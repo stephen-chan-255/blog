@@ -1,6 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Asynchronous programming in JavaScript</title>
+    <url>/blog/2020/06/08/js-async/</url>
+    <content><![CDATA[<p><strong>async</strong> actions — actions init now but finish later (code below it won’t wait)</p>
+<h2 id="Callback"><a href="#Callback" class="headerlink" title="Callback"></a>Callback</h2><ul>
+<li><p>external script loading &amp; callback <a href="https://javascript.info/callbacks">..</a></p>
+<ul>
+<li><code>onload</code> / <code>onerror</code></li>
+<li>“error-first callback” style &amp; callback hell / pyramid of doom (code grows to the right)</li>
+</ul>
+</li>
+<li><p>Fn Call Scheduling by<code>setTimeout/setInterval()</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> timerId = <span class="built_in">setTimeout</span>/<span class="built_in">setInterval</span>(fn, delay=<span class="number">0</span>, ...args); <span class="comment">// keep fn-ref in scheduler (not GC) </span></span><br><span class="line"><span class="built_in">clearTimeout</span>/<span class="built_in">clearInterval</span>(timerId); <span class="comment">// &quot;timerId keep same&quot; af clear (not null)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>setTimeout()</strong>: call a regular fn without <code>arguments</code> and set <code>this=window</code> <a href="https://javascript.info/call-apply-decorators#delaying-decorator">..</a></p>
+</li>
+<li><p><strong>setInterval()</strong>: fn-exe-time &gt; delay <a href="https://javascript.info/settimeout-setinterval#nested-settimeout">..</a></p>
+</li>
+<li><p><strong>nested setTimeout</strong> vs setInterval ..</p>
+</li>
+<li><p>tasks — <a href="https://javascript.info/settimeout-setinterval#output-every-second">Output every second</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><p>JS obj that links <strong>executor</strong> &amp; <strong>handler</strong> together</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  ...resolve(value) || reject(error) ... </span><br><span class="line">&#125;)</span><br><span class="line">	.then(<span class="function"><span class="params">value</span> =&gt;</span> &#123; <span class="comment">/* handle value */</span> &#125;)</span><br><span class="line">	.catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123; <span class="comment">/* handle error */</span> &#125;)</span><br><span class="line">	.finally &#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Executor-resolve-reject"><a href="#Executor-resolve-reject" class="headerlink" title="Executor(resolve, reject)"></a>Executor(resolve, reject)</h3><ul>
+<li><p>when <code>new Promise</code>, fn <code>executor(resolve, reject)</code> auto-run</p>
+</li>
+<li><p><code>resolve</code> &amp; <code>reject</code> — pre-defiend callbacks, called once (further calls ignored)</p>
+<ul>
+<li>Promise init props: <strong>[[PromiseStatus]]: “pending”</strong>, <strong>[[PromiseValue]]: undefined</strong></li>
+<li>run <code>resolve(result)</code>: <strong>“resolved”</strong>, <strong>result</strong></li>
+<li>run <code>reject(error)</code> / <strong>error occur</strong> (turn into a rejected promise <a href="https://javascript.info/promise-error-handling#implicit-try-catch">..</a>): <strong>“rejected”</strong>, <strong>error</strong></li>
+</ul>
+</li>
+<li><p>callback vs promise — promise only single result (callback can be called mtp times) <a href="https://javascript.info/promisify">..</a></p>
+</li>
+</ul>
+<h3 id="Consumer-then-catch-final"><a href="#Consumer-then-catch-final" class="headerlink" title="Consumer: .then(), .catch(), .final()"></a>Consumer: .then(), .catch(), .final()</h3><p>Wait for promise settled (resolve or reject) &amp; process the value (result or error) by its handler</p>
+<ul>
+<li><code>.then(onFulfill[, onReject])</code></li>
+<li><code>.catch(errorHandler)</code>  === .then(null, errorHandler)<ul>
+<li>error occur in setTimeout (except <code>reject(err)</code>) not catched <a href="https://javascript.info/promise-error-handling#error-in-settimeout">..</a></li>
+<li><a href="https://javascript.info/promise-error-handling#unhandled-rejections">unhandlerd rejection &amp; window ‘unhandledrejection’ event</a></li>
+</ul>
+</li>
+<li><code>.finally(fn)</code> — handler no params (just pass result to next handler)</li>
+</ul>
+<h3 id="Promise-Chain"><a href="#Promise-Chain" class="headerlink" title="Promise Chain"></a>Promise Chain</h3><ul>
+<li><code>.then()</code>/ <code>.catch()</code> / <code>.finally()</code> ==&gt; return a promise — can be chainned</li>
+<li>handler return a promise / result — overwrite promise value &amp; pass to next assoc handler<ul>
+<li>handler no return ==&gt; resolve(undefined) || adopt prev-Promise.state</li>
+</ul>
+</li>
+<li><a href="https://javascript.info/promise-chaining#bigger-example-fetch">promise &amp; fetch</a></li>
+<li><a href="https://javascript.info/promise-chaining#example-loadscript">customized Thenable obj</a></li>
+</ul>
+<h2 id="async-await"><a href="#async-await" class="headerlink" title="async/await"></a>async/await</h2><p><code>async</code> bf fn =&gt; ensure to return a promise &amp; enable <code>await</code> bf promise (JS wait promise to settle &amp; return the result ) </p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// await &amp; try-catch for Promise.then() &amp; catch()</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> response = <span class="keyword">await</span> fetch(<span class="string">&#x27;&#x27;</span>); </span><br><span class="line">    <span class="keyword">let</span> user = <span class="keyword">await</span> response.json();</span><br><span class="line">  &#125; <span class="keyword">catch</span>(err) &#123; </span><br><span class="line">  	<span class="comment">/* ... */</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Promise-API"><a href="#Promise-API" class="headerlink" title="Promise API"></a>Promise API</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="built_in">Promise</span>.all/allSettled/race(...promises);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>Promise.all()</code>=&gt; <strong>Promise.resolve([…values])</strong> / <strong>Promise.reject(err)</strong> — all or nothing</p>
+</li>
+<li><p><code>Promise.allSettled()</code> =&gt; <strong>Promise.resolve([…objs])</strong> — both ‘fulfilled’ &amp; ‘rejected’</p>
+</li>
+<li><p><code>Promise.race()</code> — <strong>1st (fastest) settled</strong> promise.result</p>
+</li>
+</ul>
+<p><strong>Promise.resolve(value) /.reject(err)</strong> ==&gt; return a resolved / rejected promise with value / err, same as</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> resolve(value) || reject(error));</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>IT</category>
+        <category>Programming</category>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>IT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/blog/2020/09/03/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -19,6 +104,745 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>JavaScript built-in data structure</title>
+    <url>/blog/2020/05/25/js-builtin-data-structure/</url>
+    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><ul>
+<li><code>Object</code> key: str/symbol</li>
+<li><code>Array</code> key: int (ordered collection, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">MDN</a>)</li>
+<li><code>Map</code> key: any type</li>
+<li><code>Set</code>: unique values</li>
+</ul>
+<h1 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h1><p><code>[..]</code> || <code>new Array(..)</code></p>
+<ul>
+<li>value indexing: <code>arr[i]</code>, value iter: <code>for..of</code> || <code>arr.forEach()</code></li>
+<li><code>arr.length</code> = greatest index + 1, init as item #, writable<ul>
+<li>manually increase: <code>undefined</code> values, <code>&quot;&quot;</code> in <code>toString()</code></li>
+<li>manually decrease: elem lost — clear arr <code>arr.length = 0</code>    </li>
+</ul>
+</li>
+<li><code>arr.toString()</code> =&gt; <code>_,_,_</code></li>
+<li><code>delete arr[i]</code>: value =&gt; <code>undefined</code> (<code>length</code> keep same) <a href="https://javascript.info/array-methods#splice">..</a></li>
+</ul>
+<!-- more  -->
+
+<p>Methods summary <a href="https://javascript.info/array-methods#summary">..</a></p>
+<ul>
+<li><code>splice(startIndex[, deleteCount, ...items])</code> : […rmed-elems]</li>
+<li><code>filter(fn)</code>: […matchedItems], <code>indexOf()</code>, <code>includes()</code></li>
+<li><code>map(fn)</code> &amp; <code>reduce()</code>, <code>sort()</code> &amp; <code>reverse()</code></li>
+<li><code>arr.join(glue=&#39;,&#39;)</code> &amp; <code>str.split(delim)</code> (<code>(&#39;&#39;)</code>: char[])</li>
+<li><code>Array.isArray(value)</code></li>
+</ul>
+<p>Tasks </p>
+<ul>
+<li><a href="https://javascript.info/array#a-maximal-subarray">A maximal subarray</a></li>
+<li><a href="https://javascript.info/array-methods#filter-range-in-place">Filter range “in place”</a></li>
+<li><a href="https://javascript.info/array-methods#sort-in-decreasing-order">Sort in decreasing order</a></li>
+<li><a href="https://javascript.info/array-methods#create-an-extendable-calculator">Create an extendable calculator</a></li>
+<li><a href="https://javascript.info/array-methods#sort-users-by-age">Sort users by age</a></li>
+<li><a href="https://javascript.info/array-methods#shuffle-an-array">Shuffle an array</a></li>
+<li><a href="https://javascript.info/array-methods#filter-unique-array-members">Filter unique array members</a></li>
+<li><a href="https://javascript.info/array-methods#create-keyed-object-from-array">Create keyed object from array</a></li>
+</ul>
+<h1 id="Iterable-amp-for-of"><a href="#Iterable-amp-for-of" class="headerlink" title="Iterable &amp; for..of"></a>Iterable &amp; for..of</h1><ul>
+<li><strong>iterable</strong> (e.g. arr &amp; str): obj with <a href="https://javascript.info/iterable#symbol-iterator">[Symbol.iterator()]</a> prop that can be used in <code>for..of</code> <a href="https://javascript.info/iterable">..</a><ul>
+<li>call <code>Symbol.iterator()</code> once when “for..of” start &amp; return an <strong>iterator</strong> (obj with <strong>next()</strong>)</li>
+<li>call <code>iter.next()</code> on each iter =&gt; <code>&#123;done:false, value: xxx&#125;</code> || <code>&#123;done: true&#125;</code></li>
+<li>manually call iterator <a href="https://javascript.info/iterable#calling-an-iterator-explicitly">..</a></li>
+</ul>
+</li>
+<li>array-like: obj with <strong>numeric index &amp; length</strong> <a href="https://javascript.info/iterable#array-like">..</a></li>
+<li>iter/arr-like =&gt; array: <code>Array.from(obj...)</code></li>
+</ul>
+<h1 id="“…”-Spread-syntax-amp-Rest-param"><a href="#“…”-Spread-syntax-amp-Rest-param" class="headerlink" title="“…”: Spread syntax &amp; Rest param"></a>“…”: Spread syntax &amp; Rest param</h1><p><a href="https://javascript.info/rest-parameters-spread#spread-syntax">Spread syntax</a>: <code>...iter</code> ==&gt; item list (use <strong>for..of</strong> internally)</p>
+<ul>
+<li>copy arr/obj: <code>[...arr]</code> / <code>&#123;...obj&#125;</code>, shorten than <strong>Object.assign({}, obj) &amp; Object.assign([], arr)</strong> <a href="https://javascript.info/rest-parameters-spread#get-a-new-copy-of-an-array-object">..</a></li>
+<li>merge arr: <code>[0, ...arr, 2, ...arr2]</code></li>
+<li>iter -&gt; arr: <code>[...iter]</code> || <code>Array.from(iter/arr-like)</code></li>
+</ul>
+<p>Rest params <code>...arr</code> in fn-def</p>
+<ul>
+<li>fn can be called with any # of args (no matter how defined) — only args assoc with param will be count <a href="https://javascript.info/rest-parameters-spread#rest-parameters">..</a></li>
+<li>vs the old built-in var <code>arguments</code> (both iter &amp; arr-like) <a href="https://javascript.info/rest-parameters-spread#the-arguments-variable">..</a></li>
+</ul>
+<h1 id="Map-amp-Set-WeakMap-amp-WeakSet"><a href="#Map-amp-Set-WeakMap-amp-WeakSet" class="headerlink" title="Map &amp; Set, WeakMap &amp; WeakSet"></a>Map &amp; Set, WeakMap &amp; WeakSet</h1><p><code>Map</code>: obj with key of any type</p>
+<ul>
+<li>methods: <strong>get(), set(), delete(), has(), size</strong>, … (key compare: <code>===</code> &amp; <code>NaN == NaN</code>)<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Map</span>([iter])                <span class="comment">// iter, e.g. Object.entries(obj)</span></span><br><span class="line"><span class="built_in">Object</span>.fromEntries(iter)       <span class="comment">// iter, e.g. map</span></span><br><span class="line"></span><br><span class="line">map.set(key, value)            <span class="comment">// =&gt; modified map (can be chained)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// map iter (order same as inserted)</span></span><br><span class="line">map.keys()/values()/entries() <span class="comment">// =&gt; iter, entries(): default iteration in for..of</span></span><br><span class="line">map.forEach(<span class="function">(<span class="params">key, value, map</span>) =&gt;</span> ...)</span><br></pre></td></tr></table></figure></li>
+<li><a href="https://javascript.info/keys-values-entries#object-keys-values-entries">Object.keys/values/entries(obj)</a> =&gt; arr (enum &amp; non-symbol key)<ul>
+<li>task — <a href="https://javascript.info/keys-values-entries#sum-the-properties">Sum the props</a>, </li>
+</ul>
+</li>
+</ul>
+<p><code>Set</code>: unique values</p>
+<ul>
+<li>methods similar to map, get/set() =&gt; add(), iter by insertion order <a href="https://javascript.info/map-set#summary">..</a></li>
+<li>task — <a href="https://javascript.info/map-set#filter-unique-array-members">Filter unique array members</a>: <code>Array.from(new Set(arr))</code></li>
+</ul>
+<p><code>WeakMap</code>/<code>WeakSet</code>: “2ndary” storage (obj remove from “main” storage also removed from this storage)</p>
+<ul>
+<li>only <strong>obj</strong> as key/items in WM/WS </li>
+<li>if obj inaccessible by other means, it rmed from memory &amp; WM/WS</li>
+<li>methods: only <strong>get() &amp; set() / add(), delete(), has()</strong> (no size &amp; iter methods)</li>
+<li>WeakMap use cases: additional data, caching</li>
+</ul>
+<h1 id="Destructuring-assignment-syntax"><a href="#Destructuring-assignment-syntax" class="headerlink" title="Destructuring assignment syntax"></a>Destructuring assignment syntax</h1><p>Copying iter-items into vars (keep origin unmodified)</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> [var1 = defaultValue, var2, ...rest] = arr</span><br><span class="line"><span class="keyword">let</span> &#123;<span class="attr">prop1</span>: var1 = defaultValue, prop2, ...rest&#125; = obj	<span class="comment">// prop order in left not matter</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// loop over obj/map</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> [key, value] <span class="keyword">of</span> <span class="built_in">Object</span>.entries(user)) &#123;</span><br><span class="line">  alert(<span class="string">`<span class="subst">$&#123;key&#125;</span>:<span class="subst">$&#123;value&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[guest, admin] = [admin, guest]; <span class="comment">// Swap values</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ignore item by extra <code>,</code> <a href="https://javascript.info/destructuring-assignment#array-destructuring">..</a>, <code>=</code> for default value (unprovide value as <strong>undefined</strong>) <a href="https://javascript.info/destructuring-assignment#default-values">..</a>, <code>:</code> for prop-var rename <a href="https://javascript.info/destructuring-assignment#object-destructuring">..</a></li>
+<li>obj destcructing to existing var — <code>(</code>{…}<code>)</code> ({} in main code flow as code block) <a href="https://javascript.info/destructuring-assignment#the-rest-pattern">..</a></li>
+<li><a href="https://javascript.info/destructuring-assignment#nested-destructuring">nested desructing</a> — same structure (no var for the group one)</li>
+<li><a href="https://javascript.info/destructuring-assignment#smart-function-parameters">Smart fn params</a> — pass obj as fn param</li>
+</ul>
+<h1 id="Date-amp-time"><a href="#Date-amp-time" class="headerlink" title="Date &amp; time"></a>Date &amp; time</h1><ul>
+<li><a href="https://javascript.info/date#creation">creation</a>: <code>new Date(...)</code>, <code>new Date(date)</code> <a href="https://javascript.info/date#which-day-of-month-was-many-days-ago">..</a>,  <code>Date.parse(str)</code> <a href="https://javascript.info/date#date-parse-from-a-string">..</a></li>
+<li><a href="https://javascript.info/date#access-date-components">get/set date components</a>: <code>get/set*()</code>, <a href="https://javascript.info/date#autocorrection">auto-correction</a></li>
+<li><a href="https://javascript.info/date#date-to-number-date-diff">Date to num</a> =&gt; timestamp, <a href="https://javascript.info/date#date-now">Date.now() vs date.getTime()</a><ul>
+<li><a href="https://javascript.info/date#benchmarking">date2.getTime() - date1.getTime() vs date2 - date1</a></li>
+<li><a href="https://javascript.info/date#summary">more precise time measure</a></li>
+</ul>
+</li>
+<li>tasks — <a href="https://javascript.info/date#show-a-weekday">Show a weekday</a> &amp; <a href="https://javascript.info/date#european-weekday">European weekday</a>, <a href="https://javascript.info/date#which-day-of-month-was-many-days-ago">Which day of month was many days ago?</a>, <a href="https://javascript.info/date#last-day-of-month">Last day of month?</a></li>
+</ul>
+<h1 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h1><p>Init for JS, but many other langs have libs to handle it as well ==&gt; use JSON for data exchange</p>
+<p><strong>Send data</strong>: <code>JSON.stringify(obj[, replacer, space])</code> =&gt; formatted str (aka <em>serialized</em> obj)</p>
+<ul>
+<li><a href="https://javascript.info/json#custom-tojson">obj.toJSON()</a></li>
+<li><a href="https://javascript.info/json#excluding-and-transforming-replacer">replacer special 1st call</a></li>
+</ul>
+<p><strong>Get data</strong>: <code>JSON.parse(str, [reviver])</code> =&gt; obj</p>
+]]></content>
+      <categories>
+        <category>IT</category>
+        <category>Programming</category>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>IT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript Classes</title>
+    <url>/blog/2020/06/01/js-class/</url>
+    <content><![CDATA[<p>Value of state (member var / field) &amp; implementation of behavior (member fn / method)</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">F</span> </span>&#123;</span><br><span class="line">  [<span class="keyword">static</span>] field = ..; <span class="comment">// new feature, access field in method by: `this.xxx`</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(..) &#123; <span class="comment">/*..*/</span> &#125;</span><br><span class="line">  </span><br><span class="line">  [<span class="keyword">static</span>] method() &#123; <span class="comment">/*..*/</span> &#125; </span><br><span class="line">  [get/set] method(..) &#123; <span class="comment">/*..*/</span> &#125;</span><br><span class="line">  [expr]() &#123; <span class="comment">/*..*/</span> &#125; <span class="comment">// computed name</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h1><ul>
+<li><p><code>static</code></p>
+<ul>
+<li>access static outside <code>F.field = xxx</code> / <code>F.method = function() &#123; .. &#125;</code> ==&gt; pass <code>F</code> as <code>this</code></li>
+<li>return obj in static method by <code>new this(..)</code></li>
+</ul>
+</li>
+<li><p>Class Encapsulation</p>
+<ul>
+<li><strong>protected</strong> — <code>_xxx</code> (convention)</li>
+<li><strong>private</strong> — <code>#xxx</code> (proposal), cannot access by <code>this[&#39;#xxx&#39;]</code></li>
+<li><strong>read-only prop</strong>: only getter no setter (set value on con)</li>
+</ul>
+</li>
+<li><p>(non-constructor) method access <code>this</code> require bind — 2 syntax to bind method with field</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">this</span>.xxx = <span class="built_in">this</span>.xxx.bind(<span class="built_in">this</span>); <span class="comment">// bind existing method in constructor </span></span><br><span class="line">xxx = <span class="function">() =&gt;</span> &#123;..&#125; <span class="comment">// take &quot;this&quot; from outside in class scope (&quot;this&quot; = obj)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>task — <a href="https://javascript.info/class#rewrite-to-class">class Clock</a></p>
+</li>
+</ul>
+<h1 id="Class-vs-function"><a href="#Class-vs-function" class="headerlink" title="Class vs function"></a>Class vs function</h1><p><code>typeof F</code> =&gt; <code>&quot;function&quot;</code> <a href="https://javascript.info/class-inheritance#class-extends-object">..</a></p>
+<ul>
+<li><p><code>class F &#123; .. &#125;</code> <a href="https://javascript.info/class#what-is-a-class">..</a> ==&gt; <strong>F</strong> (a constructor fn)</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> F = &#123;</span><br><span class="line">  <span class="keyword">constructor</span>(),</span><br><span class="line">  ...statics, </span><br><span class="line">  [[Prototype]]: ParentClass || Function.prototype, </span><br><span class="line"></span><br><span class="line">  prototype: &#123;</span><br><span class="line">    <span class="keyword">constructor</span>: F, </span><br><span class="line">    ...(non-static) methods, </span><br><span class="line">    [[Prototype]]: ParentClass.prototype || Object.prototype </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>new F()</code>: call <strong>constructor()</strong> internal</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  ...(non-<span class="keyword">static</span>) fields,</span><br><span class="line">  [[Prototype]]: F.prototype <span class="comment">// access to non-static methods</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://javascript.info/class#not-just-a-syntactic-sugar">class vs regular fn</a></p>
+<ul>
+<li>class auto-strict; methods all non-enum</li>
+<li>constructor label <code>[[FunctionKind]]:&quot;classConstructor&quot;</code> ==&gt;  <code>F()</code> must call by <code>new</code></li>
+<li>str repre <code>class F &#123; .. &#125;</code></li>
+<li>class-expr ..</li>
+</ul>
+</li>
+</ul>
+<h1 id="Class-inheritance"><a href="#Class-inheritance" class="headerlink" title="Class inheritance"></a>Class inheritance</h1><p><code>class F1 extends F2 &#123; .. &#125;</code> <a href="https://javascript.info/static-properties-methods#inheritance-of-static-properties-and-methods">..</a></p>
+<ul>
+<li><strong>F1</strong>.[[Prototype]] = <strong>F2</strong> (for static)</li>
+<li><strong>F1.prototype</strong>.[[Prototype]] = <strong>F2.protptype</strong> (for non-static)</li>
+</ul>
+<p>Override constructor/method: call <code>super(..) </code>  /<code>super.method(..)</code> bf use <code>this</code> (<a href="https://javascript.info/class-inheritance#super-internals-homeobject">why?</a>)</p>
+<ul>
+<li><code>this</code> in child.con (labelled by <code>[[ConstructorKind]]:&quot;derived&quot;</code>) must created by parent.con <ul>
+<li>in regular fn, an empty obj is created for <code>this</code></li>
+</ul>
+</li>
+<li><code>super</code> : bind method.<code>[[HomeObject]]</code> = their class/object (bound forever) <ul>
+<li>so method call “super” not free</li>
+<li><code>super </code>looks for parent methods in <code>[[HomeObject]].[[Prototype]]</code> <a href="https://javascript.info/mixins">..</a></li>
+<li>only work for method syntax <code>method()</code>, not <code>method: function() &#123; .. &#125;</code> <a href="https://javascript.info/class-inheritance#methods-not-function-properties">..</a></li>
+</ul>
+</li>
+<li>task — <a href="https://javascript.info/class-inheritance#extended-clock">Extended clock</a>, <a href="https://javascript.info/class-inheritance#class-extends-object">Class extends Object?</a></li>
+</ul>
+<p>Extending built-in classes</p>
+<ul>
+<li>Built-in classes like <code>Array</code>, <code>Map</code> are extendable</li>
+<li>stop pass extended fnality further in new entities in arr.map/filter: return Array in <code>static get [Symbol.species]()</code></li>
+<li>Built-ins only inherit non-statics, <code>Array.[[Prototype]] !== Object</code></li>
+</ul>
+<h1 id="Class-Type-Checking"><a href="#Class-Type-Checking" class="headerlink" title="Class Type Checking"></a>Class Type Checking</h1><ul>
+<li><code>obj instanceof F </code> <ul>
+<li>F[Symbol.hasInstance](obj)</li>
+<li>F.prototype.isPrototypeOf(obj)</li>
+</ul>
+</li>
+<li><code>Object.prototype.toString</code> =&gt; <strong>[object …]</strong><ul>
+<li>“…”: value of <code>obj[Symbol.toStringTag]</code>, e.g. “Object”, “Number”…</li>
+</ul>
+</li>
+</ul>
+<h1 id="Mixin"><a href="#Mixin" class="headerlink" title="Mixin"></a>Mixin</h1><p>A class / obj contains methods for other classes without inheritance</p>
+<ul>
+<li>add new feature by copying method to prototype <code>Object.assign(F.prototype, mixin)</code> <ul>
+<li>prevent mixin overwrite class methods</li>
+</ul>
+</li>
+<li><a href="https://javascript.info/mixins#eventmixin">EventMixin example</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>IT</category>
+        <category>Programming</category>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>IT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript Functions</title>
+    <url>/blog/2020/05/24/js-function/</url>
+    <content><![CDATA[<h1 id="Function-creation"><a href="#Function-creation" class="headerlink" title="Function creation"></a>Function creation</h1><ul>
+<li><strong>fn declaration</strong>: block-level if strict, def-hoisting <a href="https://javascript.info/function-expressions#function-expression-vs-function-declaration">..</a><ul>
+<li><code>function</code> in JS means start of fn-dec (require a name &amp; cannot be called immedeately) <a href="https://javascript.info/var#iife">..</a></li>
+</ul>
+</li>
+<li><strong>fn-expr</strong>: easy dynamic def <a href="https://javascript.info/function-expressions#function-expression-vs-function-declaration">..</a><ul>
+<li><em>anonymous</em> as callback fns</li>
+</ul>
+</li>
+<li><strong>arrow-fn</strong> (see chapter JS object)</li>
+<li><code>new Function([params: ...strs], body: str)</code>: create fn dynamically, e.g. from server<ul>
+<li><code>[[Environment]]</code>(see below) -&gt; global LE (not the outer one)</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://javascript.info/function-basics">Funtion basics</a></p>
+<ul>
+<li>fn naming …</li>
+<li>local var “shadow” outer var, global var</li>
+<li>param: value copy to local var, change not seen outside, default <code>undefined</code></li>
+<li>return: default return <code>undefined</code>, <code>(...)</code> for mtp-line value</li>
+</ul>
+<h1 id="Advanced-Var-scope-Lexical-Environment-amp-Closure"><a href="#Advanced-Var-scope-Lexical-Environment-amp-Closure" class="headerlink" title="Advanced: Var scope, Lexical Environment &amp; Closure"></a>Advanced: Var scope, Lexical Environment &amp; Closure</h1><p><code>let</code> / <code>const</code> var scope: <a href="" title="only visible inside the block where declared">block-local</a>, <a href="https://javascript.info/destructuring-assignment#the-rest-pattern" title="plain code block to group stmts">{..}</a></p>
+<p><a href="https://javascript.info/closure#lexical-environment" title="internal obj assoc with blocks, create when run">Lexical Environment (LE)</a> = <a href="" title="obj with props of all local vars &amp; `this` info, work with var === work with LE.props">Environment Record</a> + <a href="" title="ref to outer LE where it delcared">outer-ref</a></p>
+<ul>
+<li><a href="https://javascript.info/closure#step-3-inner-and-outer-lexical-environment" title="{param: arg &amp; locar-var: xxx}">fn.LE</a> &amp; <a href="" title="assoc to the whole script, inc. global var / fn, ref to null">global LE</a> </li>
+<li>access var through <strong>LE chain</strong> (inner-outer) <a href="https://javascript.info/closure#step-3-inner-and-outer-lexical-environment">..</a> </li>
+<li>updated on the LE it lives <a href="https://javascript.info/closure#step-4-returning-a-function">..</a></li>
+</ul>
+<p>When code block starts execution (bf any inner code running), LE pre-populated with: <a href="https://javascript.info/closure#step-1-variables">..</a> &amp; <a href="https://javascript.info/closure#is-variable-visible">..</a></p>
+<ul>
+<li><code>let-declared-var: &lt;uninitialized&gt;</code> (unusable until <code>let</code> run: “dead zone” ==&gt; ReferenceError <a href="https://javascript.info/closure#is-variable-visible">..</a>)</li>
+<li><code>fn-declaration-fn: function</code> (instantly fully init: ready-to-use)</li>
+</ul>
+<p><a href="https://javascript.info/closure#step-4-returning-a-function">Closure</a> — a fn that remembers its outer vars and can access them, e.g. return a fn (as obj prop / fn itself) <a href="https://javascript.info/closure#nested-functions">..</a></p>
+<ul>
+<li>fn remember outer LE by hidden prop <code>[[Environment]]</code>: fn.[[Environment]] = outerLE</li>
+<li>when outerFn run — new outerFn.LE created &amp; new nestedFn created, and nestedFn.[[Environment]] = outerFn.LE (set once &amp; forever)<ul>
+<li>so outerFn.LE still reachable (by nested fn) af fn call completion, so not GC <a href="https://javascript.info/closure#garbage-collection">..</a></li>
+<li>call outerFn mtp times ==&gt; diff outerFn.LE &amp; nestedFn created ==&gt; nestedFn independent <a href="https://javascript.info/closure#are-counters-independent">..</a></li>
+</ul>
+</li>
+<li>when nestedFn run — new nestedFn.LE created &amp; nestedFn.LE -&gt; parentFn.LE (ref value taken from [[Environment]])</li>
+</ul>
+<p>Task — <a href="https://javascript.info/closure#counter-object">Counter object</a>, <a href="https://javascript.info/closure#sum-with-closures">Sum with closures</a>, <a href="https://javascript.info/closure#filter-through-function">Filter through function</a>, <a href="https://javascript.info/closure#sort-by-field">Sort by field</a>, <a href="https://javascript.info/closure#army-of-functions">Army of functions</a></p>
+<h1 id="Programming-pattern"><a href="#Programming-pattern" class="headerlink" title="Programming pattern"></a>Programming pattern</h1><h2 id="Function-decorator"><a href="#Function-decorator" class="headerlink" title="Function decorator"></a>Function decorator</h2><p>A fn-wrapper that takes another fn (pass as callback fn) and alters its behavior (sep dec with origin-fn) <a href="https://javascript.info/call-apply-decorators#transparent-caching">..</a></p>
+<ul>
+<li>fn.props not wrapped by default <a href="https://javascript.info/call-apply-decorators#decorators-and-function-properties">..</a></li>
+<li>tasks — <a href="https://javascript.info/call-apply-decorators#spy-decorator">Spy decorator</a>, <a href="https://javascript.info/call-apply-decorators#delaying-decorator">Delaying decorator</a>, <a href="https://javascript.info/call-apply-decorators#debounce-decorator">Debounce decorator</a>, </li>
+</ul>
+<h2 id="Recursion-amp-execution-context-stack"><a href="#Recursion-amp-execution-context-stack" class="headerlink" title="Recursion &amp; execution context stack"></a>Recursion &amp; execution context stack</h2><ul>
+<li><p><a href="https://javascript.info/recursion">recursion</a> = <strong>base</strong> (get result without nest calls) &amp; <strong>recursive step</strong> <a href="https://javascript.info/recursion#two-ways-of-thinking">..</a></p>
+<ul>
+<li><a href="" title="store info about the exe of currently running fn">execution context and stack</a>, <a href="https://javascript.info/recursion#two-ways-of-thinking" title="max # of nested fn calls, inc 1st one (i.e. max # of context in the stack), limited by JS engine">recursion depth</a>, <a href="https://javascript.info/recursion#sum-all-numbers-till-the-given-one" title="recur-call in last line (most JS engineer not support)">tail call optimization</a></li>
+</ul>
+</li>
+<li><p><strong>recursive vs iterative</strong> <a href="https://javascript.info/recursion#the-exit">..</a></p>
+<ul>
+<li>recursive: <a href="" title="nested calls and execution stack management [taks1]">take resrcs</a> but <a href="" title="`shorter`  &amp; more understndable in recursive traversals">simpler code</a></li>
+<li>iterative: <a href="https://javascript.info/recursion#the-exit" title="single context, changing var in the process, small fixed memory usage">memory-saving</a></li>
+</ul>
+</li>
+<li><p><a href="https://javascript.info/recursion#recursive-structures">recursive structure</a> — linked list: <code>node = &#123;value, next -&gt; node2 / null&#125;</code> </p>
+</li>
+<li><p>task — <a href="https://javascript.info/recursion#sum-all-numbers-till-the-given-one">Sum 1..n</a>, <a href="https://javascript.info/recursion#output-a-single-linked-list">Print list</a>, <a href="https://javascript.info/recursion#output-a-single-linked-list-in-the-reverse-order">Print list revresely</a></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fib</span>(<span class="params">n</span>) </span>&#123; <span class="comment">// [task 3]</span></span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">let</span> b = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    [a, b] = [b, a + b] <span class="comment">// same as &quot;int c=a+b, a=b, b=c&quot; in Java</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>IT</category>
+        <category>Programming</category>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>IT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript miscellaneous</title>
+    <url>/blog/2020/05/20/js-miscellaneous/</url>
+    <content><![CDATA[<h1 id="‘use-strict’"><a href="#‘use-strict’" class="headerlink" title="‘use strict’"></a>‘use strict’</h1><p>To enable ES5 modification for old features (may break old code)</p>
+<ul>
+<li>off by default — always put <code>&#39;use script&#39;</code> on <strong>top</strong> of script/fn-body<ul>
+<li>auto enable for <code>class</code> &amp; <code>module</code></li>
+<li>no way to cancel once enter strict mode</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="Error-handling"><a href="#Error-handling" class="headerlink" title="Error handling"></a>Error handling</h1><ul>
+<li>Error obj <ul>
+<li>creation:<code>new Error/SyntaxError/ReferenceError/TypeError(msg)</code> <a href="https://javascript.info/try-catch#throw-operator">..</a></li>
+<li>props: <code>name</code>(F): <code>message</code> e.g. “ReferenceError: xxx is not defined”</li>
+</ul>
+</li>
+<li>unhandled error : script dies with a msg in the console</li>
+<li><code>try &#123; .. &#125; catch(e) &#123; .. &#125; finally &#123; .. &#125; </code>: <strong>synchronous</strong> &amp; <strong>run-time</strong> err / exception<ul>
+<li>manually throw err in try || rethrow in catch — <code>throw errObj </code><ul>
+<li>checking err: <strong>obj instanceof Error</strong> (better than <strong>err.name</strong> / <strong>err.constructor.name</strong> == “xxx”) <a href="https://javascript.info/custom-errors#extending-error">..</a></li>
+</ul>
+</li>
+<li>Global handler <strong>window.onerror</strong> fn ..</li>
+</ul>
+</li>
+<li>customized <code>ValidationError</code> &amp; <code>PropertyRequiredError</code> example <ul>
+<li>set name prop: <strong>this.name = ‘xxx’;</strong>  / <strong>this.name = this.constructor.name;</strong></li>
+<li>wrapping-exceptions …</li>
+</ul>
+</li>
+</ul>
+<h1 id="Generator"><a href="#Generator" class="headerlink" title="Generator"></a>Generator</h1><p>Regualr fn retur 1 value ==&gt; Generators “yield” mtp values 1-by-1 (allow create data stream)</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">generateSequence</span>(<span class="params"></span>) </span>&#123;    <span class="comment">// generator function</span></span><br><span class="line">  <span class="keyword">yield</span> <span class="number">1</span>;                        <span class="comment">// no value af &#x27;yield&#x27; means &#x27;undefined&#x27;</span></span><br><span class="line">  <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> generator = generateSequence(); <span class="comment">// when called, return a Generator instead of run the fn </span></span><br><span class="line">alert(generator);                   <span class="comment">// [object Generator]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// call generator.next() to get result</span></span><br><span class="line">&#123;<span class="attr">value</span>: <span class="number">1</span>, <span class="attr">done</span>: <span class="literal">false</span>&#125;  </span><br><span class="line">&#123;<span class="attr">value</span>: <span class="number">2</span>, <span class="attr">done</span>: <span class="literal">false</span>&#125; </span><br><span class="line">&#123;<span class="attr">value</span>: <span class="number">3</span>, <span class="attr">done</span>: <span class="literal">true</span>&#125;              <span class="comment">// done:true for &quot;return&quot;</span></span><br><span class="line">&#123;<span class="attr">done</span>: <span class="literal">true</span>&#125;                        <span class="comment">// no more value af &#x27;return&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>when called, it return a <strong>Generator</strong> (an Iterator with <strong>next()</strong> method) to manage the fn-exe</li>
+<li><code>gen.next()</code> — run fn-exe until <code>yield &lt;value&gt;</code> stmt &amp; return <code>&#123;value: &lt;value&gt;, done: true/false&#125;</code><ul>
+<li><a href="https://javascript.info/generators#using-generators-for-iterables">use generator to create iter-obj</a></li>
+<li>can use <code>gen</code> in <code>for..of</code> loop &amp; sperad syntax to get yield values (exc returned value)</li>
+</ul>
+</li>
+<li>pass data back to gen.yield<ul>
+<li><code>gen.next(arg)</code> — pass <code>arg</code> as the value of <strong>current yield</strong> &amp; return the resulting-obj of <strong>next yield</strong> <a href="https://javascript.info/generators#yield-is-a-two-way-street">..</a></li>
+<li><code>gen.throw(err)</code> — throw err as the result of <strong>current yield</strong> (err not catched in gen() will fall out to <code>gen.throw</code>)</li>
+</ul>
+</li>
+<li><strong>Generator composition</strong> — embed gen-values into another gen-fn by <code>yield* gen(...)</code> </li>
+<li>Task:  <a href="https://javascript.info/generators#pseudo-random-generator">pseudoRandom(seed)</a></li>
+</ul>
+<p><a href="https://javascript.info/async-iterators-generators#async-iterables">Async iteratable</a> <code>async *[Symbol.asyncIterator]()</code></p>
+<ul>
+<li><code>async function*</code> for <a href="https://javascript.info/async-iterators-generators#async-generators">async gen</a> — yield value asyncly &amp; <code>await gen.next()</code></li>
+<li><code>[Symbol.asyncIterator]()</code> for <a href="https://javascript.info/async-iterators-generators#async-iterators">async iterator</a> — iter over data that comes asyncly (e.g. paginated data) &amp; use in <code>for await ..of</code> loop</li>
+<li><a href="https://javascript.info/async-iterators-generators#real-life-example">the <code>async function* fetchCommits(repo)</code> example</a></li>
+</ul>
+<h1 id="JS-engine-internal"><a href="#JS-engine-internal" class="headerlink" title="JS engine internal"></a>JS engine internal</h1><h2 id="Event-loop-microtasks-and-macrotasks"><a href="#Event-loop-microtasks-and-macrotasks" class="headerlink" title="Event loop: microtasks and macrotasks"></a>Event loop: microtasks and macrotasks</h2><p><a href="https://javascript.info/event-loop#event-loop">Macrotask queue</a>: handle tasks e.g. <strong>current regular sync script</strong>, <strong>external script</strong> load &amp; exe, <strong>UI/network event handler</strong> (e.g. <code>mousemove</code>), setTimeout <strong>callback</strong></p>
+<ul>
+<li>tasks come while engine busy — enqueued to the queue</li>
+<li>re-render only af task complete — if current task tasks long time:  <strong>Page Unresponsive</strong> alert</li>
+<li>enqueue a macrotask:  <code>setTimeout(f)</code></li>
+<li>use case — <a href="https://javascript.info/event-loop#use-case-1-splitting-cpu-hungry-tasks">split CUP-heavy task by setTimeout</a> =&gt; react other tasks in-btn / <a href="https://javascript.info/event-loop#use-case-2-progress-indication">progress indication</a> <a href="https://javascript.info/event-loop#summary">…</a></li>
+</ul>
+<p><a href="https://javascript.info/microtask-queue">Microtask queue</a> (aka <code>PromiseJobs</code> queue): handle async promise handlers in <code>.then/catch/finally</code> &amp; <code>await</code></p>
+<ul>
+<li>handler enqueued when promise settled, run af current code &amp; prev micro finished <a href="https://javascript.info/microtask-queue#microtasks-queue">..</a></li>
+<li>global <code>unhandledrejection</code> event — triggered when microtask queue completed but exist “rejected” promise<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&#x27;unhandledrejection&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> alert(event.reason));</span><br></pre></td></tr></table></figure></li>
+<li>make code exe af <code>.then/catch/finally</code> — chained by <code>.then()</code></li>
+<li>enqueue a microtask — <code>queueMicrotask(f)</code> <a href="https://javascript.info/event-loop#macrotasks-and-microtasks">..</a></li>
+</ul>
+<p>JS execution flow based on <em>event loop</em>: engine sleep until (async) tasks appear, then exe them starting from the oldest one (FIFO)</p>
+<ul>
+<li>exe process (no macrotask in-btw microtask — ensure app-env same) <a href="https://javascript.info/event-loop#summary">..</a><ol>
+<li><strong>current regular sync script</strong> (=&gt; <strong>all microtasks</strong> =&gt;  <strong>render</strong>) </li>
+<li><strong>some macrotask</strong> (=&gt; <strong>all microtasks</strong> =&gt;  <strong>render</strong>)</li>
+<li><strong>another macrotask</strong> </li>
+<li>…</li>
+</ol>
+</li>
+<li><a href="https://javascript.info/event-loop#summary">cpu-heavy event &amp; web worker: another thread</a></li>
+</ul>
+<h1 id="Code-quality"><a href="#Code-quality" class="headerlink" title="Code quality"></a>Code quality</h1><ul>
+<li><a href="https://javascript.info/coding-style">Coding style &amp; linters</a></li>
+<li><a href="https://javascript.info/comments">Comments &amp; JSDoc</a></li>
+<li><a href="https://javascript.info/testing-mocha">Auto-testing lib &amp; BDD</a></li>
+</ul>
+<h1 id="Other-concepts-amp-Resources"><a href="#Other-concepts-amp-Resources" class="headerlink" title="Other concepts &amp; Resources"></a>Other concepts &amp; Resources</h1><ul>
+<li><a href="https://javascript.info/manuals-specifications">Manuals &amp; specs</a></li>
+<li><a href="https://javascript.info/polyfills">Polyfill &amp; Babel</a> <ul>
+<li>JS keep evolving &amp; some features may not implemented in all engines</li>
+<li><a href="https://babeljs.io/">Babel</a> — transpiler (new syntax constructs) +  polyfill (updates/adds new fns)</li>
+<li><a href="https://javascript.info/intro#languages-over-javascript">Langs “over” JS</a></li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>IT</category>
+        <category>Programming</category>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>IT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript prototypal inheritance</title>
+    <url>/blog/2020/05/28/js-prototype/</url>
+    <content><![CDATA[<h1 id="Prototypal-inheritance"><a href="#Prototypal-inheritance" class="headerlink" title="Prototypal inheritance"></a>Prototypal inheritance</h1><p>Object hidden prop <code>[[Prototype]]</code>: either null || another obj (other value ignored)</p>
+<ul>
+<li><p>get/set prototype: <code>Object.create(proto[, descriptors])</code>, <code>Object.get/setPrototypeOf(obj)</code> <a href="https://javascript.info/prototype-methods">..</a> </p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// fully identical shallow clone of obj</span></span><br><span class="line"><span class="keyword">let</span> clone = <span class="built_in">Object</span>.create(<span class="built_in">Object</span>.getPrototypeOf(obj), <span class="built_in">Object</span>.getOwnPropertyDescriptors(obj));</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>obj.__proto__ = obj2</code> (deprecated)<ul>
+<li>accessor of <code>[[Prototype]]</code> in <code>Object.prototype</code> (see below), not good for user-generated keys <a href="https://javascript.info/prototype-methods#summary">..</a>, fixex by <a href="https://javascript.info/prototype-methods#very-plain">“Very plain” objects</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Task — <a href="https://javascript.info/prototype-methods#add-tostring-to-the-dictionary">add toString() to the “very plain” obj</a></p>
+</li>
+</ul>
+<a id="more"></a>
+
+<p><a href="" title="prop lookup: read prop from prototype if it not exist in the obj, follow `[[Prototype]]` ref chain">Prototypal inheritance</a> </p>
+<ul>
+<li>set prop by <code>=</code> ==&gt; trigger setter in prototype || add new prop in current obj <a href="https://javascript.info/prototype-inheritance#writing-doesn-t-use-prototype">..</a> <ul>
+<li>Write to prototype.prop example <a href="https://javascript.info/prototype-inheritance#why-are-both-hamsters-full">..</a></li>
+</ul>
+</li>
+<li>delete obj.prop &amp; <code>this</code>— current obj</li>
+<li>inherited prop in <code>for..in</code> , not in <code>Object.keys/values(obj)</code> &amp; <code>obj.hasOwnProperty(prop)</code> (true for own prop)</li>
+</ul>
+<h1 id="F-protoype"><a href="#F-protoype" class="headerlink" title="F.protoype"></a>F.protoype</h1><p>A “normal” prop called “prototype” of con-fn F, only work when <code>new F()</code> </p>
+<ul>
+<li>default <strong>F.prototype</strong> = <code>&#123;constructor: F&#125;</code></li>
+<li><code>let obj = new F()</code> ==&gt; <code>obj.[[Prototype]] = F.prototype</code> if <strong>F.protoype</strong> is obj</li>
+<li>re-assign <strong>F.protoype</strong> to another obj — prev created obj.[[Prototype]] not affect</li>
+<li>Task — <a href="https://javascript.info/function-prototype#create-an-object-with-the-same-constructor">new obj.constructor()</a></li>
+</ul>
+<p>Built-in F.prototype</p>
+<ul>
+<li><code>Object.prototype</code> — <code>&#123;&#125;</code> same as <code>new Object()</code>: all obj inherited from it <a href="https://javascript.info/prototype-inheritance">..</a></li>
+<li><code>Object.prototype.__proto__ = null</code> (no more [[Prototype]] over it)</li>
+<li>Built-in obj (e.g. obj, arr, fn, num 5): store data in obj itself, store methods in prototype <a href="https://javascript.info/native-prototypes#other-built-in-prototypes">..</a> &amp; <a href="https://javascript.info/native-prototypes#summary">..</a></li>
+</ul>
+<p>Check prototype chain by <code>console.dir(obj)</code></p>
+<p><a href="https://javascript.info/prototype-methods#summary">Methods of props</a></p>
+]]></content>
+      <categories>
+        <category>IT</category>
+        <category>Programming</category>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>IT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript network requests</title>
+    <url>/blog/2020/08/16/js-network/</url>
+    <content><![CDATA[<p>URL components &amp; char-encoding <a href="https://javascript.info/url">..</a></p>
+<p>Same origin policy &amp; Cross-window Communication</p>
+<ul>
+<li>Same <a href="%22protocol://domain:port%22">origin</a> policy..<ul>
+<li>can only change the window’s <code>location</code> <a href="https://javascript.info/cross-window-communication#same-origin">..</a></li>
+<li>same 2nd-level domain &amp; “same origin” state: <code>document.domain = &#39;site.com&#39;</code> <a href="https://javascript.info/cross-window-communication#windows-on-subdomains-document-domain">..</a></li>
+</ul>
+</li>
+<li>Cross-window messaging: call <code>receiverWin.postMessage(..)</code> in sender win &amp; receiver.message event in receiverWin ..</li>
+</ul>
+<p>Popup window <code>window.open(..)</code>: a separate window with own indep JS env</p>
+<ul>
+<li>open a new tab (by default) in browser (or window if sizes provided <a href="https://javascript.info/popup-windows#summary">..</a>)</li>
+<li>Access popup from window: <code>let popupWin = window.open(..); popupWin.document.xxx; popupWin.focus()</code></li>
+<li>Access window from popup: <code>popupWin.opener</code></li>
+<li>close popup: <code>win.close()</code></li>
+<li>window scrolling &amp; resizing ..</li>
+</ul>
+<p>Embedded window <code>&lt;iframe&gt;</code>: own separate <code>document</code> and <code>window</code> obj</p>
+<ul>
+<li>wrong document pitfall <a href="https://javascript.info/cross-window-communication#iframe-wrong-document-pitfall">..</a></li>
+<li>window hierarchy &amp; <code>window.frames</code> <a href="https://javascript.info/cross-window-communication#collection-window-frames">..</a></li>
+<li>iframe <code>sandbox</code> attr (“different origin” state) <a href="https://javascript.info/cross-window-communication#the-sandbox-iframe-attribute">..</a></li>
+<li>transparent iframe &amp; clickjacking attack <a href="https://javascript.info/clickjacking">..</a></li>
+</ul>
+<a id="more"></a>
+<p>Binary data, files</p>
+<ul>
+<li>deal with files/img (create, upload, download)</li>
+<li><code>ArrayBuffer(..)</code>: store raw binary data (seq of bytes)</li>
+<li><strong>view</strong> obj (aka <strong>TypedArray</strong>): interpret data stored in ArrayBuffer (no data on it’s own)</li>
+<li><code>buffer.byteLength</code>, <code>arr.buffer</code>, <code>arr.length</code> &amp; <code>arr.byteLength</code></li>
+<li><code>DataView</code>: untyped view over ArrayBuffer (choose data format at method)</li>
+<li><code>ArrayBufferView</code> &amp; <code>BufferSource</code> ..</li>
+<li>Task: <a href="https://javascript.info/arraybuffer-binary-arrays#concatenate-typed-arrays">Concatenate typed arrays</a></li>
+</ul>
+<p>Blob: binary data with type in File API, immutable</p>
+<ul>
+<li>in file upload/download op &amp; web network request <a href="https://javascript.info/blob#summary">..</a></li>
+<li>Blob to URL (for <code>&lt;a&gt;/&lt;img&gt;</code> tags): <ul>
+<li><code>&lt;a download=&quot;hello.txt&quot;&gt;</code></li>
+<li><code>Blob type: &#39;text/html&#39;</code> (or <code>&#39;text/plain&#39;</code>, becomes Content-Type in network requests, see fetch()) </li>
+<li><code>link.href = URL.createObjectURL(blob)</code> &amp; <code>URL.revokeObjectURL(link.href)</code></li>
+<li><code>link.click()</code>: simulate click on <code>&lt;a&gt;</code></li>
+</ul>
+</li>
+<li>Blob to base64 Data URL / ArrayBuffer: <code>fileReader.readAsDataURL / .readAsArrayBuffer(blob)</code> &amp; <code>link.href / arrBuffer = fileReader.result</code></li>
+<li>img to Blob (blob type: <code>&#39;image/png&#39;</code>): <code>context.drawImage(img)</code> &amp; <code>canvas.toBlob(blob =&gt; ..)</code> ..</li>
+</ul>
+<p>File and FileReader</p>
+<ul>
+<li><code>File</code> inherit from <code>Blob</code>, <code>input.files[0]</code> &amp; Drag’n’Drop events</li>
+<li><code>FileReader</code>: <code>fr.readAs*(blob)</code> (as ArrayBuffer, Text, base64 DataURL ..) <code>fr.result / err</code> &amp; other events</li>
+</ul>
+<p>String &lt;=&gt; bytes by utf-8: <code>TextEncoder.encode(str)</code> (to bytes) &amp; <code>TextDecoder.decode()</code> (get str)</p>
+<p>Network requests &amp; fetch()<br><code>fetch(url, [options])</code> &amp; AJAX ..</p>
+<ul>
+<li><code>fetch(url)</code>: GET request (downloading content of the url) ==&gt; fetch API <a href="https://javascript.info/fetch-api">..</a></li>
+<li><strong>options</strong>: <code>&#123; method, headers, body &#125;</code><ul>
+<li>header option <code>&quot;Content-Type</code>: application/json, text/plain;charset=UTF-8, multipart/form-data <a href="https://javascript.info/formdata">..</a></li>
+<li>body type: <a href="https://javascript.info/fetch#post-requests">JSON</a>, <a href="https://javascript.info/formdata">FormData</a> (with file / Blob ..), <a href="https://javascript.info/fetch#sending-an-image">Blob</a> ..</li>
+</ul>
+</li>
+</ul>
+<p><code>fetch(url, [options]).then(response =&gt; response.json()).then(result =&gt; /* process result */)</code></p>
+<ul>
+<li>fetch() return a Promise resolved with <code>Response</code> obj when server response with headers (no body yet)<ul>
+<li><code>response.status/ok</code>, <code>response.headers</code> &amp; <code>Content-Length</code><a href="https://javascript.info/fetch-progress">..</a> ..</li>
+<li>promise rejects &amp; Abnormal HTTP-statuses (such as 404 or 500 do not cause an error) ..</li>
+</ul>
+</li>
+<li>get response body: <code>response.json()</code> (async)</li>
+<li>Task: Fetch users from GitHub ..</li>
+<li>Read response body chunk-by-chunk (binary data) as it comes: <code>response.body: ReadableStream</code> <a href="https://javascript.info/fetch-progress">..</a></li>
+</ul>
+<p>Fetch &amp; CORS</p>
+<ul>
+<li>Cross-origin requests need special headers from the remote</li>
+<li>simple requests &amp; <code>&lt;form&gt;</code> &amp; <code>&lt;script&gt;</code><ul>
+<li><code>&lt;form target=&quot;iframe&quot; ..&gt;</code></li>
+<li>script &amp; JSONP protocol: <code>&lt;script src=&quot;another-site.com?callback=xxx&quot;&gt;</code><ul>
+<li><code>another-site.com</code>: the remote website intended to expose data for this kind of access</li>
+<li>fn <code>xxx(data)</code>: remote dynamically generates a script, loads and executes &amp; call local fn <code>xxx(data)</code> with the data it wants us to receive as arg</li>
+</ul>
+</li>
+<li><a href="https://javascript.info/fetch-crossorigin#cors-for-simple-requests">CORS process for simple requests</a> ..</li>
+</ul>
+</li>
+<li><a href="https://javascript.info/fetch-crossorigin#non-simple-requests">preflight request &amp; non-simple request</a> ..</li>
+<li>server response header <code>Access-Control-Expose-Headers</code>: allow js to access non-simple response headers</li>
+<li>fetch option <code>credentials: &quot;include&quot;</code> &amp; server response header <code>Access-Control-Allow-Credentials: true</code> ..</li>
+<li>Tasks: request HTTP-header: <code>Origin</code> &amp; <code>Referer</code> <a href="https://javascript.info/fetch-crossorigin#why-do-we-need-origin">..</a></li>
+</ul>
+<p>Abort async task: <code>AbortController</code></p>
+<ul>
+<li>listen to singnal’s abort event: <code>fetch(url, &#123;signal: abortController.signal&#125;)</code>, or<br><code>Promise((res, rej) =&gt; &#123; ... ctrller.signal.addEventListener(&#39;abort&#39;, rej) ... &#125;)</code> </li>
+<li>trigger singnal’s abort event to abort request: <code>ctrler.abort()</code> </li>
+<li>=&gt; <code>fetch.Promide.reject(AbortError)</code></li>
+</ul>
+<p>XMLHTTPRequest (<code>fetch</code> cannot track upload progress)</p>
+<ul>
+<li>default <code>async</code></li>
+<li>events: <code>load/error/progress</code> (the old <code>readystate</code> &amp; <code>onreadystatechange</code>)<ul>
+<li><code>GET</code> &amp; <code>progress</code> (triggers when the data is sent <a href="https://javascript.info/resume-upload#not-so-useful-progress-event">..</a>)</li>
+<li><code>POST</code>: xhr first uploads data (the request body), then downloads the response</li>
+</ul>
+</li>
+<li><code>xhr.responseType = &#39;json&#39;</code> &amp; <code>xhr.response</code>, <code>xhr.abort()</code></li>
+<li>HTTP-headers ..</li>
+<li>track upload progress: <code>xhr.upload.onprocess</code>, <code>e.lengthComputable</code> (true if server sent Content-Length header) &amp; <code>e.loaded / e.total</code></li>
+<li>resume file uploading &amp; <code>fetch(&#39;status&#39;, &#123; headers: &#123; &#39;X-File-Id&#39;: fileId &#125; &#125; )</code> <a href="https://javascript.info/resume-upload#algorithm">..</a></li>
+</ul>
+<h1 id="B-S-communication"><a href="#B-S-communication" class="headerlink" title="B/S communication"></a>B/S communication</h1><h2 id="Receive-msg-from-server"><a href="#Receive-msg-from-server" class="headerlink" title="Receive msg from server"></a>Receive msg from server</h2><p><strong>Regular polling</strong>: msg pass delay, server bombed with requests<br><strong>Long polling pattern</strong>: b.request =&gt; s.hang conn until msg passed =&gt; conn close/lost &amp; b.re-request ..</p>
+<ul>
+<li>sent msg to server by <code>fetch(..)</code> &amp; receive msg by re <code>fetch(url)</code> af prev response body got</li>
+<li>good when msgs rare</li>
+</ul>
+<p><strong>EventSource</strong>: persistent conn, msg: str text, auto-reconn</p>
+<ul>
+<li><code>new EventSource(url, [&#123; withCredentials: true &#125;])</code>: conn to url &amp; waiting for server.msg<ul>
+<li>server response with HTTP-status 200 &amp; header <code>Content-Type: text/event-stream</code> (write text msg) </li>
+<li>auto-reconn if conn lost (with few seconds delay)</li>
+<li>no reconn if server response with HTTP-status 204 || some <code>&quot;error&quot;</code> cases || <code>es.close()</code> ..</li>
+</ul>
+</li>
+<li>server msg fields<ul>
+<li><code>retry: &lt;delay&gt;</code> for reconn timeout</li>
+<li><code>event: &lt;customEvent&gt;</code> (precede <code>data</code>) =&gt; <code>es.addEventListener(..)</code></li>
+<li><code>data: &lt;msg&gt;</code> =&gt; <code>es.onmessage(e.data)</code></li>
+<li><code>id</code> for conn resume (last field) =&gt; <code>es.lastEventId</code> &amp; browser sent <code>Last-Event-ID</code> header when reconn </li>
+</ul>
+</li>
+<li>events: <code>open</code>, <code>message</code>(<code>e.data</code>), <code>error</code> &amp; custom event ..</li>
+</ul>
+<h2 id="Bi-directional-data-exchange"><a href="#Bi-directional-data-exchange" class="headerlink" title="Bi-directional data exchange"></a>Bi-directional data exchange</h2><p><strong>WebSocket</strong>: persistent conn, msg: text/binary data (cross-origin by nature)</p>
+<ul>
+<li>events: <code>open/message(e.data)/error(e.message)/close</code></li>
+<li><code>new WebSocket(&quot;wss://ws.site.com&quot;, [...subprotocols]);</code>: start connecting<ul>
+<li>Extensions (by browser) and subprotocols in both headers ..</li>
+</ul>
+</li>
+<li><code>ws.send(data: str/binary)</code></li>
+<li><code>ws.close(code=1000, reason);</code> =&gt; <code>onclose.e.code/reason</code> (<code>e.wasClean=false</code> when no close frame)</li>
+<li>set received binary data format: <code>socket.binaryType = &quot;arraybuffer&quot;;</code></li>
+<li>check how many bytes waiting to be sent currently: <code>socket.bufferedAmount</code></li>
+</ul>
+<h2 id="General"><a href="#General" class="headerlink" title="General"></a>General</h2><ul>
+<li>conn state check: <code>es/ws.readyState</code> ..</li>
+</ul>
+<p>Storing data in the browser<br>Cookie: <code>name=value;</code> pairs stored in browser, part of HTTP protocol</p>
+<ul>
+<li>server set it in response <code>Set-Cookie</code> HTTP-header &amp; browser sent it in request <code>Cookie</code> HTTP-header when request to same domain, e.g. in auth</li>
+<li>read/write by <code>document.cookie</code> <ul>
+<li>unaccessible if <code>httpOnly</code> option set; </li>
+<li>special char encoded by <code>encodeURIComponent(..)</code></li>
+</ul>
+</li>
+<li>options: <ul>
+<li><code>path=/</code> (accessible for pages under that path), <code>domain=site.com</code> (accessible at its sub-domain)</li>
+<li><code>expires=GMT-timezone</code> / <code>max-age=seconds</code>: cookie rmed af browser close by default: session cookie</li>
+<li><code>secure</code>: only accessible over HTTPS (if set in https://)</li>
+<li><code>samesite</code>: prevent XSRF attack (only work for browser af 2017)<ul>
+<li>prev solution: server check XSRF protection token in every form it receives</li>
+<li><code>samesite[=strict]</code>: forbids browser to sent cookie if request from outside (so user not recgnized &amp; op not proceed)</li>
+<li><code>samesite=lax</code>: sent cookie when “go to URL” op</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3rd-party cookies: placed by domain other than the page visiting, to recognize &amp; track user when moves btn sites (GDPR enforce explicit user permission) .. </li>
+</ul>
+<p>Browser storage obj: save key/value pairs in browser</p>
+<ul>
+<li><code>sessionStorage</code>: only exists in current browser tab (even page refresh, but not re-open)</li>
+<li><code>localStorage</code>: data shared btn all wins with the same origin &amp; not expire</li>
+<li>comm methods and properties, key loops ..</li>
+<li><code>window.onstorage</code> event: triggers on all wins where the storage accessible, except the causing one, allow same origin windows to exchange msgs</li>
+<li><code>sessionStorage/localStorage</code> key/value type: both strs (auto-toString)</li>
+<li>task: Autosave a form field</li>
+</ul>
+<p>indexedDB: mtp types of key/value, bigger storage (intended for offline apps), support transaction</p>
+<ul>
+<li><code>let openRequest = indexedDB.open(DBNname: str, schemaVersionNo: int);</code>: conn to a DB, bound to current origin</li>
+<li>openRequest obj events:<ul>
+<li><code>error</code> &amp; <code>console.error(&quot;Error&quot;, openRequest.error)</code></li>
+<li><code>success</code> &amp; <code>let db = openRequest.result</code></li>
+<li><code>upgradeneeded</code>: when client local db version <code>e.oldVersion</code> &lt; arg <code>schemaVersionNo</code> <code>e.newVersion</code><ul>
+<li>e.g. user come 1st time (db not exist yet, version = 0), </li>
+<li>or client load old code (prevent by HTTP caching headers, or prompt reload page)</li>
+<li>handler finishes without errs =&gt; trigger <code>openRequest.onsuccess</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Parallel update problem: both old/new db conn exists (in diff tabs)<ul>
+<li><code>versionchange</code> event trigger in tab1 (old version db conn): close old db conn &amp; reload page (see <code>db.onversionchange</code>)</li>
+<li>if old db conn not close,  <code>open()</code> in tab2 trigger <code>block</code> event (ask tab2 user to close other tabs for update)</li>
+<li>variants ..</li>
+</ul>
+</li>
+<li>delete db by <code>let deleteRequest = indexedDB.deleteDatabase(name)</code><ul>
+<li>check <code>deleteRequest.onsuccess/onerror</code> for deletion result</li>
+</ul>
+</li>
+<li>object store (i.e. table in RDB)<ul>
+<li><code>db.create/deleteObjectStore(..), objectStoreNames.contains(..)</code> ..</li>
+<li>created/removed/altered obj-store only in <code>upgradeneeded</code> handler (auto-generate a <code>versionchange</code> transaction)</li>
+<li>can make data-ops outside <code>upgradeneeded</code> handler </li>
+<li>obj-store CRUD requests<ul>
+<li>search by key: <code>IDBKeyRange</code> obj &amp; <code>store.get*([query])</code> (values sorted by key order) ..<br>  by other fields by <code>index</code> (return a obj-store-liked obj keyed by that field, could mtp-value) ..</li>
+<li>add/update &amp; delete data request: <code>store.add/put(obj)</code>, <code>store.delete(..)/clear()</code></li>
+</ul>
+</li>
+<li>iter obj-store by <code>cursor</code> ..</li>
+</ul>
+</li>
+<li>transaction<ul>
+<li>starts t &amp; get it obj-store: <code>let t = db.transaction(..)</code> <code>let books = t.objectStore(&quot;books&quot;)</code><br>&amp; other request cmds</li>
+<li><code>request.onsuccess/error</code> &amp; <code>request.result/error</code></li>
+<li>all t.requests finish =&gt; microtasks queue empty =&gt; auto-commit =&gt; <code>t.oncomplete</code> event<ul>
+<li>async ops/macrotask not allowed btn t.requests: t closed bf macrotasks starts =&gt; <code>TransactionInactiveError</code></li>
+<li>solution: split t ops &amp; macrotasks/async ops apart ..</li>
+</ul>
+</li>
+<li><code>t.abort()</code> &amp; <code>t.onabort</code> event, <code>t.error</code><ul>
+<li>failed request auto abort t, can be prevent in <code>request.onerror</code> handler by <code>e.preventDefault()</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>IndexedDB events bubble: <code>request</code> → <code>transaction</code> → <code>database</code><ul>
+<li><code>db.onerror = function(event) &#123; let request = event.target.. &#125;</code></li>
+</ul>
+</li>
+<li>Promise wrapper &amp; <code>try..catch</code> vs Adding <code>onsuccess/onerror</code> to every request</li>
+<li>demo in summary ..</li>
+</ul>
+<p>Web Components</p>
+<ul>
+<li>custom html elem: all-new (no semantics) &amp; extends built-in elem ..<ul>
+<li>html tag <code>&lt;..&gt;</code> / <code>document.createElement(..)</code>: instance of <code>*ELement</code></li>
+<li><code>customElements.define()</code> &amp; <code>:not(:defined)</code></li>
+</ul>
+</li>
+<li>HTML parser process parent bf child<ul>
+<li>access childElem by <code>setTimeout</code> (af html parsing completed) ..</li>
+<li>want outer callback trigger af inner elem ready: inner elem dispatch events &amp; outer listen</li>
+<li><code>&lt;time-formatted&gt;</code> &amp; <code> Intl.DateTimeFormat(..)</code> demo ..</li>
+</ul>
+</li>
+<li>task: Live timer element</li>
+</ul>
+<p>Shadow DOM: component private DOM subtree (encapsulate internal implementation details)</p>
+<ul>
+<li>own stylesheets (local css / non-standard <code>pseudo</code> attr), own id/quary spaces ..</li>
+<li>if shadow DOM, light DOM not displayed — render its light DOM elems (aka “slotted” elems) inside the shadow DOM by <code>&lt;slot&gt;</code> (flattened DOM) <a href="https://javascript.info/slots-composition">..</a><ul>
+<li>shadowRoot can’t handle event, so using the first child</li>
+<li>open/close menu example <a href="https://javascript.info/slots-composition#menu-example">..</a></li>
+</ul>
+</li>
+<li>styling: shadow host &amp; slotted elem and their contents live in outer doc:  <ul>
+<li>local <code>&lt;style&gt;</code> &amp; <code>&lt;link rel=&quot;stylesheet&quot; href=&quot;…&quot;&gt;</code></li>
+<li>host: local? <code>:host*</code> &amp; doc css <a href="https://javascript.info/shadow-dom-style#cascading">..</a> and custom CSS props </li>
+<li>slot: local <code>slot</code> css &amp; <code>::slotted(selector)</code> </li>
+</ul>
+</li>
+<li>events handling <a href="https://javascript.info/shadow-dom-events">..</a>: <ul>
+<li>host elem as target in outer handler (Event retarget) except slotted elems</li>
+<li>event bubbling &amp; <code>e.composedPath()</code>, <code>e.composed</code> (true for e bubble across shadow DOM boundary)</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://javascript.info/template-element">Template element</a><br><code>&lt;template&gt;</code> tag: contents ignored by browser (elems inside not render, style/script not work) until inserted to doc (by <code>elem.append(tmpl.content)</code>)</p>
+]]></content>
+      <categories>
+        <category>IT</category>
+        <category>Programming</category>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>IT</tag>
+      </tags>
   </entry>
   <entry>
     <title>JavaScript Objects &amp; Symbols, Arrow function</title>
@@ -228,6 +1052,390 @@
 </li>
 <li>conditional op <code>?..:</code>, Nullish coalescing op <code>??</code> (check for “null/undefined”), logical ops <code>! &amp;&amp; ||</code></li>
 <li>Comma, Bitwise ops, op precedence &amp; <a href="https://javascript.info/operators#assignment-returns-a-value">op return</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>IT</category>
+        <category>Programming</category>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>IT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript &amp; DOM</title>
+    <url>/blog/2020/06/30/js-dom/</url>
+    <content><![CDATA[<h1 id="JS-intro"><a href="#JS-intro" class="headerlink" title="JS intro"></a>JS intro</h1><ul>
+<li>init to <strong>make webpages alive</strong></li>
+<li>run on platform with <a href="https://javascript.info/intro#what-is-javascript">JS engine</a> (e.g. browser JS VM <a href="https://mrale.ph/">V8</a>) in Chrome &amp; Opera) ==&gt; <a href="https://javascript.info/browser-environment">host env</a></li>
+<li>JS in HTML: <code>&lt;script&gt;...&lt;/script&gt;</code> &amp; <code>&lt;script src=...&gt;&lt;/script&gt;</code> <a href="https://javascript.info/hello-world">..</a> <ul>
+<li><strong>type=”text/javascript” language=”javascript”</strong> attr no need anymore</li>
+<li>inline content ignored if <code>src</code> set</li>
+<li>browser cache external script for reuse ==&gt; make complex scripts external</li>
+</ul>
+</li>
+<li>in-browser JS restrictions: access file system &amp; devices, browser <strong>Same Origin Policy</strong></li>
+</ul>
+<a id="more"></a>
+
+<h1 id="Browser-env"><a href="#Browser-env" class="headerlink" title="Browser env"></a>Browser env</h1><ul>
+<li><code>window</code> =&gt; JS (global obj) / DOM / BOM (the browser window obj) <a href="https://javascript.info/browser-environment">..</a></li>
+<li><a href="https://javascript.info/browser-environment#bom-browser-object-model">BOM</a>: <code>navigator</code> obj, <code>location.href</code> =&gt; URL, <a href="https://javascript.info/alert-prompt-confirm">model window fn</a>: <code>alert()</code>, <code>prompt()</code>, <code>confirm()</code></li>
+</ul>
+<h1 id="DOM-tree"><a href="#DOM-tree" class="headerlink" title="DOM tree"></a>DOM tree</h1><ul>
+<li>repre HTML/XML doc structure <a href="https://javascript.info/dom-nodes#summary">..</a>, contains eth in HTML, inc <code>&lt;!DOCTYPE HTML&gt;</code> <a href="https://javascript.info/dom-nodes#other-node-types">..</a></li>
+<li>rooted at <code>document</code> (whole doc<a href="https://javascript.info/dom-nodes#other-node-types">..</a>) =&gt; <strong>document.documentElement</strong> / <strong>.head</strong> / .<strong>body</strong> <a href="https://javascript.info/dom-navigation#on-top-documentelement-and-body">..</a></li>
+<li>build on load pages <a href="https://javascript.info/dom-attributes-and-properties">..</a><ul>
+<li><strong>document.body = null</strong> for &lt;head&gt;.script <a href="https://javascript.info/dom-navigation#on-top-documentelement-and-body">..</a></li>
+<li>browser auto-correction when building the DOM, e.g. &lt;table&gt; always have &lt;tbody&gt; <a href="https://javascript.info/dom-nodes#autocorrection">..</a></li>
+</ul>
+</li>
+<li><a href="https://javascript.info/dom-nodes#interaction-with-console">interact DOM elem in console</a></li>
+</ul>
+<h1 id="DOM-class-hierarchy"><a href="#DOM-class-hierarchy" class="headerlink" title="DOM class hierarchy"></a>DOM class hierarchy</h1><ul>
+<li><p>abstract <strong>EventTarget</strong> =&gt; abstract <strong>Node</strong> (inc. nav props) =&gt; <a href="https://javascript.info/basic-dom-node-properties#dom-node-classes">..</a></p>
+<ul>
+<li><strong>Element</strong> =&gt; HTMLElement …<ul>
+<li><code>console.dir(elem)</code> (DOM tree elem) <strong>vs</strong> <code>console.log(elem)</code> (DOM obj &amp; props) <a href="https://javascript.info/basic-dom-node-properties#dom-node-classes">..</a></li>
+</ul>
+</li>
+<li><strong>Text</strong>, <strong>Comment</strong></li>
+<li><strong>Document</strong> =&gt; <strong>HTMLDocument</strong>, instance <code>document</code> <a href="https://javascript.info/basic-dom-node-properties#where-s-the-document-in-the-hierarchy">..</a></li>
+</ul>
+</li>
+<li><p>check node type</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">alert( node.nodeName );     <span class="comment">// #comment, #document, BODY</span></span><br><span class="line">alert( elem.tagName );      <span class="comment">// BODY</span></span><br><span class="line"></span><br><span class="line">alert( <span class="built_in">document</span>.body.constructor.name ); <span class="comment">// HTMLBodyElement</span></span><br><span class="line"><span class="comment">// by toString()</span></span><br><span class="line">alert( <span class="built_in">document</span>.body );     <span class="comment">// [object HTMLBodyElement]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// the old &quot;nodeType&quot;</span></span><br><span class="line">alert(node.nodeType);       <span class="comment">// 1 =&gt; element, 3 = text, 9 = document</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="Attr-amp-Prop"><a href="#Attr-amp-Prop" class="headerlink" title="Attr &amp; Prop"></a>Attr &amp; Prop</h1><ul>
+<li><strong>HTML-attr</strong>: case-insensitive (all lowercase in HTML) &amp; value: str<ul>
+<li>HTML <code>hidden</code> attr === <code>style=&quot;display:none</code> <a href="https://javascript.info/basic-dom-node-properties#the-hidden-property">..</a></li>
+</ul>
+</li>
+<li><strong>DOM prop</strong>: case-sensitive &amp; value: any type</li>
+<li>interact: <code>elem.get/remove/hasAttribute(name)</code> / <code>setAttribute(name, value)</code> / <code>attributes</code><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// std attr &lt;-&gt; prop</span></span><br><span class="line">input.setAttribute(<span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;id&#x27;</span>);         <span class="comment">// input.id: id </span></span><br><span class="line">input.id = <span class="string">&#x27;newId&#x27;</span>;                     <span class="comment">// input.getAttribute(&#x27;id&#x27;)): newId</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// input value attr -&gt; input.value</span></span><br><span class="line">input.setAttribute(<span class="string">&#x27;value&#x27;</span>, <span class="string">&#x27;text&#x27;</span>);    <span class="comment">// input.value: text</span></span><br><span class="line">input.value = <span class="string">&#x27;newValue&#x27;</span>;               <span class="comment">// input.getAttribute(&#x27;value&#x27;): text (attr not updated)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// DOM prop value type: not only str</span></span><br><span class="line">input.getAttribute(<span class="string">&#x27;checked&#x27;</span>)           <span class="comment">// &#x27;&#x27;</span></span><br><span class="line">input.checked                           <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">div.getAttribute(<span class="string">&#x27;style&#x27;</span>)               <span class="comment">// color:red;font-size:120%</span></span><br><span class="line">div.style                               <span class="comment">// [object CSSStyleDeclaration]</span></span><br><span class="line"></span><br><span class="line">a.getAttribute(<span class="string">&#x27;href&#x27;</span>));                <span class="comment">// #hello (relative path)</span></span><br><span class="line">a.href                                  <span class="comment">// full URL </span></span><br></pre></td></tr></table></figure></li>
+<li><strong>customized attr</strong><ul>
+<li>pass data to JS || “mark” HTML-elem for JS ==&gt; <strong>querySelector(‘tag[attr]’)</strong></li>
+<li>naming by <code>data-*</code> (avoid conflict of become standard later), access by <strong>dataset.xxx</strong> (mtp-word camelCase)</li>
+</ul>
+</li>
+</ul>
+<h1 id="DOM-modification"><a href="#DOM-modification" class="headerlink" title="DOM modification"></a>DOM modification</h1><h2 id="Node-creation"><a href="#Node-creation" class="headerlink" title="Node creation"></a>Node creation</h2><ul>
+<li><code>document.createElement(tag: str)</code> / <strong>createTextNode</strong>(text: str) <a href="https://javascript.info/modifying-document#creating-an-element">..</a></li>
+<li>elem.<strong>cloneNode</strong>(isDeepCopy: bool) ==&gt; deep copy (all attrs &amp; sub-elems), false without sub-elems <a href="https://javascript.info/modifying-document#cloning-nodes-clonenode">..</a></li>
+</ul>
+<h2 id="Node-Select"><a href="#Node-Select" class="headerlink" title="Node Select"></a>Node Select</h2><ul>
+<li><code>elem.querySelectorAll(css: str)</code>: static-collection &amp; <code>elem.querySelector(css)</code>: 1st-elem <a href="https://javascript.info/searching-elements-dom#querySelectorAll">..</a> <ul>
+<li>css: <strong>‘tag[attr]’</strong> <a href="https://javascript.info/dom-attributes-and-properties#make-external-links-orange">..</a> &amp; <a href="https://javascript.info/searching-elements-dom#matches">..</a></li>
+</ul>
+</li>
+<li><code>document.getElementById(id: str)</code><ul>
+<li>or just id (the id-named gloabal var) || <strong>window[‘xxx’]</strong> (for comp, not recomm)</li>
+<li><a href="https://javascript.info/searching-elements-dom#getelementsby">the old getElemetsBy* methods</a></li>
+</ul>
+</li>
+<li>elem.<strong>closest(css)</strong> =&gt; closest ancestor (inc elem itself)</li>
+<li><strong>nav props</strong> (child, parent, sibling, read-only) <a href="https://javascript.info/dom-navigation">..</a><ul>
+<li><code>childNodes: nodes</code> &amp; <code>children: elems</code> =&gt; DOM collection (array-like iter obj)</li>
+<li>for <code>&lt;html&gt;</code>, parentNode =&gt; <code>document</code>, parentElement =&gt; <code>null</code></li>
+</ul>
+</li>
+<li><strong>elemA.contains(elemB)</strong>(true if B descendant or same) / <strong>elem.matches</strong>(css) =&gt; bool </li>
+<li>table props <a href="https://javascript.info/dom-navigation#dom-navigation-tables">..</a></li>
+</ul>
+<h2 id="Node-modification"><a href="#Node-modification" class="headerlink" title="Node modification"></a>Node modification</h2><h3 id="Content"><a href="#Content" class="headerlink" title="Content"></a>Content</h3><ul>
+<li><code>elem.innerHTML</code> <a href="https://javascript.info/basic-dom-node-properties#innerhtml-the-contents">..</a><ul>
+<li>innerHTML += xxx — replace instead addition (resrc reload, selection &amp; input removed)</li>
+<li>insert script-tag by innerHTML — inserted but not executed</li>
+<li>elem.<strong>outerHTML</strong> =&gt; innerHTML + elem itself <a href="https://javascript.info/basic-dom-node-properties#outerhtml-full-html-of-the-element">..</a><ul>
+<li>replace in the DOM but <strong>not change elem</strong> itself (var still ref to the old value) — get new value by query again</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>elem.textContent</code> — inner text without tags || insert as text (safer then .innerHTML)</li>
+<li><code>Text/Comment.data</code> — text/comment content of the node (similar to <strong>nodeValue</strong> prop) <a href="https://javascript.info/basic-dom-node-properties#nodevalue-data-text-node-content">..</a></li>
+<li>task: <a href="https://javascript.info/basic-dom-node-properties#count-descendants">Count descendants</a>, <a href="https://javascript.info/modifying-document#create-a-calendar">Create a calendar</a>, <a href="https://javascript.info/modifying-document#sort-the-table">Sort the table</a></li>
+</ul>
+<h3 id="Style"><a href="#Style" class="headerlink" title="Style"></a>Style</h3><ul>
+<li>prefer class-attr than style-attr for styling</li>
+<li><code>getComputedStyle</code>(elem, [pseudo: str]).<strong>camelCaseProp</strong> =&gt; <strong>str with unit</strong> (of resolved value) <strong>from CSS-class</strong> <a href="https://javascript.info/styles-and-classes#computed-styles-getcomputedstyle">..</a><ul>
+<li><strong>resolved value</strong> (fixed or absolute, with unit, e.g. “20px”) vs <strong>computed style value</strong> (could be relative, e.g. “em”, “125%”)</li>
+<li>prop use full name, e.g.marginTop instead of margin (otherwise may inconsist among browsers)</li>
+<li>set class: elem.<strong>className</strong> (whole replace) / <strong>.classList</strong> (iter, with methods <strong>add/remove/toggle/contains</strong>(“class”), for indiv set)</li>
+</ul>
+</li>
+<li>elem.<code>style</code>.camelCaseProp =&gt; <strong>str with unit</strong> from <strong>style-attr</strong> (no access to CSS value <a href="https://javascript.info/styles-and-classes#computed-styles-getcomputedstyle">..</a>)<ul>
+<li>reset by elem.<strong>style.xxx = ‘’</strong> (back to CSS classes and its built-in styles normally)</li>
+<li>style prop <strong>default = ‘’</strong> for unsetted prop, e.g. style prop from CSS class &amp; style set without unit</li>
+<li>full rewrite — <strong>style.cssText = xxx</strong>, same as <strong>setAttribute(‘style’, cssText)</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="Size-coords-amp-scroll"><a href="#Size-coords-amp-scroll" class="headerlink" title="Size, coords &amp; scroll"></a>Size, coords &amp; scroll</h3><h4 id="Geometry-props"><a href="#Geometry-props" class="headerlink" title="Geometry props"></a>Geometry props</h4><ul>
+<li>return number (without “px”, only for displayed elem)</li>
+<li><strong>offsetParent</strong> — for calc coords when render: nearest CSS-positioned ancestor || <code>td</code>, <code>th</code>, <code>table</code> || <code>body</code> <a href="https://javascript.info/size-and-scroll#offsetparent-offsetleft-top">..</a><ul>
+<li><strong>offsetLeft/Top</strong>, <code>offsetWidth/Height</code> (<strong>outer size</strong>: outer border = CSS-w/h (inc scrollbar) + padding + border)</li>
+<li><strong>clientTop/Left</strong> (border + sbar), <code>clientWidth/Height</code> (<strong>inner size</strong>: inside sbar &amp; broder = (CSS-w/h - sbar) + padding)</li>
+<li>task — <a href="https://javascript.info/size-and-scroll#what-is-the-scrollbar-width">What is the scrollbar width?</a></li>
+</ul>
+</li>
+<li><code>elem.getBoundingClientRect()</code> =&gt; X/Y, top/left &amp; bottom/right (outer border rel to window), width/height <a href="https://javascript.info/coordinates#element-coordinates-getboundingclientrect">..</a><ul>
+<li>convert <code>clientX/Y</code> (rel to window, ==&gt; position: <strong>fixed</strong>) to <code>pageX/Y</code> (position: <strong>absolute</strong>):<br><strong>getBoundingClientRect().left/top + window.pageX/YOffect</strong> (scrolled-out part of doc) <a href="https://javascript.info/coordinates#getCoords">..</a></li>
+<li>tasks — <a href="https://javascript.info/coordinates#find-window-coordinates-of-the-field">Find window coordinates of the field</a>, <a href="https://javascript.info/coordinates#position-the-note-inside-absolute">Position the note inside (absolute)</a></li>
+</ul>
+</li>
+<li><code>style.left/top</code> <a href="https://javascript.info/size-and-scroll#place-the-ball-in-the-field-center">..</a>, <code>style.width/height</code> <a href="https://javascript.info/size-and-scroll#what-is-the-scrollbar-width">..</a> =&gt; <strong>str with unit</strong></li>
+<li><code>document.elementFromPoint(clientX, clientY)</code>: most nested elem, null if out of window <a href="https://javascript.info/coordinates#elementFromPoint">..</a></li>
+</ul>
+<h4 id="Scroll-props"><a href="#Scroll-props" class="headerlink" title="Scroll props"></a>Scroll props</h4><p>Get scrolled-out part size:</p>
+<ul>
+<li>for whole doc: <strong>window.pageX/YOffset</strong> <a href="https://javascript.info/size-and-scroll-window#page-scroll">..</a></li>
+<li>for some elem: elem.<strong>scrollTop/Left</strong> (scrolled out part, <strong>writable</strong>) = elem.<strong>scrollWidth/Height</strong> - elem.clientWidth/Height<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">elem.style.height = <span class="string">`<span class="subst">$&#123;elem.scrollHeight&#125;</span>px`</span>; <span class="comment">// expand elem to full height</span></span><br><span class="line"></span><br><span class="line">elem.scrollTop = elem.scrollHeight; <span class="comment">// auto-scroll up [Events mouseover/mouseout, relatedTarget]</span></span><br><span class="line">elem.scrollTop = <span class="number">0</span> / <span class="literal">Infinity</span>       <span class="comment">// scroll to top/bottom</span></span><br><span class="line"><span class="keyword">let</span> scrollBottom = elem.scrollHeight - elem.scrollTop - elem.clientHeight; <span class="comment">// [Task1]</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>Scroll the doc</p>
+<ul>
+<li><code>window.scrollBy(x,y)</code> &amp; <code>window.scrollTo(pageX,pageY)</code> <a href="https://javascript.info/size-and-scroll-window#window-scroll">..</a></li>
+<li><code>elem.scrollToView(top=true)</code>: scroll page to make elem top / bottom of the window</li>
+</ul>
+<p>Set/forbid scroll</p>
+<ul>
+<li><code>style.overflow[X/Y]=&#39;scroll/hidden&#39;</code> (same as CSS overflow[-x/-y]) <a href="https://javascript.info/size-and-scroll#what-is-the-scrollbar-width">..</a> &amp; <a href="https://javascript.info/size-and-scroll-window#forbid-the-scrolling">..</a></li>
+</ul>
+<h4 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h4><ul>
+<li>text overflow ==&gt; padding-bottom area may filled with text <a href="https://javascript.info/size-and-scroll#sample-element">..</a></li>
+<li>cases for geometry prop = 0 &amp; offsetParent = null <a href="https://javascript.info/size-and-scroll">..</a></li>
+<li>for elem width/height/distance, <strong>use geometry prop (e.g. clientWidth) instead</strong> getComputedStyle() <a href="https://javascript.info/size-and-scroll#don-t-take-width-height-from-css">..</a> &amp; <a href="https://javascript.info/size-and-scroll#the-difference-css-width-versus-clientwidth">..</a></li>
+<li>get window size — <strong>document.documentElement.clientWidth/H</strong> (without sbar)  vs <strong>window.innerWeight/H</strong> (inc sbar) <a href="https://javascript.info/size-and-scroll-window#width-height-of-the-window">..</a></li>
+<li>get doc size (with scroll out part) <a href="https://javascript.info/size-and-scroll-window#width-height-of-the-document">..</a></li>
+</ul>
+<h2 id="Node-insert-move-amp-remove"><a href="#Node-insert-move-amp-remove" class="headerlink" title="Node insert, move &amp; remove"></a>Node insert, move &amp; remove</h2><p><strong>Insert elem || text</strong>: <code>node.append/prepend/before/after(...nodes || textStrs)</code> <a href="https://javascript.info/modifying-document#insertion-methods">..</a></p>
+<ul>
+<li>auto remove existing node from old place</li>
+<li><a href="https://javascript.info/modifying-document#old-school-insert-remove-methods">the old insert/remove methods</a></li>
+</ul>
+<p><strong>Insert HTML</strong>: <code>elem.insertAdjacentHTML(where, html: str)</code> <a href="https://javascript.info/modifying-document#insertadjacenthtml-text-element">..</a> </p>
+<ul>
+<li>where = “beforebegin/afterbegin/beforeend/afterend” </li>
+<li>elem.<strong>insertAdjacentElement/Text</strong> can be replaced by node.<strong>append/prepend/before/after</strong></li>
+</ul>
+<p><strong>Replace node</strong>: <code>node.replaceWith(...nodes || textStrs)</code> <a href="https://javascript.info/modifying-document#insertion-methods">..</a></p>
+<p><strong>Remove node</strong>: <code>node.remove()</code> <a href="https://javascript.info/modifying-document#node-removal">..</a></p>
+<p><strong>Node groups</strong>: node-array &amp; DocumentFragment obj <a href="https://javascript.info/modifying-document#document-fragment">..</a></p>
+<p><a href="https://javascript.info/modifying-document#a-word-about-document-write">The old <strong>document.write</strong>(html: str)</a>: call when onload (call af load replace page content)</p>
+<h1 id="UI-Event-handle"><a href="#UI-Event-handle" class="headerlink" title="UI Event handle"></a>UI Event handle</h1><h2 id="UI-Event"><a href="#UI-Event" class="headerlink" title="UI Event"></a>UI Event</h2><p>Event Obj <a href="https://javascript.info/introduction-browser-events#event-object">..</a></p>
+<ul>
+<li><code>e.type</code>: e.g. “click”</li>
+<li><code>e.clientX/Y</code>: window-rel coors</li>
+</ul>
+<p>Event phase &amp; event delegation</p>
+<ul>
+<li><strong>event capturing <a href="https://javascript.info/bubbling-and-capturing#capturing">..</a> &amp; event bubbling</strong> (most events bubble, except <strong>focus</strong>) <a href="https://javascript.info/bubbling-and-capturing#bubbling">..</a><ul>
+<li>Event delegation &amp; event bubble: handle event on container for mtp elems <a href="https://javascript.info/event-delegation#summary">..</a></li>
+<li>tasks — <a href="https://javascript.info/event-delegation#hide-messages-with-delegation">Hide messages with delegation</a>, <a href="https://javascript.info/event-delegation#tree-menu">toogle tree menu</a>, <a href="https://javascript.info/event-delegation#sortable-table">Sortable table</a>, <a href="https://javascript.info/event-delegation#tooltip-behavior">Tooltip behavior</a></li>
+<li>stop bubbling by <ul>
+<li><strong>e.stopPropagation()</strong> (stop current handler)</li>
+<li><strong>e.stopImmediatePropagation()</strong> (stop all handlers)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>e.target</code>, <code>e.currentTarget</code> <a href="https://javascript.info/bubbling-and-capturing#event-target">..</a></li>
+<li><code>e.eventPhase</code>: capturing=1, target=2, bubbling=3 <a href="https://javascript.info/bubbling-and-capturing#summary">..</a></li>
+</ul>
+<h2 id="Custom-Event-Construct-amp-dispatch"><a href="#Custom-Event-Construct-amp-dispatch" class="headerlink" title="Custom Event Construct &amp; dispatch"></a>Custom Event Construct &amp; dispatch</h2><p>Script-gen events &amp; dispatch to elem <a href="https://javascript.info/dispatch-events#event-constructor">..</a> &amp; <a href="https://javascript.info/dispatch-events#custom-events">..</a></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> event = <span class="keyword">new</span> CustomEvent(type: str, <span class="attr">options</span>: &#123;<span class="attr">bubbles</span>: <span class="literal">false</span>, <span class="attr">cancelable</span>: <span class="literal">false</span>&#125;); </span><br><span class="line">elem.dispatchEvent(event, &#123;<span class="attr">detail</span>: obj); <span class="comment">// access by e.detail.xxx in event handler</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// diff user event &amp; script-gen event</span></span><br><span class="line">event.isTrusted <span class="comment">// true for user action, false for script-gen</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Event-handler"><a href="#Event-handler" class="headerlink" title="Event handler"></a>Event handler</h2><p><strong>Event handler</strong>: fn(eventObj) <a href="https://javascript.info/introduction-browser-events#event-handlers">..</a></p>
+<h3 id="Add-event-handler"><a href="#Add-event-handler" class="headerlink" title="Add event handler"></a>Add event handler</h3><p>3 ways to add event handler to elem: </p>
+<ol>
+<li><code>elem.addEventListener()</code><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">elem.add/removeEventListener(event, handler, [options])</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>work for custom event <a href="https://javascript.info/dispatch-events#bubbling-example">..</a></li>
+<li>allow mtp handlers (by mtp calls to <strong>elem.addEventListener</strong>)</li>
+<li>work for <strong>document.addEventListener(“DOMContentLoaded”, handler)</strong> &amp; <code>focusin</code>\ <code>focusout</code> event <a href="https://javascript.info/focus-blur#delegation-focusin-focusout">..</a></li>
+<li>support <strong>obj with method handleEvent(event)</strong> as handler <a href="https://javascript.info/introduction-browser-events#object-handlers-handleevent">..</a></li>
+<li><code>options</code>: {once/cature/passive: bool}</li>
+</ul>
+<ol start="2">
+<li>HTML attr <code>on&lt;event&gt;=&quot;fn-body&quot;</code> || DOM prop <code>elem.on&lt;event&gt;function() &#123; ... &#125;</code> <a href="https://javascript.info/introduction-browser-events#event-handlers">..</a>, e.g. onclick<ul>
+<li>only work for built-in events <a href="https://javascript.info/dispatch-events#bubbling-example">..</a></li>
+<li>can only assign 1 handler (overwrite if DOM prop &amp; HTML attr both set) <a href="https://javascript.info/introduction-browser-events#dom-property">..</a></li>
+<li><code>elem.setAttribute(&#39;on&lt;event&gt;&#39;, handler)</code> not work for event handler <a href="https://javascript.info/introduction-browser-events#possible-mistakes">..</a></li>
+<li><code>this</code> in handler = e.currentTarget <a href="https://javascript.info/introduction-browser-events#accessing-the-element-this">..</a> &amp; <a href="https://javascript.info/introduction-browser-events#event-object">..</a></li>
+<li>rm by <code>elem.on&lt;event&gt; = null</code> <a href="https://javascript.info/introduction-browser-events#dom-property">..</a></li>
+</ul>
+</li>
+</ol>
+<p>Tasks: <a href="https://javascript.info/introduction-browser-events#move-the-ball-across-the-field">Move the ball across the field</a>, <a href="https://javascript.info/introduction-browser-events#create-a-sliding-menu">Create a sliding menu</a>, <a href="https://javascript.info/introduction-browser-events#add-a-closing-button">Add a closing button</a>, <a href="https://javascript.info/introduction-browser-events#carousel">Carousel</a></p>
+<h3 id="Prevent-default-actions"><a href="#Prevent-default-actions" class="headerlink" title="Prevent default actions"></a>Prevent default actions</h3><ul>
+<li>default browser action list <a href="https://javascript.info/default-browser-action#summary">..</a></li>
+<li>prevent by call <code>e.preventDefault()</code> on handler || <code> on&lt;event&gt;</code> handler return false (other return value ignored) <a href="https://javascript.info/default-browser-action#preventing-browser-actions">..</a><ul>
+<li>call <strong>e.preventDefault()</strong>  ==&gt; <strong>e.defaultPrevented</strong>: true (means the event is handled somewhere) <a href="https://javascript.info/default-browser-action#event-defaultprevented">..</a> &amp; elem.<strong>dispatchEvent(event)</strong> return false <a href="https://javascript.info/dispatch-events#event-preventdefault">..</a></li>
+<li><code>passive: true</code> option of <code>addEventListener</code>: signals the browser that the handler is not going to call preventDefault() <a href="https://javascript.info/default-browser-action#the-passive-handler-option">why needed?</a></li>
+</ul>
+</li>
+<li>Tasks — <a href="https://javascript.info/default-browser-action#why-return-false-doesn-t-work">Why “return false” doesn’t work?</a>, <a href="https://javascript.info/default-browser-action#image-gallery">Image gallery</a></li>
+</ul>
+<h2 id="Event-Processing-Queue"><a href="#Event-Processing-Queue" class="headerlink" title="Event Processing Queue"></a>Event Processing Queue</h2><p>Asycnly &amp; Syncly <a href="https://javascript.info/dispatch-events#events-in-events-are-synchronous">..</a> </p>
+<h1 id="Mouse-Event"><a href="#Mouse-Event" class="headerlink" title="Mouse Event"></a>Mouse Event</h1><ul>
+<li>simple &amp; complext events <a href="https://javascript.info/mouse-events-basics#mouse-event-types">..</a> &amp; events order, e.g. click: mousedown =&gt; mouseup =&gt; click <a href="https://javascript.info/mouse-events-basics#events-order">..</a></li>
+<li>mouse coords: <code>e.clientX/Y, e.pageX/Y</code> <a href="https://javascript.info/mouse-events-basics#coordinates-clientx-y-pagex-y">..</a></li>
+<li>mouse btn &amp; <code>e.button</code> (=0 left-btn, =1 middle, =2 right-btn)<ul>
+<li>deprecated <code>e.which</code> <a href="https://javascript.info/mouse-events-basics#mouse-button">..</a></li>
+</ul>
+</li>
+<li>mouse event also inc info of modifier keys: <code>e.shiftKey/altKey/ctrlKey/metaKey</code>(Mac): bool (true if pressed) <a href="https://javascript.info/mouse-events-basics#modifiers-shift-alt-ctrl-and-meta">..</a><ul>
+<li>Ctrl in Windows vs Cmd (metaKey) in MacOS — left-click + ctrl = right-click on MacOS</li>
+</ul>
+</li>
+<li>disable selection (on dblclick) &amp; copy: <code>onmousedown/oncopy=&quot;return false</code> <a href="https://javascript.info/mouse-events-basics#disabling-selection">..</a></li>
+</ul>
+<h2 id="Mouse-Move-Event"><a href="#Mouse-Move-Event" class="headerlink" title="Mouse Move Event"></a>Mouse Move Event</h2><p><code>mousemove</code> <a href="https://javascript.info/mouse-events-basics#coordinates-clientx-y-pagex-y">..</a>:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">onmousemove</span>=<span class="string">&quot;this.value=event.clientX+&#x27;:&#x27;+event.clientY&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Mouse over me&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>mouseover/mouseout</code> event &amp; <code>e.relatedTarget</code> <a href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#events-mouseover-mouseout-relatedtarget">..</a></p>
+<ul>
+<li>may skip elems in-btw if move fast <a href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#skipping-elements">..</a> &amp; <strong>e.relatedTarget</strong> can be null if from outside of window</li>
+<li>If <strong>mouseover</strong> triggered, there must be <strong>mouseout</strong></li>
+<li>vs <code>mouseenter/mouseleave</code> <a href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#events-mouseenter-and-mouseleave">..</a><ul>
+<li>event bubble — event delegation <a href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#event-delegation">..</a></li>
+<li><strong>mouseout</strong> trigger on elem when mouse move from elem to descendants (mouse only over a single elem at a time: most nested /top one) <a href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#mouseout-when-leaving-for-a-child">..</a></li>
+</ul>
+</li>
+<li>task — <a href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#smart-tooltip">“Smart” tooltip</a> (tooltip style)</li>
+</ul>
+<h2 id="Drag’n’Drop-Event"><a href="#Drag’n’Drop-Event" class="headerlink" title="Drag’n’Drop Event"></a>Drag’n’Drop Event</h2><ul>
+<li>native event (e.g. <strong>dragstart, dragend</strong>) limitation <a href="https://javascript.info/mouse-drag-and-drop">..</a></li>
+<li>implement Drag’n’Drop by mouse events: <code>mousedown</code> =&gt; <code>mousemove</code> =&gt; <code>mouseup</code> <a href="https://javascript.info/mouse-drag-and-drop#drag-n-drop-algorithm">..</a> &amp; <a href="https://javascript.info/mouse-drag-and-drop#correct-positioning">..</a></li>
+<li>highlight droppable elem <a href="https://javascript.info/mouse-drag-and-drop#potential-drop-targets-droppables">..</a><ul>
+<li>draggable elem always above other elem when dragging &amp; mouse event only happen on the top elem, so eh on other elem not work, can fix by<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">draggble.hidden = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">let</span> elemBelow = <span class="built_in">document</span>.elementFromPoint(event.clientX, event.clientY);</span><br><span class="line">draggble.hidden = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>task — <a href="https://javascript.info/mouse-drag-and-drop#slider">Slider</a>, <a href="https://javascript.info/mouse-drag-and-drop#drag-superheroes-around-the-field">Drag superheroes around the field</a> (not checked yet)</li>
+</ul>
+<h2 id="Scroll-Event"><a href="#Scroll-Event" class="headerlink" title="Scroll Event"></a>Scroll Event</h2><ul>
+<li><p><code>scroll</code> event on elem &amp; window <a href="https://javascript.info/onscroll">..</a></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&#x27;scroll&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">&#x27;showScroll&#x27;</span>).innerHTML = <span class="built_in">window</span>.pageYOffset + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>task — <a href="https://javascript.info/onscroll#endless-page">Endless page</a>, <a href="https://javascript.info/onscroll#up-down-button">Up/down button</a>, <a href="https://javascript.info/onscroll#load-visible-images">Load visible images</a></p>
+</li>
+</ul>
+<h1 id="Keyboard-Event"><a href="#Keyboard-Event" class="headerlink" title="Keyboard Event"></a>Keyboard Event</h1><p><code>keydown</code>, <code>keyup</code> <a href="https://javascript.info/keyboard-events#keydown-and-keyup">..</a></p>
+<ul>
+<li><code>e.code</code> (physical key loc, e.g “KeyZ”, “ShiftLeft”) vs <code>event.key</code> (meaning of key, ie. char inputted, e.g. “z” || “Z”) <a href="https://javascript.info/keyboard-events#event-code-and-event-key">..</a></li>
+<li><code>e.repeat</code>= true when many “keydown” (key pressed for a long enough time) &amp; single “keyup”</li>
+<li>prevent default action by <code>onkeydown=&#39;return false;&#39;</code> <a href="https://javascript.info/keyboard-events#default-actions">..</a></li>
+<li><a href="https://javascript.info/keyboard-events#legacy">the old “keypress”, “keyCode”, “charCode”, “which”</a></li>
+<li>task — <a href="https://javascript.info/keyboard-events#extended-hotkeys">Extended hotkeys</a></li>
+</ul>
+<h1 id="Form-Ctrl"><a href="#Form-Ctrl" class="headerlink" title="Form Ctrl"></a>Form Ctrl</h1><ul>
+<li>named collection: <code>document.forms.formName</code> &amp; <code>form/fieldset.elements.ctrlElemName</code> (fieldset as subform) <a href="https://javascript.info/form-elements#navigation-form-and-elements">..</a></li>
+</ul>
+<h2 id="Form-elem-props"><a href="#Form-elem-props" class="headerlink" title="Form elem props"></a>Form elem props</h2><p><code>form.elements[index/name]</code> &amp; <code>elem.form</code> <a href="https://javascript.info/form-elements#backreference-element-form">..</a></p>
+<p><strong>input &amp; textarea</strong> <a href="https://javascript.info/form-elements#input-and-textarea">..</a></p>
+<ul>
+<li><code>input/textarea.value</code>: str, <code>input.checked</code>: bool (for checkboxes and radio btns)</li>
+</ul>
+<p><strong>select &amp; option</strong> <a href="https://javascript.info/form-elements#select-and-option">..</a></p>
+<ul>
+<li><code>select.options</code>: option collection &amp; <code>select.value/selectedIndex</code>: <code>selectedOption.value/index</code></li>
+<li><code>option.selected</code>: bool, <code>option.value\text</code>, <code>option.index</code></li>
+<li>new Option(…) <a href="https://javascript.info/form-elements#new-option">..</a><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 3 ways to set select value</span></span><br><span class="line">select.options[<span class="number">2</span>].selected = <span class="literal">true</span>;</span><br><span class="line">select.selectedIndex = <span class="number">2</span>;</span><br><span class="line">select.value = <span class="string">&#x27;banana&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// get all selected values from &lt;select multiple&gt;</span></span><br><span class="line"><span class="keyword">let</span> selected = <span class="built_in">Array</span>.from(select.options)</span><br><span class="line">  .filter(<span class="function"><span class="params">option</span> =&gt;</span> option.selected)</span><br><span class="line">  .map(<span class="function"><span class="params">option</span> =&gt;</span> option.value);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="Focusing-Event"><a href="#Focusing-Event" class="headerlink" title="Focusing Event"></a>Focusing Event</h2><ul>
+<li><code>focus</code> / <code>blur</code> event <a href="https://javascript.info/focus-blur#events-focus-blur">..</a> &amp; <code>elem.focus/blur()</code> <a href="https://javascript.info/focus-blur#methods-focus-blur">..</a><ul>
+<li>event not bubble (but capturable) ==&gt; <strong>focusin</strong> / <strong>focusout</strong> event (handler assign by <strong>elem.addEventListener</strong>)</li>
+<li><code>autofocus</code> attr [..] (<a href="https://javascript.info/focus-blur">https://javascript.info/focus-blur</a>) &amp; <code>:focus</code> in css <a href="https://javascript.info/focus-blur#allow-focusing-on-any-element-tabindex">..</a></li>
+<li>input validate attr: <code>required</code>, <code>pattern</code> <a href="https://javascript.info/focus-blur#events-focus-blur">..</a></li>
+</ul>
+</li>
+<li>enable any elem focusable by <code>tabindex*</code> attr || elem.<strong>tabindex</strong> (0, -1, …) &amp; switch order <a href="https://javascript.info/focus-blur#allow-focusing-on-any-element-tabindex">..</a></li>
+<li>get focused elem: <code>document.activeElement</code> <a href="https://javascript.info/focus-blur#summary">..</a></li>
+<li>task — <a href="https://javascript.info/focus-blur#editable-div">Editable div</a>, <a href="https://javascript.info/focus-blur#edit-td-on-click">Edit TD on click</a>, <a href="https://javascript.info/focus-blur#keyboard-driven-mouse">Keyboard-driven mouse</a></li>
+</ul>
+<h2 id="Data-update-events"><a href="#Data-update-events" class="headerlink" title="Data update events"></a>Data update events</h2><ul>
+<li><code>input</code> event: on any value change <a href="https://javascript.info/events-change-input#event-input">..</a></li>
+<li><code>change</code> event: on finish change, e.g. text-input elem blur, select-opt changes <a href="https://javascript.info/events-change-input#event-change">..</a></li>
+<li><code>cut/copy/paste</code> event <a href="https://javascript.info/events-change-input#events-cut-copy-paste">..</a></li>
+</ul>
+<h2 id="Form-submit-event"><a href="#Form-submit-event" class="headerlink" title="Form submit event"></a>Form submit event</h2><ul>
+<li><code>submit</code> event on form (sent data to server): <ul>
+<li>trigger on press “Enter” on input field =&gt; trigger <strong>click</strong> on input[type=submit] <a href="https://javascript.info/forms-submit#event-submit">..</a></li>
+<li>form.<strong>submit()</strong>: submit form manually (<code>submit</code> event not generated, i.e. submit handler not run)</li>
+<li>tasks — <a href="https://javascript.info/forms-submit#modal-form">Modal form</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="Doc-amp-resrc-loading"><a href="#Doc-amp-resrc-loading" class="headerlink" title="Doc &amp; resrc loading"></a>Doc &amp; resrc loading</h1><h2 id="Page-load-events"><a href="#Page-load-events" class="headerlink" title="Page load events"></a>Page load events</h2><p><code>DOMContentLoaded</code> event: HTML &amp; DOM tree ready (no external resrc) =&gt; DOM nodes ready</p>
+<ul>
+<li><strong>wait non-async script</strong> execution bf continuing building the DOM <a href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded-and-scripts">..</a></li>
+<li><strong>not wait external-CSS</strong> unless script require it <a href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded-and-styles">..</a></li>
+<li>form-autofill on <code>DOMContentLoaded</code> <a href="https://javascript.info/onload-ondomcontentloaded#built-in-browser-autofill">..</a></li>
+<li>handle by <code>document.addEventListener</code> <a href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded">..</a></li>
+</ul>
+<p><code>window.onload</code> event: HTML &amp; DOM tree ready + external resrc loaded ==&gt; CSS applied, image sizes known  <a href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded">..</a> &amp; <a href="https://javascript.info/onload-ondomcontentloaded#window-onload">..</a></p>
+<p><code>window.onunload</code> <a href="https://javascript.info/onload-ondomcontentloaded#window-onunload">..</a> &amp; <code>onbeforeunload</code> <a href="https://javascript.info/onload-ondomcontentloaded#window.onbeforeunload">..</a></p>
+<p><code>document.readState</code> = “loading”, “interactive” , “complete” &amp; the old <strong>document.readystatechange</strong> <a href="https://javascript.info/onload-ondomcontentloaded#readystate">..</a></p>
+<p><strong>Whole process</strong> <a href="https://javascript.info/onload-ondomcontentloaded#readystate">..</a></p>
+<ul>
+<li>readState: loading &amp; readState: interactive</li>
+<li>DOMContentLoaded</li>
+<li>ex-resrc onload &amp; readyState:complete</li>
+<li>window onload </li>
+</ul>
+<h2 id="Script-attr-async-defer"><a href="#Script-attr-async-defer" class="headerlink" title="Script attr: async, defer"></a>Script attr: async, defer</h2><p>Both load not block page rendering (load script in bg)</p>
+<ul>
+<li><code>defer</code>: run when DOM ready but bf DOMContentLoaded event<ul>
+<li>only for external script, run on doc order</li>
+</ul>
+</li>
+<li><code>async</code>: run in load-1st order (load 1st, run 1st, not wait for each other)<ul>
+<li><strong>dynamicScript.async = true</strong> by default</li>
+<li>Dynamic scripts (&amp; other resrc) load af insert to the doc <a href="https://javascript.info/onload-onerror#other-resources">..</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="Resrc-loading-event"><a href="#Resrc-loading-event" class="headerlink" title="Resrc loading event"></a>Resrc loading event</h2><p><code>load</code>, <code>error</code> — track <strong>loading process</strong> of resrc with <strong>src</strong> attr, e.g. script, img, css <a href="https://javascript.info/onload-onerror">..</a></p>
+<ul>
+<li><code>onload</code> — trigger af script loaded successfully &amp; executed</li>
+<li><code>onerror</code> — trigger when error occurs during loading</li>
+</ul>
+<p>Most resources start loading when added to the doc</p>
+<ul>
+<li>img start loading when gets src <a href="https://javascript.info/onload-onerror#other-resources">..</a> &amp; catched <a href="https://javascript.info/onload-onerror#load-images-with-a-callback">..</a> </li>
+<li>iframe.onload: on loading finished ( successful || error) (history) <a href="https://javascript.info/onload-onerror#other-resources">..</a></li>
+<li>track other errors: <code>window.onerror</code> <a href="https://javascript.info/onload-onerror#script-onerror">..</a></li>
+<li><a href="CORS">cross-origin policy</a> &amp; script.crossorigin attr (commu with remove server) <a href="https://javascript.info/onload-onerror#crossorigin-policy">..</a></li>
+</ul>
+<h1 id="Others-1"><a href="#Others-1" class="headerlink" title="Others"></a>Others</h1><h2 id="Range-amp-Selection"><a href="#Range-amp-Selection" class="headerlink" title="Range &amp; Selection"></a>Range &amp; Selection</h2><p>range <a href="https://javascript.info/selection-range#range">..</a> &amp; props &amp; methods …</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> range = <span class="keyword">new</span> Range();</span><br><span class="line">range.setStart/End(node, <span class="attr">offset</span>: num); <span class="comment">// offset: child index, offset=0 means 1st child</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// apply the selection</span></span><br><span class="line"><span class="built_in">document</span>/<span class="built_in">window</span>.getSelection().addRange(range)/removeAllRanges();</span><br></pre></td></tr></table></figure>
+
+<p>selection <a href="https://javascript.info/selection-range#selection">..</a></p>
+<ul>
+<li>get by <strong>window/document.getSelection()</strong> — singloten???</li>
+<li>all browsers (except Firefox), a Selection contains maximum 1 range</li>
+<li>props, methods &amp; events …</li>
+<li>selection in form ctrls …</li>
+<li>Making unselectable <a href="https://javascript.info/selection-range#making-unselectable">..</a></li>
+</ul>
+<h2 id="Mutation-observer"><a href="#Mutation-observer" class="headerlink" title="Mutation observer"></a>Mutation observer</h2><p>A built-in obj that observes a DOM node &amp; fire callback in case of changes: childList &amp; subtree, attributes, data</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> observer = <span class="keyword">new</span> MutationObserver(callback); </span><br><span class="line"><span class="comment">// callback: fn(mutationRecords: [...MutationRecord-objs], observer: the observer itself)	</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// attach to DOM node </span></span><br><span class="line">observer.observe(node, <span class="attr">config</span>: &#123;bool-options&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// stop observing</span></span><br><span class="line">observer.disconnect();</span><br><span class="line"></span><br><span class="line"><span class="comment">// handle unprocessed mutations when stopping observing</span></span><br><span class="line"><span class="keyword">let</span> mutationRecords = observer.takeRecords();</span><br></pre></td></tr></table></figure>
+
+<p><strong>Usages</strong> <a href="https://javascript.info/mutation-observer#usage-for-integration">..</a><br><strong>observer &amp; GC</strong> — node observed doesn’t prevent GC(weak ref)</p>
+<h2 id="Chrome-console-amp-Debugging-in-Chrome"><a href="#Chrome-console-amp-Debugging-in-Chrome" class="headerlink" title="Chrome console &amp; Debugging in Chrome"></a>Chrome console &amp; Debugging in Chrome</h2><p>Chrome console <a href="https://javascript.info/devtools#google-chrome">..</a></p>
+<ul>
+<li><strong>breakpoints</strong> &amp; <code>debugger</code> cmd</li>
+<li>execution tracking…</li>
+<li>logging with <code>console.log(...)</code></li>
+<li>ref: <a href="https://javascript.info/debugging-chrome">https://javascript.info/debugging-chrome</a></li>
 </ul>
 ]]></content>
       <categories>

@@ -22,21 +22,21 @@
     var CONFIG = {"hostname":"stephen-chan255.github.io","root":"/blog/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="Variables   Keyword Feature    let, const local scope   the old var fn or global scope; declaration hoist &#x2F; raise    non-strict: assignment to non-existing var (without declear) &#x3D;&#x3D;&gt; creates a new g">
+  <meta name="description" content="‘use strict’To enable ES5 modification for old features (may break old code)  off by default — always put &#39;use script&#39; on top of script&#x2F;fn-body auto enable for class &amp; module no way to can">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript Variables, Data types &amp; Operators">
-<meta property="og:url" content="https://stephen-chan255.github.io/blog/2020/05/18/js-var-datatype/index.html">
+<meta property="og:title" content="JavaScript miscellaneous">
+<meta property="og:url" content="https://stephen-chan255.github.io/blog/2020/05/20/js-miscellaneous/index.html">
 <meta property="og:site_name" content="Stephen&#39;s notes">
-<meta property="og:description" content="Variables   Keyword Feature    let, const local scope   the old var fn or global scope; declaration hoist &#x2F; raise    non-strict: assignment to non-existing var (without declear) &#x3D;&#x3D;&gt; creates a new g">
+<meta property="og:description" content="‘use strict’To enable ES5 modification for old features (may break old code)  off by default — always put &#39;use script&#39; on top of script&#x2F;fn-body auto enable for class &amp; module no way to can">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-05-18T13:34:08.000Z">
-<meta property="article:modified_time" content="2020-09-04T09:08:04.183Z">
+<meta property="article:published_time" content="2020-05-20T09:08:31.000Z">
+<meta property="article:modified_time" content="2020-09-04T10:22:18.113Z">
 <meta property="article:author" content="Stephen Chan">
 <meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://stephen-chan255.github.io/blog/2020/05/18/js-var-datatype/">
+<link rel="canonical" href="https://stephen-chan255.github.io/blog/2020/05/20/js-miscellaneous/">
 
 
 <script class="page-configurations">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>JavaScript Variables, Data types & Operators | Stephen's notes</title>
+  <title>JavaScript miscellaneous | Stephen's notes</title>
   
 
 
@@ -225,7 +225,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Variables"><span class="nav-number">1.</span> <span class="nav-text">Variables</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-types"><span class="nav-number">2.</span> <span class="nav-text">Data types</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Number"><span class="nav-number">2.1.</span> <span class="nav-text">Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">2.2.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bool"><span class="nav-number">2.3.</span> <span class="nav-text">Bool</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null-amp-undefined"><span class="nav-number">2.4.</span> <span class="nav-text">null &amp; undefined</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Operators"><span class="nav-number">3.</span> <span class="nav-text">Operators</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E2%80%98use-strict%E2%80%99"><span class="nav-number">1.</span> <span class="nav-text">‘use strict’</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Error-handling"><span class="nav-number">2.</span> <span class="nav-text">Error handling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Generator"><span class="nav-number">3.</span> <span class="nav-text">Generator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS-engine-internal"><span class="nav-number">4.</span> <span class="nav-text">JS engine internal</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-loop-microtasks-and-macrotasks"><span class="nav-number">4.1.</span> <span class="nav-text">Event loop: microtasks and macrotasks</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code-quality"><span class="nav-number">5.</span> <span class="nav-text">Code quality</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other-concepts-amp-Resources"><span class="nav-number">6.</span> <span class="nav-text">Other concepts &amp; Resources</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -316,7 +316,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://stephen-chan255.github.io/blog/2020/05/18/js-var-datatype/">
+    <link itemprop="mainEntityOfPage" href="https://stephen-chan255.github.io/blog/2020/05/20/js-miscellaneous/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/apple-touch-icon-next.png">
@@ -332,7 +332,7 @@
     
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          JavaScript Variables, Data types & Operators
+          JavaScript miscellaneous
         </h1>
 
         <div class="post-meta-container">
@@ -343,14 +343,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2020-05-18 23:34:08" itemprop="dateCreated datePublished" datetime="2020-05-18T23:34:08+10:00">2020-05-18</time>
+      <time title="Created: 2020-05-20 19:08:31" itemprop="dateCreated datePublished" datetime="2020-05-20T19:08:31+10:00">2020-05-20</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-04 19:08:04" itemprop="dateModified" datetime="2020-09-04T19:08:04+10:00">2020-09-04</time>
+        <time title="Modified: 2020-09-04 20:22:18" itemprop="dateModified" datetime="2020-09-04T20:22:18+10:00">2020-09-04</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -380,71 +380,98 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h1><table>
-<thead>
-<tr>
-<th>Keyword</th>
-<th>Feature</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>let</code>, <code>const</code></td>
-<td>local scope</td>
-</tr>
-<tr>
-<td>the old <code>var</code></td>
-<td>fn or global scope; declaration hoist / raise</td>
-</tr>
-</tbody></table>
+        <h1 id="‘use-strict’"><a href="#‘use-strict’" class="headerlink" title="‘use strict’"></a>‘use strict’</h1><p>To enable ES5 modification for old features (may break old code)</p>
 <ul>
-<li>non-strict: assignment to non-existing var (without declear) ==&gt; creates a new global var (compatibility) <a target="_blank" rel="noopener" href="https://javascript.info/closure#step-3-inner-and-outer-lexical-environment">..</a></li>
+<li>off by default — always put <code>&#39;use script&#39;</code> on <strong>top</strong> of script/fn-body<ul>
+<li>auto enable for <code>class</code> &amp; <code>module</code></li>
+<li>no way to cancel once enter strict mode</li>
+</ul>
+</li>
 </ul>
 <a id="more"></a>
 
-<h1 id="Data-types"><a href="#Data-types" class="headerlink" title="Data types"></a>Data types</h1><ul>
-<li><strong>dynamic typed</strong>, (7+1) basic data types</li>
-<li><code>typeof</code> =&gt; <strong>lowercase str</strong>, e.g. <code>null</code>: “object”, <code>alert</code>: “function” <a target="_blank" rel="noopener" href="https://javascript.info/types#type-typeof">..</a></li>
-</ul>
-<h2 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h2><ul>
-<li>integer + float &amp; <code>Infinity</code>, <code>-Infinity</code>, <code>NaN </code> <a target="_blank" rel="noopener" href="https://javascript.info/types#number">..</a><ul>
-<li>int ±2^53 ==&gt; <a target="_blank" rel="noopener" href="https://javascript.info/types#bigint">BigInt</a>, num <a href="" title="double precision float">64-bit</a> ==&gt; Imprecise calc</li>
-<li>num repre: <code>e</code>, hex / binary / octal num ==&gt; <code>parseInt/-float()</code>, <code>toString(base)</code></li>
-<li>regular num &amp; NaN test: <code>isFinite()</code>, <code>isNaN()</code> vs <code>Object.is()</code></li>
-<li>check for int — <code>Math.round(n) == n</code> <a target="_blank" rel="noopener" href="https://javascript.info/testing-mocha">..</a></li>
+<h1 id="Error-handling"><a href="#Error-handling" class="headerlink" title="Error handling"></a>Error handling</h1><ul>
+<li>Error obj <ul>
+<li>creation:<code>new Error/SyntaxError/ReferenceError/TypeError(msg)</code> <a target="_blank" rel="noopener" href="https://javascript.info/try-catch#throw-operator">..</a></li>
+<li>props: <code>name</code>(F): <code>message</code> e.g. “ReferenceError: xxx is not defined”</li>
 </ul>
 </li>
-<li>convert in unary <code>+</code>, math-fn / math-op &amp; <code>Number(value)</code></li>
-<li>num rouding: multiply-and-divide &amp; <code>toFixed(n)</code></li>
-<li>math ops, Modify-in-place ops e.g. “+=” &amp; in-/decrement ops <code>++</code>, <code>--</code></li>
-<li>tasks — <a target="_blank" rel="noopener" href="https://javascript.info/number#why-6-35-tofixed-1-6-3">Why 6.35.toFixed(1) == 6.3?</a>, <a target="_blank" rel="noopener" href="https://javascript.info/number#a-random-integer-from-min-to-max">A random integer from min to max</a></li>
-</ul>
-<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><ul>
-<li>3 quotes &amp; <code>...$&#123;...&#125;</code> (string template, allow line break) <a target="_blank" rel="noopener" href="https://javascript.info/types#string">..</a><ul>
-<li>special chars: line break <code>\n</code> in <code>&#39;&#39;</code> / <code>&quot;&quot;</code>; escape char <code>\</code></li>
+<li>unhandled error : script dies with a msg in the console</li>
+<li><code>try &#123; .. &#125; catch(e) &#123; .. &#125; finally &#123; .. &#125; </code>: <strong>synchronous</strong> &amp; <strong>run-time</strong> err / exception<ul>
+<li>manually throw err in try || rethrow in catch — <code>throw errObj </code><ul>
+<li>checking err: <strong>obj instanceof Error</strong> (better than <strong>err.name</strong> / <strong>err.constructor.name</strong> == “xxx”) <a target="_blank" rel="noopener" href="https://javascript.info/custom-errors#extending-error">..</a></li>
 </ul>
 </li>
-<li>convert in output <a target="_blank" rel="noopener" href="https://javascript.info/type-conversions#summary">..</a> e.g. <code>alert(value)</code>, <a target="_blank" rel="noopener" href="https://javascript.info/object-toprimitive#toprimitive" title="call toString()">obj as key</a>, <a target="_blank" rel="noopener" href="https://javascript.info/json#custom-tojson" title="call toString()">JSON.stringify</a> &amp; <code>String(value)</code></li>
-<li>concat by <code>+</code> op</li>
-<li><code>str.length</code>, char accessing <code>str[i]</code>, str immutable</li>
-<li>str methods: search substr, get substr e.g. <code>str.slice()</code>, str compare &amp; UTF-8 e.g. <code>str.localeCompare(str2)</code>, <code>str.repeat(n)</code>, str &amp; char: <code>String.fromCodePoint(code)</code> and <code>str.codePointAt(index)</code> (can use to generate pwd <a target="_blank" rel="noopener" href="https://javascript.info/generators#generator-composition">..</a>)</li>
-<li>task — <a target="_blank" rel="noopener" href="https://javascript.info/string#truncate-the-text">Truncate the text</a></li>
-</ul>
-<h2 id="Bool"><a href="#Bool" class="headerlink" title="Bool"></a>Bool</h2><ul>
-<li><code>true</code> / <code>false</code> <a target="_blank" rel="noopener" href="https://javascript.info/types#boolean-logical-type">..</a></li>
-<li>convert by logical op <code>!!</code> &amp; <code>Boolean(value)</code>:  6 false values</li>
-</ul>
-<h2 id="null-amp-undefined"><a href="#null-amp-undefined" class="headerlink" title="null &amp; undefined"></a>null &amp; undefined</h2><ul>
-<li><code>null</code> : value unknown</li>
-<li><code>undefined</code>: default initial value for unassigned-var &amp; fn-return</li>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/types">..</a></li>
-</ul>
-<h1 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h1><ul>
-<li>comparison &amp; equality check ops =&gt; bool<ul>
-<li>compare diff type (convert to num) &amp; <code>null == undefined</code> , <code>===</code> &amp; <code>NaN != NaN</code></li>
+<li>Global handler <strong>window.onerror</strong> fn ..</li>
 </ul>
 </li>
-<li>conditional op <code>?..:</code>, Nullish coalescing op <code>??</code> (check for “null/undefined”), logical ops <code>! &amp;&amp; ||</code></li>
-<li>Comma, Bitwise ops, op precedence &amp; <a target="_blank" rel="noopener" href="https://javascript.info/operators#assignment-returns-a-value">op return</a></li>
+<li>customized <code>ValidationError</code> &amp; <code>PropertyRequiredError</code> example <ul>
+<li>set name prop: <strong>this.name = ‘xxx’;</strong>  / <strong>this.name = this.constructor.name;</strong></li>
+<li>wrapping-exceptions …</li>
+</ul>
+</li>
+</ul>
+<h1 id="Generator"><a href="#Generator" class="headerlink" title="Generator"></a>Generator</h1><p>Regualr fn retur 1 value ==&gt; Generators “yield” mtp values 1-by-1 (allow create data stream)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">generateSequence</span>(<span class="params"></span>) </span>&#123;    <span class="comment">// generator function</span></span><br><span class="line">  <span class="keyword">yield</span> <span class="number">1</span>;                        <span class="comment">// no value af &#x27;yield&#x27; means &#x27;undefined&#x27;</span></span><br><span class="line">  <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> generator = generateSequence(); <span class="comment">// when called, return a Generator instead of run the fn </span></span><br><span class="line">alert(generator);                   <span class="comment">// [object Generator]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// call generator.next() to get result</span></span><br><span class="line">&#123;<span class="attr">value</span>: <span class="number">1</span>, <span class="attr">done</span>: <span class="literal">false</span>&#125;  </span><br><span class="line">&#123;<span class="attr">value</span>: <span class="number">2</span>, <span class="attr">done</span>: <span class="literal">false</span>&#125; </span><br><span class="line">&#123;<span class="attr">value</span>: <span class="number">3</span>, <span class="attr">done</span>: <span class="literal">true</span>&#125;              <span class="comment">// done:true for &quot;return&quot;</span></span><br><span class="line">&#123;<span class="attr">done</span>: <span class="literal">true</span>&#125;                        <span class="comment">// no more value af &#x27;return&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>when called, it return a <strong>Generator</strong> (an Iterator with <strong>next()</strong> method) to manage the fn-exe</li>
+<li><code>gen.next()</code> — run fn-exe until <code>yield &lt;value&gt;</code> stmt &amp; return <code>&#123;value: &lt;value&gt;, done: true/false&#125;</code><ul>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/generators#using-generators-for-iterables">use generator to create iter-obj</a></li>
+<li>can use <code>gen</code> in <code>for..of</code> loop &amp; sperad syntax to get yield values (exc returned value)</li>
+</ul>
+</li>
+<li>pass data back to gen.yield<ul>
+<li><code>gen.next(arg)</code> — pass <code>arg</code> as the value of <strong>current yield</strong> &amp; return the resulting-obj of <strong>next yield</strong> <a target="_blank" rel="noopener" href="https://javascript.info/generators#yield-is-a-two-way-street">..</a></li>
+<li><code>gen.throw(err)</code> — throw err as the result of <strong>current yield</strong> (err not catched in gen() will fall out to <code>gen.throw</code>)</li>
+</ul>
+</li>
+<li><strong>Generator composition</strong> — embed gen-values into another gen-fn by <code>yield* gen(...)</code> </li>
+<li>Task:  <a target="_blank" rel="noopener" href="https://javascript.info/generators#pseudo-random-generator">pseudoRandom(seed)</a></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://javascript.info/async-iterators-generators#async-iterables">Async iteratable</a> <code>async *[Symbol.asyncIterator]()</code></p>
+<ul>
+<li><code>async function*</code> for <a target="_blank" rel="noopener" href="https://javascript.info/async-iterators-generators#async-generators">async gen</a> — yield value asyncly &amp; <code>await gen.next()</code></li>
+<li><code>[Symbol.asyncIterator]()</code> for <a target="_blank" rel="noopener" href="https://javascript.info/async-iterators-generators#async-iterators">async iterator</a> — iter over data that comes asyncly (e.g. paginated data) &amp; use in <code>for await ..of</code> loop</li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/async-iterators-generators#real-life-example">the <code>async function* fetchCommits(repo)</code> example</a></li>
+</ul>
+<h1 id="JS-engine-internal"><a href="#JS-engine-internal" class="headerlink" title="JS engine internal"></a>JS engine internal</h1><h2 id="Event-loop-microtasks-and-macrotasks"><a href="#Event-loop-microtasks-and-macrotasks" class="headerlink" title="Event loop: microtasks and macrotasks"></a>Event loop: microtasks and macrotasks</h2><p><a target="_blank" rel="noopener" href="https://javascript.info/event-loop#event-loop">Macrotask queue</a>: handle tasks e.g. <strong>current regular sync script</strong>, <strong>external script</strong> load &amp; exe, <strong>UI/network event handler</strong> (e.g. <code>mousemove</code>), setTimeout <strong>callback</strong></p>
+<ul>
+<li>tasks come while engine busy — enqueued to the queue</li>
+<li>re-render only af task complete — if current task tasks long time:  <strong>Page Unresponsive</strong> alert</li>
+<li>enqueue a macrotask:  <code>setTimeout(f)</code></li>
+<li>use case — <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#use-case-1-splitting-cpu-hungry-tasks">split CUP-heavy task by setTimeout</a> =&gt; react other tasks in-btn / <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#use-case-2-progress-indication">progress indication</a> <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#summary">…</a></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://javascript.info/microtask-queue">Microtask queue</a> (aka <code>PromiseJobs</code> queue): handle async promise handlers in <code>.then/catch/finally</code> &amp; <code>await</code></p>
+<ul>
+<li>handler enqueued when promise settled, run af current code &amp; prev micro finished <a target="_blank" rel="noopener" href="https://javascript.info/microtask-queue#microtasks-queue">..</a></li>
+<li>global <code>unhandledrejection</code> event — triggered when microtask queue completed but exist “rejected” promise<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&#x27;unhandledrejection&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> alert(event.reason));</span><br></pre></td></tr></table></figure></li>
+<li>make code exe af <code>.then/catch/finally</code> — chained by <code>.then()</code></li>
+<li>enqueue a microtask — <code>queueMicrotask(f)</code> <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#macrotasks-and-microtasks">..</a></li>
+</ul>
+<p>JS execution flow based on <em>event loop</em>: engine sleep until (async) tasks appear, then exe them starting from the oldest one (FIFO)</p>
+<ul>
+<li>exe process (no macrotask in-btw microtask — ensure app-env same) <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#summary">..</a><ol>
+<li><strong>current regular sync script</strong> (=&gt; <strong>all microtasks</strong> =&gt;  <strong>render</strong>) </li>
+<li><strong>some macrotask</strong> (=&gt; <strong>all microtasks</strong> =&gt;  <strong>render</strong>)</li>
+<li><strong>another macrotask</strong> </li>
+<li>…</li>
+</ol>
+</li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/event-loop#summary">cpu-heavy event &amp; web worker: another thread</a></li>
+</ul>
+<h1 id="Code-quality"><a href="#Code-quality" class="headerlink" title="Code quality"></a>Code quality</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/coding-style">Coding style &amp; linters</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/comments">Comments &amp; JSDoc</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/testing-mocha">Auto-testing lib &amp; BDD</a></li>
+</ul>
+<h1 id="Other-concepts-amp-Resources"><a href="#Other-concepts-amp-Resources" class="headerlink" title="Other concepts &amp; Resources"></a>Other concepts &amp; Resources</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/manuals-specifications">Manuals &amp; specs</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/polyfills">Polyfill &amp; Babel</a> <ul>
+<li>JS keep evolving &amp; some features may not implemented in all engines</li>
+<li><a target="_blank" rel="noopener" href="https://babeljs.io/">Babel</a> — transpiler (new syntax constructs) +  polyfill (updates/adds new fns)</li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/intro#languages-over-javascript">Langs “over” JS</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -462,10 +489,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/blog/2020/05/18/js-var-datatype/" rel="prev" title="JavaScript Variables, Data types & Operators">
+                  <i class="fa fa-chevron-left"></i> JavaScript Variables, Data types & Operators
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/blog/2020/05/20/js-miscellaneous/" rel="next" title="JavaScript miscellaneous">
-                  JavaScript miscellaneous <i class="fa fa-chevron-right"></i>
+                <a href="/blog/2020/05/24/js-function/" rel="next" title="JavaScript Functions">
+                  JavaScript Functions <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

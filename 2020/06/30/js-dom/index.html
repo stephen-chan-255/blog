@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"stephen-chan255.github.io","root":"/blog/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="JS intro init to make webpages alive run on platform with JS engine (e.g. browser JS VM V8) in Chrome &amp; Opera) &#x3D;&#x3D;&gt; host env JS in HTML: &lt;script&gt;...&lt;&#x2F;script&gt; &amp; &lt;script src&#x3D;...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript &amp; DOM">
+<meta property="og:url" content="https://stephen-chan255.github.io/blog/2020/06/30/js-dom/index.html">
+<meta property="og:site_name" content="Stephen&#39;s notes">
+<meta property="og:description" content="JS intro init to make webpages alive run on platform with JS engine (e.g. browser JS VM V8) in Chrome &amp; Opera) &#x3D;&#x3D;&gt; host env JS in HTML: &lt;script&gt;...&lt;&#x2F;script&gt; &amp; &lt;script src&#x3D;...">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-30T06:34:11.000Z">
+<meta property="article:modified_time" content="2020-09-04T10:22:18.026Z">
+<meta property="article:author" content="Stephen Chan">
+<meta property="article:tag" content="IT">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://stephen-chan255.github.io/blog/2020/06/30/js-dom/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>JavaScript & DOM | Stephen's notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Stephen's notes</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Contents keep updating ...</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-programming">
+
+    <a href="/blog/programming/" rel="section"><i class="fa fa-code fa-fw"></i>Programming</a>
+
+  </li>
+        <li class="menu-item menu-item-java">
+
+    <a href="/blog/java/" rel="section"><i class="fab fa-java fa-fw"></i>Java</a>
+
+  </li>
+        <li class="menu-item menu-item-javascript">
+
+    <a href="/blog/categories/IT/Programming/JavaScript/" rel="section"><i class="fab fa-js fa-fw"></i>JavaScript</a>
+
+  </li>
+        <li class="menu-item menu-item-config">
+
+    <a href="/blog/config/" rel="section"><i class="fa fa-cog fa-fw"></i>Config</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">11</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JS-intro"><span class="nav-number">1.</span> <span class="nav-text">JS intro</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Browser-env"><span class="nav-number">2.</span> <span class="nav-text">Browser env</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM-tree"><span class="nav-number">3.</span> <span class="nav-text">DOM tree</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM-class-hierarchy"><span class="nav-number">4.</span> <span class="nav-text">DOM class hierarchy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Attr-amp-Prop"><span class="nav-number">5.</span> <span class="nav-text">Attr &amp; Prop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM-modification"><span class="nav-number">6.</span> <span class="nav-text">DOM modification</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-creation"><span class="nav-number">6.1.</span> <span class="nav-text">Node creation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-Select"><span class="nav-number">6.2.</span> <span class="nav-text">Node Select</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-modification"><span class="nav-number">6.3.</span> <span class="nav-text">Node modification</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Content"><span class="nav-number">6.3.1.</span> <span class="nav-text">Content</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Style"><span class="nav-number">6.3.2.</span> <span class="nav-text">Style</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Size-coords-amp-scroll"><span class="nav-number">6.3.3.</span> <span class="nav-text">Size, coords &amp; scroll</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Geometry-props"><span class="nav-number">6.3.3.1.</span> <span class="nav-text">Geometry props</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Scroll-props"><span class="nav-number">6.3.3.2.</span> <span class="nav-text">Scroll props</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Others"><span class="nav-number">6.3.3.3.</span> <span class="nav-text">Others</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-insert-move-amp-remove"><span class="nav-number">6.4.</span> <span class="nav-text">Node insert, move &amp; remove</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UI-Event-handle"><span class="nav-number">7.</span> <span class="nav-text">UI Event handle</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UI-Event"><span class="nav-number">7.1.</span> <span class="nav-text">UI Event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Custom-Event-Construct-amp-dispatch"><span class="nav-number">7.2.</span> <span class="nav-text">Custom Event Construct &amp; dispatch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-handler"><span class="nav-number">7.3.</span> <span class="nav-text">Event handler</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-event-handler"><span class="nav-number">7.3.1.</span> <span class="nav-text">Add event handler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prevent-default-actions"><span class="nav-number">7.3.2.</span> <span class="nav-text">Prevent default actions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-Processing-Queue"><span class="nav-number">7.4.</span> <span class="nav-text">Event Processing Queue</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mouse-Event"><span class="nav-number">8.</span> <span class="nav-text">Mouse Event</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mouse-Move-Event"><span class="nav-number">8.1.</span> <span class="nav-text">Mouse Move Event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Drag%E2%80%99n%E2%80%99Drop-Event"><span class="nav-number">8.2.</span> <span class="nav-text">Drag’n’Drop Event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scroll-Event"><span class="nav-number">8.3.</span> <span class="nav-text">Scroll Event</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keyboard-Event"><span class="nav-number">9.</span> <span class="nav-text">Keyboard Event</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Form-Ctrl"><span class="nav-number">10.</span> <span class="nav-text">Form Ctrl</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Form-elem-props"><span class="nav-number">10.1.</span> <span class="nav-text">Form elem props</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Focusing-Event"><span class="nav-number">10.2.</span> <span class="nav-text">Focusing Event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-update-events"><span class="nav-number">10.3.</span> <span class="nav-text">Data update events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Form-submit-event"><span class="nav-number">10.4.</span> <span class="nav-text">Form submit event</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Doc-amp-resrc-loading"><span class="nav-number">11.</span> <span class="nav-text">Doc &amp; resrc loading</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Page-load-events"><span class="nav-number">11.1.</span> <span class="nav-text">Page load events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Script-attr-async-defer"><span class="nav-number">11.2.</span> <span class="nav-text">Script attr: async, defer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Resrc-loading-event"><span class="nav-number">11.3.</span> <span class="nav-text">Resrc loading event</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Others-1"><span class="nav-number">12.</span> <span class="nav-text">Others</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Range-amp-Selection"><span class="nav-number">12.1.</span> <span class="nav-text">Range &amp; Selection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mutation-observer"><span class="nav-number">12.2.</span> <span class="nav-text">Mutation observer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome-console-amp-Debugging-in-Chrome"><span class="nav-number">12.3.</span> <span class="nav-text">Chrome console &amp; Debugging in Chrome</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Stephen Chan"
+      src="/blog/images/apple-touch-icon-next.png">
+  <p class="site-author-name" itemprop="name">Stephen Chan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Stephen-Chan255" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Stephen-Chan255" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/stephen-chan255/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;stephen-chan255&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stephen.chan255@gmail.com" title="E-Mail → mailto:stephen.chan255@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stephen-chan255.github.io/portfolio/" title="Portfolio → https:&#x2F;&#x2F;stephen-chan255.github.io&#x2F;portfolio&#x2F;"><i class="fa fa-globe fa-fw"></i>Portfolio</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://youtube.com/" title="http:&#x2F;&#x2F;youtube.com" rel="noopener" target="_blank">Youtube</a>
+        </li>
+    </ul>
+  </div>
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/Stephen-Chan255/" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://stephen-chan255.github.io/blog/2020/06/30/js-dom/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/apple-touch-icon-next.png">
+      <meta itemprop="name" content="Stephen Chan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stephen's notes">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaScript & DOM
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-06-30 16:34:11" itemprop="dateCreated datePublished" datetime="2020-06-30T16:34:11+10:00">2020-06-30</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-09-04 20:22:18" itemprop="dateModified" datetime="2020-09-04T20:22:18+10:00">2020-09-04</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/IT/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/IT/Programming/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="JS-intro"><a href="#JS-intro" class="headerlink" title="JS intro"></a>JS intro</h1><ul>
+<li>init to <strong>make webpages alive</strong></li>
+<li>run on platform with <a target="_blank" rel="noopener" href="https://javascript.info/intro#what-is-javascript">JS engine</a> (e.g. browser JS VM <a target="_blank" rel="noopener" href="https://mrale.ph/">V8</a>) in Chrome &amp; Opera) ==&gt; <a target="_blank" rel="noopener" href="https://javascript.info/browser-environment">host env</a></li>
+<li>JS in HTML: <code>&lt;script&gt;...&lt;/script&gt;</code> &amp; <code>&lt;script src=...&gt;&lt;/script&gt;</code> <a target="_blank" rel="noopener" href="https://javascript.info/hello-world">..</a> <ul>
+<li><strong>type=”text/javascript” language=”javascript”</strong> attr no need anymore</li>
+<li>inline content ignored if <code>src</code> set</li>
+<li>browser cache external script for reuse ==&gt; make complex scripts external</li>
+</ul>
+</li>
+<li>in-browser JS restrictions: access file system &amp; devices, browser <strong>Same Origin Policy</strong></li>
+</ul>
+<a id="more"></a>
+
+<h1 id="Browser-env"><a href="#Browser-env" class="headerlink" title="Browser env"></a>Browser env</h1><ul>
+<li><code>window</code> =&gt; JS (global obj) / DOM / BOM (the browser window obj) <a target="_blank" rel="noopener" href="https://javascript.info/browser-environment">..</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/browser-environment#bom-browser-object-model">BOM</a>: <code>navigator</code> obj, <code>location.href</code> =&gt; URL, <a target="_blank" rel="noopener" href="https://javascript.info/alert-prompt-confirm">model window fn</a>: <code>alert()</code>, <code>prompt()</code>, <code>confirm()</code></li>
+</ul>
+<h1 id="DOM-tree"><a href="#DOM-tree" class="headerlink" title="DOM tree"></a>DOM tree</h1><ul>
+<li>repre HTML/XML doc structure <a target="_blank" rel="noopener" href="https://javascript.info/dom-nodes#summary">..</a>, contains eth in HTML, inc <code>&lt;!DOCTYPE HTML&gt;</code> <a target="_blank" rel="noopener" href="https://javascript.info/dom-nodes#other-node-types">..</a></li>
+<li>rooted at <code>document</code> (whole doc<a target="_blank" rel="noopener" href="https://javascript.info/dom-nodes#other-node-types">..</a>) =&gt; <strong>document.documentElement</strong> / <strong>.head</strong> / .<strong>body</strong> <a target="_blank" rel="noopener" href="https://javascript.info/dom-navigation#on-top-documentelement-and-body">..</a></li>
+<li>build on load pages <a target="_blank" rel="noopener" href="https://javascript.info/dom-attributes-and-properties">..</a><ul>
+<li><strong>document.body = null</strong> for &lt;head&gt;.script <a target="_blank" rel="noopener" href="https://javascript.info/dom-navigation#on-top-documentelement-and-body">..</a></li>
+<li>browser auto-correction when building the DOM, e.g. &lt;table&gt; always have &lt;tbody&gt; <a target="_blank" rel="noopener" href="https://javascript.info/dom-nodes#autocorrection">..</a></li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/dom-nodes#interaction-with-console">interact DOM elem in console</a></li>
+</ul>
+<h1 id="DOM-class-hierarchy"><a href="#DOM-class-hierarchy" class="headerlink" title="DOM class hierarchy"></a>DOM class hierarchy</h1><ul>
+<li><p>abstract <strong>EventTarget</strong> =&gt; abstract <strong>Node</strong> (inc. nav props) =&gt; <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#dom-node-classes">..</a></p>
+<ul>
+<li><strong>Element</strong> =&gt; HTMLElement …<ul>
+<li><code>console.dir(elem)</code> (DOM tree elem) <strong>vs</strong> <code>console.log(elem)</code> (DOM obj &amp; props) <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#dom-node-classes">..</a></li>
+</ul>
+</li>
+<li><strong>Text</strong>, <strong>Comment</strong></li>
+<li><strong>Document</strong> =&gt; <strong>HTMLDocument</strong>, instance <code>document</code> <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#where-s-the-document-in-the-hierarchy">..</a></li>
+</ul>
+</li>
+<li><p>check node type</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">alert( node.nodeName );     <span class="comment">// #comment, #document, BODY</span></span><br><span class="line">alert( elem.tagName );      <span class="comment">// BODY</span></span><br><span class="line"></span><br><span class="line">alert( <span class="built_in">document</span>.body.constructor.name ); <span class="comment">// HTMLBodyElement</span></span><br><span class="line"><span class="comment">// by toString()</span></span><br><span class="line">alert( <span class="built_in">document</span>.body );     <span class="comment">// [object HTMLBodyElement]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// the old &quot;nodeType&quot;</span></span><br><span class="line">alert(node.nodeType);       <span class="comment">// 1 =&gt; element, 3 = text, 9 = document</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="Attr-amp-Prop"><a href="#Attr-amp-Prop" class="headerlink" title="Attr &amp; Prop"></a>Attr &amp; Prop</h1><ul>
+<li><strong>HTML-attr</strong>: case-insensitive (all lowercase in HTML) &amp; value: str<ul>
+<li>HTML <code>hidden</code> attr === <code>style=&quot;display:none</code> <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#the-hidden-property">..</a></li>
+</ul>
+</li>
+<li><strong>DOM prop</strong>: case-sensitive &amp; value: any type</li>
+<li>interact: <code>elem.get/remove/hasAttribute(name)</code> / <code>setAttribute(name, value)</code> / <code>attributes</code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// std attr &lt;-&gt; prop</span></span><br><span class="line">input.setAttribute(<span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;id&#x27;</span>);         <span class="comment">// input.id: id </span></span><br><span class="line">input.id = <span class="string">&#x27;newId&#x27;</span>;                     <span class="comment">// input.getAttribute(&#x27;id&#x27;)): newId</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// input value attr -&gt; input.value</span></span><br><span class="line">input.setAttribute(<span class="string">&#x27;value&#x27;</span>, <span class="string">&#x27;text&#x27;</span>);    <span class="comment">// input.value: text</span></span><br><span class="line">input.value = <span class="string">&#x27;newValue&#x27;</span>;               <span class="comment">// input.getAttribute(&#x27;value&#x27;): text (attr not updated)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// DOM prop value type: not only str</span></span><br><span class="line">input.getAttribute(<span class="string">&#x27;checked&#x27;</span>)           <span class="comment">// &#x27;&#x27;</span></span><br><span class="line">input.checked                           <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">div.getAttribute(<span class="string">&#x27;style&#x27;</span>)               <span class="comment">// color:red;font-size:120%</span></span><br><span class="line">div.style                               <span class="comment">// [object CSSStyleDeclaration]</span></span><br><span class="line"></span><br><span class="line">a.getAttribute(<span class="string">&#x27;href&#x27;</span>));                <span class="comment">// #hello (relative path)</span></span><br><span class="line">a.href                                  <span class="comment">// full URL </span></span><br></pre></td></tr></table></figure></li>
+<li><strong>customized attr</strong><ul>
+<li>pass data to JS || “mark” HTML-elem for JS ==&gt; <strong>querySelector(‘tag[attr]’)</strong></li>
+<li>naming by <code>data-*</code> (avoid conflict of become standard later), access by <strong>dataset.xxx</strong> (mtp-word camelCase)</li>
+</ul>
+</li>
+</ul>
+<h1 id="DOM-modification"><a href="#DOM-modification" class="headerlink" title="DOM modification"></a>DOM modification</h1><h2 id="Node-creation"><a href="#Node-creation" class="headerlink" title="Node creation"></a>Node creation</h2><ul>
+<li><code>document.createElement(tag: str)</code> / <strong>createTextNode</strong>(text: str) <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#creating-an-element">..</a></li>
+<li>elem.<strong>cloneNode</strong>(isDeepCopy: bool) ==&gt; deep copy (all attrs &amp; sub-elems), false without sub-elems <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#cloning-nodes-clonenode">..</a></li>
+</ul>
+<h2 id="Node-Select"><a href="#Node-Select" class="headerlink" title="Node Select"></a>Node Select</h2><ul>
+<li><code>elem.querySelectorAll(css: str)</code>: static-collection &amp; <code>elem.querySelector(css)</code>: 1st-elem <a target="_blank" rel="noopener" href="https://javascript.info/searching-elements-dom#querySelectorAll">..</a> <ul>
+<li>css: <strong>‘tag[attr]’</strong> <a target="_blank" rel="noopener" href="https://javascript.info/dom-attributes-and-properties#make-external-links-orange">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/searching-elements-dom#matches">..</a></li>
+</ul>
+</li>
+<li><code>document.getElementById(id: str)</code><ul>
+<li>or just id (the id-named gloabal var) || <strong>window[‘xxx’]</strong> (for comp, not recomm)</li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/searching-elements-dom#getelementsby">the old getElemetsBy* methods</a></li>
+</ul>
+</li>
+<li>elem.<strong>closest(css)</strong> =&gt; closest ancestor (inc elem itself)</li>
+<li><strong>nav props</strong> (child, parent, sibling, read-only) <a target="_blank" rel="noopener" href="https://javascript.info/dom-navigation">..</a><ul>
+<li><code>childNodes: nodes</code> &amp; <code>children: elems</code> =&gt; DOM collection (array-like iter obj)</li>
+<li>for <code>&lt;html&gt;</code>, parentNode =&gt; <code>document</code>, parentElement =&gt; <code>null</code></li>
+</ul>
+</li>
+<li><strong>elemA.contains(elemB)</strong>(true if B descendant or same) / <strong>elem.matches</strong>(css) =&gt; bool </li>
+<li>table props <a target="_blank" rel="noopener" href="https://javascript.info/dom-navigation#dom-navigation-tables">..</a></li>
+</ul>
+<h2 id="Node-modification"><a href="#Node-modification" class="headerlink" title="Node modification"></a>Node modification</h2><h3 id="Content"><a href="#Content" class="headerlink" title="Content"></a>Content</h3><ul>
+<li><code>elem.innerHTML</code> <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#innerhtml-the-contents">..</a><ul>
+<li>innerHTML += xxx — replace instead addition (resrc reload, selection &amp; input removed)</li>
+<li>insert script-tag by innerHTML — inserted but not executed</li>
+<li>elem.<strong>outerHTML</strong> =&gt; innerHTML + elem itself <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#outerhtml-full-html-of-the-element">..</a><ul>
+<li>replace in the DOM but <strong>not change elem</strong> itself (var still ref to the old value) — get new value by query again</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>elem.textContent</code> — inner text without tags || insert as text (safer then .innerHTML)</li>
+<li><code>Text/Comment.data</code> — text/comment content of the node (similar to <strong>nodeValue</strong> prop) <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#nodevalue-data-text-node-content">..</a></li>
+<li>task: <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#count-descendants">Count descendants</a>, <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#create-a-calendar">Create a calendar</a>, <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#sort-the-table">Sort the table</a></li>
+</ul>
+<h3 id="Style"><a href="#Style" class="headerlink" title="Style"></a>Style</h3><ul>
+<li>prefer class-attr than style-attr for styling</li>
+<li><code>getComputedStyle</code>(elem, [pseudo: str]).<strong>camelCaseProp</strong> =&gt; <strong>str with unit</strong> (of resolved value) <strong>from CSS-class</strong> <a target="_blank" rel="noopener" href="https://javascript.info/styles-and-classes#computed-styles-getcomputedstyle">..</a><ul>
+<li><strong>resolved value</strong> (fixed or absolute, with unit, e.g. “20px”) vs <strong>computed style value</strong> (could be relative, e.g. “em”, “125%”)</li>
+<li>prop use full name, e.g.marginTop instead of margin (otherwise may inconsist among browsers)</li>
+<li>set class: elem.<strong>className</strong> (whole replace) / <strong>.classList</strong> (iter, with methods <strong>add/remove/toggle/contains</strong>(“class”), for indiv set)</li>
+</ul>
+</li>
+<li>elem.<code>style</code>.camelCaseProp =&gt; <strong>str with unit</strong> from <strong>style-attr</strong> (no access to CSS value <a target="_blank" rel="noopener" href="https://javascript.info/styles-and-classes#computed-styles-getcomputedstyle">..</a>)<ul>
+<li>reset by elem.<strong>style.xxx = ‘’</strong> (back to CSS classes and its built-in styles normally)</li>
+<li>style prop <strong>default = ‘’</strong> for unsetted prop, e.g. style prop from CSS class &amp; style set without unit</li>
+<li>full rewrite — <strong>style.cssText = xxx</strong>, same as <strong>setAttribute(‘style’, cssText)</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="Size-coords-amp-scroll"><a href="#Size-coords-amp-scroll" class="headerlink" title="Size, coords &amp; scroll"></a>Size, coords &amp; scroll</h3><h4 id="Geometry-props"><a href="#Geometry-props" class="headerlink" title="Geometry props"></a>Geometry props</h4><ul>
+<li>return number (without “px”, only for displayed elem)</li>
+<li><strong>offsetParent</strong> — for calc coords when render: nearest CSS-positioned ancestor || <code>td</code>, <code>th</code>, <code>table</code> || <code>body</code> <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#offsetparent-offsetleft-top">..</a><ul>
+<li><strong>offsetLeft/Top</strong>, <code>offsetWidth/Height</code> (<strong>outer size</strong>: outer border = CSS-w/h (inc scrollbar) + padding + border)</li>
+<li><strong>clientTop/Left</strong> (border + sbar), <code>clientWidth/Height</code> (<strong>inner size</strong>: inside sbar &amp; broder = (CSS-w/h - sbar) + padding)</li>
+<li>task — <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#what-is-the-scrollbar-width">What is the scrollbar width?</a></li>
+</ul>
+</li>
+<li><code>elem.getBoundingClientRect()</code> =&gt; X/Y, top/left &amp; bottom/right (outer border rel to window), width/height <a target="_blank" rel="noopener" href="https://javascript.info/coordinates#element-coordinates-getboundingclientrect">..</a><ul>
+<li>convert <code>clientX/Y</code> (rel to window, ==&gt; position: <strong>fixed</strong>) to <code>pageX/Y</code> (position: <strong>absolute</strong>):<br><strong>getBoundingClientRect().left/top + window.pageX/YOffect</strong> (scrolled-out part of doc) <a target="_blank" rel="noopener" href="https://javascript.info/coordinates#getCoords">..</a></li>
+<li>tasks — <a target="_blank" rel="noopener" href="https://javascript.info/coordinates#find-window-coordinates-of-the-field">Find window coordinates of the field</a>, <a target="_blank" rel="noopener" href="https://javascript.info/coordinates#position-the-note-inside-absolute">Position the note inside (absolute)</a></li>
+</ul>
+</li>
+<li><code>style.left/top</code> <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#place-the-ball-in-the-field-center">..</a>, <code>style.width/height</code> <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#what-is-the-scrollbar-width">..</a> =&gt; <strong>str with unit</strong></li>
+<li><code>document.elementFromPoint(clientX, clientY)</code>: most nested elem, null if out of window <a target="_blank" rel="noopener" href="https://javascript.info/coordinates#elementFromPoint">..</a></li>
+</ul>
+<h4 id="Scroll-props"><a href="#Scroll-props" class="headerlink" title="Scroll props"></a>Scroll props</h4><p>Get scrolled-out part size:</p>
+<ul>
+<li>for whole doc: <strong>window.pageX/YOffset</strong> <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll-window#page-scroll">..</a></li>
+<li>for some elem: elem.<strong>scrollTop/Left</strong> (scrolled out part, <strong>writable</strong>) = elem.<strong>scrollWidth/Height</strong> - elem.clientWidth/Height<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">elem.style.height = <span class="string">`<span class="subst">$&#123;elem.scrollHeight&#125;</span>px`</span>; <span class="comment">// expand elem to full height</span></span><br><span class="line"></span><br><span class="line">elem.scrollTop = elem.scrollHeight; <span class="comment">// auto-scroll up [Events mouseover/mouseout, relatedTarget]</span></span><br><span class="line">elem.scrollTop = <span class="number">0</span> / <span class="literal">Infinity</span>       <span class="comment">// scroll to top/bottom</span></span><br><span class="line"><span class="keyword">let</span> scrollBottom = elem.scrollHeight - elem.scrollTop - elem.clientHeight; <span class="comment">// [Task1]</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>Scroll the doc</p>
+<ul>
+<li><code>window.scrollBy(x,y)</code> &amp; <code>window.scrollTo(pageX,pageY)</code> <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll-window#window-scroll">..</a></li>
+<li><code>elem.scrollToView(top=true)</code>: scroll page to make elem top / bottom of the window</li>
+</ul>
+<p>Set/forbid scroll</p>
+<ul>
+<li><code>style.overflow[X/Y]=&#39;scroll/hidden&#39;</code> (same as CSS overflow[-x/-y]) <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#what-is-the-scrollbar-width">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll-window#forbid-the-scrolling">..</a></li>
+</ul>
+<h4 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h4><ul>
+<li>text overflow ==&gt; padding-bottom area may filled with text <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#sample-element">..</a></li>
+<li>cases for geometry prop = 0 &amp; offsetParent = null <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll">..</a></li>
+<li>for elem width/height/distance, <strong>use geometry prop (e.g. clientWidth) instead</strong> getComputedStyle() <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#don-t-take-width-height-from-css">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#the-difference-css-width-versus-clientwidth">..</a></li>
+<li>get window size — <strong>document.documentElement.clientWidth/H</strong> (without sbar)  vs <strong>window.innerWeight/H</strong> (inc sbar) <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll-window#width-height-of-the-window">..</a></li>
+<li>get doc size (with scroll out part) <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll-window#width-height-of-the-document">..</a></li>
+</ul>
+<h2 id="Node-insert-move-amp-remove"><a href="#Node-insert-move-amp-remove" class="headerlink" title="Node insert, move &amp; remove"></a>Node insert, move &amp; remove</h2><p><strong>Insert elem || text</strong>: <code>node.append/prepend/before/after(...nodes || textStrs)</code> <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#insertion-methods">..</a></p>
+<ul>
+<li>auto remove existing node from old place</li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#old-school-insert-remove-methods">the old insert/remove methods</a></li>
+</ul>
+<p><strong>Insert HTML</strong>: <code>elem.insertAdjacentHTML(where, html: str)</code> <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#insertadjacenthtml-text-element">..</a> </p>
+<ul>
+<li>where = “beforebegin/afterbegin/beforeend/afterend” </li>
+<li>elem.<strong>insertAdjacentElement/Text</strong> can be replaced by node.<strong>append/prepend/before/after</strong></li>
+</ul>
+<p><strong>Replace node</strong>: <code>node.replaceWith(...nodes || textStrs)</code> <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#insertion-methods">..</a></p>
+<p><strong>Remove node</strong>: <code>node.remove()</code> <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#node-removal">..</a></p>
+<p><strong>Node groups</strong>: node-array &amp; DocumentFragment obj <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#document-fragment">..</a></p>
+<p><a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#a-word-about-document-write">The old <strong>document.write</strong>(html: str)</a>: call when onload (call af load replace page content)</p>
+<h1 id="UI-Event-handle"><a href="#UI-Event-handle" class="headerlink" title="UI Event handle"></a>UI Event handle</h1><h2 id="UI-Event"><a href="#UI-Event" class="headerlink" title="UI Event"></a>UI Event</h2><p>Event Obj <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#event-object">..</a></p>
+<ul>
+<li><code>e.type</code>: e.g. “click”</li>
+<li><code>e.clientX/Y</code>: window-rel coors</li>
+</ul>
+<p>Event phase &amp; event delegation</p>
+<ul>
+<li><strong>event capturing <a target="_blank" rel="noopener" href="https://javascript.info/bubbling-and-capturing#capturing">..</a> &amp; event bubbling</strong> (most events bubble, except <strong>focus</strong>) <a target="_blank" rel="noopener" href="https://javascript.info/bubbling-and-capturing#bubbling">..</a><ul>
+<li>Event delegation &amp; event bubble: handle event on container for mtp elems <a target="_blank" rel="noopener" href="https://javascript.info/event-delegation#summary">..</a></li>
+<li>tasks — <a target="_blank" rel="noopener" href="https://javascript.info/event-delegation#hide-messages-with-delegation">Hide messages with delegation</a>, <a target="_blank" rel="noopener" href="https://javascript.info/event-delegation#tree-menu">toogle tree menu</a>, <a target="_blank" rel="noopener" href="https://javascript.info/event-delegation#sortable-table">Sortable table</a>, <a target="_blank" rel="noopener" href="https://javascript.info/event-delegation#tooltip-behavior">Tooltip behavior</a></li>
+<li>stop bubbling by <ul>
+<li><strong>e.stopPropagation()</strong> (stop current handler)</li>
+<li><strong>e.stopImmediatePropagation()</strong> (stop all handlers)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>e.target</code>, <code>e.currentTarget</code> <a target="_blank" rel="noopener" href="https://javascript.info/bubbling-and-capturing#event-target">..</a></li>
+<li><code>e.eventPhase</code>: capturing=1, target=2, bubbling=3 <a target="_blank" rel="noopener" href="https://javascript.info/bubbling-and-capturing#summary">..</a></li>
+</ul>
+<h2 id="Custom-Event-Construct-amp-dispatch"><a href="#Custom-Event-Construct-amp-dispatch" class="headerlink" title="Custom Event Construct &amp; dispatch"></a>Custom Event Construct &amp; dispatch</h2><p>Script-gen events &amp; dispatch to elem <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#event-constructor">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#custom-events">..</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> event = <span class="keyword">new</span> CustomEvent(type: str, <span class="attr">options</span>: &#123;<span class="attr">bubbles</span>: <span class="literal">false</span>, <span class="attr">cancelable</span>: <span class="literal">false</span>&#125;); </span><br><span class="line">elem.dispatchEvent(event, &#123;<span class="attr">detail</span>: obj); <span class="comment">// access by e.detail.xxx in event handler</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// diff user event &amp; script-gen event</span></span><br><span class="line">event.isTrusted <span class="comment">// true for user action, false for script-gen</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Event-handler"><a href="#Event-handler" class="headerlink" title="Event handler"></a>Event handler</h2><p><strong>Event handler</strong>: fn(eventObj) <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#event-handlers">..</a></p>
+<h3 id="Add-event-handler"><a href="#Add-event-handler" class="headerlink" title="Add event handler"></a>Add event handler</h3><p>3 ways to add event handler to elem: </p>
+<ol>
+<li><code>elem.addEventListener()</code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">elem.add/removeEventListener(event, handler, [options])</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>work for custom event <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#bubbling-example">..</a></li>
+<li>allow mtp handlers (by mtp calls to <strong>elem.addEventListener</strong>)</li>
+<li>work for <strong>document.addEventListener(“DOMContentLoaded”, handler)</strong> &amp; <code>focusin</code>\ <code>focusout</code> event <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#delegation-focusin-focusout">..</a></li>
+<li>support <strong>obj with method handleEvent(event)</strong> as handler <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#object-handlers-handleevent">..</a></li>
+<li><code>options</code>: {once/cature/passive: bool}</li>
+</ul>
+<ol start="2">
+<li>HTML attr <code>on&lt;event&gt;=&quot;fn-body&quot;</code> || DOM prop <code>elem.on&lt;event&gt;function() &#123; ... &#125;</code> <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#event-handlers">..</a>, e.g. onclick<ul>
+<li>only work for built-in events <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#bubbling-example">..</a></li>
+<li>can only assign 1 handler (overwrite if DOM prop &amp; HTML attr both set) <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#dom-property">..</a></li>
+<li><code>elem.setAttribute(&#39;on&lt;event&gt;&#39;, handler)</code> not work for event handler <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#possible-mistakes">..</a></li>
+<li><code>this</code> in handler = e.currentTarget <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#accessing-the-element-this">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#event-object">..</a></li>
+<li>rm by <code>elem.on&lt;event&gt; = null</code> <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#dom-property">..</a></li>
+</ul>
+</li>
+</ol>
+<p>Tasks: <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#move-the-ball-across-the-field">Move the ball across the field</a>, <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#create-a-sliding-menu">Create a sliding menu</a>, <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#add-a-closing-button">Add a closing button</a>, <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#carousel">Carousel</a></p>
+<h3 id="Prevent-default-actions"><a href="#Prevent-default-actions" class="headerlink" title="Prevent default actions"></a>Prevent default actions</h3><ul>
+<li>default browser action list <a target="_blank" rel="noopener" href="https://javascript.info/default-browser-action#summary">..</a></li>
+<li>prevent by call <code>e.preventDefault()</code> on handler || <code> on&lt;event&gt;</code> handler return false (other return value ignored) <a target="_blank" rel="noopener" href="https://javascript.info/default-browser-action#preventing-browser-actions">..</a><ul>
+<li>call <strong>e.preventDefault()</strong>  ==&gt; <strong>e.defaultPrevented</strong>: true (means the event is handled somewhere) <a target="_blank" rel="noopener" href="https://javascript.info/default-browser-action#event-defaultprevented">..</a> &amp; elem.<strong>dispatchEvent(event)</strong> return false <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#event-preventdefault">..</a></li>
+<li><code>passive: true</code> option of <code>addEventListener</code>: signals the browser that the handler is not going to call preventDefault() <a target="_blank" rel="noopener" href="https://javascript.info/default-browser-action#the-passive-handler-option">why needed?</a></li>
+</ul>
+</li>
+<li>Tasks — <a target="_blank" rel="noopener" href="https://javascript.info/default-browser-action#why-return-false-doesn-t-work">Why “return false” doesn’t work?</a>, <a target="_blank" rel="noopener" href="https://javascript.info/default-browser-action#image-gallery">Image gallery</a></li>
+</ul>
+<h2 id="Event-Processing-Queue"><a href="#Event-Processing-Queue" class="headerlink" title="Event Processing Queue"></a>Event Processing Queue</h2><p>Asycnly &amp; Syncly <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#events-in-events-are-synchronous">..</a> </p>
+<h1 id="Mouse-Event"><a href="#Mouse-Event" class="headerlink" title="Mouse Event"></a>Mouse Event</h1><ul>
+<li>simple &amp; complext events <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#mouse-event-types">..</a> &amp; events order, e.g. click: mousedown =&gt; mouseup =&gt; click <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#events-order">..</a></li>
+<li>mouse coords: <code>e.clientX/Y, e.pageX/Y</code> <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#coordinates-clientx-y-pagex-y">..</a></li>
+<li>mouse btn &amp; <code>e.button</code> (=0 left-btn, =1 middle, =2 right-btn)<ul>
+<li>deprecated <code>e.which</code> <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#mouse-button">..</a></li>
+</ul>
+</li>
+<li>mouse event also inc info of modifier keys: <code>e.shiftKey/altKey/ctrlKey/metaKey</code>(Mac): bool (true if pressed) <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#modifiers-shift-alt-ctrl-and-meta">..</a><ul>
+<li>Ctrl in Windows vs Cmd (metaKey) in MacOS — left-click + ctrl = right-click on MacOS</li>
+</ul>
+</li>
+<li>disable selection (on dblclick) &amp; copy: <code>onmousedown/oncopy=&quot;return false</code> <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#disabling-selection">..</a></li>
+</ul>
+<h2 id="Mouse-Move-Event"><a href="#Mouse-Move-Event" class="headerlink" title="Mouse Move Event"></a>Mouse Move Event</h2><p><code>mousemove</code> <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#coordinates-clientx-y-pagex-y">..</a>:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">onmousemove</span>=<span class="string">&quot;this.value=event.clientX+&#x27;:&#x27;+event.clientY&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Mouse over me&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>mouseover/mouseout</code> event &amp; <code>e.relatedTarget</code> <a target="_blank" rel="noopener" href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#events-mouseover-mouseout-relatedtarget">..</a></p>
+<ul>
+<li>may skip elems in-btw if move fast <a target="_blank" rel="noopener" href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#skipping-elements">..</a> &amp; <strong>e.relatedTarget</strong> can be null if from outside of window</li>
+<li>If <strong>mouseover</strong> triggered, there must be <strong>mouseout</strong></li>
+<li>vs <code>mouseenter/mouseleave</code> <a target="_blank" rel="noopener" href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#events-mouseenter-and-mouseleave">..</a><ul>
+<li>event bubble — event delegation <a target="_blank" rel="noopener" href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#event-delegation">..</a></li>
+<li><strong>mouseout</strong> trigger on elem when mouse move from elem to descendants (mouse only over a single elem at a time: most nested /top one) <a target="_blank" rel="noopener" href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#mouseout-when-leaving-for-a-child">..</a></li>
+</ul>
+</li>
+<li>task — <a target="_blank" rel="noopener" href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#smart-tooltip">“Smart” tooltip</a> (tooltip style)</li>
+</ul>
+<h2 id="Drag’n’Drop-Event"><a href="#Drag’n’Drop-Event" class="headerlink" title="Drag’n’Drop Event"></a>Drag’n’Drop Event</h2><ul>
+<li>native event (e.g. <strong>dragstart, dragend</strong>) limitation <a target="_blank" rel="noopener" href="https://javascript.info/mouse-drag-and-drop">..</a></li>
+<li>implement Drag’n’Drop by mouse events: <code>mousedown</code> =&gt; <code>mousemove</code> =&gt; <code>mouseup</code> <a target="_blank" rel="noopener" href="https://javascript.info/mouse-drag-and-drop#drag-n-drop-algorithm">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/mouse-drag-and-drop#correct-positioning">..</a></li>
+<li>highlight droppable elem <a target="_blank" rel="noopener" href="https://javascript.info/mouse-drag-and-drop#potential-drop-targets-droppables">..</a><ul>
+<li>draggable elem always above other elem when dragging &amp; mouse event only happen on the top elem, so eh on other elem not work, can fix by<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">draggble.hidden = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">let</span> elemBelow = <span class="built_in">document</span>.elementFromPoint(event.clientX, event.clientY);</span><br><span class="line">draggble.hidden = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>task — <a target="_blank" rel="noopener" href="https://javascript.info/mouse-drag-and-drop#slider">Slider</a>, <a target="_blank" rel="noopener" href="https://javascript.info/mouse-drag-and-drop#drag-superheroes-around-the-field">Drag superheroes around the field</a> (not checked yet)</li>
+</ul>
+<h2 id="Scroll-Event"><a href="#Scroll-Event" class="headerlink" title="Scroll Event"></a>Scroll Event</h2><ul>
+<li><p><code>scroll</code> event on elem &amp; window <a target="_blank" rel="noopener" href="https://javascript.info/onscroll">..</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&#x27;scroll&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">&#x27;showScroll&#x27;</span>).innerHTML = <span class="built_in">window</span>.pageYOffset + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>task — <a target="_blank" rel="noopener" href="https://javascript.info/onscroll#endless-page">Endless page</a>, <a target="_blank" rel="noopener" href="https://javascript.info/onscroll#up-down-button">Up/down button</a>, <a target="_blank" rel="noopener" href="https://javascript.info/onscroll#load-visible-images">Load visible images</a></p>
+</li>
+</ul>
+<h1 id="Keyboard-Event"><a href="#Keyboard-Event" class="headerlink" title="Keyboard Event"></a>Keyboard Event</h1><p><code>keydown</code>, <code>keyup</code> <a target="_blank" rel="noopener" href="https://javascript.info/keyboard-events#keydown-and-keyup">..</a></p>
+<ul>
+<li><code>e.code</code> (physical key loc, e.g “KeyZ”, “ShiftLeft”) vs <code>event.key</code> (meaning of key, ie. char inputted, e.g. “z” || “Z”) <a target="_blank" rel="noopener" href="https://javascript.info/keyboard-events#event-code-and-event-key">..</a></li>
+<li><code>e.repeat</code>= true when many “keydown” (key pressed for a long enough time) &amp; single “keyup”</li>
+<li>prevent default action by <code>onkeydown=&#39;return false;&#39;</code> <a target="_blank" rel="noopener" href="https://javascript.info/keyboard-events#default-actions">..</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/keyboard-events#legacy">the old “keypress”, “keyCode”, “charCode”, “which”</a></li>
+<li>task — <a target="_blank" rel="noopener" href="https://javascript.info/keyboard-events#extended-hotkeys">Extended hotkeys</a></li>
+</ul>
+<h1 id="Form-Ctrl"><a href="#Form-Ctrl" class="headerlink" title="Form Ctrl"></a>Form Ctrl</h1><ul>
+<li>named collection: <code>document.forms.formName</code> &amp; <code>form/fieldset.elements.ctrlElemName</code> (fieldset as subform) <a target="_blank" rel="noopener" href="https://javascript.info/form-elements#navigation-form-and-elements">..</a></li>
+</ul>
+<h2 id="Form-elem-props"><a href="#Form-elem-props" class="headerlink" title="Form elem props"></a>Form elem props</h2><p><code>form.elements[index/name]</code> &amp; <code>elem.form</code> <a target="_blank" rel="noopener" href="https://javascript.info/form-elements#backreference-element-form">..</a></p>
+<p><strong>input &amp; textarea</strong> <a target="_blank" rel="noopener" href="https://javascript.info/form-elements#input-and-textarea">..</a></p>
+<ul>
+<li><code>input/textarea.value</code>: str, <code>input.checked</code>: bool (for checkboxes and radio btns)</li>
+</ul>
+<p><strong>select &amp; option</strong> <a target="_blank" rel="noopener" href="https://javascript.info/form-elements#select-and-option">..</a></p>
+<ul>
+<li><code>select.options</code>: option collection &amp; <code>select.value/selectedIndex</code>: <code>selectedOption.value/index</code></li>
+<li><code>option.selected</code>: bool, <code>option.value\text</code>, <code>option.index</code></li>
+<li>new Option(…) <a target="_blank" rel="noopener" href="https://javascript.info/form-elements#new-option">..</a><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3 ways to set select value</span></span><br><span class="line">select.options[<span class="number">2</span>].selected = <span class="literal">true</span>;</span><br><span class="line">select.selectedIndex = <span class="number">2</span>;</span><br><span class="line">select.value = <span class="string">&#x27;banana&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// get all selected values from &lt;select multiple&gt;</span></span><br><span class="line"><span class="keyword">let</span> selected = <span class="built_in">Array</span>.from(select.options)</span><br><span class="line">  .filter(<span class="function"><span class="params">option</span> =&gt;</span> option.selected)</span><br><span class="line">  .map(<span class="function"><span class="params">option</span> =&gt;</span> option.value);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="Focusing-Event"><a href="#Focusing-Event" class="headerlink" title="Focusing Event"></a>Focusing Event</h2><ul>
+<li><code>focus</code> / <code>blur</code> event <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#events-focus-blur">..</a> &amp; <code>elem.focus/blur()</code> <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#methods-focus-blur">..</a><ul>
+<li>event not bubble (but capturable) ==&gt; <strong>focusin</strong> / <strong>focusout</strong> event (handler assign by <strong>elem.addEventListener</strong>)</li>
+<li><code>autofocus</code> attr [..] (<a target="_blank" rel="noopener" href="https://javascript.info/focus-blur">https://javascript.info/focus-blur</a>) &amp; <code>:focus</code> in css <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#allow-focusing-on-any-element-tabindex">..</a></li>
+<li>input validate attr: <code>required</code>, <code>pattern</code> <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#events-focus-blur">..</a></li>
+</ul>
+</li>
+<li>enable any elem focusable by <code>tabindex*</code> attr || elem.<strong>tabindex</strong> (0, -1, …) &amp; switch order <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#allow-focusing-on-any-element-tabindex">..</a></li>
+<li>get focused elem: <code>document.activeElement</code> <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#summary">..</a></li>
+<li>task — <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#editable-div">Editable div</a>, <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#edit-td-on-click">Edit TD on click</a>, <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#keyboard-driven-mouse">Keyboard-driven mouse</a></li>
+</ul>
+<h2 id="Data-update-events"><a href="#Data-update-events" class="headerlink" title="Data update events"></a>Data update events</h2><ul>
+<li><code>input</code> event: on any value change <a target="_blank" rel="noopener" href="https://javascript.info/events-change-input#event-input">..</a></li>
+<li><code>change</code> event: on finish change, e.g. text-input elem blur, select-opt changes <a target="_blank" rel="noopener" href="https://javascript.info/events-change-input#event-change">..</a></li>
+<li><code>cut/copy/paste</code> event <a target="_blank" rel="noopener" href="https://javascript.info/events-change-input#events-cut-copy-paste">..</a></li>
+</ul>
+<h2 id="Form-submit-event"><a href="#Form-submit-event" class="headerlink" title="Form submit event"></a>Form submit event</h2><ul>
+<li><code>submit</code> event on form (sent data to server): <ul>
+<li>trigger on press “Enter” on input field =&gt; trigger <strong>click</strong> on input[type=submit] <a target="_blank" rel="noopener" href="https://javascript.info/forms-submit#event-submit">..</a></li>
+<li>form.<strong>submit()</strong>: submit form manually (<code>submit</code> event not generated, i.e. submit handler not run)</li>
+<li>tasks — <a target="_blank" rel="noopener" href="https://javascript.info/forms-submit#modal-form">Modal form</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="Doc-amp-resrc-loading"><a href="#Doc-amp-resrc-loading" class="headerlink" title="Doc &amp; resrc loading"></a>Doc &amp; resrc loading</h1><h2 id="Page-load-events"><a href="#Page-load-events" class="headerlink" title="Page load events"></a>Page load events</h2><p><code>DOMContentLoaded</code> event: HTML &amp; DOM tree ready (no external resrc) =&gt; DOM nodes ready</p>
+<ul>
+<li><strong>wait non-async script</strong> execution bf continuing building the DOM <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded-and-scripts">..</a></li>
+<li><strong>not wait external-CSS</strong> unless script require it <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded-and-styles">..</a></li>
+<li>form-autofill on <code>DOMContentLoaded</code> <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#built-in-browser-autofill">..</a></li>
+<li>handle by <code>document.addEventListener</code> <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded">..</a></li>
+</ul>
+<p><code>window.onload</code> event: HTML &amp; DOM tree ready + external resrc loaded ==&gt; CSS applied, image sizes known  <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#window-onload">..</a></p>
+<p><code>window.onunload</code> <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#window-onunload">..</a> &amp; <code>onbeforeunload</code> <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#window.onbeforeunload">..</a></p>
+<p><code>document.readState</code> = “loading”, “interactive” , “complete” &amp; the old <strong>document.readystatechange</strong> <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#readystate">..</a></p>
+<p><strong>Whole process</strong> <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#readystate">..</a></p>
+<ul>
+<li>readState: loading &amp; readState: interactive</li>
+<li>DOMContentLoaded</li>
+<li>ex-resrc onload &amp; readyState:complete</li>
+<li>window onload </li>
+</ul>
+<h2 id="Script-attr-async-defer"><a href="#Script-attr-async-defer" class="headerlink" title="Script attr: async, defer"></a>Script attr: async, defer</h2><p>Both load not block page rendering (load script in bg)</p>
+<ul>
+<li><code>defer</code>: run when DOM ready but bf DOMContentLoaded event<ul>
+<li>only for external script, run on doc order</li>
+</ul>
+</li>
+<li><code>async</code>: run in load-1st order (load 1st, run 1st, not wait for each other)<ul>
+<li><strong>dynamicScript.async = true</strong> by default</li>
+<li>Dynamic scripts (&amp; other resrc) load af insert to the doc <a target="_blank" rel="noopener" href="https://javascript.info/onload-onerror#other-resources">..</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="Resrc-loading-event"><a href="#Resrc-loading-event" class="headerlink" title="Resrc loading event"></a>Resrc loading event</h2><p><code>load</code>, <code>error</code> — track <strong>loading process</strong> of resrc with <strong>src</strong> attr, e.g. script, img, css <a target="_blank" rel="noopener" href="https://javascript.info/onload-onerror">..</a></p>
+<ul>
+<li><code>onload</code> — trigger af script loaded successfully &amp; executed</li>
+<li><code>onerror</code> — trigger when error occurs during loading</li>
+</ul>
+<p>Most resources start loading when added to the doc</p>
+<ul>
+<li>img start loading when gets src <a target="_blank" rel="noopener" href="https://javascript.info/onload-onerror#other-resources">..</a> &amp; catched <a target="_blank" rel="noopener" href="https://javascript.info/onload-onerror#load-images-with-a-callback">..</a> </li>
+<li>iframe.onload: on loading finished ( successful || error) (history) <a target="_blank" rel="noopener" href="https://javascript.info/onload-onerror#other-resources">..</a></li>
+<li>track other errors: <code>window.onerror</code> <a target="_blank" rel="noopener" href="https://javascript.info/onload-onerror#script-onerror">..</a></li>
+<li><a href="CORS">cross-origin policy</a> &amp; script.crossorigin attr (commu with remove server) <a target="_blank" rel="noopener" href="https://javascript.info/onload-onerror#crossorigin-policy">..</a></li>
+</ul>
+<h1 id="Others-1"><a href="#Others-1" class="headerlink" title="Others"></a>Others</h1><h2 id="Range-amp-Selection"><a href="#Range-amp-Selection" class="headerlink" title="Range &amp; Selection"></a>Range &amp; Selection</h2><p>range <a target="_blank" rel="noopener" href="https://javascript.info/selection-range#range">..</a> &amp; props &amp; methods …</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> range = <span class="keyword">new</span> Range();</span><br><span class="line">range.setStart/End(node, <span class="attr">offset</span>: num); <span class="comment">// offset: child index, offset=0 means 1st child</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// apply the selection</span></span><br><span class="line"><span class="built_in">document</span>/<span class="built_in">window</span>.getSelection().addRange(range)/removeAllRanges();</span><br></pre></td></tr></table></figure>
+
+<p>selection <a target="_blank" rel="noopener" href="https://javascript.info/selection-range#selection">..</a></p>
+<ul>
+<li>get by <strong>window/document.getSelection()</strong> — singloten???</li>
+<li>all browsers (except Firefox), a Selection contains maximum 1 range</li>
+<li>props, methods &amp; events …</li>
+<li>selection in form ctrls …</li>
+<li>Making unselectable <a target="_blank" rel="noopener" href="https://javascript.info/selection-range#making-unselectable">..</a></li>
+</ul>
+<h2 id="Mutation-observer"><a href="#Mutation-observer" class="headerlink" title="Mutation observer"></a>Mutation observer</h2><p>A built-in obj that observes a DOM node &amp; fire callback in case of changes: childList &amp; subtree, attributes, data</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> observer = <span class="keyword">new</span> MutationObserver(callback); </span><br><span class="line"><span class="comment">// callback: fn(mutationRecords: [...MutationRecord-objs], observer: the observer itself)	</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// attach to DOM node </span></span><br><span class="line">observer.observe(node, <span class="attr">config</span>: &#123;bool-options&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// stop observing</span></span><br><span class="line">observer.disconnect();</span><br><span class="line"></span><br><span class="line"><span class="comment">// handle unprocessed mutations when stopping observing</span></span><br><span class="line"><span class="keyword">let</span> mutationRecords = observer.takeRecords();</span><br></pre></td></tr></table></figure>
+
+<p><strong>Usages</strong> <a target="_blank" rel="noopener" href="https://javascript.info/mutation-observer#usage-for-integration">..</a><br><strong>observer &amp; GC</strong> — node observed doesn’t prevent GC(weak ref)</p>
+<h2 id="Chrome-console-amp-Debugging-in-Chrome"><a href="#Chrome-console-amp-Debugging-in-Chrome" class="headerlink" title="Chrome console &amp; Debugging in Chrome"></a>Chrome console &amp; Debugging in Chrome</h2><p>Chrome console <a target="_blank" rel="noopener" href="https://javascript.info/devtools#google-chrome">..</a></p>
+<ul>
+<li><strong>breakpoints</strong> &amp; <code>debugger</code> cmd</li>
+<li>execution tracking…</li>
+<li>logging with <code>console.log(...)</code></li>
+<li>ref: <a target="_blank" rel="noopener" href="https://javascript.info/debugging-chrome">https://javascript.info/debugging-chrome</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/IT/" rel="tag"># IT</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/2020/06/08/js-async/" rel="prev" title="Asynchronous programming in JavaScript">
+                  <i class="fa fa-chevron-left"></i> Asynchronous programming in JavaScript
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/2020/08/16/js-network/" rel="next" title="JavaScript network requests">
+                  JavaScript network requests <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Stephen Chan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/blog/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
