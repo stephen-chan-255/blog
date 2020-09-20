@@ -22,21 +22,21 @@
     var CONFIG = {"hostname":"stephen-chan255.github.io","root":"/blog/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="Variables   Keyword Feature    let, const local scope   the old var fn or global scope; declaration hoist &#x2F; raise    non-strict: assignment to non-existing var (without declear) &#x3D;&#x3D;&gt; creates a new g">
+  <meta name="description" content="Var, Data types &amp; OpsVariables let, const: block scope .. — the old “var” &amp; IIFE  Data types dynamic typed, 7+1 basic data types typeof &#x3D;&gt; lowercase str, e.g. null: “object”, alert: “functi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript Variables, Data types &amp; Operators">
-<meta property="og:url" content="https://stephen-chan255.github.io/blog/2020/05/18/js-var-datatype/index.html">
+<meta property="og:title" content="js basics">
+<meta property="og:url" content="https://stephen-chan255.github.io/blog/2020/05/18/js-basics/index.html">
 <meta property="og:site_name" content="Stephen&#39;s notes">
-<meta property="og:description" content="Variables   Keyword Feature    let, const local scope   the old var fn or global scope; declaration hoist &#x2F; raise    non-strict: assignment to non-existing var (without declear) &#x3D;&#x3D;&gt; creates a new g">
+<meta property="og:description" content="Var, Data types &amp; OpsVariables let, const: block scope .. — the old “var” &amp; IIFE  Data types dynamic typed, 7+1 basic data types typeof &#x3D;&gt; lowercase str, e.g. null: “object”, alert: “functi">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-05-18T13:34:08.000Z">
-<meta property="article:modified_time" content="2020-09-04T09:08:04.183Z">
+<meta property="article:modified_time" content="2020-09-20T03:35:58.307Z">
 <meta property="article:author" content="Stephen Chan">
 <meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://stephen-chan255.github.io/blog/2020/05/18/js-var-datatype/">
+<link rel="canonical" href="https://stephen-chan255.github.io/blog/2020/05/18/js-basics/">
 
 
 <script class="page-configurations">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>JavaScript Variables, Data types & Operators | Stephen's notes</title>
+  <title>js basics | Stephen's notes</title>
   
 
 
@@ -166,7 +166,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">11</span></a>
+    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">10</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -225,7 +225,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Variables"><span class="nav-number">1.</span> <span class="nav-text">Variables</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-types"><span class="nav-number">2.</span> <span class="nav-text">Data types</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Number"><span class="nav-number">2.1.</span> <span class="nav-text">Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">2.2.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bool"><span class="nav-number">2.3.</span> <span class="nav-text">Bool</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null-amp-undefined"><span class="nav-number">2.4.</span> <span class="nav-text">null &amp; undefined</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Operators"><span class="nav-number">3.</span> <span class="nav-text">Operators</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Var-Data-types-amp-Ops"><span class="nav-number">1.</span> <span class="nav-text">Var, Data types &amp; Ops</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Variables"><span class="nav-number">1.1.</span> <span class="nav-text">Variables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-types"><span class="nav-number">1.2.</span> <span class="nav-text">Data types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ops"><span class="nav-number">1.3.</span> <span class="nav-text">Ops</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Function"><span class="nav-number">2.</span> <span class="nav-text">Function</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -241,7 +241,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -316,7 +316,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://stephen-chan255.github.io/blog/2020/05/18/js-var-datatype/">
+    <link itemprop="mainEntityOfPage" href="https://stephen-chan255.github.io/blog/2020/05/18/js-basics/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/apple-touch-icon-next.png">
@@ -332,7 +332,7 @@
     
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          JavaScript Variables, Data types & Operators
+          js basics
         </h1>
 
         <div class="post-meta-container">
@@ -350,7 +350,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-04 19:08:04" itemprop="dateModified" datetime="2020-09-04T19:08:04+10:00">2020-09-04</time>
+        <time title="Modified: 2020-09-20 13:35:58" itemprop="dateModified" datetime="2020-09-20T13:35:58+10:00">2020-09-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -380,71 +380,79 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h1><table>
-<thead>
-<tr>
-<th>Keyword</th>
-<th>Feature</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>let</code>, <code>const</code></td>
-<td>local scope</td>
-</tr>
-<tr>
-<td>the old <code>var</code></td>
-<td>fn or global scope; declaration hoist / raise</td>
-</tr>
-</tbody></table>
-<ul>
-<li>non-strict: assignment to non-existing var (without declear) ==&gt; creates a new global var (compatibility) <a target="_blank" rel="noopener" href="https://javascript.info/closure#step-3-inner-and-outer-lexical-environment">..</a></li>
+        <h1 id="Var-Data-types-amp-Ops"><a href="#Var-Data-types-amp-Ops" class="headerlink" title="Var, Data types &amp; Ops"></a>Var, Data types &amp; Ops</h1><h2 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h2><ul>
+<li><code>let</code>, <code>const</code>: <a target="_blank" rel="noopener" href="https://javascript.info/destructuring-assignment#the-rest-pattern" title="plain code block to group stmts">block</a> scope <a target="_blank" rel="noopener" href="https://javascript.info/closure">..</a> — <a href="" title="fn/global scope; dec hoist/raise, allow redec(latter ignored)">the old “var”</a> &amp; <a href="" title="immediately-invoked fn-expr">IIFE</a></li>
+</ul>
+<h2 id="Data-types"><a href="#Data-types" class="headerlink" title="Data types"></a>Data types</h2><ul>
+<li><strong>dynamic typed</strong>, <a href="" title="num/bigInt, str, bool, null/undefined, obj/symbol">7+1</a> basic data types</li>
+<li><code>typeof</code> =&gt; <strong>lowercase str</strong>, e.g. <code>null</code>: “object”, <code>alert</code>: “function” <a target="_blank" rel="noopener" href="https://javascript.info/types#type-typeof">..</a></li>
 </ul>
 <a id="more"></a>
 
-<h1 id="Data-types"><a href="#Data-types" class="headerlink" title="Data types"></a>Data types</h1><ul>
-<li><strong>dynamic typed</strong>, (7+1) basic data types</li>
-<li><code>typeof</code> =&gt; <strong>lowercase str</strong>, e.g. <code>null</code>: “object”, <code>alert</code>: “function” <a target="_blank" rel="noopener" href="https://javascript.info/types#type-typeof">..</a></li>
-</ul>
-<h2 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h2><ul>
-<li>integer + float &amp; <code>Infinity</code>, <code>-Infinity</code>, <code>NaN </code> <a target="_blank" rel="noopener" href="https://javascript.info/types#number">..</a><ul>
-<li>int ±2^53 ==&gt; <a target="_blank" rel="noopener" href="https://javascript.info/types#bigint">BigInt</a>, num <a href="" title="double precision float">64-bit</a> ==&gt; Imprecise calc</li>
-<li>num repre: <code>e</code>, hex / binary / octal num ==&gt; <code>parseInt/-float()</code>, <code>toString(base)</code></li>
+<p><strong>Number</strong></p>
+<ul>
+<li>int/float &amp; <code>Infinity</code>, <code>-Infinity</code>, <code>NaN</code> <a target="_blank" rel="noopener" href="https://javascript.info/types#number">..</a><ul>
+<li>64-bit — Imprecise calc &amp; BigInt <a target="_blank" rel="noopener" href="https://javascript.info/number">..</a></li>
+<li>repre: <code>e</code>, hex/binary/octal — <code>parseInt/-float()</code>, <code>toString(base)</code></li>
+<li>check for int: <code>Math.round(n) == n</code> <a target="_blank" rel="noopener" href="https://javascript.info/testing-mocha">..</a></li>
 <li>regular num &amp; NaN test: <code>isFinite()</code>, <code>isNaN()</code> vs <code>Object.is()</code></li>
-<li>check for int — <code>Math.round(n) == n</code> <a target="_blank" rel="noopener" href="https://javascript.info/testing-mocha">..</a></li>
 </ul>
 </li>
-<li>convert in unary <code>+</code>, math-fn / math-op &amp; <code>Number(value)</code></li>
-<li>num rouding: multiply-and-divide &amp; <code>toFixed(n)</code></li>
-<li>math ops, Modify-in-place ops e.g. “+=” &amp; in-/decrement ops <code>++</code>, <code>--</code></li>
-<li>tasks — <a target="_blank" rel="noopener" href="https://javascript.info/number#why-6-35-tofixed-1-6-3">Why 6.35.toFixed(1) == 6.3?</a>, <a target="_blank" rel="noopener" href="https://javascript.info/number#a-random-integer-from-min-to-max">A random integer from min to max</a></li>
+<li>auto type convert: unary <code>+</code>, math-fn / math-op &amp; <code>Number(value)</code></li>
+<li>rouding: multiply-and-divide &amp; <code>toFixed(n)</code></li>
+<li>tasks: <a target="_blank" rel="noopener" href="https://javascript.info/number#why-6-35-tofixed-1-6-3">Why 6.35.toFixed(1) == 6.3?</a>, <a target="_blank" rel="noopener" href="https://javascript.info/number#a-random-integer-from-min-to-max">random int from min to max</a></li>
 </ul>
-<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><ul>
-<li>3 quotes &amp; <code>...$&#123;...&#125;</code> (string template, allow line break) <a target="_blank" rel="noopener" href="https://javascript.info/types#string">..</a><ul>
-<li>special chars: line break <code>\n</code> in <code>&#39;&#39;</code> / <code>&quot;&quot;</code>; escape char <code>\</code></li>
+<p><strong>String</strong></p>
+<ul>
+<li>quotes &amp; <code>...$&#123;...&#125;</code> <a target="_blank" rel="noopener" href="https://javascript.info/types#string">..</a></li>
+<li>special chars: line break <code>\n</code>; escape char <code>\</code></li>
+<li>convert in output e.g. <code>alert(..)</code>, <code>String(..)</code> &amp; <code>toString()</code>: <a target="_blank" rel="noopener" href="https://javascript.info/object-toprimitive#toprimitive">obj as key</a>, <a target="_blank" rel="noopener" href="https://javascript.info/json#custom-tojson">JSON.stringify()</a> <a target="_blank" rel="noopener" href="https://javascript.info/type-conversions#summary">..</a></li>
+<li><code>str.length</code>, <code>str[i]</code></li>
+<li>substr <code>str.slice()</code>, str compare <code>str.localeCompare(str2)</code>, <code>str.repeat(n)</code>, charCode <code>String.fromCodePoint(code)</code> &amp; <code>str.codePointAt(i)</code> (in generate pwd <a target="_blank" rel="noopener" href="https://javascript.info/generators#generator-composition">..</a>)</li>
+<li>task: <a target="_blank" rel="noopener" href="https://javascript.info/string#truncate-the-text">Truncate text</a></li>
+</ul>
+<p><strong>Bool</strong> <a target="_blank" rel="noopener" href="https://javascript.info/types#boolean-logical-type">..</a></p>
+<ul>
+<li>6 falsy values <a target="_blank" rel="noopener" href="https://javascript.info/type-conversions#boolean-conversion">..</a></li>
+<li>convert by logical op <code>!!</code>, compareson &amp; <code>Boolean(..)</code></li>
+</ul>
+<p><strong>null &amp; undefined</strong> <a target="_blank" rel="noopener" href="https://javascript.info/types">..</a></p>
+<ul>
+<li><code>null</code> : value unknown; </li>
+<li><code>undefined</code>: unassigned-var init val &amp; default fn-return </li>
+</ul>
+<h2 id="Ops"><a href="#Ops" class="headerlink" title="Ops"></a>Ops</h2><ul>
+<li>compare diff type (convert to num) &amp; <code>null == undefined</code> , <code>NaN != NaN</code> &amp; <code>===</code></li>
+<li>Nullish coalescing op <code>??</code> (check for “null/undefined”), obj optional chaining <code>?.</code>, comma <a target="_blank" rel="noopener" href="https://javascript.info/operators#comma">..</a></li>
+</ul>
+<h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><p><strong>Fn creation</strong> <a target="_blank" rel="noopener" href="https://javascript.info/function-expressions#function-expression-vs-function-declaration">..</a></p>
+<ul>
+<li><strong>fn dec</strong>: block-level if strict, def-hoisting<ul>
+<li><code>function ..</code>: start of fn-dec (require a name &amp; cannot be called immediately) <a target="_blank" rel="noopener" href="https://javascript.info/var#iife">..</a></li>
 </ul>
 </li>
-<li>convert in output <a target="_blank" rel="noopener" href="https://javascript.info/type-conversions#summary">..</a> e.g. <code>alert(value)</code>, <a target="_blank" rel="noopener" href="https://javascript.info/object-toprimitive#toprimitive" title="call toString()">obj as key</a>, <a target="_blank" rel="noopener" href="https://javascript.info/json#custom-tojson" title="call toString()">JSON.stringify</a> &amp; <code>String(value)</code></li>
-<li>concat by <code>+</code> op</li>
-<li><code>str.length</code>, char accessing <code>str[i]</code>, str immutable</li>
-<li>str methods: search substr, get substr e.g. <code>str.slice()</code>, str compare &amp; UTF-8 e.g. <code>str.localeCompare(str2)</code>, <code>str.repeat(n)</code>, str &amp; char: <code>String.fromCodePoint(code)</code> and <code>str.codePointAt(index)</code> (can use to generate pwd <a target="_blank" rel="noopener" href="https://javascript.info/generators#generator-composition">..</a>)</li>
-<li>task — <a target="_blank" rel="noopener" href="https://javascript.info/string#truncate-the-text">Truncate the text</a></li>
-</ul>
-<h2 id="Bool"><a href="#Bool" class="headerlink" title="Bool"></a>Bool</h2><ul>
-<li><code>true</code> / <code>false</code> <a target="_blank" rel="noopener" href="https://javascript.info/types#boolean-logical-type">..</a></li>
-<li>convert by logical op <code>!!</code> &amp; <code>Boolean(value)</code>:  6 false values</li>
-</ul>
-<h2 id="null-amp-undefined"><a href="#null-amp-undefined" class="headerlink" title="null &amp; undefined"></a>null &amp; undefined</h2><ul>
-<li><code>null</code> : value unknown</li>
-<li><code>undefined</code>: default initial value for unassigned-var &amp; fn-return</li>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/types">..</a></li>
-</ul>
-<h1 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h1><ul>
-<li>comparison &amp; equality check ops =&gt; bool<ul>
-<li>compare diff type (convert to num) &amp; <code>null == undefined</code> , <code>===</code> &amp; <code>NaN != NaN</code></li>
+<li><strong>fn-expr</strong>: easy dynamic def<ul>
+<li><em>anonymous</em> as callback, N(named) FE</li>
 </ul>
 </li>
-<li>conditional op <code>?..:</code>, Nullish coalescing op <code>??</code> (check for “null/undefined”), logical ops <code>! &amp;&amp; ||</code></li>
-<li>Comma, Bitwise ops, op precedence &amp; <a target="_blank" rel="noopener" href="https://javascript.info/operators#assignment-returns-a-value">op return</a></li>
+<li><strong>arrow-fn</strong> (see chapter JS object)</li>
+<li><code>new Function([...params], body)</code>: create fn dynamically at run time <a target="_blank" rel="noopener" href="https://javascript.info/new-function">..</a></li>
+</ul>
+<p><strong>Closure</strong> <a target="_blank" rel="noopener" href="https://javascript.info/closure">..</a></p>
+<ul>
+<li>block scope &amp; Lexical Environment (EnvRecord &amp; outer-ref, created on run time) …</li>
+<li>LE var/fn pre-populate &amp; var “dead zone” <a target="_blank" rel="noopener" href="https://javascript.info/closure#is-variable-visible">..</a></li>
+<li>access var through <strong>LE chain</strong> (inner-outer) <a target="_blank" rel="noopener" href="https://javascript.info/closure#step-3-inner-and-outer-lexical-environment">..</a> &amp; updated on the LE it lives <a target="_blank" rel="noopener" href="https://javascript.info/closure#step-4-returning-a-function">..</a></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://javascript.info/closure#step-4-returning-a-function">Closure</a>: a fn that remembers its outer vars and can access them by e.g. return a fn (or as obj prop) <a target="_blank" rel="noopener" href="https://javascript.info/closure#nested-functions">..</a></p>
+<ul>
+<li>run outerFn: new outerFn.LE &amp; nestedFn created, <code>nestedFn.[[Env..]] = outerFn.LE</code> (set once &amp; forever)<ul>
+<li>so outerFn.LE still reachable af its fn call completion &amp; outerFn.LE not GC <a target="_blank" rel="noopener" href="https://javascript.info/closure#garbage-collection">..</a></li>
+<li>call outerFn mtp times ==&gt; diff outerFn.LE &amp; nestedFn created ==&gt; nestedFn independent <a target="_blank" rel="noopener" href="https://javascript.info/closure#are-counters-independent">..</a></li>
+</ul>
+</li>
+<li>run nestedFn: new nestedFn.LE created &amp; <code>nestedFn.LE -&gt; outerFn.LE</code> (ref value taken from [[Env..]])</li>
+<li>Task: <a target="_blank" rel="noopener" href="https://javascript.info/closure#counter-object">Counter object</a>, <a target="_blank" rel="noopener" href="https://javascript.info/closure#sum-with-closures">Sum with closures</a>, <a target="_blank" rel="noopener" href="https://javascript.info/closure#filter-through-function">Filter through function</a>, <a target="_blank" rel="noopener" href="https://javascript.info/closure#sort-by-field">Sort by field</a>, <a target="_blank" rel="noopener" href="https://javascript.info/closure#army-of-functions">Army of functions</a></li>
 </ul>
 
     </div>

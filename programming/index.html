@@ -22,15 +22,15 @@
     var CONFIG = {"hostname":"stephen-chan255.github.io","root":"/blog/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="Code Structure Expressions, Statements, and Blocks Blocks: without &amp;#123;..&amp;#125; only 1st statements work; java class def excluded   Stmt, semicolon &amp; line-break; in JS, no implicit “;” bf [&#x2F;( ..">
+  <meta name="description" content="Code Structure expr, stmt ; &amp; blocks &amp;#123;..&amp;#125; .. comment: inline &#x2F; mtp-line, javadoc ..  VariableA named storage in memory for data  &lt;type&gt;: allowed value &amp; ops, e.g. primitive &#x2F; r">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Programming Language Commonness">
+<meta property="og:title" content="Java &amp; JS Commonness">
 <meta property="og:url" content="https://stephen-chan255.github.io/blog/programming/index.html">
 <meta property="og:site_name" content="Stephen&#39;s notes">
-<meta property="og:description" content="Code Structure Expressions, Statements, and Blocks Blocks: without &amp;#123;..&amp;#125; only 1st statements work; java class def excluded   Stmt, semicolon &amp; line-break; in JS, no implicit “;” bf [&#x2F;( ..">
+<meta property="og:description" content="Code Structure expr, stmt ; &amp; blocks &amp;#123;..&amp;#125; .. comment: inline &#x2F; mtp-line, javadoc ..  VariableA named storage in memory for data  &lt;type&gt;: allowed value &amp; ops, e.g. primitive &#x2F; r">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-04T10:24:51.000Z">
-<meta property="article:modified_time" content="2020-09-04T10:25:20.455Z">
+<meta property="article:modified_time" content="2020-09-20T03:38:44.474Z">
 <meta property="article:author" content="Stephen Chan">
 <meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>Programming Language Commonness | Stephen's notes
+  <title>Java & JS Commonness | Stephen's notes
 </title>
   
 
@@ -167,7 +167,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">11</span></a>
+    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">10</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -226,7 +226,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Code-Structure"><span class="nav-number">1.</span> <span class="nav-text">Code Structure</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Variable"><span class="nav-number">2.</span> <span class="nav-text">Variable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Operator"><span class="nav-number">3.</span> <span class="nav-text">Operator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Control-flow"><span class="nav-number">4.</span> <span class="nav-text">Control flow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Array"><span class="nav-number">5.</span> <span class="nav-text">Array</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#String"><span class="nav-number">6.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Object-oriented"><span class="nav-number">7.</span> <span class="nav-text">Object-oriented</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Refs"><span class="nav-number">8.</span> <span class="nav-text">Refs</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Code-Structure"><span class="nav-number">1.</span> <span class="nav-text">Code Structure</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Variable"><span class="nav-number">2.</span> <span class="nav-text">Variable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Operator"><span class="nav-number">3.</span> <span class="nav-text">Operator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Control-flow"><span class="nav-number">4.</span> <span class="nav-text">Control flow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Function"><span class="nav-number">5.</span> <span class="nav-text">Function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Array"><span class="nav-number">6.</span> <span class="nav-text">Array</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#String"><span class="nav-number">7.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Obj-oriented"><span class="nav-number">8.</span> <span class="nav-text">Obj-oriented</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Refs"><span class="nav-number">9.</span> <span class="nav-text">Refs</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -242,7 +242,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -321,7 +321,7 @@
     <div class="post-block" lang="en">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">Programming Language Commonness
+<h1 class="post-title" itemprop="name headline">Java & JS Commonness
 </h1>
 
 <div class="post-meta-container">
@@ -336,78 +336,89 @@
       
       <div class="post-body">
           <h1 id="Code-Structure"><a href="#Code-Structure" class="headerlink" title="Code Structure"></a>Code Structure</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/expressions.html">Expressions, Statements, and Blocks</a><ul>
-<li>Blocks: without <code>&#123;..&#125;</code> only 1st statements work; java class def excluded</li>
+<li>expr, stmt <code>;</code> &amp; blocks <code>&#123;..&#125;</code> <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/expressions.html">..</a></li>
+<li>comment: inline / mtp-line, javadoc <a target="_blank" rel="noopener" href="https://javascript.info/structure#code-comments">..</a></li>
 </ul>
-</li>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/structure#statements">Stmt, semicolon &amp; line-break</a>;<ul>
-<li>in JS, no implicit “;” bf <code>[</code>/<code>(</code> <a target="_blank" rel="noopener" href="https://javascript.info/function-basics#returning-a-value">..</a></li>
-</ul>
-</li>
-<li>Comment: inline, mtp-line, javadoc</li>
-</ul>
-<h1 id="Variable"><a href="#Variable" class="headerlink" title="Variable"></a>Variable</h1><p>A <strong>named storage</strong> in (stack) memory for data</p>
+<h1 id="Variable"><a href="#Variable" class="headerlink" title="Variable"></a>Variable</h1><p>A <strong>named storage</strong> in memory for data</p>
 <ul>
-<li>value: primitive type (<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html" title="store in stack, non-sharable">literal</a>) / reference type (<a href="" title="sharable, store in heap">memory addr of obj</a>)</li>
-<li>name: descriptive ref of value (no keyword, UPPERCASE_CONST)</li>
-<li>type: allowed value &amp; ops, e.g. Prim-type, Class/Interface<ul>
+<li><code>&lt;type&gt;</code>: allowed value &amp; ops, e.g. primitive / reference type<ul>
 <li>static/dynamic typing: compile/runtime type checking</li>
 </ul>
 </li>
-<li><code>null</code> literal: object unavailable marker (<code>instanceof</code> ==&gt; false)</li>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/closure#code-blocks" title="store temporary internal state, only visible inside the declaring block">local scope var</a> &amp; var shadow</li>
+<li><code>&lt;name&gt;</code>: descriptive ref of value (no keyword, UPPERCASE_CONST)</li>
+<li><code>&lt;value&gt;</code>: <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html" title="non-sharable, store in stack">literal</a> / <a href="" title="memory addr of obj, sharable, store in heap">reference</a><ul>
+<li><code>null</code> literal: obj unavailable marker (<code>instanceof</code> =&gt; false)</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/closure#code-blocks" title="store temporary internal state, only visible inside the declaring block">var scope</a> &amp; var shadow</li>
 </ul>
 <h1 id="Operator"><a href="#Operator" class="headerlink" title="Operator"></a>Operator</h1><ul>
-<li>string concat op;</li>
-<li>bitwise/bit shift ops <a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/bitwise-operators-in-java/">..</a></li>
+<li>comparison &amp; equality check ops =&gt; bool</li>
+<li>conditional op <code>?..:</code>, logical ops <code>! &amp;&amp; ||</code></li>
+<li>bitwise/bit shift ops <a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/bitwise-operators-in-java/">..</a>, op precedence &amp; <a target="_blank" rel="noopener" href="https://javascript.info/operators#assignment-returns-a-value">op return</a></li>
 </ul>
 <h1 id="Control-flow"><a href="#Control-flow" class="headerlink" title="Control flow"></a>Control flow</h1><ul>
-<li><code>if..else</code>, <code>switch</code> (block falls througth 贯穿==&gt; case group), <code>switch/case</code> arg:<ul>
-<li>in JS, can be any expr; value compare <code>===</code>;</li>
-<li>in Java, can only be <code>byte/short/int/char</code> &amp; their wrapper, <code>String</code> &amp; <code>enum</code></li>
+<li><code>if..else</code>, <code>switch</code> (block falls througth 贯穿 ==&gt; case group)<ul>
+<li><code>switch/case</code> arg: in JS, can be any expr, value compare <code>===</code>; <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html">working types in Java</a></li>
 </ul>
 </li>
 <li><code>while</code> &amp; <code>do..while</code>, <code>for</code> &amp;  <code>for..of</code> (JS) &amp; <code>for..:</code> (Java)</li>
 <li><code>break</code>/<code>continue</code> (non-expr in JS, not in <code>?..</code>) &amp; <strong>label</strong></li>
 </ul>
+<h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><p><strong>Fn basics</strong> <a target="_blank" rel="noopener" href="https://javascript.info/function-basics">..</a></p>
+<ul>
+<li>fn naming …</li>
+<li>fn-param: declare in fn(..) &amp; init when fn-call by <strong>args</strong><ul>
+<li>pass args to fn: copy value to fn-params (use as a local var in fn-body, change not seen outside, default value)</li>
+<li>pass method to fn: callback fn, lambda expr</li>
+<li>rest param: <code>fn(.., ...arr)</code> &amp; <code>method(.., int... arr)</code></li>
+</ul>
+</li>
+<li>local var “shadow” outer var, global var</li>
+<li>return: default return <code>undefined</code> / <code>null</code> , <code>(...)</code> for mtp-line value</li>
+</ul>
 <h1 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h1><ul>
 <li><code>arr.length</code>, <code>arr[i]</code></li>
 <li><code>186****5678</code>: <code>fill(..)</code></li>
-<li>sort: 冒泡排序(每轮两两比较，大的往后放)，直接选择排序（每轮找将前n个元素里的最大值并将其放在length-n的位置；[p83]</li>
 </ul>
 <h1 id="String"><a href="#String" class="headerlink" title="String"></a>String</h1><ul>
+<li>immutable, concat op <code>+</code></li>
 <li>get info: <code>charAt(i)</code>, <code>indexOf()</code>, <code>starts/endsWith()</code>, <code>contains()</code>; </li>
-<li>modify str: <code>replace()</code>, <code>split()</code>, rm space：<code>trim()</code>, <code>replaceAll(&quot;\\s&quot;, &quot;&quot;)</code></li>
+<li>modify: <code>replace()</code>, <code>split()</code>, <code>substr()</code>, rm space：<code>trim()</code>, <code>replaceAll(&quot;\\s&quot;, &quot;&quot;)</code></li>
 </ul>
-<h1 id="Object-oriented"><a href="#Object-oriented" class="headerlink" title="Object-oriented"></a>Object-oriented</h1><ul>
+<h1 id="Obj-oriented"><a href="#Obj-oriented" class="headerlink" title="Obj-oriented"></a>Obj-oriented</h1><ul>
 <li>OOP 3大基本特性: 封装，继承，多态 (一种定义，多种实现)</li>
 </ul>
-<p>Class &amp; Inheritance</p>
+<p>Class</p>
 <ul>
-<li><code>class</code> &amp; <strong>object</strong> (prototype &amp; instance) member: <strong>field</strong> (state) &amp; <strong>method</strong> (behavior), nested type;</li>
-<li><strong>constructor</strong> &amp; <code>new</code> op, <code>obj.member</code>; <code>this(..)</code> &amp; <code>this.member</code>; </li>
-<li><code>static</code> method: no access to instance members, no <code>this</code></li>
-<li>fn param: declare in fn(…) &amp; init when fn-call with value of <strong>arg</strong><ul>
-<li>pass args to fn: copy value to fn params (like a local var in fn-body)</li>
-<li>pass method to fn: callback fn, lambda expr</li>
-<li>rest param:     <code>fn(.., ...arr)</code> &amp; <code>method(.., int... arr)</code></li>
+<li><p>class &amp; obj: prototype &amp; instance </p>
+</li>
+<li><p>class member: <strong>field</strong> (value of state) &amp; <strong>method</strong> (implementation of behavior), nested type;</p>
+</li>
+<li><p><strong>constructor</strong> &amp; <code>new</code> op, <code>obj.&lt;member&gt;</code>; <code>this(..)</code> &amp; <code>this.&lt;member&gt;</code>; </p>
+</li>
+<li><p><code>static</code> method: no access to instance members, no <code>this</code></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html">Enum</a>: a fixed set of consts</p>
+</li>
+</ul>
+<p>Inheritance</p>
+<ul>
+<li><code>extends</code>, <code>super</code>; method/constructor &amp; fields override </li>
+<li>call <code>super(..)</code> in child.con(): <ul>
+<li>JS uses parent.con() to create &amp; init <code>this</code> for child instance when <code>new</code> <a target="_blank" rel="noopener" href="https://javascript.info/class-inheritance#overriding-constructor">..</a></li>
+<li>In JS, call parent.con() in child class, parent.con uses parent field value, not the overridden one in child class <a target="_blank" rel="noopener" href="https://javascript.info/class-inheritance#overriding-class-fields-a-tricky-note">..</a></li>
 </ul>
 </li>
-<li><code>extends</code>, <code>super</code>; method override <ul>
-<li>call <code>super(..)</code> in child.con(): instanciate parent obj bf child-obj to init intance vars of super </li>
-<li><code>super()</code> called implicitly (Object has a empty con()), but <code>super(..)</code> need to called explicitly [p159]</li>
-</ul>
-</li>
+<li><code>super()</code> called implicitly (Object has a empty con()), call <code>super(..)</code> explicitly [p159]</li>
 <li><code>instanceof</code> op</li>
-<li><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html">Enum</a>: a fixed set of consts</li>
 </ul>
-<p><a href="%22jsinfo%22">GC</a></p>
-<ul>
-<li>value reachablity: roots &amp; ref chain</li>
-<li>garbage collection: <strong>mark-sweep</strong> algorithm</li>
-<li>manually drop ref by set to <code>null</code></li>
+<p><a target="_blank" rel="noopener" href="https://javascript.info/garbage-collection">GC</a>: manually drop ref by <code>null</code></p>
+<h1 id="Refs"><a href="#Refs" class="headerlink" title="Refs"></a>Refs</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/TOC.html">Oracle Java Tut</a> &amp; <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/index.html">Javase 8 API</a></li>
+<li>《Java 从入门到精通》(项目案例版) 2017.9</li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/">javascript.info</a></li>
 </ul>
-<h1 id="Refs"><a href="#Refs" class="headerlink" title="Refs"></a>Refs</h1><p><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/TOC.html">Oracle Java Tut</a><br><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/index.html">Javase 8 API</a><br>《Java 从入门到精通》(项目案例版) 2017.9<br><a target="_blank" rel="noopener" href="https://javascript.info/">javascript.info</a></p>
 
       </div>
       

@@ -161,7 +161,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">11</span></a>
+    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">10</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -235,7 +235,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -801,7 +801,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-04 20:22:17" itemprop="dateModified" datetime="2020-09-04T20:22:17+10:00">2020-09-04</time>
+        <time title="Modified: 2020-09-10 14:05:09" itemprop="dateModified" datetime="2020-09-10T14:05:09+10:00">2020-09-10</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -831,8 +831,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Value of state (member var / field) &amp; implementation of behavior (member fn / method)</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">F</span> </span>&#123;</span><br><span class="line">  [<span class="keyword">static</span>] field = ..; <span class="comment">// new feature, access field in method by: `this.xxx`</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(..) &#123; <span class="comment">/*..*/</span> &#125;</span><br><span class="line">  </span><br><span class="line">  [<span class="keyword">static</span>] method() &#123; <span class="comment">/*..*/</span> &#125; </span><br><span class="line">  [get/set] method(..) &#123; <span class="comment">/*..*/</span> &#125;</span><br><span class="line">  [expr]() &#123; <span class="comment">/*..*/</span> &#125; <span class="comment">// computed name</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">F</span> </span>&#123;</span><br><span class="line">  [<span class="keyword">static</span>] field = ..; <span class="comment">// new feature, access field in method by: `this.xxx`</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(..) &#123; <span class="comment">/*..*/</span> &#125;</span><br><span class="line">  </span><br><span class="line">  [<span class="keyword">static</span>] method() &#123; <span class="comment">/*..*/</span> &#125; </span><br><span class="line">  [get/set] method(..) &#123; <span class="comment">/*..*/</span> &#125;</span><br><span class="line">  [expr]() &#123; <span class="comment">/*..*/</span> &#125; <span class="comment">// computed name</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h1><ul>
 <li><p><code>static</code></p>
 <ul>
@@ -847,7 +846,7 @@
 <li><strong>read-only prop</strong>: only getter no setter (set value on con)</li>
 </ul>
 </li>
-<li><p>(non-constructor) method access <code>this</code> require bind — 2 syntax to bind method with field</p>
+<li><p>(non-constructor) method access <code>this</code> require bind — 2 syntax to bind method with field <a target="_blank" rel="noopener" href="https://javascript.info/class#making-bound-methods-with-class-fields">..</a></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.xxx = <span class="built_in">this</span>.xxx.bind(<span class="built_in">this</span>); <span class="comment">// bind existing method in constructor </span></span><br><span class="line">xxx = <span class="function">() =&gt;</span> &#123;..&#125; <span class="comment">// take &quot;this&quot; from outside in class scope (&quot;this&quot; = obj)</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>task — <a target="_blank" rel="noopener" href="https://javascript.info/class#rewrite-to-class">class Clock</a></p>
@@ -1346,159 +1345,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://stephen-chan255.github.io/blog/2020/05/24/js-function/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/apple-touch-icon-next.png">
-      <meta itemprop="name" content="Stephen Chan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Stephen's notes">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/05/24/js-function/" class="post-title-link" itemprop="url">JavaScript Functions</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2020-05-24 14:20:55" itemprop="dateCreated datePublished" datetime="2020-05-24T14:20:55+10:00">2020-05-24</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-04 20:22:18" itemprop="dateModified" datetime="2020-09-04T20:22:18+10:00">2020-09-04</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/IT/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/IT/Programming/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Function-creation"><a href="#Function-creation" class="headerlink" title="Function creation"></a>Function creation</h1><ul>
-<li><strong>fn declaration</strong>: block-level if strict, def-hoisting <a target="_blank" rel="noopener" href="https://javascript.info/function-expressions#function-expression-vs-function-declaration">..</a><ul>
-<li><code>function</code> in JS means start of fn-dec (require a name &amp; cannot be called immedeately) <a target="_blank" rel="noopener" href="https://javascript.info/var#iife">..</a></li>
-</ul>
-</li>
-<li><strong>fn-expr</strong>: easy dynamic def <a target="_blank" rel="noopener" href="https://javascript.info/function-expressions#function-expression-vs-function-declaration">..</a><ul>
-<li><em>anonymous</em> as callback fns</li>
-</ul>
-</li>
-<li><strong>arrow-fn</strong> (see chapter JS object)</li>
-<li><code>new Function([params: ...strs], body: str)</code>: create fn dynamically, e.g. from server<ul>
-<li><code>[[Environment]]</code>(see below) -&gt; global LE (not the outer one)</li>
-</ul>
-</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://javascript.info/function-basics">Funtion basics</a></p>
-<ul>
-<li>fn naming …</li>
-<li>local var “shadow” outer var, global var</li>
-<li>param: value copy to local var, change not seen outside, default <code>undefined</code></li>
-<li>return: default return <code>undefined</code>, <code>(...)</code> for mtp-line value</li>
-</ul>
-<h1 id="Advanced-Var-scope-Lexical-Environment-amp-Closure"><a href="#Advanced-Var-scope-Lexical-Environment-amp-Closure" class="headerlink" title="Advanced: Var scope, Lexical Environment &amp; Closure"></a>Advanced: Var scope, Lexical Environment &amp; Closure</h1><p><code>let</code> / <code>const</code> var scope: <a href="" title="only visible inside the block where declared">block-local</a>, <a target="_blank" rel="noopener" href="https://javascript.info/destructuring-assignment#the-rest-pattern" title="plain code block to group stmts">{..}</a></p>
-<p><a target="_blank" rel="noopener" href="https://javascript.info/closure#lexical-environment" title="internal obj assoc with blocks, create when run">Lexical Environment (LE)</a> = <a href="" title="obj with props of all local vars &amp; `this` info, work with var === work with LE.props">Environment Record</a> + <a href="" title="ref to outer LE where it delcared">outer-ref</a></p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/closure#step-3-inner-and-outer-lexical-environment" title="{param: arg &amp; locar-var: xxx}">fn.LE</a> &amp; <a href="" title="assoc to the whole script, inc. global var / fn, ref to null">global LE</a> </li>
-<li>access var through <strong>LE chain</strong> (inner-outer) <a target="_blank" rel="noopener" href="https://javascript.info/closure#step-3-inner-and-outer-lexical-environment">..</a> </li>
-<li>updated on the LE it lives <a target="_blank" rel="noopener" href="https://javascript.info/closure#step-4-returning-a-function">..</a></li>
-</ul>
-<p>When code block starts execution (bf any inner code running), LE pre-populated with: <a target="_blank" rel="noopener" href="https://javascript.info/closure#step-1-variables">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/closure#is-variable-visible">..</a></p>
-<ul>
-<li><code>let-declared-var: &lt;uninitialized&gt;</code> (unusable until <code>let</code> run: “dead zone” ==&gt; ReferenceError <a target="_blank" rel="noopener" href="https://javascript.info/closure#is-variable-visible">..</a>)</li>
-<li><code>fn-declaration-fn: function</code> (instantly fully init: ready-to-use)</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://javascript.info/closure#step-4-returning-a-function">Closure</a> — a fn that remembers its outer vars and can access them, e.g. return a fn (as obj prop / fn itself) <a target="_blank" rel="noopener" href="https://javascript.info/closure#nested-functions">..</a></p>
-<ul>
-<li>fn remember outer LE by hidden prop <code>[[Environment]]</code>: fn.[[Environment]] = outerLE</li>
-<li>when outerFn run — new outerFn.LE created &amp; new nestedFn created, and nestedFn.[[Environment]] = outerFn.LE (set once &amp; forever)<ul>
-<li>so outerFn.LE still reachable (by nested fn) af fn call completion, so not GC <a target="_blank" rel="noopener" href="https://javascript.info/closure#garbage-collection">..</a></li>
-<li>call outerFn mtp times ==&gt; diff outerFn.LE &amp; nestedFn created ==&gt; nestedFn independent <a target="_blank" rel="noopener" href="https://javascript.info/closure#are-counters-independent">..</a></li>
-</ul>
-</li>
-<li>when nestedFn run — new nestedFn.LE created &amp; nestedFn.LE -&gt; parentFn.LE (ref value taken from [[Environment]])</li>
-</ul>
-<p>Task — <a target="_blank" rel="noopener" href="https://javascript.info/closure#counter-object">Counter object</a>, <a target="_blank" rel="noopener" href="https://javascript.info/closure#sum-with-closures">Sum with closures</a>, <a target="_blank" rel="noopener" href="https://javascript.info/closure#filter-through-function">Filter through function</a>, <a target="_blank" rel="noopener" href="https://javascript.info/closure#sort-by-field">Sort by field</a>, <a target="_blank" rel="noopener" href="https://javascript.info/closure#army-of-functions">Army of functions</a></p>
-<h1 id="Programming-pattern"><a href="#Programming-pattern" class="headerlink" title="Programming pattern"></a>Programming pattern</h1><h2 id="Function-decorator"><a href="#Function-decorator" class="headerlink" title="Function decorator"></a>Function decorator</h2><p>A fn-wrapper that takes another fn (pass as callback fn) and alters its behavior (sep dec with origin-fn) <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#transparent-caching">..</a></p>
-<ul>
-<li>fn.props not wrapped by default <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#decorators-and-function-properties">..</a></li>
-<li>tasks — <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#spy-decorator">Spy decorator</a>, <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#delaying-decorator">Delaying decorator</a>, <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#debounce-decorator">Debounce decorator</a>, </li>
-</ul>
-<h2 id="Recursion-amp-execution-context-stack"><a href="#Recursion-amp-execution-context-stack" class="headerlink" title="Recursion &amp; execution context stack"></a>Recursion &amp; execution context stack</h2><ul>
-<li><p><a target="_blank" rel="noopener" href="https://javascript.info/recursion">recursion</a> = <strong>base</strong> (get result without nest calls) &amp; <strong>recursive step</strong> <a target="_blank" rel="noopener" href="https://javascript.info/recursion#two-ways-of-thinking">..</a></p>
-<ul>
-<li><a href="" title="store info about the exe of currently running fn">execution context and stack</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#two-ways-of-thinking" title="max # of nested fn calls, inc 1st one (i.e. max # of context in the stack), limited by JS engine">recursion depth</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#sum-all-numbers-till-the-given-one" title="recur-call in last line (most JS engineer not support)">tail call optimization</a></li>
-</ul>
-</li>
-<li><p><strong>recursive vs iterative</strong> <a target="_blank" rel="noopener" href="https://javascript.info/recursion#the-exit">..</a></p>
-<ul>
-<li>recursive: <a href="" title="nested calls and execution stack management [taks1]">take resrcs</a> but <a href="" title="`shorter`  &amp; more understndable in recursive traversals">simpler code</a></li>
-<li>iterative: <a target="_blank" rel="noopener" href="https://javascript.info/recursion#the-exit" title="single context, changing var in the process, small fixed memory usage">memory-saving</a></li>
-</ul>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://javascript.info/recursion#recursive-structures">recursive structure</a> — linked list: <code>node = &#123;value, next -&gt; node2 / null&#125;</code> </p>
-</li>
-<li><p>task — <a target="_blank" rel="noopener" href="https://javascript.info/recursion#sum-all-numbers-till-the-given-one">Sum 1..n</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#output-a-single-linked-list">Print list</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#output-a-single-linked-list-in-the-reverse-order">Print list revresely</a></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fib</span>(<span class="params">n</span>) </span>&#123; <span class="comment">// [task 3]</span></span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">let</span> b = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    [a, b] = [b, a + b] <span class="comment">// same as &quot;int c=a+b, a=b, b=c&quot; in Java</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://stephen-chan255.github.io/blog/2020/05/20/js-miscellaneous/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1534,7 +1380,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-04 20:22:18" itemprop="dateModified" datetime="2020-09-04T20:22:18+10:00">2020-09-04</time>
+        <time title="Modified: 2020-09-20 13:46:38" itemprop="dateModified" datetime="2020-09-20T13:46:38+10:00">2020-09-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1571,6 +1417,7 @@
 <li>no way to cancel once enter strict mode</li>
 </ul>
 </li>
+<li>non-strict: assignment to non-existing var (without declear) ==&gt; create a new global var (for compatibility) <a target="_blank" rel="noopener" href="https://javascript.info/closure#step-3-inner-and-outer-lexical-environment">..</a></li>
 </ul>
           <!--noindex-->
             <div class="post-button">
@@ -1596,11 +1443,108 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://stephen-chan255.github.io/blog/2020/05/18/js-basics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/apple-touch-icon-next.png">
+      <meta itemprop="name" content="Stephen Chan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stephen's notes">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2020/05/18/js-basics/" class="post-title-link" itemprop="url">js basics</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-05-18 23:34:08" itemprop="dateCreated datePublished" datetime="2020-05-18T23:34:08+10:00">2020-05-18</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-09-20 13:35:58" itemprop="dateModified" datetime="2020-09-20T13:35:58+10:00">2020-09-20</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/IT/" itemprop="url" rel="index"><span itemprop="name">IT</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/IT/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/IT/Programming/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+        </span>
+    </span>
 
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="extend next" rel="next" href="/blog/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Var-Data-types-amp-Ops"><a href="#Var-Data-types-amp-Ops" class="headerlink" title="Var, Data types &amp; Ops"></a>Var, Data types &amp; Ops</h1><h2 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h2><ul>
+<li><code>let</code>, <code>const</code>: <a target="_blank" rel="noopener" href="https://javascript.info/destructuring-assignment#the-rest-pattern" title="plain code block to group stmts">block</a> scope <a target="_blank" rel="noopener" href="https://javascript.info/closure">..</a> — <a href="" title="fn/global scope; dec hoist/raise, allow redec(latter ignored)">the old “var”</a> &amp; <a href="" title="immediately-invoked fn-expr">IIFE</a></li>
+</ul>
+<h2 id="Data-types"><a href="#Data-types" class="headerlink" title="Data types"></a>Data types</h2><ul>
+<li><strong>dynamic typed</strong>, <a href="" title="num/bigInt, str, bool, null/undefined, obj/symbol">7+1</a> basic data types</li>
+<li><code>typeof</code> =&gt; <strong>lowercase str</strong>, e.g. <code>null</code>: “object”, <code>alert</code>: “function” <a target="_blank" rel="noopener" href="https://javascript.info/types#type-typeof">..</a></li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blog/2020/05/18/js-basics/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+
+  
 
 
 

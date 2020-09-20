@@ -2952,6 +2952,7 @@ mark.search-keyword {
 }
 .post-body code {
   background: #f5f2f0;
+  font-size: 1em;
   color: #000;
 }
 .post-body a:not(.btn) {

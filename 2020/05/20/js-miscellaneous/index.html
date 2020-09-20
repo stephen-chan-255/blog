@@ -30,7 +30,7 @@
 <meta property="og:description" content="‘use strict’To enable ES5 modification for old features (may break old code)  off by default — always put &#39;use script&#39; on top of script&#x2F;fn-body auto enable for class &amp; module no way to can">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-05-20T09:08:31.000Z">
-<meta property="article:modified_time" content="2020-09-04T10:22:18.113Z">
+<meta property="article:modified_time" content="2020-09-20T03:46:38.442Z">
 <meta property="article:author" content="Stephen Chan">
 <meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
@@ -166,7 +166,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">11</span></a>
+    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">10</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -225,7 +225,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E2%80%98use-strict%E2%80%99"><span class="nav-number">1.</span> <span class="nav-text">‘use strict’</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Error-handling"><span class="nav-number">2.</span> <span class="nav-text">Error handling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Generator"><span class="nav-number">3.</span> <span class="nav-text">Generator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS-engine-internal"><span class="nav-number">4.</span> <span class="nav-text">JS engine internal</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-loop-microtasks-and-macrotasks"><span class="nav-number">4.1.</span> <span class="nav-text">Event loop: microtasks and macrotasks</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code-quality"><span class="nav-number">5.</span> <span class="nav-text">Code quality</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other-concepts-amp-Resources"><span class="nav-number">6.</span> <span class="nav-text">Other concepts &amp; Resources</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E2%80%98use-strict%E2%80%99"><span class="nav-number">1.</span> <span class="nav-text">‘use strict’</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Error-handling"><span class="nav-number">2.</span> <span class="nav-text">Error handling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Generator"><span class="nav-number">3.</span> <span class="nav-text">Generator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS-engine-internal"><span class="nav-number">4.</span> <span class="nav-text">JS engine internal</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-loop-microtasks-and-macrotasks"><span class="nav-number">4.1.</span> <span class="nav-text">Event loop: microtasks and macrotasks</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Programming-pattern"><span class="nav-number">5.</span> <span class="nav-text">Programming pattern</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code-quality"><span class="nav-number">6.</span> <span class="nav-text">Code quality</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other-concepts-amp-Resources"><span class="nav-number">7.</span> <span class="nav-text">Other concepts &amp; Resources</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -241,7 +241,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -350,7 +350,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-04 20:22:18" itemprop="dateModified" datetime="2020-09-04T20:22:18+10:00">2020-09-04</time>
+        <time title="Modified: 2020-09-20 13:46:38" itemprop="dateModified" datetime="2020-09-20T13:46:38+10:00">2020-09-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -387,6 +387,7 @@
 <li>no way to cancel once enter strict mode</li>
 </ul>
 </li>
+<li>non-strict: assignment to non-existing var (without declear) ==&gt; create a new global var (for compatibility) <a target="_blank" rel="noopener" href="https://javascript.info/closure#step-3-inner-and-outer-lexical-environment">..</a></li>
 </ul>
 <a id="more"></a>
 
@@ -459,6 +460,28 @@
 </li>
 <li><a target="_blank" rel="noopener" href="https://javascript.info/event-loop#summary">cpu-heavy event &amp; web worker: another thread</a></li>
 </ul>
+<ul>
+<li><code>new Function([...params], body)</code>: create fn dynamically at run time <a target="_blank" rel="noopener" href="https://javascript.info/new-function">..</a></li>
+</ul>
+<h1 id="Programming-pattern"><a href="#Programming-pattern" class="headerlink" title="Programming pattern"></a>Programming pattern</h1><p><strong>Fn decorator</strong> <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators">..</a></p>
+<ul>
+<li>fn-wrapper that takes fn as param (callback) and alters its behavior</li>
+<li>tasks: <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#spy-decorator">Spy decorator</a>, <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#delaying-decorator">Delaying decorator</a>, <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#debounce-decorator">Debounce decorator</a>, </li>
+</ul>
+<p><strong>Recursion</strong> <a target="_blank" rel="noopener" href="https://javascript.info/recursion">..</a></p>
+<ul>
+<li><strong>base</strong> (get result without nest calls) &amp; <strong>recursive step</strong><ul>
+<li><a href="" title="store info about the exe of currently running fn">execution context and stack</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#two-ways-of-thinking" title="max # of nested fn calls, inc 1st one (i.e. max # of context in the stack), limited by JS engine">recursion depth</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#sum-all-numbers-till-the-given-one" title="recur-call in last line (most JS engine not support)">tail call optimization</a></li>
+</ul>
+</li>
+<li><strong>recursive vs iterative</strong> <a target="_blank" rel="noopener" href="https://javascript.info/recursion#the-exit">..</a><ul>
+<li>recursive: <a href="" title="nested calls and execution stack management [taks1]">take resrcs</a> but <a href="" title="`shorter` &amp; more understndable">simpler code</a></li>
+<li>iterative: <a target="_blank" rel="noopener" href="https://javascript.info/recursion#the-exit" title="single context, changing var in the process, small fixed memory usage">memory-saving</a></li>
+</ul>
+</li>
+<li>recursive structure &amp; linked list: <code>node = &#123;value, next -&gt; node2 / null&#125;</code> </li>
+<li>task: <a target="_blank" rel="noopener" href="https://javascript.info/recursion#fibonacci-numbers">Fib numbers</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#sum-all-numbers-till-the-given-one">Sum 1..n</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#output-a-single-linked-list">Print list</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#output-a-single-linked-list-in-the-reverse-order">Print list revresely</a></li>
+</ul>
 <h1 id="Code-quality"><a href="#Code-quality" class="headerlink" title="Code quality"></a>Code quality</h1><ul>
 <li><a target="_blank" rel="noopener" href="https://javascript.info/coding-style">Coding style &amp; linters</a></li>
 <li><a target="_blank" rel="noopener" href="https://javascript.info/comments">Comments &amp; JSDoc</a></li>
@@ -489,13 +512,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/blog/2020/05/18/js-var-datatype/" rel="prev" title="JavaScript Variables, Data types & Operators">
-                  <i class="fa fa-chevron-left"></i> JavaScript Variables, Data types & Operators
+                <a href="/blog/2020/05/18/js-basics/" rel="prev" title="js basics">
+                  <i class="fa fa-chevron-left"></i> js basics
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/blog/2020/05/24/js-function/" rel="next" title="JavaScript Functions">
-                  JavaScript Functions <i class="fa fa-chevron-right"></i>
+                <a href="/blog/2020/05/24/js-object/" rel="next" title="JavaScript Objects & Symbols, Arrow function">
+                  JavaScript Objects & Symbols, Arrow function <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
