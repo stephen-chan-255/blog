@@ -30,7 +30,7 @@
 <meta property="og:description" content="Var, Data types &amp; OpsVariables let, const: block scope .. — the old “var” &amp; IIFE  Data types dynamic typed, 7+1 basic data types typeof &#x3D;&gt; lowercase str, e.g. null: “object”, alert: “functi">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-05-18T13:34:08.000Z">
-<meta property="article:modified_time" content="2020-09-20T03:35:58.307Z">
+<meta property="article:modified_time" content="2020-09-21T09:30:41.462Z">
 <meta property="article:author" content="Stephen Chan">
 <meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
@@ -166,7 +166,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">10</span></a>
+    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">9</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -225,7 +225,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Var-Data-types-amp-Ops"><span class="nav-number">1.</span> <span class="nav-text">Var, Data types &amp; Ops</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Variables"><span class="nav-number">1.1.</span> <span class="nav-text">Variables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-types"><span class="nav-number">1.2.</span> <span class="nav-text">Data types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ops"><span class="nav-number">1.3.</span> <span class="nav-text">Ops</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Function"><span class="nav-number">2.</span> <span class="nav-text">Function</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Var-Data-types-amp-Ops"><span class="nav-number">1.</span> <span class="nav-text">Var, Data types &amp; Ops</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Variables"><span class="nav-number">1.1.</span> <span class="nav-text">Variables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-types"><span class="nav-number">1.2.</span> <span class="nav-text">Data types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ops"><span class="nav-number">1.3.</span> <span class="nav-text">Ops</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Function"><span class="nav-number">2.</span> <span class="nav-text">Function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Obj-Symbol-Arrow-Fn"><span class="nav-number">3.</span> <span class="nav-text">Obj, Symbol, Arrow Fn</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol"><span class="nav-number">3.1.</span> <span class="nav-text">Symbol</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Methods-amp-%E2%80%9Cthis%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">Methods &amp; “this”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Global-obj"><span class="nav-number">3.3.</span> <span class="nav-text">Global obj</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Obj-amp-Fn"><span class="nav-number">4.</span> <span class="nav-text">Obj &amp; Fn</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Arrow-fn"><span class="nav-number">4.1.</span> <span class="nav-text">Arrow fn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Constructor-fn"><span class="nav-number">4.2.</span> <span class="nav-text">Constructor fn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fn-is-obj"><span class="nav-number">4.3.</span> <span class="nav-text">Fn is obj</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced"><span class="nav-number">4.4.</span> <span class="nav-text">Advanced</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -241,7 +241,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -350,7 +350,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-20 13:35:58" itemprop="dateModified" datetime="2020-09-20T13:35:58+10:00">2020-09-20</time>
+        <time title="Modified: 2020-09-21 19:30:41" itemprop="dateModified" datetime="2020-09-21T19:30:41+10:00">2020-09-21</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -453,6 +453,129 @@
 </li>
 <li>run nestedFn: new nestedFn.LE created &amp; <code>nestedFn.LE -&gt; outerFn.LE</code> (ref value taken from [[Env..]])</li>
 <li>Task: <a target="_blank" rel="noopener" href="https://javascript.info/closure#counter-object">Counter object</a>, <a target="_blank" rel="noopener" href="https://javascript.info/closure#sum-with-closures">Sum with closures</a>, <a target="_blank" rel="noopener" href="https://javascript.info/closure#filter-through-function">Filter through function</a>, <a target="_blank" rel="noopener" href="https://javascript.info/closure#sort-by-field">Sort by field</a>, <a target="_blank" rel="noopener" href="https://javascript.info/closure#army-of-functions">Army of functions</a></li>
+</ul>
+<h1 id="Obj-Symbol-Arrow-Fn"><a href="#Obj-Symbol-Arrow-Fn" class="headerlink" title="Obj, Symbol, Arrow Fn"></a>Obj, Symbol, Arrow Fn</h1><p><strong>Obj</strong>: keyed values collection</p>
+<ul>
+<li>key type: str || symbol (see below), value: any type (except “__proto__” prop)<ul>
+<li>key can be reserved word, non-str/symbol key ==&gt; toString <a target="_blank" rel="noopener" href="https://javascript.info/object#property-names-limitations">..</a></li>
+<li>key existence test: <code>in</code> op &amp; optional chaining syntax <code>?.</code>  (check for <code>null/undefined</code>, shorter than <code>&amp;&amp;</code>)</li>
+<li>key iterate: <code>for..in</code> loop &amp; prop order ..</li>
+</ul>
+</li>
+<li>value access: <code>obj.prop</code> (var-naming style, no space) vs <code>obj[&quot;prop&quot;]</code><ul>
+<li>prop add/set: <code>obj.prop = xxx</code>, delete: <code>delete obj.prop</code></li>
+</ul>
+</li>
+<li>computed prop, prop value shorthand</li>
+<li>Obj copy-/compare by-ref<ul>
+<li>clone by <code>&#123;...obj&#125;</code> (same as <code>Object.assign(desc, ...srcs)</code>, obj-prop still same ref)</li>
+<li>deep cloning by <code>for..in</code> loop <a target="_blank" rel="noopener" href="https://javascript.info/object-copy#cloning-and-merging-object-assign">..</a> &amp; <code>typeof</code></li>
+</ul>
+</li>
+<li>tasks: <a target="_blank" rel="noopener" href="https://javascript.info/object#ordered-like-an-object">Check for emptiness</a></li>
+</ul>
+<!-- more -->
+
+<h2 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h2><p>unique id for obj prop <a target="_blank" rel="noopener" href="https://javascript.info/types#objects-and-symbols">..</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> id = <span class="built_in">Symbol</span>([description]);</span><br><span class="line"><span class="built_in">Symbol</span>(<span class="string">&quot;id&quot;</span>) !== <span class="built_in">Symbol</span>(<span class="string">&quot;id&quot;</span>);</span><br><span class="line"></span><br><span class="line">alert(<span class="built_in">Symbol</span>(<span class="string">&quot;id&quot;</span>));    <span class="comment">// TypeError (not auto-convert to string)</span></span><br><span class="line">alert(id.toString()); 	<span class="comment">// Symbol(id)</span></span><br><span class="line">alert(id.description);  <span class="comment">// id</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Global symbols</strong>: <code>Symbol.for(desc)</code> &amp; <code>Symbol.keyFor(globalSym)</code> =&gt; “desc” or undefined</li>
+<li><strong>Symbol as obj key</strong>: <ul>
+<li>skip in <code>for..in</code> loop  &amp; <code>Object.keys(obj)</code> (looks like non-emutable)</li>
+<li>get by <code>Object.getOwnPropertySymbols(obj)</code> <a target="_blank" rel="noopener" href="https://javascript.info/prototype-methods#summary">..</a></li>
+<li>in <code>Object.assign()</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="Methods-amp-“this”"><a href="#Methods-amp-“this”" class="headerlink" title="Methods &amp; “this”"></a>Methods &amp; “this”</h2><ul>
+<li>method def: fn-expr shorthand || copy from fn <a target="_blank" rel="noopener" href="https://javascript.info/object-methods#method-examples">..</a></li>
+<li><code>this</code> in fn not bound, value evaluate at run-time — <a target="_blank" rel="noopener" href="https://javascript.info/bind#losing-this" title="obj method passed around &amp; called in another context">losing “this” problem</a><ul>
+<li>call fn with obj (“this” in methods): <code>this=obj</code> <a target="_blank" rel="noopener" href="https://javascript.info/object-methods#this-in-methods">..</a></li>
+<li>call fn without obj (as fn itself) <a target="_blank" rel="noopener" href="https://javascript.info/object-methods#this-is-not-bound">..</a><ul>
+<li><code>this=undefined</code> if strict &amp; <code>arr.forEach(fn)</code> <a target="_blank" rel="noopener" href="https://javascript.info/arrow-functions#arrow-functions-have-no-this">..</a></li>
+<li><code>this=window</code> if non-strict &amp; <code>setTimeout(fn, ms)</code> <a target="_blank" rel="noopener" href="https://javascript.info/bind#losing-this">..</a>, <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#delaying-decorator">..</a></li>
+</ul>
+</li>
+<li>tasks: <a target="_blank" rel="noopener" href="https://javascript.info/object-methods#using-this-in-object-literal">Using “this” in object literal</a>, <a target="_blank" rel="noopener" href="https://javascript.info/object-methods#create-a-calculator">calculator</a>, <a target="_blank" rel="noopener" href="https://javascript.info/object-methods#create-a-calculator">Chaining</a></li>
+</ul>
+</li>
+<li>bind “this”: <ul>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/bind#solution-2-bind">fn binding</a>: <code>let boundFn = fn.bind(context, [...startingArgs])</code><ul>
+<li><code>this=context</code>, starting args &amp; partial <a target="_blank" rel="noopener" href="https://javascript.info/bind#partial-functions">..</a>)</li>
+<li><code>context</code> bound <a target="_blank" rel="noopener" href="https://javascript.info/bind#bound-function-as-a-method" title="use pre-bound context value (even bound obj changes later), so cannot re-bound">hard-fixed</a></li>
+<li>partial without context <a target="_blank" rel="noopener" href="https://javascript.info/bind#going-partial-without-context">..</a></li>
+<li>tasks: <a target="_blank" rel="noopener" href="https://javascript.info/bind#bound-function-as-a-method">Bound fn in method</a>, <a target="_blank" rel="noopener" href="https://javascript.info/bind#second-bind">re-bound ignored</a>, <a target="_blank" rel="noopener" href="https://javascript.info/bind#function-property-after-bind">Fn prop lost af bind</a>, <a target="_blank" rel="noopener" href="https://javascript.info/bind#fix-a-function-that-loses-this">method bind context in callbacks</a>, <a target="_blank" rel="noopener" href="https://javascript.info/bind#partial-application-for-login">Partial &amp; method</a></li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#func-apply" title="Passing all args context to another fn">call forwarding</a>: <code>fn.apply(context, args: arrLike)</code> (prefer) &amp; <code>fn.call(context, ...args);</code></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#method-borrowing" title="take a method from an obj and call it in the context of another obj">fn-borrowing</a>: <code>[].join.call(arguments);</code> in fn-body<ul>
+<li><code>arr.join()</code> allow arr-like (<code>arguments</code> here instead of <code>[]</code>) as <code>this</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Global-obj"><a href="#Global-obj" class="headerlink" title="Global obj"></a>Global obj</h2><p>Provide built-in var &amp; fn (can be access directly), e.g. <code>window</code> in browser &amp; <code>global</code> in node </p>
+<ul>
+<li>e.g. <code>window.alert</code>, <code>window.innerHeight</code></li>
+<li>global fn || <strong>var</strong>-var ==&gt; become props of global-obj (for compatibility)</li>
+<li>make value global: <code>window.xxx = ...</code></li>
+</ul>
+<h1 id="Obj-amp-Fn"><a href="#Obj-amp-Fn" class="headerlink" title="Obj &amp; Fn"></a>Obj &amp; Fn</h1><h2 id="Arrow-fn"><a href="#Arrow-fn" class="headerlink" title="Arrow fn"></a>Arrow fn</h2><p><code>(...args) =&gt; expr || &#123; ...body &#125; || (obj-litiral)</code> <a target="_blank" rel="noopener" href="https://javascript.info/array-methods#map-to-objects">..</a></p>
+<ul>
+<li>no own <code>this</code>, <code>super</code> <a target="_blank" rel="noopener" href="https://javascript.info/class-inheritance#overriding-a-method">..</a> &amp; <code>arguments</code> (to run small fn without leaving the current context, so no own context)<ul>
+<li>take <code>this</code> / <code>super</code> from outer LE, e.g. outer fn, cann’t run with <code>new</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="Constructor-fn"><a href="#Constructor-fn" class="headerlink" title="Constructor fn"></a>Constructor fn</h2><ul>
+<li>capital naming e.g. User</li>
+<li>set props &amp; methods <code>this.xxx = ...</code></li>
+<li>call by <code>new</code> op (execute “internal algorithm”)<ul>
+<li>return this ||  another obj (prim-return ignored)</li>
+<li>Constructor mode test: <code>new.target</code></li>
+</ul>
+</li>
+<li>singleton obj <code>new function() &#123; ... &#125;</code></li>
+</ul>
+<h2 id="Fn-is-obj"><a href="#Fn-is-obj" class="headerlink" title="Fn is obj"></a>Fn is obj</h2><p>Fn is a callable action (instead of data) obj, can ± props, pass by ref</p>
+<ul>
+<li>fn-def: store the fn-obj in the same named var, call by <code>fnName(...args)</code> ==&gt; callback fn <a target="_blank" rel="noopener" href="https://javascript.info/function-expressions">..</a></li>
+<li>Fn built-in props: <code>name</code> (str, “” for anonymous), <code>length</code> (param #, rest param not count)</li>
+<li>custom prop/helper method: <code>fnName.prop = ..</code></li>
+<li>Named Fn Expr (NFE): internal fn name (for internal ref only)</li>
+<li>tasks: <a target="_blank" rel="noopener" href="https://javascript.info/function-object#set-and-decrease-for-counter">Set and decrease for counter</a>, <a target="_blank" rel="noopener" href="https://javascript.info/function-object#sum-with-an-arbitrary-amount-of-brackets">Sum with an arbitrary amount of brackets</a></li>
+</ul>
+<h2 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h2><p><strong>Obj prop config</strong></p>
+<ul>
+<li>prop descriptor: <code>value</code> attr + 3 flags: <code>writable</code>, <code>enumerable</code>, <code>configurable</code> <a target="_blank" rel="noopener" href="https://javascript.info/property-descriptors">..</a><ul>
+<li>get/set desc: <code>Object.getOwnPropertyDescriptor()</code>, <code>Object.defineProperty()</code><ul>
+<li>obj created “the usually way”: flags default <code>true</code>; flags not supplied in desc defalut <code>false</code></li>
+</ul>
+</li>
+<li>built-in <code>toString()</code> non-enumerable</li>
+<li>Sealing an object globally ..</li>
+</ul>
+</li>
+</ul>
+<p><strong>Accessor props</strong><br><code>get/set propName([value]) &#123;..&#125;</code>, trigger when <code>propName</code> read/assign</p>
+<ul>
+<li>descriptors: <code>get/set([value]) &#123;..&#125;</code>, <code>enumerable</code>, <code>configurable</code></li>
+<li>smarter getter/setter: store value in another internal prop</li>
+</ul>
+<p><strong>Obj -&gt; primitive</strong></p>
+<ul>
+<li><a href="" title="which type to convert">3 hints</a>:  <code>&quot;string&quot;</code>, <code>&quot;number&quot;</code> &amp; <code>&quot;default&quot;</code> (no boolean hint: all <strong>obj  =&gt; true</strong>))</li>
+<li>3 methods: must return a prim value <a target="_blank" rel="noopener" href="https://javascript.info/object-toprimitive#return-types">..</a><ul>
+<li><code>[Symbol.toPrimitive](hint)</code> return obj ==&gt; err</li>
+<li>built-in <code>toString()</code> =&gt; “[object Object]”, <code>valueOf()</code> =&gt; obj itself (ignored) <a target="_blank" rel="noopener" href="https://javascript.info/object-toprimitive#tostring-valueof">..</a></li>
+</ul>
+</li>
+</ul>
+<p><strong>Primitive as Obj</strong><br>Use to op prim e.g.  <code>String</code>, <code>Number</code>, <code>Boolean</code>, <code>Symbol</code> but keep them fast &amp; lightweight </p>
+<ul>
+<li>temporary wrapper obj created &amp; destroyed <a target="_blank" rel="noopener" href="https://javascript.info/primitives-methods#a-primitive-as-an-object">..</a> ==&gt; manually modify obj wrap =&gt; err (strict) || undefined <a target="_blank" rel="noopener" href="https://javascript.info/primitives-methods#can-i-add-a-string-property">..</a></li>
+<li>obj wrapper constructor vs type convert fn <a target="_blank" rel="noopener" href="https://javascript.info/primitives-methods#a-primitive-as-an-object">..</a></li>
 </ul>
 
     </div>
