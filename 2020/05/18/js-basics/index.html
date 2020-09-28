@@ -24,13 +24,13 @@
 
   <meta name="description" content="Var, Data types &amp; OpsVariables let, const: block scope .. — the old “var” &amp; IIFE  Data types dynamic typed, 7+1 basic data types typeof &#x3D;&gt; lowercase str, e.g. null: “object”, alert: “functi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="js basics">
+<meta property="og:title" content="JavaScript basics">
 <meta property="og:url" content="https://stephen-chan255.github.io/blog/2020/05/18/js-basics/index.html">
 <meta property="og:site_name" content="Stephen&#39;s notes">
 <meta property="og:description" content="Var, Data types &amp; OpsVariables let, const: block scope .. — the old “var” &amp; IIFE  Data types dynamic typed, 7+1 basic data types typeof &#x3D;&gt; lowercase str, e.g. null: “object”, alert: “functi">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-05-18T13:34:08.000Z">
-<meta property="article:modified_time" content="2020-09-21T09:30:41.462Z">
+<meta property="article:published_time" content="2020-05-18T15:34:08.000Z">
+<meta property="article:modified_time" content="2020-09-28T05:09:53.071Z">
 <meta property="article:author" content="Stephen Chan">
 <meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>js basics | Stephen's notes</title>
+  <title>JavaScript basics | Stephen's notes</title>
   
 
 
@@ -166,7 +166,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">9</span></a>
+    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">8</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -225,7 +225,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Var-Data-types-amp-Ops"><span class="nav-number">1.</span> <span class="nav-text">Var, Data types &amp; Ops</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Variables"><span class="nav-number">1.1.</span> <span class="nav-text">Variables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-types"><span class="nav-number">1.2.</span> <span class="nav-text">Data types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ops"><span class="nav-number">1.3.</span> <span class="nav-text">Ops</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Function"><span class="nav-number">2.</span> <span class="nav-text">Function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Obj-Symbol-Arrow-Fn"><span class="nav-number">3.</span> <span class="nav-text">Obj, Symbol, Arrow Fn</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol"><span class="nav-number">3.1.</span> <span class="nav-text">Symbol</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Methods-amp-%E2%80%9Cthis%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">Methods &amp; “this”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Global-obj"><span class="nav-number">3.3.</span> <span class="nav-text">Global obj</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Obj-amp-Fn"><span class="nav-number">4.</span> <span class="nav-text">Obj &amp; Fn</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Arrow-fn"><span class="nav-number">4.1.</span> <span class="nav-text">Arrow fn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Constructor-fn"><span class="nav-number">4.2.</span> <span class="nav-text">Constructor fn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fn-is-obj"><span class="nav-number">4.3.</span> <span class="nav-text">Fn is obj</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced"><span class="nav-number">4.4.</span> <span class="nav-text">Advanced</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Var-Data-types-amp-Ops"><span class="nav-number">1.</span> <span class="nav-text">Var, Data types &amp; Ops</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Variables"><span class="nav-number">1.1.</span> <span class="nav-text">Variables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-types"><span class="nav-number">1.2.</span> <span class="nav-text">Data types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ops"><span class="nav-number">1.3.</span> <span class="nav-text">Ops</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Function"><span class="nav-number">2.</span> <span class="nav-text">Function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Obj-Symbol-Arrow-Fn"><span class="nav-number">3.</span> <span class="nav-text">Obj, Symbol, Arrow Fn</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol"><span class="nav-number">3.1.</span> <span class="nav-text">Symbol</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Methods-amp-%E2%80%9Cthis%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">Methods &amp; “this”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Global-obj"><span class="nav-number">3.3.</span> <span class="nav-text">Global obj</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Obj-amp-Fn"><span class="nav-number">4.</span> <span class="nav-text">Obj &amp; Fn</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Arrow-fn"><span class="nav-number">4.1.</span> <span class="nav-text">Arrow fn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Constructor-fn"><span class="nav-number">4.2.</span> <span class="nav-text">Constructor fn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fn-is-obj"><span class="nav-number">4.3.</span> <span class="nav-text">Fn is obj</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced"><span class="nav-number">4.4.</span> <span class="nav-text">Advanced</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Built-in-Data-Structure"><span class="nav-number">5.</span> <span class="nav-text">Built-in Data Structure</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Array"><span class="nav-number">5.1.</span> <span class="nav-text">Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON"><span class="nav-number">5.2.</span> <span class="nav-text">JSON</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Date-amp-time"><span class="nav-number">5.3.</span> <span class="nav-text">Date &amp; time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map-amp-Set-WeakMap-amp-WeakSet"><span class="nav-number">5.4.</span> <span class="nav-text">Map &amp; Set, WeakMap &amp; WeakSet</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -241,7 +241,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -332,7 +332,7 @@
     
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          js basics
+          JavaScript basics
         </h1>
 
         <div class="post-meta-container">
@@ -343,14 +343,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2020-05-18 23:34:08" itemprop="dateCreated datePublished" datetime="2020-05-18T23:34:08+10:00">2020-05-18</time>
+      <time title="Created: 2020-05-18 23:34:08" itemprop="dateCreated datePublished" datetime="2020-05-18T23:34:08+08:00">2020-05-18</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-21 19:30:41" itemprop="dateModified" datetime="2020-09-21T19:30:41+10:00">2020-09-21</time>
+        <time title="Modified: 2020-09-28 13:09:53" itemprop="dateModified" datetime="2020-09-28T13:09:53+08:00">2020-09-28</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -576,6 +576,106 @@
 <ul>
 <li>temporary wrapper obj created &amp; destroyed <a target="_blank" rel="noopener" href="https://javascript.info/primitives-methods#a-primitive-as-an-object">..</a> ==&gt; manually modify obj wrap =&gt; err (strict) || undefined <a target="_blank" rel="noopener" href="https://javascript.info/primitives-methods#can-i-add-a-string-property">..</a></li>
 <li>obj wrapper constructor vs type convert fn <a target="_blank" rel="noopener" href="https://javascript.info/primitives-methods#a-primitive-as-an-object">..</a></li>
+</ul>
+<h1 id="Built-in-Data-Structure"><a href="#Built-in-Data-Structure" class="headerlink" title="Built-in Data Structure"></a>Built-in Data Structure</h1><ul>
+<li><code>Object</code> key: str/symbol</li>
+<li><code>Array</code> key: int (ordered collection, <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">MDN</a>)</li>
+<li><code>Map</code> key: any type</li>
+<li><code>Set</code>: unique values</li>
+</ul>
+<h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><ul>
+<li>value indexing: <code>arr[i]</code>, value iter: <code>for..of</code> || <code>arr.forEach()</code></li>
+<li><code>arr.length</code> = greatest index + 1, init as item #, writable<ul>
+<li>manually increase: <code>undefined</code> values, <code>&quot;&quot;</code> in <code>toString()</code></li>
+<li>manually decrease: elem lost — clear arr <code>arr.length = 0</code>    </li>
+</ul>
+</li>
+<li><code>delete arr[i]</code>: value =&gt; <code>undefined</code> (<code>length</code> keep same) <a target="_blank" rel="noopener" href="https://javascript.info/array-methods#splice">..</a></li>
+<li><code>arr.toString()</code> =&gt; <code>_,_,_...</code></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/keys-values-entries#object-keys-values-entries">Object.keys/values/entries(obj)</a> =&gt; arr (enum &amp; non-symbol key)<ul>
+<li>task: <a target="_blank" rel="noopener" href="https://javascript.info/keys-values-entries#sum-the-properties">Sum the props</a></li>
+</ul>
+</li>
+</ul>
+<!-- more  -->
+<p>Methods <a target="_blank" rel="noopener" href="https://javascript.info/array-methods#summary">..</a></p>
+<ul>
+<li><code>splice(..)</code> : […rmed-elems]</li>
+<li><code>filter(fn)</code>: […matchedItems], <code>indexOf()</code>, <code>includes()</code></li>
+<li><code>map(fn)</code> &amp; <code>reduce(..)</code>, <code>sort(..)</code> &amp; <code>reverse()</code></li>
+<li><code>arr.join(glue=&#39;,&#39;)</code> &amp; <code>str.split(delim)</code> (<code>(&#39;&#39;)</code>: char[])</li>
+<li><code>Array.isArray(value)</code></li>
+</ul>
+<p><strong>Iterable &amp; array-like</strong></p>
+<ul>
+<li><strong>iterable</strong> (e.g. arr &amp; str) can be used in <code>for..of</code> <a target="_blank" rel="noopener" href="https://javascript.info/iterable">..</a></li>
+<li>array-like: obj with <strong>numeric index &amp; length</strong> <a target="_blank" rel="noopener" href="https://javascript.info/iterable#array-like">..</a></li>
+<li>iter/arr-like =&gt; array: <code>Array.from(obj...)</code></li>
+</ul>
+<p><code>...</code>: <strong>Spread syntax &amp; Rest param</strong></p>
+<ul>
+<li>Spread syntax: <code>...iter</code>: item list (use <strong>for..of</strong> internally) <ul>
+<li>copy/merge/convert by <code>[...iter]</code> / <code>&#123;...obj&#125;</code></li>
+</ul>
+</li>
+<li>Rest params: <code>...arr</code> in fn-def<ul>
+<li>fn can be called with any # of args (no matter how defined) — only args assoc with param will be count <a target="_blank" rel="noopener" href="https://javascript.info/rest-parameters-spread#rest-parameters">..</a></li>
+<li>vs the old built-in var <code>arguments</code> (both iter &amp; arr-like) <a target="_blank" rel="noopener" href="https://javascript.info/rest-parameters-spread#the-arguments-variable">..</a></li>
+</ul>
+</li>
+</ul>
+<p><strong>Destructuring assignment syntax</strong></p>
+<ul>
+<li>Copying iter-items into vars: <code>let [...vars]/&#123;...obj-props&#125; = arr/obj</code> (keep origin unmodified)<ul>
+<li>ignore item by extra <code>,</code> <a target="_blank" rel="noopener" href="https://javascript.info/destructuring-assignment#array-destructuring">..</a>, <code>=</code> for default value (unprovide value as <strong>undefined</strong>) <a target="_blank" rel="noopener" href="https://javascript.info/destructuring-assignment#default-values">..</a>, <code>:</code> for prop-var rename <a target="_blank" rel="noopener" href="https://javascript.info/destructuring-assignment#object-destructuring">..</a></li>
+</ul>
+</li>
+<li>easy swap: <code>[guest, admin] = [admin, guest];</code></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/destructuring-assignment#nested-destructuring">nested desructing</a> : same structure (no var for the group one)</li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/destructuring-assignment#smart-function-parameters">Smart fn params</a>: pass obj as fn param</li>
+<li>obj destcructing to existing var: <code>(</code>{…}<code>)</code> ({} in main code flow as code block) <a target="_blank" rel="noopener" href="https://javascript.info/destructuring-assignment#the-rest-pattern">..</a></li>
+</ul>
+<p>Tasks </p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/array#a-maximal-subarray">A maximal subarray</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/array-methods#filter-range-in-place">Filter range “in place”</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/array-methods#sort-in-decreasing-order">Sort in decreasing order</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/array-methods#create-an-extendable-calculator">Create an extendable calculator</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/array-methods#sort-users-by-age">Sort users by age</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/array-methods#shuffle-an-array">Shuffle an array</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/array-methods#filter-unique-array-members">Filter unique array members</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/array-methods#create-keyed-object-from-array">Create keyed object from array</a></li>
+</ul>
+<h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2><ul>
+<li>Send data: <code>JSON.stringify(obj, ..)</code> &amp; <code>obj.toJSON()</code>: formatted str (aka <em>serialized</em> obj)</li>
+<li>Get data: <code>JSON.parse(str, ..)</code> =&gt; obj</li>
+</ul>
+<h2 id="Date-amp-time"><a href="#Date-amp-time" class="headerlink" title="Date &amp; time"></a>Date &amp; time</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/date#creation">creation</a> &amp; <code>Date.parse(str)</code> <a target="_blank" rel="noopener" href="https://javascript.info/date#date-parse-from-a-string">..</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/date#access-date-components">get/set date components</a>: <code>get/set*()</code>, <a target="_blank" rel="noopener" href="https://javascript.info/date#autocorrection">auto-correction</a></li>
+<li>work on timestamp<ul>
+<li><code>Date.now()</code>: get timestamp without intermediate Date obj</li>
+<li><code>date.getTime()</code>: faster than auto-date-to-num-convert (by +/-) <a target="_blank" rel="noopener" href="https://javascript.info/date#benchmarking">..</a><ul>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/date#summary">more precise time measure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>tasks: <a target="_blank" rel="noopener" href="https://javascript.info/date#show-a-weekday">Show a weekday</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/date#european-weekday">European weekday</a>, <a target="_blank" rel="noopener" href="https://javascript.info/date#which-day-of-month-was-many-days-ago">getDateAgo(date, days)</a>, <a target="_blank" rel="noopener" href="https://javascript.info/date#last-day-of-month">getLastDayOfMonth(year, month)</a></li>
+</ul>
+<h2 id="Map-amp-Set-WeakMap-amp-WeakSet"><a href="#Map-amp-Set-WeakMap-amp-WeakSet" class="headerlink" title="Map &amp; Set, WeakMap &amp; WeakSet"></a>Map &amp; Set, WeakMap &amp; WeakSet</h2><p><code>Map</code>: obj with key of any type, key compare: <code>===</code> &amp; <code>NaN === NaN</code></p>
+<ul>
+<li><code>new Map([ [_,_], [_,_] ..])</code> &amp; obj &lt;=&gt; map, <code>forEach(..)</code></li>
+</ul>
+<p><code>Set</code>: unique values</p>
+<ul>
+<li>methods similar to map, get/set() =&gt; add(), iter by insertion order <a target="_blank" rel="noopener" href="https://javascript.info/map-set#summary">..</a></li>
+<li>task: <a target="_blank" rel="noopener" href="https://javascript.info/map-set#filter-unique-array-members">Filter unique array members</a>: <code>Array.from(new Set(arr))</code></li>
+</ul>
+<p><code>WeakMap</code>/<code>WeakSet</code>: if obj unreachable by other means, it rmed from memory &amp; WM/WS</p>
+<ul>
+<li>only <strong>obj</strong> as key/items in WM/WS</li>
+<li>methods <a target="_blank" rel="noopener" href="https://javascript.info/weakmap-weakset#weakmap">..</a></li>
 </ul>
 
     </div>

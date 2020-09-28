@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hello World</title>
+    <url>/blog/2020/09/03/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<a id="more"></a>
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>Asynchronous programming in JavaScript</title>
     <url>/blog/2020/06/08/js-async/</url>
     <content><![CDATA[<p><strong>async</strong> actions — actions init now but finish later (code below it won’t wait)</p>
@@ -76,354 +96,6 @@
 </ul>
 <p><strong>Promise.resolve(value) /.reject(err)</strong> ==&gt; return a resolved / rejected promise with value / err, same as</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> resolve(value) || reject(error));</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>IT</category>
-        <category>Programming</category>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>IT</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/blog/2020/09/03/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<a id="more"></a>
-
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>js basics</title>
-    <url>/blog/2020/05/18/js-basics/</url>
-    <content><![CDATA[<h1 id="Var-Data-types-amp-Ops"><a href="#Var-Data-types-amp-Ops" class="headerlink" title="Var, Data types &amp; Ops"></a>Var, Data types &amp; Ops</h1><h2 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h2><ul>
-<li><code>let</code>, <code>const</code>: <a href="https://javascript.info/destructuring-assignment#the-rest-pattern" title="plain code block to group stmts">block</a> scope <a href="https://javascript.info/closure">..</a> — <a href="" title="fn/global scope; dec hoist/raise, allow redec(latter ignored)">the old “var”</a> &amp; <a href="" title="immediately-invoked fn-expr">IIFE</a></li>
-</ul>
-<h2 id="Data-types"><a href="#Data-types" class="headerlink" title="Data types"></a>Data types</h2><ul>
-<li><strong>dynamic typed</strong>, <a href="" title="num/bigInt, str, bool, null/undefined, obj/symbol">7+1</a> basic data types</li>
-<li><code>typeof</code> =&gt; <strong>lowercase str</strong>, e.g. <code>null</code>: “object”, <code>alert</code>: “function” <a href="https://javascript.info/types#type-typeof">..</a></li>
-</ul>
-<a id="more"></a>
-
-<p><strong>Number</strong></p>
-<ul>
-<li>int/float &amp; <code>Infinity</code>, <code>-Infinity</code>, <code>NaN</code> <a href="https://javascript.info/types#number">..</a><ul>
-<li>64-bit — Imprecise calc &amp; BigInt <a href="https://javascript.info/number">..</a></li>
-<li>repre: <code>e</code>, hex/binary/octal — <code>parseInt/-float()</code>, <code>toString(base)</code></li>
-<li>check for int: <code>Math.round(n) == n</code> <a href="https://javascript.info/testing-mocha">..</a></li>
-<li>regular num &amp; NaN test: <code>isFinite()</code>, <code>isNaN()</code> vs <code>Object.is()</code></li>
-</ul>
-</li>
-<li>auto type convert: unary <code>+</code>, math-fn / math-op &amp; <code>Number(value)</code></li>
-<li>rouding: multiply-and-divide &amp; <code>toFixed(n)</code></li>
-<li>tasks: <a href="https://javascript.info/number#why-6-35-tofixed-1-6-3">Why 6.35.toFixed(1) == 6.3?</a>, <a href="https://javascript.info/number#a-random-integer-from-min-to-max">random int from min to max</a></li>
-</ul>
-<p><strong>String</strong></p>
-<ul>
-<li>quotes &amp; <code>...$&#123;...&#125;</code> <a href="https://javascript.info/types#string">..</a></li>
-<li>special chars: line break <code>\n</code>; escape char <code>\</code></li>
-<li>convert in output e.g. <code>alert(..)</code>, <code>String(..)</code> &amp; <code>toString()</code>: <a href="https://javascript.info/object-toprimitive#toprimitive">obj as key</a>, <a href="https://javascript.info/json#custom-tojson">JSON.stringify()</a> <a href="https://javascript.info/type-conversions#summary">..</a></li>
-<li><code>str.length</code>, <code>str[i]</code></li>
-<li>substr <code>str.slice()</code>, str compare <code>str.localeCompare(str2)</code>, <code>str.repeat(n)</code>, charCode <code>String.fromCodePoint(code)</code> &amp; <code>str.codePointAt(i)</code> (in generate pwd <a href="https://javascript.info/generators#generator-composition">..</a>)</li>
-<li>task: <a href="https://javascript.info/string#truncate-the-text">Truncate text</a></li>
-</ul>
-<p><strong>Bool</strong> <a href="https://javascript.info/types#boolean-logical-type">..</a></p>
-<ul>
-<li>6 falsy values <a href="https://javascript.info/type-conversions#boolean-conversion">..</a></li>
-<li>convert by logical op <code>!!</code>, compareson &amp; <code>Boolean(..)</code></li>
-</ul>
-<p><strong>null &amp; undefined</strong> <a href="https://javascript.info/types">..</a></p>
-<ul>
-<li><code>null</code> : value unknown; </li>
-<li><code>undefined</code>: unassigned-var init val &amp; default fn-return </li>
-</ul>
-<h2 id="Ops"><a href="#Ops" class="headerlink" title="Ops"></a>Ops</h2><ul>
-<li>compare diff type (convert to num) &amp; <code>null == undefined</code> , <code>NaN != NaN</code> &amp; <code>===</code></li>
-<li>Nullish coalescing op <code>??</code> (check for “null/undefined”), obj optional chaining <code>?.</code>, comma <a href="https://javascript.info/operators#comma">..</a></li>
-</ul>
-<h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><p><strong>Fn creation</strong> <a href="https://javascript.info/function-expressions#function-expression-vs-function-declaration">..</a></p>
-<ul>
-<li><strong>fn dec</strong>: block-level if strict, def-hoisting<ul>
-<li><code>function ..</code>: start of fn-dec (require a name &amp; cannot be called immediately) <a href="https://javascript.info/var#iife">..</a></li>
-</ul>
-</li>
-<li><strong>fn-expr</strong>: easy dynamic def<ul>
-<li><em>anonymous</em> as callback, N(named) FE</li>
-</ul>
-</li>
-<li><strong>arrow-fn</strong> (see chapter JS object)</li>
-<li><code>new Function([...params], body)</code>: create fn dynamically at run time <a href="https://javascript.info/new-function">..</a></li>
-</ul>
-<p><strong>Closure</strong> <a href="https://javascript.info/closure">..</a></p>
-<ul>
-<li>block scope &amp; Lexical Environment (EnvRecord &amp; outer-ref, created on run time) …</li>
-<li>LE var/fn pre-populate &amp; var “dead zone” <a href="https://javascript.info/closure#is-variable-visible">..</a></li>
-<li>access var through <strong>LE chain</strong> (inner-outer) <a href="https://javascript.info/closure#step-3-inner-and-outer-lexical-environment">..</a> &amp; updated on the LE it lives <a href="https://javascript.info/closure#step-4-returning-a-function">..</a></li>
-</ul>
-<p><a href="https://javascript.info/closure#step-4-returning-a-function">Closure</a>: a fn that remembers its outer vars and can access them by e.g. return a fn (or as obj prop) <a href="https://javascript.info/closure#nested-functions">..</a></p>
-<ul>
-<li>run outerFn: new outerFn.LE &amp; nestedFn created, <code>nestedFn.[[Env..]] = outerFn.LE</code> (set once &amp; forever)<ul>
-<li>so outerFn.LE still reachable af its fn call completion &amp; outerFn.LE not GC <a href="https://javascript.info/closure#garbage-collection">..</a></li>
-<li>call outerFn mtp times ==&gt; diff outerFn.LE &amp; nestedFn created ==&gt; nestedFn independent <a href="https://javascript.info/closure#are-counters-independent">..</a></li>
-</ul>
-</li>
-<li>run nestedFn: new nestedFn.LE created &amp; <code>nestedFn.LE -&gt; outerFn.LE</code> (ref value taken from [[Env..]])</li>
-<li>Task: <a href="https://javascript.info/closure#counter-object">Counter object</a>, <a href="https://javascript.info/closure#sum-with-closures">Sum with closures</a>, <a href="https://javascript.info/closure#filter-through-function">Filter through function</a>, <a href="https://javascript.info/closure#sort-by-field">Sort by field</a>, <a href="https://javascript.info/closure#army-of-functions">Army of functions</a></li>
-</ul>
-<h1 id="Obj-Symbol-Arrow-Fn"><a href="#Obj-Symbol-Arrow-Fn" class="headerlink" title="Obj, Symbol, Arrow Fn"></a>Obj, Symbol, Arrow Fn</h1><p><strong>Obj</strong>: keyed values collection</p>
-<ul>
-<li>key type: str || symbol (see below), value: any type (except “__proto__” prop)<ul>
-<li>key can be reserved word, non-str/symbol key ==&gt; toString <a href="https://javascript.info/object#property-names-limitations">..</a></li>
-<li>key existence test: <code>in</code> op &amp; optional chaining syntax <code>?.</code>  (check for <code>null/undefined</code>, shorter than <code>&amp;&amp;</code>)</li>
-<li>key iterate: <code>for..in</code> loop &amp; prop order ..</li>
-</ul>
-</li>
-<li>value access: <code>obj.prop</code> (var-naming style, no space) vs <code>obj[&quot;prop&quot;]</code><ul>
-<li>prop add/set: <code>obj.prop = xxx</code>, delete: <code>delete obj.prop</code></li>
-</ul>
-</li>
-<li>computed prop, prop value shorthand</li>
-<li>Obj copy-/compare by-ref<ul>
-<li>clone by <code>&#123;...obj&#125;</code> (same as <code>Object.assign(desc, ...srcs)</code>, obj-prop still same ref)</li>
-<li>deep cloning by <code>for..in</code> loop <a href="https://javascript.info/object-copy#cloning-and-merging-object-assign">..</a> &amp; <code>typeof</code></li>
-</ul>
-</li>
-<li>tasks: <a href="https://javascript.info/object#ordered-like-an-object">Check for emptiness</a></li>
-</ul>
-<!-- more -->
-
-<h2 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h2><p>unique id for obj prop <a href="https://javascript.info/types#objects-and-symbols">..</a></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> id = <span class="built_in">Symbol</span>([description]);</span><br><span class="line"><span class="built_in">Symbol</span>(<span class="string">&quot;id&quot;</span>) !== <span class="built_in">Symbol</span>(<span class="string">&quot;id&quot;</span>);</span><br><span class="line"></span><br><span class="line">alert(<span class="built_in">Symbol</span>(<span class="string">&quot;id&quot;</span>));    <span class="comment">// TypeError (not auto-convert to string)</span></span><br><span class="line">alert(id.toString()); 	<span class="comment">// Symbol(id)</span></span><br><span class="line">alert(id.description);  <span class="comment">// id</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>Global symbols</strong>: <code>Symbol.for(desc)</code> &amp; <code>Symbol.keyFor(globalSym)</code> =&gt; “desc” or undefined</li>
-<li><strong>Symbol as obj key</strong>: <ul>
-<li>skip in <code>for..in</code> loop  &amp; <code>Object.keys(obj)</code> (looks like non-emutable)</li>
-<li>get by <code>Object.getOwnPropertySymbols(obj)</code> <a href="https://javascript.info/prototype-methods#summary">..</a></li>
-<li>in <code>Object.assign()</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="Methods-amp-“this”"><a href="#Methods-amp-“this”" class="headerlink" title="Methods &amp; “this”"></a>Methods &amp; “this”</h2><ul>
-<li>method def: fn-expr shorthand || copy from fn <a href="https://javascript.info/object-methods#method-examples">..</a></li>
-<li><code>this</code> in fn not bound, value evaluate at run-time — <a href="https://javascript.info/bind#losing-this" title="obj method passed around &amp; called in another context">losing “this” problem</a><ul>
-<li>call fn with obj (“this” in methods): <code>this=obj</code> <a href="https://javascript.info/object-methods#this-in-methods">..</a></li>
-<li>call fn without obj (as fn itself) <a href="https://javascript.info/object-methods#this-is-not-bound">..</a><ul>
-<li><code>this=undefined</code> if strict &amp; <code>arr.forEach(fn)</code> <a href="https://javascript.info/arrow-functions#arrow-functions-have-no-this">..</a></li>
-<li><code>this=window</code> if non-strict &amp; <code>setTimeout(fn, ms)</code> <a href="https://javascript.info/bind#losing-this">..</a>, <a href="https://javascript.info/call-apply-decorators#delaying-decorator">..</a></li>
-</ul>
-</li>
-<li>tasks: <a href="https://javascript.info/object-methods#using-this-in-object-literal">Using “this” in object literal</a>, <a href="https://javascript.info/object-methods#create-a-calculator">calculator</a>, <a href="https://javascript.info/object-methods#create-a-calculator">Chaining</a></li>
-</ul>
-</li>
-<li>bind “this”: <ul>
-<li><a href="https://javascript.info/bind#solution-2-bind">fn binding</a>: <code>let boundFn = fn.bind(context, [...startingArgs])</code><ul>
-<li><code>this=context</code>, starting args &amp; partial <a href="https://javascript.info/bind#partial-functions">..</a>)</li>
-<li><code>context</code> bound <a href="https://javascript.info/bind#bound-function-as-a-method" title="use pre-bound context value (even bound obj changes later), so cannot re-bound">hard-fixed</a></li>
-<li>partial without context <a href="https://javascript.info/bind#going-partial-without-context">..</a></li>
-<li>tasks: <a href="https://javascript.info/bind#bound-function-as-a-method">Bound fn in method</a>, <a href="https://javascript.info/bind#second-bind">re-bound ignored</a>, <a href="https://javascript.info/bind#function-property-after-bind">Fn prop lost af bind</a>, <a href="https://javascript.info/bind#fix-a-function-that-loses-this">method bind context in callbacks</a>, <a href="https://javascript.info/bind#partial-application-for-login">Partial &amp; method</a></li>
-</ul>
-</li>
-<li><a href="https://javascript.info/call-apply-decorators#func-apply" title="Passing all args context to another fn">call forwarding</a>: <code>fn.apply(context, args: arrLike)</code> (prefer) &amp; <code>fn.call(context, ...args);</code></li>
-<li><a href="https://javascript.info/call-apply-decorators#method-borrowing" title="take a method from an obj and call it in the context of another obj">fn-borrowing</a>: <code>[].join.call(arguments);</code> in fn-body<ul>
-<li><code>arr.join()</code> allow arr-like (<code>arguments</code> here instead of <code>[]</code>) as <code>this</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Global-obj"><a href="#Global-obj" class="headerlink" title="Global obj"></a>Global obj</h2><p>Provide built-in var &amp; fn (can be access directly), e.g. <code>window</code> in browser &amp; <code>global</code> in node </p>
-<ul>
-<li>e.g. <code>window.alert</code>, <code>window.innerHeight</code></li>
-<li>global fn || <strong>var</strong>-var ==&gt; become props of global-obj (for compatibility)</li>
-<li>make value global: <code>window.xxx = ...</code></li>
-</ul>
-<h1 id="Obj-amp-Fn"><a href="#Obj-amp-Fn" class="headerlink" title="Obj &amp; Fn"></a>Obj &amp; Fn</h1><h2 id="Arrow-fn"><a href="#Arrow-fn" class="headerlink" title="Arrow fn"></a>Arrow fn</h2><p><code>(...args) =&gt; expr || &#123; ...body &#125; || (obj-litiral)</code> <a href="https://javascript.info/array-methods#map-to-objects">..</a></p>
-<ul>
-<li>no own <code>this</code>, <code>super</code> <a href="https://javascript.info/class-inheritance#overriding-a-method">..</a> &amp; <code>arguments</code> (to run small fn without leaving the current context, so no own context)<ul>
-<li>take <code>this</code> / <code>super</code> from outer LE, e.g. outer fn, cann’t run with <code>new</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="Constructor-fn"><a href="#Constructor-fn" class="headerlink" title="Constructor fn"></a>Constructor fn</h2><ul>
-<li>capital naming e.g. User</li>
-<li>set props &amp; methods <code>this.xxx = ...</code></li>
-<li>call by <code>new</code> op (execute “internal algorithm”)<ul>
-<li>return this ||  another obj (prim-return ignored)</li>
-<li>Constructor mode test: <code>new.target</code></li>
-</ul>
-</li>
-<li>singleton obj <code>new function() &#123; ... &#125;</code></li>
-</ul>
-<h2 id="Fn-is-obj"><a href="#Fn-is-obj" class="headerlink" title="Fn is obj"></a>Fn is obj</h2><p>Fn is a callable action (instead of data) obj, can ± props, pass by ref</p>
-<ul>
-<li>fn-def: store the fn-obj in the same named var, call by <code>fnName(...args)</code> ==&gt; callback fn <a href="https://javascript.info/function-expressions">..</a></li>
-<li>Fn built-in props: <code>name</code> (str, “” for anonymous), <code>length</code> (param #, rest param not count)</li>
-<li>custom prop/helper method: <code>fnName.prop = ..</code></li>
-<li>Named Fn Expr (NFE): internal fn name (for internal ref only)</li>
-<li>tasks: <a href="https://javascript.info/function-object#set-and-decrease-for-counter">Set and decrease for counter</a>, <a href="https://javascript.info/function-object#sum-with-an-arbitrary-amount-of-brackets">Sum with an arbitrary amount of brackets</a></li>
-</ul>
-<h2 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h2><p><strong>Obj prop config</strong></p>
-<ul>
-<li>prop descriptor: <code>value</code> attr + 3 flags: <code>writable</code>, <code>enumerable</code>, <code>configurable</code> <a href="https://javascript.info/property-descriptors">..</a><ul>
-<li>get/set desc: <code>Object.getOwnPropertyDescriptor()</code>, <code>Object.defineProperty()</code><ul>
-<li>obj created “the usually way”: flags default <code>true</code>; flags not supplied in desc defalut <code>false</code></li>
-</ul>
-</li>
-<li>built-in <code>toString()</code> non-enumerable</li>
-<li>Sealing an object globally ..</li>
-</ul>
-</li>
-</ul>
-<p><strong>Accessor props</strong><br><code>get/set propName([value]) &#123;..&#125;</code>, trigger when <code>propName</code> read/assign</p>
-<ul>
-<li>descriptors: <code>get/set([value]) &#123;..&#125;</code>, <code>enumerable</code>, <code>configurable</code></li>
-<li>smarter getter/setter: store value in another internal prop</li>
-</ul>
-<p><strong>Obj -&gt; primitive</strong></p>
-<ul>
-<li><a href="" title="which type to convert">3 hints</a>:  <code>&quot;string&quot;</code>, <code>&quot;number&quot;</code> &amp; <code>&quot;default&quot;</code> (no boolean hint: all <strong>obj  =&gt; true</strong>))</li>
-<li>3 methods: must return a prim value <a href="https://javascript.info/object-toprimitive#return-types">..</a><ul>
-<li><code>[Symbol.toPrimitive](hint)</code> return obj ==&gt; err</li>
-<li>built-in <code>toString()</code> =&gt; “[object Object]”, <code>valueOf()</code> =&gt; obj itself (ignored) <a href="https://javascript.info/object-toprimitive#tostring-valueof">..</a></li>
-</ul>
-</li>
-</ul>
-<p><strong>Primitive as Obj</strong><br>Use to op prim e.g.  <code>String</code>, <code>Number</code>, <code>Boolean</code>, <code>Symbol</code> but keep them fast &amp; lightweight </p>
-<ul>
-<li>temporary wrapper obj created &amp; destroyed <a href="https://javascript.info/primitives-methods#a-primitive-as-an-object">..</a> ==&gt; manually modify obj wrap =&gt; err (strict) || undefined <a href="https://javascript.info/primitives-methods#can-i-add-a-string-property">..</a></li>
-<li>obj wrapper constructor vs type convert fn <a href="https://javascript.info/primitives-methods#a-primitive-as-an-object">..</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>IT</category>
-        <category>Programming</category>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>IT</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript built-in data structure</title>
-    <url>/blog/2020/05/25/js-builtin-data-structure/</url>
-    <content><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><ul>
-<li><code>Object</code> key: str/symbol</li>
-<li><code>Array</code> key: int (ordered collection, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">MDN</a>)</li>
-<li><code>Map</code> key: any type</li>
-<li><code>Set</code>: unique values</li>
-</ul>
-<h1 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h1><p><code>[..]</code> || <code>new Array(..)</code></p>
-<ul>
-<li>value indexing: <code>arr[i]</code>, value iter: <code>for..of</code> || <code>arr.forEach()</code></li>
-<li><code>arr.length</code> = greatest index + 1, init as item #, writable<ul>
-<li>manually increase: <code>undefined</code> values, <code>&quot;&quot;</code> in <code>toString()</code></li>
-<li>manually decrease: elem lost — clear arr <code>arr.length = 0</code>    </li>
-</ul>
-</li>
-<li><code>arr.toString()</code> =&gt; <code>_,_,_</code></li>
-<li><code>delete arr[i]</code>: value =&gt; <code>undefined</code> (<code>length</code> keep same) <a href="https://javascript.info/array-methods#splice">..</a></li>
-</ul>
-<!-- more  -->
-
-<p>Methods summary <a href="https://javascript.info/array-methods#summary">..</a></p>
-<ul>
-<li><code>splice(startIndex[, deleteCount, ...items])</code> : […rmed-elems]</li>
-<li><code>filter(fn)</code>: […matchedItems], <code>indexOf()</code>, <code>includes()</code></li>
-<li><code>map(fn)</code> &amp; <code>reduce()</code>, <code>sort()</code> &amp; <code>reverse()</code></li>
-<li><code>arr.join(glue=&#39;,&#39;)</code> &amp; <code>str.split(delim)</code> (<code>(&#39;&#39;)</code>: char[])</li>
-<li><code>Array.isArray(value)</code></li>
-</ul>
-<p>Tasks </p>
-<ul>
-<li><a href="https://javascript.info/array#a-maximal-subarray">A maximal subarray</a></li>
-<li><a href="https://javascript.info/array-methods#filter-range-in-place">Filter range “in place”</a></li>
-<li><a href="https://javascript.info/array-methods#sort-in-decreasing-order">Sort in decreasing order</a></li>
-<li><a href="https://javascript.info/array-methods#create-an-extendable-calculator">Create an extendable calculator</a></li>
-<li><a href="https://javascript.info/array-methods#sort-users-by-age">Sort users by age</a></li>
-<li><a href="https://javascript.info/array-methods#shuffle-an-array">Shuffle an array</a></li>
-<li><a href="https://javascript.info/array-methods#filter-unique-array-members">Filter unique array members</a></li>
-<li><a href="https://javascript.info/array-methods#create-keyed-object-from-array">Create keyed object from array</a></li>
-</ul>
-<h1 id="Iterable-amp-for-of"><a href="#Iterable-amp-for-of" class="headerlink" title="Iterable &amp; for..of"></a>Iterable &amp; for..of</h1><ul>
-<li><strong>iterable</strong> (e.g. arr &amp; str): obj with <a href="https://javascript.info/iterable#symbol-iterator">[Symbol.iterator()]</a> prop that can be used in <code>for..of</code> <a href="https://javascript.info/iterable">..</a><ul>
-<li>call <code>Symbol.iterator()</code> once when “for..of” start &amp; return an <strong>iterator</strong> (obj with <strong>next()</strong>)</li>
-<li>call <code>iter.next()</code> on each iter =&gt; <code>&#123;done:false, value: xxx&#125;</code> || <code>&#123;done: true&#125;</code></li>
-<li>manually call iterator <a href="https://javascript.info/iterable#calling-an-iterator-explicitly">..</a></li>
-</ul>
-</li>
-<li>array-like: obj with <strong>numeric index &amp; length</strong> <a href="https://javascript.info/iterable#array-like">..</a></li>
-<li>iter/arr-like =&gt; array: <code>Array.from(obj...)</code></li>
-</ul>
-<h1 id="“…”-Spread-syntax-amp-Rest-param"><a href="#“…”-Spread-syntax-amp-Rest-param" class="headerlink" title="“…”: Spread syntax &amp; Rest param"></a>“…”: Spread syntax &amp; Rest param</h1><p><a href="https://javascript.info/rest-parameters-spread#spread-syntax">Spread syntax</a>: <code>...iter</code> ==&gt; item list (use <strong>for..of</strong> internally)</p>
-<ul>
-<li>copy arr/obj: <code>[...arr]</code> / <code>&#123;...obj&#125;</code>, shorten than <strong>Object.assign({}, obj) &amp; Object.assign([], arr)</strong> <a href="https://javascript.info/rest-parameters-spread#get-a-new-copy-of-an-array-object">..</a></li>
-<li>merge arr: <code>[0, ...arr, 2, ...arr2]</code></li>
-<li>iter -&gt; arr: <code>[...iter]</code> || <code>Array.from(iter/arr-like)</code></li>
-</ul>
-<p>Rest params <code>...arr</code> in fn-def</p>
-<ul>
-<li>fn can be called with any # of args (no matter how defined) — only args assoc with param will be count <a href="https://javascript.info/rest-parameters-spread#rest-parameters">..</a></li>
-<li>vs the old built-in var <code>arguments</code> (both iter &amp; arr-like) <a href="https://javascript.info/rest-parameters-spread#the-arguments-variable">..</a></li>
-</ul>
-<h1 id="Map-amp-Set-WeakMap-amp-WeakSet"><a href="#Map-amp-Set-WeakMap-amp-WeakSet" class="headerlink" title="Map &amp; Set, WeakMap &amp; WeakSet"></a>Map &amp; Set, WeakMap &amp; WeakSet</h1><p><code>Map</code>: obj with key of any type</p>
-<ul>
-<li>methods: <strong>get(), set(), delete(), has(), size</strong>, … (key compare: <code>===</code> &amp; <code>NaN == NaN</code>)<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Map</span>([iter])                <span class="comment">// iter, e.g. Object.entries(obj)</span></span><br><span class="line"><span class="built_in">Object</span>.fromEntries(iter)       <span class="comment">// iter, e.g. map</span></span><br><span class="line"></span><br><span class="line">map.set(key, value)            <span class="comment">// =&gt; modified map (can be chained)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// map iter (order same as inserted)</span></span><br><span class="line">map.keys()/values()/entries() <span class="comment">// =&gt; iter, entries(): default iteration in for..of</span></span><br><span class="line">map.forEach(<span class="function">(<span class="params">key, value, map</span>) =&gt;</span> ...)</span><br></pre></td></tr></table></figure></li>
-<li><a href="https://javascript.info/keys-values-entries#object-keys-values-entries">Object.keys/values/entries(obj)</a> =&gt; arr (enum &amp; non-symbol key)<ul>
-<li>task — <a href="https://javascript.info/keys-values-entries#sum-the-properties">Sum the props</a>, </li>
-</ul>
-</li>
-</ul>
-<p><code>Set</code>: unique values</p>
-<ul>
-<li>methods similar to map, get/set() =&gt; add(), iter by insertion order <a href="https://javascript.info/map-set#summary">..</a></li>
-<li>task — <a href="https://javascript.info/map-set#filter-unique-array-members">Filter unique array members</a>: <code>Array.from(new Set(arr))</code></li>
-</ul>
-<p><code>WeakMap</code>/<code>WeakSet</code>: “2ndary” storage (obj remove from “main” storage also removed from this storage)</p>
-<ul>
-<li>only <strong>obj</strong> as key/items in WM/WS </li>
-<li>if obj inaccessible by other means, it rmed from memory &amp; WM/WS</li>
-<li>methods: only <strong>get() &amp; set() / add(), delete(), has()</strong> (no size &amp; iter methods)</li>
-<li>WeakMap use cases: additional data, caching</li>
-</ul>
-<h1 id="Destructuring-assignment-syntax"><a href="#Destructuring-assignment-syntax" class="headerlink" title="Destructuring assignment syntax"></a>Destructuring assignment syntax</h1><p>Copying iter-items into vars (keep origin unmodified)</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> [var1 = defaultValue, var2, ...rest] = arr</span><br><span class="line"><span class="keyword">let</span> &#123;<span class="attr">prop1</span>: var1 = defaultValue, prop2, ...rest&#125; = obj	<span class="comment">// prop order in left not matter</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// loop over obj/map</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> [key, value] <span class="keyword">of</span> <span class="built_in">Object</span>.entries(user)) &#123;</span><br><span class="line">  alert(<span class="string">`<span class="subst">$&#123;key&#125;</span>:<span class="subst">$&#123;value&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[guest, admin] = [admin, guest]; <span class="comment">// Swap values</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>ignore item by extra <code>,</code> <a href="https://javascript.info/destructuring-assignment#array-destructuring">..</a>, <code>=</code> for default value (unprovide value as <strong>undefined</strong>) <a href="https://javascript.info/destructuring-assignment#default-values">..</a>, <code>:</code> for prop-var rename <a href="https://javascript.info/destructuring-assignment#object-destructuring">..</a></li>
-<li>obj destcructing to existing var — <code>(</code>{…}<code>)</code> ({} in main code flow as code block) <a href="https://javascript.info/destructuring-assignment#the-rest-pattern">..</a></li>
-<li><a href="https://javascript.info/destructuring-assignment#nested-destructuring">nested desructing</a> — same structure (no var for the group one)</li>
-<li><a href="https://javascript.info/destructuring-assignment#smart-function-parameters">Smart fn params</a> — pass obj as fn param</li>
-</ul>
-<h1 id="Date-amp-time"><a href="#Date-amp-time" class="headerlink" title="Date &amp; time"></a>Date &amp; time</h1><ul>
-<li><a href="https://javascript.info/date#creation">creation</a>: <code>new Date(...)</code>, <code>new Date(date)</code> <a href="https://javascript.info/date#which-day-of-month-was-many-days-ago">..</a>,  <code>Date.parse(str)</code> <a href="https://javascript.info/date#date-parse-from-a-string">..</a></li>
-<li><a href="https://javascript.info/date#access-date-components">get/set date components</a>: <code>get/set*()</code>, <a href="https://javascript.info/date#autocorrection">auto-correction</a></li>
-<li><a href="https://javascript.info/date#date-to-number-date-diff">Date to num</a> =&gt; timestamp, <a href="https://javascript.info/date#date-now">Date.now() vs date.getTime()</a><ul>
-<li><a href="https://javascript.info/date#benchmarking">date2.getTime() - date1.getTime() vs date2 - date1</a></li>
-<li><a href="https://javascript.info/date#summary">more precise time measure</a></li>
-</ul>
-</li>
-<li>tasks — <a href="https://javascript.info/date#show-a-weekday">Show a weekday</a> &amp; <a href="https://javascript.info/date#european-weekday">European weekday</a>, <a href="https://javascript.info/date#which-day-of-month-was-many-days-ago">Which day of month was many days ago?</a>, <a href="https://javascript.info/date#last-day-of-month">Last day of month?</a></li>
-</ul>
-<h1 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h1><p>Init for JS, but many other langs have libs to handle it as well ==&gt; use JSON for data exchange</p>
-<p><strong>Send data</strong>: <code>JSON.stringify(obj[, replacer, space])</code> =&gt; formatted str (aka <em>serialized</em> obj)</p>
-<ul>
-<li><a href="https://javascript.info/json#custom-tojson">obj.toJSON()</a></li>
-<li><a href="https://javascript.info/json#excluding-and-transforming-replacer">replacer special 1st call</a></li>
-</ul>
-<p><strong>Get data</strong>: <code>JSON.parse(str, [reviver])</code> =&gt; obj</p>
-]]></content>
       <categories>
         <category>IT</category>
         <category>Programming</category>
@@ -647,59 +319,6 @@
 </ul>
 </li>
 </ul>
-]]></content>
-      <categories>
-        <category>IT</category>
-        <category>Programming</category>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>IT</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript prototypal inheritance</title>
-    <url>/blog/2020/05/28/js-prototype/</url>
-    <content><![CDATA[<h1 id="Prototypal-inheritance"><a href="#Prototypal-inheritance" class="headerlink" title="Prototypal inheritance"></a>Prototypal inheritance</h1><p>Object hidden prop <code>[[Prototype]]</code>: either null || another obj (other value ignored)</p>
-<ul>
-<li><p>get/set prototype: <code>Object.create(proto[, descriptors])</code>, <code>Object.get/setPrototypeOf(obj)</code> <a href="https://javascript.info/prototype-methods">..</a> </p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// fully identical shallow clone of obj</span></span><br><span class="line"><span class="keyword">let</span> clone = <span class="built_in">Object</span>.create(<span class="built_in">Object</span>.getPrototypeOf(obj), <span class="built_in">Object</span>.getOwnPropertyDescriptors(obj));</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>obj.__proto__ = obj2</code> (deprecated)<ul>
-<li>accessor of <code>[[Prototype]]</code> in <code>Object.prototype</code> (see below), not good for user-generated keys <a href="https://javascript.info/prototype-methods#summary">..</a>, fixex by <a href="https://javascript.info/prototype-methods#very-plain">“Very plain” objects</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Task — <a href="https://javascript.info/prototype-methods#add-tostring-to-the-dictionary">add toString() to the “very plain” obj</a></p>
-</li>
-</ul>
-<a id="more"></a>
-
-<p><a href="" title="prop lookup: read prop from prototype if it not exist in the obj, follow `[[Prototype]]` ref chain">Prototypal inheritance</a> </p>
-<ul>
-<li>set prop by <code>=</code> ==&gt; trigger setter in prototype || add new prop in current obj <a href="https://javascript.info/prototype-inheritance#writing-doesn-t-use-prototype">..</a> <ul>
-<li>Write to prototype.prop example <a href="https://javascript.info/prototype-inheritance#why-are-both-hamsters-full">..</a></li>
-</ul>
-</li>
-<li>delete obj.prop &amp; <code>this</code>— current obj</li>
-<li>inherited prop in <code>for..in</code> , not in <code>Object.keys/values(obj)</code> &amp; <code>obj.hasOwnProperty(prop)</code> (true for own prop)</li>
-</ul>
-<h1 id="F-protoype"><a href="#F-protoype" class="headerlink" title="F.protoype"></a>F.protoype</h1><p>A “normal” prop called “prototype” of con-fn F, only work when <code>new F()</code> </p>
-<ul>
-<li>default <strong>F.prototype</strong> = <code>&#123;constructor: F&#125;</code></li>
-<li><code>let obj = new F()</code> ==&gt; <code>obj.[[Prototype]] = F.prototype</code> if <strong>F.protoype</strong> is obj</li>
-<li>re-assign <strong>F.protoype</strong> to another obj — prev created obj.[[Prototype]] not affect</li>
-<li>Task — <a href="https://javascript.info/function-prototype#create-an-object-with-the-same-constructor">new obj.constructor()</a></li>
-</ul>
-<p>Built-in F.prototype</p>
-<ul>
-<li><code>Object.prototype</code> — <code>&#123;&#125;</code> same as <code>new Object()</code>: all obj inherited from it <a href="https://javascript.info/prototype-inheritance">..</a></li>
-<li><code>Object.prototype.__proto__ = null</code> (no more [[Prototype]] over it)</li>
-<li>Built-in obj (e.g. obj, arr, fn, num 5): store data in obj itself, store methods in prototype <a href="https://javascript.info/native-prototypes#other-built-in-prototypes">..</a> &amp; <a href="https://javascript.info/native-prototypes#summary">..</a></li>
-</ul>
-<p>Check prototype chain by <code>console.dir(obj)</code></p>
-<p><a href="https://javascript.info/prototype-methods#summary">Methods of props</a></p>
 ]]></content>
       <categories>
         <category>IT</category>
@@ -986,6 +605,369 @@
 </li>
 </ul>
 <p><a href="https://javascript.info/template-element">Template element</a><br><code>&lt;template&gt;</code> tag: contents ignored by browser (elems inside not render, style/script not work) until inserted to doc (by <code>elem.append(tmpl.content)</code>)</p>
+]]></content>
+      <categories>
+        <category>IT</category>
+        <category>Programming</category>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>IT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript prototypal inheritance</title>
+    <url>/blog/2020/05/28/js-prototype/</url>
+    <content><![CDATA[<h1 id="Prototypal-inheritance"><a href="#Prototypal-inheritance" class="headerlink" title="Prototypal inheritance"></a>Prototypal inheritance</h1><p>Object hidden prop <code>[[Prototype]]</code>: either null || another obj (other value ignored)</p>
+<ul>
+<li><p>get/set prototype: <code>Object.create(proto[, descriptors])</code>, <code>Object.get/setPrototypeOf(obj)</code> <a href="https://javascript.info/prototype-methods">..</a> </p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// fully identical shallow clone of obj</span></span><br><span class="line"><span class="keyword">let</span> clone = <span class="built_in">Object</span>.create(<span class="built_in">Object</span>.getPrototypeOf(obj), <span class="built_in">Object</span>.getOwnPropertyDescriptors(obj));</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>obj.__proto__ = obj2</code> (deprecated)<ul>
+<li>accessor of <code>[[Prototype]]</code> in <code>Object.prototype</code> (see below), not good for user-generated keys <a href="https://javascript.info/prototype-methods#summary">..</a>, fixex by <a href="https://javascript.info/prototype-methods#very-plain">“Very plain” objects</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Task — <a href="https://javascript.info/prototype-methods#add-tostring-to-the-dictionary">add toString() to the “very plain” obj</a></p>
+</li>
+</ul>
+<a id="more"></a>
+
+<p><a href="" title="prop lookup: read prop from prototype if it not exist in the obj, follow `[[Prototype]]` ref chain">Prototypal inheritance</a> </p>
+<ul>
+<li>set prop by <code>=</code> ==&gt; trigger setter in prototype || add new prop in current obj <a href="https://javascript.info/prototype-inheritance#writing-doesn-t-use-prototype">..</a> <ul>
+<li>Write to prototype.prop example <a href="https://javascript.info/prototype-inheritance#why-are-both-hamsters-full">..</a></li>
+</ul>
+</li>
+<li>delete obj.prop &amp; <code>this</code>— current obj</li>
+<li>inherited prop in <code>for..in</code> , not in <code>Object.keys/values(obj)</code> &amp; <code>obj.hasOwnProperty(prop)</code> (true for own prop)</li>
+</ul>
+<h1 id="F-protoype"><a href="#F-protoype" class="headerlink" title="F.protoype"></a>F.protoype</h1><p>A “normal” prop called “prototype” of con-fn F, only work when <code>new F()</code> </p>
+<ul>
+<li>default <strong>F.prototype</strong> = <code>&#123;constructor: F&#125;</code></li>
+<li><code>let obj = new F()</code> ==&gt; <code>obj.[[Prototype]] = F.prototype</code> if <strong>F.protoype</strong> is obj</li>
+<li>re-assign <strong>F.protoype</strong> to another obj — prev created obj.[[Prototype]] not affect</li>
+<li>Task — <a href="https://javascript.info/function-prototype#create-an-object-with-the-same-constructor">new obj.constructor()</a></li>
+</ul>
+<p>Built-in F.prototype</p>
+<ul>
+<li><code>Object.prototype</code> — <code>&#123;&#125;</code> same as <code>new Object()</code>: all obj inherited from it <a href="https://javascript.info/prototype-inheritance">..</a></li>
+<li><code>Object.prototype.__proto__ = null</code> (no more [[Prototype]] over it)</li>
+<li>Built-in obj (e.g. obj, arr, fn, num 5): store data in obj itself, store methods in prototype <a href="https://javascript.info/native-prototypes#other-built-in-prototypes">..</a> &amp; <a href="https://javascript.info/native-prototypes#summary">..</a></li>
+</ul>
+<p>Check prototype chain by <code>console.dir(obj)</code></p>
+<p><a href="https://javascript.info/prototype-methods#summary">Methods of props</a></p>
+]]></content>
+      <categories>
+        <category>IT</category>
+        <category>Programming</category>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>IT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript basics</title>
+    <url>/blog/2020/05/18/js-basics/</url>
+    <content><![CDATA[<h1 id="Var-Data-types-amp-Ops"><a href="#Var-Data-types-amp-Ops" class="headerlink" title="Var, Data types &amp; Ops"></a>Var, Data types &amp; Ops</h1><h2 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h2><ul>
+<li><code>let</code>, <code>const</code>: <a href="https://javascript.info/destructuring-assignment#the-rest-pattern" title="plain code block to group stmts">block</a> scope <a href="https://javascript.info/closure">..</a> — <a href="" title="fn/global scope; dec hoist/raise, allow redec(latter ignored)">the old “var”</a> &amp; <a href="" title="immediately-invoked fn-expr">IIFE</a></li>
+</ul>
+<h2 id="Data-types"><a href="#Data-types" class="headerlink" title="Data types"></a>Data types</h2><ul>
+<li><strong>dynamic typed</strong>, <a href="" title="num/bigInt, str, bool, null/undefined, obj/symbol">7+1</a> basic data types</li>
+<li><code>typeof</code> =&gt; <strong>lowercase str</strong>, e.g. <code>null</code>: “object”, <code>alert</code>: “function” <a href="https://javascript.info/types#type-typeof">..</a></li>
+</ul>
+<a id="more"></a>
+
+<p><strong>Number</strong></p>
+<ul>
+<li>int/float &amp; <code>Infinity</code>, <code>-Infinity</code>, <code>NaN</code> <a href="https://javascript.info/types#number">..</a><ul>
+<li>64-bit — Imprecise calc &amp; BigInt <a href="https://javascript.info/number">..</a></li>
+<li>repre: <code>e</code>, hex/binary/octal — <code>parseInt/-float()</code>, <code>toString(base)</code></li>
+<li>check for int: <code>Math.round(n) == n</code> <a href="https://javascript.info/testing-mocha">..</a></li>
+<li>regular num &amp; NaN test: <code>isFinite()</code>, <code>isNaN()</code> vs <code>Object.is()</code></li>
+</ul>
+</li>
+<li>auto type convert: unary <code>+</code>, math-fn / math-op &amp; <code>Number(value)</code></li>
+<li>rouding: multiply-and-divide &amp; <code>toFixed(n)</code></li>
+<li>tasks: <a href="https://javascript.info/number#why-6-35-tofixed-1-6-3">Why 6.35.toFixed(1) == 6.3?</a>, <a href="https://javascript.info/number#a-random-integer-from-min-to-max">random int from min to max</a></li>
+</ul>
+<p><strong>String</strong></p>
+<ul>
+<li>quotes &amp; <code>...$&#123;...&#125;</code> <a href="https://javascript.info/types#string">..</a></li>
+<li>special chars: line break <code>\n</code>; escape char <code>\</code></li>
+<li>convert in output e.g. <code>alert(..)</code>, <code>String(..)</code> &amp; <code>toString()</code>: <a href="https://javascript.info/object-toprimitive#toprimitive">obj as key</a>, <a href="https://javascript.info/json#custom-tojson">JSON.stringify()</a> <a href="https://javascript.info/type-conversions#summary">..</a></li>
+<li><code>str.length</code>, <code>str[i]</code></li>
+<li>substr <code>str.slice()</code>, str compare <code>str.localeCompare(str2)</code>, <code>str.repeat(n)</code>, charCode <code>String.fromCodePoint(code)</code> &amp; <code>str.codePointAt(i)</code> (in generate pwd <a href="https://javascript.info/generators#generator-composition">..</a>)</li>
+<li>task: <a href="https://javascript.info/string#truncate-the-text">Truncate text</a></li>
+</ul>
+<p><strong>Bool</strong> <a href="https://javascript.info/types#boolean-logical-type">..</a></p>
+<ul>
+<li>6 falsy values <a href="https://javascript.info/type-conversions#boolean-conversion">..</a></li>
+<li>convert by logical op <code>!!</code>, compareson &amp; <code>Boolean(..)</code></li>
+</ul>
+<p><strong>null &amp; undefined</strong> <a href="https://javascript.info/types">..</a></p>
+<ul>
+<li><code>null</code> : value unknown; </li>
+<li><code>undefined</code>: unassigned-var init val &amp; default fn-return </li>
+</ul>
+<h2 id="Ops"><a href="#Ops" class="headerlink" title="Ops"></a>Ops</h2><ul>
+<li>compare diff type (convert to num) &amp; <code>null == undefined</code> , <code>NaN != NaN</code> &amp; <code>===</code></li>
+<li>Nullish coalescing op <code>??</code> (check for “null/undefined”), obj optional chaining <code>?.</code>, comma <a href="https://javascript.info/operators#comma">..</a></li>
+</ul>
+<h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><p><strong>Fn creation</strong> <a href="https://javascript.info/function-expressions#function-expression-vs-function-declaration">..</a></p>
+<ul>
+<li><strong>fn dec</strong>: block-level if strict, def-hoisting<ul>
+<li><code>function ..</code>: start of fn-dec (require a name &amp; cannot be called immediately) <a href="https://javascript.info/var#iife">..</a></li>
+</ul>
+</li>
+<li><strong>fn-expr</strong>: easy dynamic def<ul>
+<li><em>anonymous</em> as callback, N(named) FE</li>
+</ul>
+</li>
+<li><strong>arrow-fn</strong> (see chapter JS object)</li>
+<li><code>new Function([...params], body)</code>: create fn dynamically at run time <a href="https://javascript.info/new-function">..</a></li>
+</ul>
+<p><strong>Closure</strong> <a href="https://javascript.info/closure">..</a></p>
+<ul>
+<li>block scope &amp; Lexical Environment (EnvRecord &amp; outer-ref, created on run time) …</li>
+<li>LE var/fn pre-populate &amp; var “dead zone” <a href="https://javascript.info/closure#is-variable-visible">..</a></li>
+<li>access var through <strong>LE chain</strong> (inner-outer) <a href="https://javascript.info/closure#step-3-inner-and-outer-lexical-environment">..</a> &amp; updated on the LE it lives <a href="https://javascript.info/closure#step-4-returning-a-function">..</a></li>
+</ul>
+<p><a href="https://javascript.info/closure#step-4-returning-a-function">Closure</a>: a fn that remembers its outer vars and can access them by e.g. return a fn (or as obj prop) <a href="https://javascript.info/closure#nested-functions">..</a></p>
+<ul>
+<li>run outerFn: new outerFn.LE &amp; nestedFn created, <code>nestedFn.[[Env..]] = outerFn.LE</code> (set once &amp; forever)<ul>
+<li>so outerFn.LE still reachable af its fn call completion &amp; outerFn.LE not GC <a href="https://javascript.info/closure#garbage-collection">..</a></li>
+<li>call outerFn mtp times ==&gt; diff outerFn.LE &amp; nestedFn created ==&gt; nestedFn independent <a href="https://javascript.info/closure#are-counters-independent">..</a></li>
+</ul>
+</li>
+<li>run nestedFn: new nestedFn.LE created &amp; <code>nestedFn.LE -&gt; outerFn.LE</code> (ref value taken from [[Env..]])</li>
+<li>Task: <a href="https://javascript.info/closure#counter-object">Counter object</a>, <a href="https://javascript.info/closure#sum-with-closures">Sum with closures</a>, <a href="https://javascript.info/closure#filter-through-function">Filter through function</a>, <a href="https://javascript.info/closure#sort-by-field">Sort by field</a>, <a href="https://javascript.info/closure#army-of-functions">Army of functions</a></li>
+</ul>
+<h1 id="Obj-Symbol-Arrow-Fn"><a href="#Obj-Symbol-Arrow-Fn" class="headerlink" title="Obj, Symbol, Arrow Fn"></a>Obj, Symbol, Arrow Fn</h1><p><strong>Obj</strong>: keyed values collection</p>
+<ul>
+<li>key type: str || symbol (see below), value: any type (except “__proto__” prop)<ul>
+<li>key can be reserved word, non-str/symbol key ==&gt; toString <a href="https://javascript.info/object#property-names-limitations">..</a></li>
+<li>key existence test: <code>in</code> op &amp; optional chaining syntax <code>?.</code>  (check for <code>null/undefined</code>, shorter than <code>&amp;&amp;</code>)</li>
+<li>key iterate: <code>for..in</code> loop &amp; prop order ..</li>
+</ul>
+</li>
+<li>value access: <code>obj.prop</code> (var-naming style, no space) vs <code>obj[&quot;prop&quot;]</code><ul>
+<li>prop add/set: <code>obj.prop = xxx</code>, delete: <code>delete obj.prop</code></li>
+</ul>
+</li>
+<li>computed prop, prop value shorthand</li>
+<li>Obj copy-/compare by-ref<ul>
+<li>clone by <code>&#123;...obj&#125;</code> (same as <code>Object.assign(desc, ...srcs)</code>, obj-prop still same ref)</li>
+<li>deep cloning by <code>for..in</code> loop <a href="https://javascript.info/object-copy#cloning-and-merging-object-assign">..</a> &amp; <code>typeof</code></li>
+</ul>
+</li>
+<li>tasks: <a href="https://javascript.info/object#ordered-like-an-object">Check for emptiness</a></li>
+</ul>
+<!-- more -->
+
+<h2 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h2><p>unique id for obj prop <a href="https://javascript.info/types#objects-and-symbols">..</a></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> id = <span class="built_in">Symbol</span>([description]);</span><br><span class="line"><span class="built_in">Symbol</span>(<span class="string">&quot;id&quot;</span>) !== <span class="built_in">Symbol</span>(<span class="string">&quot;id&quot;</span>);</span><br><span class="line"></span><br><span class="line">alert(<span class="built_in">Symbol</span>(<span class="string">&quot;id&quot;</span>));    <span class="comment">// TypeError (not auto-convert to string)</span></span><br><span class="line">alert(id.toString()); 	<span class="comment">// Symbol(id)</span></span><br><span class="line">alert(id.description);  <span class="comment">// id</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Global symbols</strong>: <code>Symbol.for(desc)</code> &amp; <code>Symbol.keyFor(globalSym)</code> =&gt; “desc” or undefined</li>
+<li><strong>Symbol as obj key</strong>: <ul>
+<li>skip in <code>for..in</code> loop  &amp; <code>Object.keys(obj)</code> (looks like non-emutable)</li>
+<li>get by <code>Object.getOwnPropertySymbols(obj)</code> <a href="https://javascript.info/prototype-methods#summary">..</a></li>
+<li>in <code>Object.assign()</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="Methods-amp-“this”"><a href="#Methods-amp-“this”" class="headerlink" title="Methods &amp; “this”"></a>Methods &amp; “this”</h2><ul>
+<li>method def: fn-expr shorthand || copy from fn <a href="https://javascript.info/object-methods#method-examples">..</a></li>
+<li><code>this</code> in fn not bound, value evaluate at run-time — <a href="https://javascript.info/bind#losing-this" title="obj method passed around &amp; called in another context">losing “this” problem</a><ul>
+<li>call fn with obj (“this” in methods): <code>this=obj</code> <a href="https://javascript.info/object-methods#this-in-methods">..</a></li>
+<li>call fn without obj (as fn itself) <a href="https://javascript.info/object-methods#this-is-not-bound">..</a><ul>
+<li><code>this=undefined</code> if strict &amp; <code>arr.forEach(fn)</code> <a href="https://javascript.info/arrow-functions#arrow-functions-have-no-this">..</a></li>
+<li><code>this=window</code> if non-strict &amp; <code>setTimeout(fn, ms)</code> <a href="https://javascript.info/bind#losing-this">..</a>, <a href="https://javascript.info/call-apply-decorators#delaying-decorator">..</a></li>
+</ul>
+</li>
+<li>tasks: <a href="https://javascript.info/object-methods#using-this-in-object-literal">Using “this” in object literal</a>, <a href="https://javascript.info/object-methods#create-a-calculator">calculator</a>, <a href="https://javascript.info/object-methods#create-a-calculator">Chaining</a></li>
+</ul>
+</li>
+<li>bind “this”: <ul>
+<li><a href="https://javascript.info/bind#solution-2-bind">fn binding</a>: <code>let boundFn = fn.bind(context, [...startingArgs])</code><ul>
+<li><code>this=context</code>, starting args &amp; partial <a href="https://javascript.info/bind#partial-functions">..</a>)</li>
+<li><code>context</code> bound <a href="https://javascript.info/bind#bound-function-as-a-method" title="use pre-bound context value (even bound obj changes later), so cannot re-bound">hard-fixed</a></li>
+<li>partial without context <a href="https://javascript.info/bind#going-partial-without-context">..</a></li>
+<li>tasks: <a href="https://javascript.info/bind#bound-function-as-a-method">Bound fn in method</a>, <a href="https://javascript.info/bind#second-bind">re-bound ignored</a>, <a href="https://javascript.info/bind#function-property-after-bind">Fn prop lost af bind</a>, <a href="https://javascript.info/bind#fix-a-function-that-loses-this">method bind context in callbacks</a>, <a href="https://javascript.info/bind#partial-application-for-login">Partial &amp; method</a></li>
+</ul>
+</li>
+<li><a href="https://javascript.info/call-apply-decorators#func-apply" title="Passing all args context to another fn">call forwarding</a>: <code>fn.apply(context, args: arrLike)</code> (prefer) &amp; <code>fn.call(context, ...args);</code></li>
+<li><a href="https://javascript.info/call-apply-decorators#method-borrowing" title="take a method from an obj and call it in the context of another obj">fn-borrowing</a>: <code>[].join.call(arguments);</code> in fn-body<ul>
+<li><code>arr.join()</code> allow arr-like (<code>arguments</code> here instead of <code>[]</code>) as <code>this</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Global-obj"><a href="#Global-obj" class="headerlink" title="Global obj"></a>Global obj</h2><p>Provide built-in var &amp; fn (can be access directly), e.g. <code>window</code> in browser &amp; <code>global</code> in node </p>
+<ul>
+<li>e.g. <code>window.alert</code>, <code>window.innerHeight</code></li>
+<li>global fn || <strong>var</strong>-var ==&gt; become props of global-obj (for compatibility)</li>
+<li>make value global: <code>window.xxx = ...</code></li>
+</ul>
+<h1 id="Obj-amp-Fn"><a href="#Obj-amp-Fn" class="headerlink" title="Obj &amp; Fn"></a>Obj &amp; Fn</h1><h2 id="Arrow-fn"><a href="#Arrow-fn" class="headerlink" title="Arrow fn"></a>Arrow fn</h2><p><code>(...args) =&gt; expr || &#123; ...body &#125; || (obj-litiral)</code> <a href="https://javascript.info/array-methods#map-to-objects">..</a></p>
+<ul>
+<li>no own <code>this</code>, <code>super</code> <a href="https://javascript.info/class-inheritance#overriding-a-method">..</a> &amp; <code>arguments</code> (to run small fn without leaving the current context, so no own context)<ul>
+<li>take <code>this</code> / <code>super</code> from outer LE, e.g. outer fn, cann’t run with <code>new</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="Constructor-fn"><a href="#Constructor-fn" class="headerlink" title="Constructor fn"></a>Constructor fn</h2><ul>
+<li>capital naming e.g. User</li>
+<li>set props &amp; methods <code>this.xxx = ...</code></li>
+<li>call by <code>new</code> op (execute “internal algorithm”)<ul>
+<li>return this ||  another obj (prim-return ignored)</li>
+<li>Constructor mode test: <code>new.target</code></li>
+</ul>
+</li>
+<li>singleton obj <code>new function() &#123; ... &#125;</code></li>
+</ul>
+<h2 id="Fn-is-obj"><a href="#Fn-is-obj" class="headerlink" title="Fn is obj"></a>Fn is obj</h2><p>Fn is a callable action (instead of data) obj, can ± props, pass by ref</p>
+<ul>
+<li>fn-def: store the fn-obj in the same named var, call by <code>fnName(...args)</code> ==&gt; callback fn <a href="https://javascript.info/function-expressions">..</a></li>
+<li>Fn built-in props: <code>name</code> (str, “” for anonymous), <code>length</code> (param #, rest param not count)</li>
+<li>custom prop/helper method: <code>fnName.prop = ..</code></li>
+<li>Named Fn Expr (NFE): internal fn name (for internal ref only)</li>
+<li>tasks: <a href="https://javascript.info/function-object#set-and-decrease-for-counter">Set and decrease for counter</a>, <a href="https://javascript.info/function-object#sum-with-an-arbitrary-amount-of-brackets">Sum with an arbitrary amount of brackets</a></li>
+</ul>
+<h2 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h2><p><strong>Obj prop config</strong></p>
+<ul>
+<li>prop descriptor: <code>value</code> attr + 3 flags: <code>writable</code>, <code>enumerable</code>, <code>configurable</code> <a href="https://javascript.info/property-descriptors">..</a><ul>
+<li>get/set desc: <code>Object.getOwnPropertyDescriptor()</code>, <code>Object.defineProperty()</code><ul>
+<li>obj created “the usually way”: flags default <code>true</code>; flags not supplied in desc defalut <code>false</code></li>
+</ul>
+</li>
+<li>built-in <code>toString()</code> non-enumerable</li>
+<li>Sealing an object globally ..</li>
+</ul>
+</li>
+</ul>
+<p><strong>Accessor props</strong><br><code>get/set propName([value]) &#123;..&#125;</code>, trigger when <code>propName</code> read/assign</p>
+<ul>
+<li>descriptors: <code>get/set([value]) &#123;..&#125;</code>, <code>enumerable</code>, <code>configurable</code></li>
+<li>smarter getter/setter: store value in another internal prop</li>
+</ul>
+<p><strong>Obj -&gt; primitive</strong></p>
+<ul>
+<li><a href="" title="which type to convert">3 hints</a>:  <code>&quot;string&quot;</code>, <code>&quot;number&quot;</code> &amp; <code>&quot;default&quot;</code> (no boolean hint: all <strong>obj  =&gt; true</strong>))</li>
+<li>3 methods: must return a prim value <a href="https://javascript.info/object-toprimitive#return-types">..</a><ul>
+<li><code>[Symbol.toPrimitive](hint)</code> return obj ==&gt; err</li>
+<li>built-in <code>toString()</code> =&gt; “[object Object]”, <code>valueOf()</code> =&gt; obj itself (ignored) <a href="https://javascript.info/object-toprimitive#tostring-valueof">..</a></li>
+</ul>
+</li>
+</ul>
+<p><strong>Primitive as Obj</strong><br>Use to op prim e.g.  <code>String</code>, <code>Number</code>, <code>Boolean</code>, <code>Symbol</code> but keep them fast &amp; lightweight </p>
+<ul>
+<li>temporary wrapper obj created &amp; destroyed <a href="https://javascript.info/primitives-methods#a-primitive-as-an-object">..</a> ==&gt; manually modify obj wrap =&gt; err (strict) || undefined <a href="https://javascript.info/primitives-methods#can-i-add-a-string-property">..</a></li>
+<li>obj wrapper constructor vs type convert fn <a href="https://javascript.info/primitives-methods#a-primitive-as-an-object">..</a></li>
+</ul>
+<h1 id="Built-in-Data-Structure"><a href="#Built-in-Data-Structure" class="headerlink" title="Built-in Data Structure"></a>Built-in Data Structure</h1><ul>
+<li><code>Object</code> key: str/symbol</li>
+<li><code>Array</code> key: int (ordered collection, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">MDN</a>)</li>
+<li><code>Map</code> key: any type</li>
+<li><code>Set</code>: unique values</li>
+</ul>
+<h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><ul>
+<li>value indexing: <code>arr[i]</code>, value iter: <code>for..of</code> || <code>arr.forEach()</code></li>
+<li><code>arr.length</code> = greatest index + 1, init as item #, writable<ul>
+<li>manually increase: <code>undefined</code> values, <code>&quot;&quot;</code> in <code>toString()</code></li>
+<li>manually decrease: elem lost — clear arr <code>arr.length = 0</code>    </li>
+</ul>
+</li>
+<li><code>delete arr[i]</code>: value =&gt; <code>undefined</code> (<code>length</code> keep same) <a href="https://javascript.info/array-methods#splice">..</a></li>
+<li><code>arr.toString()</code> =&gt; <code>_,_,_...</code></li>
+<li><a href="https://javascript.info/keys-values-entries#object-keys-values-entries">Object.keys/values/entries(obj)</a> =&gt; arr (enum &amp; non-symbol key)<ul>
+<li>task: <a href="https://javascript.info/keys-values-entries#sum-the-properties">Sum the props</a></li>
+</ul>
+</li>
+</ul>
+<!-- more  -->
+<p>Methods <a href="https://javascript.info/array-methods#summary">..</a></p>
+<ul>
+<li><code>splice(..)</code> : […rmed-elems]</li>
+<li><code>filter(fn)</code>: […matchedItems], <code>indexOf()</code>, <code>includes()</code></li>
+<li><code>map(fn)</code> &amp; <code>reduce(..)</code>, <code>sort(..)</code> &amp; <code>reverse()</code></li>
+<li><code>arr.join(glue=&#39;,&#39;)</code> &amp; <code>str.split(delim)</code> (<code>(&#39;&#39;)</code>: char[])</li>
+<li><code>Array.isArray(value)</code></li>
+</ul>
+<p><strong>Iterable &amp; array-like</strong></p>
+<ul>
+<li><strong>iterable</strong> (e.g. arr &amp; str) can be used in <code>for..of</code> <a href="https://javascript.info/iterable">..</a></li>
+<li>array-like: obj with <strong>numeric index &amp; length</strong> <a href="https://javascript.info/iterable#array-like">..</a></li>
+<li>iter/arr-like =&gt; array: <code>Array.from(obj...)</code></li>
+</ul>
+<p><code>...</code>: <strong>Spread syntax &amp; Rest param</strong></p>
+<ul>
+<li>Spread syntax: <code>...iter</code>: item list (use <strong>for..of</strong> internally) <ul>
+<li>copy/merge/convert by <code>[...iter]</code> / <code>&#123;...obj&#125;</code></li>
+</ul>
+</li>
+<li>Rest params: <code>...arr</code> in fn-def<ul>
+<li>fn can be called with any # of args (no matter how defined) — only args assoc with param will be count <a href="https://javascript.info/rest-parameters-spread#rest-parameters">..</a></li>
+<li>vs the old built-in var <code>arguments</code> (both iter &amp; arr-like) <a href="https://javascript.info/rest-parameters-spread#the-arguments-variable">..</a></li>
+</ul>
+</li>
+</ul>
+<p><strong>Destructuring assignment syntax</strong></p>
+<ul>
+<li>Copying iter-items into vars: <code>let [...vars]/&#123;...obj-props&#125; = arr/obj</code> (keep origin unmodified)<ul>
+<li>ignore item by extra <code>,</code> <a href="https://javascript.info/destructuring-assignment#array-destructuring">..</a>, <code>=</code> for default value (unprovide value as <strong>undefined</strong>) <a href="https://javascript.info/destructuring-assignment#default-values">..</a>, <code>:</code> for prop-var rename <a href="https://javascript.info/destructuring-assignment#object-destructuring">..</a></li>
+</ul>
+</li>
+<li>easy swap: <code>[guest, admin] = [admin, guest];</code></li>
+<li><a href="https://javascript.info/destructuring-assignment#nested-destructuring">nested desructing</a> : same structure (no var for the group one)</li>
+<li><a href="https://javascript.info/destructuring-assignment#smart-function-parameters">Smart fn params</a>: pass obj as fn param</li>
+<li>obj destcructing to existing var: <code>(</code>{…}<code>)</code> ({} in main code flow as code block) <a href="https://javascript.info/destructuring-assignment#the-rest-pattern">..</a></li>
+</ul>
+<p>Tasks </p>
+<ul>
+<li><a href="https://javascript.info/array#a-maximal-subarray">A maximal subarray</a></li>
+<li><a href="https://javascript.info/array-methods#filter-range-in-place">Filter range “in place”</a></li>
+<li><a href="https://javascript.info/array-methods#sort-in-decreasing-order">Sort in decreasing order</a></li>
+<li><a href="https://javascript.info/array-methods#create-an-extendable-calculator">Create an extendable calculator</a></li>
+<li><a href="https://javascript.info/array-methods#sort-users-by-age">Sort users by age</a></li>
+<li><a href="https://javascript.info/array-methods#shuffle-an-array">Shuffle an array</a></li>
+<li><a href="https://javascript.info/array-methods#filter-unique-array-members">Filter unique array members</a></li>
+<li><a href="https://javascript.info/array-methods#create-keyed-object-from-array">Create keyed object from array</a></li>
+</ul>
+<h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2><ul>
+<li>Send data: <code>JSON.stringify(obj, ..)</code> &amp; <code>obj.toJSON()</code>: formatted str (aka <em>serialized</em> obj)</li>
+<li>Get data: <code>JSON.parse(str, ..)</code> =&gt; obj</li>
+</ul>
+<h2 id="Date-amp-time"><a href="#Date-amp-time" class="headerlink" title="Date &amp; time"></a>Date &amp; time</h2><ul>
+<li><a href="https://javascript.info/date#creation">creation</a> &amp; <code>Date.parse(str)</code> <a href="https://javascript.info/date#date-parse-from-a-string">..</a></li>
+<li><a href="https://javascript.info/date#access-date-components">get/set date components</a>: <code>get/set*()</code>, <a href="https://javascript.info/date#autocorrection">auto-correction</a></li>
+<li>work on timestamp<ul>
+<li><code>Date.now()</code>: get timestamp without intermediate Date obj</li>
+<li><code>date.getTime()</code>: faster than auto-date-to-num-convert (by +/-) <a href="https://javascript.info/date#benchmarking">..</a><ul>
+<li><a href="https://javascript.info/date#summary">more precise time measure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>tasks: <a href="https://javascript.info/date#show-a-weekday">Show a weekday</a> &amp; <a href="https://javascript.info/date#european-weekday">European weekday</a>, <a href="https://javascript.info/date#which-day-of-month-was-many-days-ago">getDateAgo(date, days)</a>, <a href="https://javascript.info/date#last-day-of-month">getLastDayOfMonth(year, month)</a></li>
+</ul>
+<h2 id="Map-amp-Set-WeakMap-amp-WeakSet"><a href="#Map-amp-Set-WeakMap-amp-WeakSet" class="headerlink" title="Map &amp; Set, WeakMap &amp; WeakSet"></a>Map &amp; Set, WeakMap &amp; WeakSet</h2><p><code>Map</code>: obj with key of any type, key compare: <code>===</code> &amp; <code>NaN === NaN</code></p>
+<ul>
+<li><code>new Map([ [_,_], [_,_] ..])</code> &amp; obj &lt;=&gt; map, <code>forEach(..)</code></li>
+</ul>
+<p><code>Set</code>: unique values</p>
+<ul>
+<li>methods similar to map, get/set() =&gt; add(), iter by insertion order <a href="https://javascript.info/map-set#summary">..</a></li>
+<li>task: <a href="https://javascript.info/map-set#filter-unique-array-members">Filter unique array members</a>: <code>Array.from(new Set(arr))</code></li>
+</ul>
+<p><code>WeakMap</code>/<code>WeakSet</code>: if obj unreachable by other means, it rmed from memory &amp; WM/WS</p>
+<ul>
+<li>only <strong>obj</strong> as key/items in WM/WS</li>
+<li>methods <a href="https://javascript.info/weakmap-weakset#weakmap">..</a></li>
+</ul>
 ]]></content>
       <categories>
         <category>IT</category>
