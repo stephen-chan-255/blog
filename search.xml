@@ -616,59 +616,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaScript prototypal inheritance</title>
-    <url>/blog/2020/05/28/js-prototype/</url>
-    <content><![CDATA[<h1 id="Prototypal-inheritance"><a href="#Prototypal-inheritance" class="headerlink" title="Prototypal inheritance"></a>Prototypal inheritance</h1><p>Object hidden prop <code>[[Prototype]]</code>: either null || another obj (other value ignored)</p>
-<ul>
-<li><p>get/set prototype: <code>Object.create(proto[, descriptors])</code>, <code>Object.get/setPrototypeOf(obj)</code> <a href="https://javascript.info/prototype-methods">..</a> </p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// fully identical shallow clone of obj</span></span><br><span class="line"><span class="keyword">let</span> clone = <span class="built_in">Object</span>.create(<span class="built_in">Object</span>.getPrototypeOf(obj), <span class="built_in">Object</span>.getOwnPropertyDescriptors(obj));</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>obj.__proto__ = obj2</code> (deprecated)<ul>
-<li>accessor of <code>[[Prototype]]</code> in <code>Object.prototype</code> (see below), not good for user-generated keys <a href="https://javascript.info/prototype-methods#summary">..</a>, fixex by <a href="https://javascript.info/prototype-methods#very-plain">“Very plain” objects</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Task — <a href="https://javascript.info/prototype-methods#add-tostring-to-the-dictionary">add toString() to the “very plain” obj</a></p>
-</li>
-</ul>
-<a id="more"></a>
-
-<p><a href="" title="prop lookup: read prop from prototype if it not exist in the obj, follow `[[Prototype]]` ref chain">Prototypal inheritance</a> </p>
-<ul>
-<li>set prop by <code>=</code> ==&gt; trigger setter in prototype || add new prop in current obj <a href="https://javascript.info/prototype-inheritance#writing-doesn-t-use-prototype">..</a> <ul>
-<li>Write to prototype.prop example <a href="https://javascript.info/prototype-inheritance#why-are-both-hamsters-full">..</a></li>
-</ul>
-</li>
-<li>delete obj.prop &amp; <code>this</code>— current obj</li>
-<li>inherited prop in <code>for..in</code> , not in <code>Object.keys/values(obj)</code> &amp; <code>obj.hasOwnProperty(prop)</code> (true for own prop)</li>
-</ul>
-<h1 id="F-protoype"><a href="#F-protoype" class="headerlink" title="F.protoype"></a>F.protoype</h1><p>A “normal” prop called “prototype” of con-fn F, only work when <code>new F()</code> </p>
-<ul>
-<li>default <strong>F.prototype</strong> = <code>&#123;constructor: F&#125;</code></li>
-<li><code>let obj = new F()</code> ==&gt; <code>obj.[[Prototype]] = F.prototype</code> if <strong>F.protoype</strong> is obj</li>
-<li>re-assign <strong>F.protoype</strong> to another obj — prev created obj.[[Prototype]] not affect</li>
-<li>Task — <a href="https://javascript.info/function-prototype#create-an-object-with-the-same-constructor">new obj.constructor()</a></li>
-</ul>
-<p>Built-in F.prototype</p>
-<ul>
-<li><code>Object.prototype</code> — <code>&#123;&#125;</code> same as <code>new Object()</code>: all obj inherited from it <a href="https://javascript.info/prototype-inheritance">..</a></li>
-<li><code>Object.prototype.__proto__ = null</code> (no more [[Prototype]] over it)</li>
-<li>Built-in obj (e.g. obj, arr, fn, num 5): store data in obj itself, store methods in prototype <a href="https://javascript.info/native-prototypes#other-built-in-prototypes">..</a> &amp; <a href="https://javascript.info/native-prototypes#summary">..</a></li>
-</ul>
-<p>Check prototype chain by <code>console.dir(obj)</code></p>
-<p><a href="https://javascript.info/prototype-methods#summary">Methods of props</a></p>
-]]></content>
-      <categories>
-        <category>IT</category>
-        <category>Programming</category>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>IT</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript basics</title>
     <url>/blog/2020/05/18/js-basics/</url>
     <content><![CDATA[<h1 id="Var-Data-types-amp-Ops"><a href="#Var-Data-types-amp-Ops" class="headerlink" title="Var, Data types &amp; Ops"></a>Var, Data types &amp; Ops</h1><h2 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h2><ul>
@@ -967,6 +914,45 @@
 <ul>
 <li>only <strong>obj</strong> as key/items in WM/WS</li>
 <li>methods <a href="https://javascript.info/weakmap-weakset#weakmap">..</a></li>
+</ul>
+<h1 id="Prototypal-inheritance"><a href="#Prototypal-inheritance" class="headerlink" title="Prototypal inheritance"></a>Prototypal inheritance</h1><p><strong>[[Prototype]] &amp; prototype</strong></p>
+<ul>
+<li>Obj hidden prop <code>[[Prototype]]</code>: null || obj (aka <strong>prototype</strong>) <a href="https://javascript.info/prototype-inheritance">..</a></li>
+<li>get/set proto: <code>Object.get/setPrototypeOf(obj)</code> &amp; <code>Object.create(proto, ..)</code> — fully obj-clone <a href="https://javascript.info/prototype-methods">..</a><ul>
+<li>deprecated <code>__proto__</code> prop: accessor of <code>[[Prototype]]</code> <a href="https://javascript.info/prototype-inheritance#prototype">..</a><ul>
+<li>reside in <code>Object.prototype</code> <a href="https://javascript.info/prototype-methods#very-plain">..</a></li>
+<li>not good for user-generated keys, fix by <a href="https://javascript.info/prototype-methods#very-plain">“Very plain” obj</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Prototypal inheritance</strong>: if prop not exist in the obj, find from proto (follow <code>[[Prototype]]</code> ref chain) <a href="https://javascript.info/prototype-inheritance#summary">..</a></p>
+<ul>
+<li>proto only for reading prop, write/delete data prop act on the obj (write may call setter in proto) <a href="https://javascript.info/prototype-inheritance#writing-doesn-t-use-prototype">..</a></li>
+<li>proto searching algorithm <a href="https://javascript.info/prototype-inheritance#searching-algorithm">..</a></li>
+<li><code>this</code> in proto method: ref to obj bf <code>.</code> (method shared but obj state not) <a href="https://javascript.info/prototype-inheritance#the-value-of-this">..</a></li>
+<li>inherited prop in <code>for..in</code> (if enum) but not in <code>Object.keys/values()</code> , diff by <code>obj.hasOwnProperty(key)</code> <a href="https://javascript.info/prototype-inheritance#for-in-loop">..</a></li>
+<li>task: <a href="https://javascript.info/prototype-methods#add-tostring-to-the-dictionary">add toString() to the “very plain” obj</a></li>
+</ul>
+<p><strong>F.protoype</strong>: a “normal” prop of con-fn F, set <code>[[Proto..]]</code> for obj from F when <code>new F()</code></p>
+<ul>
+<li><code>let obj = new F()</code>: set <code>obj.[[Prototype]] = F.prototype</code> (<code>&#123;constructor: F&#125;</code> by default)</li>
+<li>so <code>obj.constructor === F</code> &amp; <code>let obj2 = new obj.constructor()</code><ul>
+<li>Task: <a href="https://javascript.info/function-prototype#create-an-object-with-the-same-constructor">Create obj with same constructor</a></li>
+</ul>
+</li>
+<li>re-assign <strong>F.protoype</strong> to another obj: prev created obj.[[Prototype]] not affect</li>
+<li>native F.prototypes<ul>
+<li><code>Object.prototype</code>: inherited to all obj, ref to a huge obj with toString and other methods<ul>
+<li><code>Object.prototype.__proto__ = null</code></li>
+</ul>
+</li>
+<li>Built-in obj (e.g. obj, arr, fn, num 5): store data in obj itself, store methods in prototype <a href="https://javascript.info/native-prototypes#other-built-in-prototypes">..</a> &amp; <a href="https://javascript.info/native-prototypes#summary">..</a></li>
+</ul>
+</li>
+<li>Check prototype chain by <code>console.dir(obj)</code> <a href="https://javascript.info/native-prototypes#other-built-in-prototypes">..</a></li>
+<li>task: <a href="https://javascript.info/native-prototypes#add-the-decorating-defer-to-functions">Add decorating “defer()” to fns</a>, <a href="https://javascript.info/prototype-methods#the-difference-between-calls">The difference between calls</a></li>
 </ul>
 ]]></content>
       <categories>
