@@ -30,7 +30,7 @@
 <meta property="og:description" content="Var, Data types &amp; OpsVariables let, const: block scope .. — the old “var” &amp; IIFE  Data types dynamic typed, 7+1 basic data types typeof &#x3D;&gt; lowercase str, e.g. null: “object”, alert: “functi">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-05-18T15:34:08.000Z">
-<meta property="article:modified_time" content="2020-09-29T07:23:36.351Z">
+<meta property="article:modified_time" content="2020-09-30T08:54:52.957Z">
 <meta property="article:author" content="Stephen Chan">
 <meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
@@ -166,7 +166,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">7</span></a>
+    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">6</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -225,7 +225,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Var-Data-types-amp-Ops"><span class="nav-number">1.</span> <span class="nav-text">Var, Data types &amp; Ops</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Variables"><span class="nav-number">1.1.</span> <span class="nav-text">Variables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-types"><span class="nav-number">1.2.</span> <span class="nav-text">Data types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ops"><span class="nav-number">1.3.</span> <span class="nav-text">Ops</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Function"><span class="nav-number">2.</span> <span class="nav-text">Function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Obj-Symbol-Arrow-Fn"><span class="nav-number">3.</span> <span class="nav-text">Obj, Symbol, Arrow Fn</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol"><span class="nav-number">3.1.</span> <span class="nav-text">Symbol</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Methods-amp-%E2%80%9Cthis%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">Methods &amp; “this”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Global-obj"><span class="nav-number">3.3.</span> <span class="nav-text">Global obj</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Obj-amp-Fn"><span class="nav-number">4.</span> <span class="nav-text">Obj &amp; Fn</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Arrow-fn"><span class="nav-number">4.1.</span> <span class="nav-text">Arrow fn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Constructor-fn"><span class="nav-number">4.2.</span> <span class="nav-text">Constructor fn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fn-is-obj"><span class="nav-number">4.3.</span> <span class="nav-text">Fn is obj</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced"><span class="nav-number">4.4.</span> <span class="nav-text">Advanced</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Built-in-Data-Structure"><span class="nav-number">5.</span> <span class="nav-text">Built-in Data Structure</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Array"><span class="nav-number">5.1.</span> <span class="nav-text">Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON"><span class="nav-number">5.2.</span> <span class="nav-text">JSON</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Date-amp-time"><span class="nav-number">5.3.</span> <span class="nav-text">Date &amp; time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map-amp-Set-WeakMap-amp-WeakSet"><span class="nav-number">5.4.</span> <span class="nav-text">Map &amp; Set, WeakMap &amp; WeakSet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Prototypal-inheritance"><span class="nav-number">6.</span> <span class="nav-text">Prototypal inheritance</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Var-Data-types-amp-Ops"><span class="nav-number">1.</span> <span class="nav-text">Var, Data types &amp; Ops</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Variables"><span class="nav-number">1.1.</span> <span class="nav-text">Variables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-types"><span class="nav-number">1.2.</span> <span class="nav-text">Data types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ops"><span class="nav-number">1.3.</span> <span class="nav-text">Ops</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Function"><span class="nav-number">2.</span> <span class="nav-text">Function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Obj-Symbol-Arrow-Fn"><span class="nav-number">3.</span> <span class="nav-text">Obj, Symbol, Arrow Fn</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol"><span class="nav-number">3.1.</span> <span class="nav-text">Symbol</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Methods-amp-%E2%80%9Cthis%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">Methods &amp; “this”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Global-obj"><span class="nav-number">3.3.</span> <span class="nav-text">Global obj</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Obj-amp-Fn"><span class="nav-number">4.</span> <span class="nav-text">Obj &amp; Fn</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Arrow-fn"><span class="nav-number">4.1.</span> <span class="nav-text">Arrow fn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Constructor-fn"><span class="nav-number">4.2.</span> <span class="nav-text">Constructor fn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fn-is-obj"><span class="nav-number">4.3.</span> <span class="nav-text">Fn is obj</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced"><span class="nav-number">4.4.</span> <span class="nav-text">Advanced</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Built-in-Data-Structure"><span class="nav-number">5.</span> <span class="nav-text">Built-in Data Structure</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Array"><span class="nav-number">5.1.</span> <span class="nav-text">Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON"><span class="nav-number">5.2.</span> <span class="nav-text">JSON</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Date-amp-time"><span class="nav-number">5.3.</span> <span class="nav-text">Date &amp; time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map-amp-Set-WeakMap-amp-WeakSet"><span class="nav-number">5.4.</span> <span class="nav-text">Map &amp; Set, WeakMap &amp; WeakSet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Prototypal-inheritance"><span class="nav-number">6.</span> <span class="nav-text">Prototypal inheritance</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Class"><span class="nav-number">7.</span> <span class="nav-text">Class</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Class-vs-fn"><span class="nav-number">7.1.</span> <span class="nav-text">Class vs fn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class-inheritance"><span class="nav-number">7.2.</span> <span class="nav-text">Class inheritance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mixin"><span class="nav-number">7.3.</span> <span class="nav-text">Mixin</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -241,7 +241,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -350,7 +350,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-29 15:23:36" itemprop="dateModified" datetime="2020-09-29T15:23:36+08:00">2020-09-29</time>
+        <time title="Modified: 2020-09-30 16:54:52" itemprop="dateModified" datetime="2020-09-30T16:54:52+08:00">2020-09-30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -715,6 +715,63 @@
 </li>
 <li>Check prototype chain by <code>console.dir(obj)</code> <a target="_blank" rel="noopener" href="https://javascript.info/native-prototypes#other-built-in-prototypes">..</a></li>
 <li>task: <a target="_blank" rel="noopener" href="https://javascript.info/native-prototypes#add-the-decorating-defer-to-functions">Add decorating “defer()” to fns</a>, <a target="_blank" rel="noopener" href="https://javascript.info/prototype-methods#the-difference-between-calls">The difference between calls</a></li>
+</ul>
+<h1 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">F</span> </span>&#123;</span><br><span class="line">  [<span class="keyword">static</span>] field = ..; <span class="comment">// access field in method by &quot;this.xxx&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(..) &#123; <span class="comment">/*..*/</span> &#125; <span class="comment">// called when &quot;new&quot;</span></span><br><span class="line">  </span><br><span class="line">  [<span class="keyword">static</span>] method() &#123; <span class="comment">/*..*/</span> &#125; </span><br><span class="line">  [get/set] method(..) &#123; <span class="comment">/*..*/</span> &#125;</span><br><span class="line">  [expr]() &#123; <span class="comment">/*..*/</span> &#125; <span class="comment">// computed name</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>bind <code>this</code> in method <a target="_blank" rel="noopener" href="https://javascript.info/class#making-bound-methods-with-class-fields">..</a><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.xxx = <span class="built_in">this</span>.xxx.bind(<span class="built_in">this</span>); <span class="comment">// bind existing method in constructor </span></span><br><span class="line">xxx = <span class="function">() =&gt;</span> &#123;..&#125; <span class="comment">// field store in obj itself (&quot;this&quot; = obj)</span></span><br></pre></td></tr></table></figure></li>
+<li>access <code>static</code> outside <code>F.field = xxx</code> <a target="_blank" rel="noopener" href="https://javascript.info/static-properties-methods#static-properties">..</a> / <code>F.method = function() &#123; .. &#125;</code> (pass <code>F</code> as <code>this</code>) <a target="_blank" rel="noopener" href="https://javascript.info/static-properties-methods">..</a><ul>
+<li>return obj in static method by <code>new this(..)</code> (factory method)</li>
+</ul>
+</li>
+<li>Class Encapsulation <a target="_blank" rel="noopener" href="https://javascript.info/private-protected-properties-methods">..</a><ul>
+<li><strong>protected</strong>: <code>_xxx</code> (convention)</li>
+<li><strong>private</strong>: <code>#xxx</code> (proposal, cannot access by <code>this[&#39;#xxx&#39;]</code>)</li>
+<li><strong>read-only prop</strong>: only getter no setter (set value on con)</li>
+</ul>
+</li>
+<li>task: <a target="_blank" rel="noopener" href="https://javascript.info/class#rewrite-to-class">class Clock</a></li>
+</ul>
+<h2 id="Class-vs-fn"><a href="#Class-vs-fn" class="headerlink" title="Class vs fn"></a>Class vs fn</h2><p><code>typeof F</code>: <code>&quot;function&quot;</code> <a target="_blank" rel="noopener" href="https://javascript.info/class#what-is-a-class">..</a></p>
+<ul>
+<li><code>class F &#123; .. &#125;</code>: <strong>F</strong> (con-fn) &amp; <strong>F.prototype</strong> <a target="_blank" rel="noopener" href="https://javascript.info/class#what-is-a-class">..</a><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">F: &#123;</span><br><span class="line">  ...statics,</span><br><span class="line"> <span class="keyword">constructor</span>(),</span><br><span class="line">  [[Prototype]]: ParentF || Function.prototype </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">F.prototype: &#123; </span><br><span class="line">  ...methods, <span class="comment">// non-enum</span></span><br><span class="line">  <span class="keyword">constructor</span>: F, </span><br><span class="line">   [Prototype]]: ParentF.prototype || Object.prototype </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></li>
+<li><code>new F()</code>: obj<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">obj: &#123;</span><br><span class="line">  ...fields,</span><br><span class="line">  [[Prototype]]: F.prototype <span class="comment">// access to non-static methods</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>class &amp; fn diffs <a target="_blank" rel="noopener" href="https://javascript.info/class#not-just-a-syntactic-sugar">..</a></li>
+</ul>
+<h2 id="Class-inheritance"><a href="#Class-inheritance" class="headerlink" title="Class inheritance"></a>Class inheritance</h2><p><strong>“extends” keyword</strong><br><code>class F1 extends F2 &#123; .. &#125;</code> set 2 proto refs: <a target="_blank" rel="noopener" href="https://javascript.info/static-properties-methods#inheritance-of-static-properties-and-methods">..</a></p>
+<ul>
+<li><code>F1.[[Prototype]] = F2</code> (con-fn inheritance, for statics)</li>
+<li><code>F1.prototype.[[Prototype]] = F2.protptype</code> (for methods)</li>
+</ul>
+<p><strong>Member overriding</strong></p>
+<ul>
+<li>override con/method: <code>super(..)</code> &amp; <code>super.method(..)</code> <a target="_blank" rel="noopener" href="https://javascript.info/class-inheritance#overriding-a-method">..</a><ul>
+<li>default child-con: <code>super(...args)</code> <a target="_blank" rel="noopener" href="https://javascript.info/class-inheritance#overriding-constructor">..</a></li>
+<li>call <code>super(..)</code> in child-con bf using <code>this</code> <a target="_blank" rel="noopener" href="https://javascript.info/class-inheritance#overriding-constructor">..</a> (<a target="_blank" rel="noopener" href="https://javascript.info/class-inheritance#super-internals-homeobject">why?</a>)<ul>
+<li>when <code>new</code>: child-con create <code>this</code> by parent-con (in regular fn, an empty obj created for <code>this</code>) <a target="_blank" rel="noopener" href="https://javascript.info/class-inheritance#overriding-constructor">..</a></li>
+<li>method.<code>[[HomeObject]]</code> = their class/obj <a target="_blank" rel="noopener" href="https://javascript.info/class-inheritance#homeobject">..</a> (bound forever <a target="_blank" rel="noopener" href="https://javascript.info/class-inheritance#methods-are-not-free">..</a>) &amp; <code>super</code> find parent methods in <code>[[HomeObject]].[[Prototype]]</code> <a target="_blank" rel="noopener" href="https://javascript.info/mixins#a-mixin-example">..</a></li>
+<li>so method with <code>super</code> not free (it uses <code>[[HomeObject]]</code>) <a target="_blank" rel="noopener" href="https://javascript.info/class-inheritance#methods-are-not-free">..</a></li>
+<li><code>super</code> only work for <code>method()</code>, not <code>method: function() &#123; .. &#125;</code> <a target="_blank" rel="noopener" href="https://javascript.info/class-inheritance#methods-not-function-properties">..</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>override field: <code>field = ..</code> (parent-con use own field value, not overriden one) <a target="_blank" rel="noopener" href="https://javascript.info/class-inheritance#overriding-class-fields-a-tricky-note">..</a></li>
+<li>task: <a target="_blank" rel="noopener" href="https://javascript.info/class-inheritance#extended-clock">Extended clock</a>, <a target="_blank" rel="noopener" href="https://javascript.info/static-properties-methods#class-extends-object">Class extends Object?</a></li>
+</ul>
+<p><strong>Extending built-in classes</strong> <a target="_blank" rel="noopener" href="https://javascript.info/extend-natives">..</a></p>
+<p><strong>Class Type Checking</strong> <a target="_blank" rel="noopener" href="https://javascript.info/instanceof">..</a></p>
+<ul>
+<li><code>obj instanceof F</code> — <code>F[Symbol.hasInstance](obj)</code> &amp; <code>F.prototype.isPrototypeOf(obj)</code></li>
+<li><code>Object.prototype.toString</code>: <code>[object xxx]</code> (xxx: value of <code>obj[Symbol.toStringTag]</code>)</li>
+</ul>
+<h2 id="Mixin"><a href="#Mixin" class="headerlink" title="Mixin"></a>Mixin</h2><p>A class / obj contains methods for other classes without inheritance</p>
+<ul>
+<li>imp by copying method into prototype <code>Object.assign(F.prototype, mixin)</code><ul>
+<li>prevent mixin overwrite class methods</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/mixins#eventmixin">EventMixin example</a></li>
 </ul>
 
     </div>

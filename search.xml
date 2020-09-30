@@ -106,101 +106,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaScript Classes</title>
-    <url>/blog/2020/06/01/js-class/</url>
-    <content><![CDATA[<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">F</span> </span>&#123;</span><br><span class="line">  [<span class="keyword">static</span>] field = ..; <span class="comment">// new feature, access field in method by: `this.xxx`</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(..) &#123; <span class="comment">/*..*/</span> &#125;</span><br><span class="line">  </span><br><span class="line">  [<span class="keyword">static</span>] method() &#123; <span class="comment">/*..*/</span> &#125; </span><br><span class="line">  [get/set] method(..) &#123; <span class="comment">/*..*/</span> &#125;</span><br><span class="line">  [expr]() &#123; <span class="comment">/*..*/</span> &#125; <span class="comment">// computed name</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h1><ul>
-<li><p><code>static</code></p>
-<ul>
-<li>access static outside <code>F.field = xxx</code> / <code>F.method = function() &#123; .. &#125;</code> ==&gt; pass <code>F</code> as <code>this</code></li>
-<li>return obj in static method by <code>new this(..)</code></li>
-</ul>
-</li>
-<li><p>Class Encapsulation</p>
-<ul>
-<li><strong>protected</strong> — <code>_xxx</code> (convention)</li>
-<li><strong>private</strong> — <code>#xxx</code> (proposal), cannot access by <code>this[&#39;#xxx&#39;]</code></li>
-<li><strong>read-only prop</strong>: only getter no setter (set value on con)</li>
-</ul>
-</li>
-<li><p>(non-constructor) method access <code>this</code> require bind — 2 syntax to bind method with field <a href="https://javascript.info/class#making-bound-methods-with-class-fields">..</a></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">this</span>.xxx = <span class="built_in">this</span>.xxx.bind(<span class="built_in">this</span>); <span class="comment">// bind existing method in constructor </span></span><br><span class="line">xxx = <span class="function">() =&gt;</span> &#123;..&#125; <span class="comment">// take &quot;this&quot; from outside in class scope (&quot;this&quot; = obj)</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>task — <a href="https://javascript.info/class#rewrite-to-class">class Clock</a></p>
-</li>
-</ul>
-<h1 id="Class-vs-function"><a href="#Class-vs-function" class="headerlink" title="Class vs function"></a>Class vs function</h1><p><code>typeof F</code> =&gt; <code>&quot;function&quot;</code> <a href="https://javascript.info/class-inheritance#class-extends-object">..</a></p>
-<ul>
-<li><p><code>class F &#123; .. &#125;</code> <a href="https://javascript.info/class#what-is-a-class">..</a> ==&gt; <strong>F</strong> (a constructor fn)</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> F = &#123;</span><br><span class="line">  <span class="keyword">constructor</span>(),</span><br><span class="line">  ...statics, </span><br><span class="line">  [[Prototype]]: ParentClass || Function.prototype, </span><br><span class="line"></span><br><span class="line">  prototype: &#123;</span><br><span class="line">    <span class="keyword">constructor</span>: F, </span><br><span class="line">    ...(non-static) methods, </span><br><span class="line">    [[Prototype]]: ParentClass.prototype || Object.prototype </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>new F()</code>: call <strong>constructor()</strong> internal</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  ...(non-<span class="keyword">static</span>) fields,</span><br><span class="line">  [[Prototype]]: F.prototype <span class="comment">// access to non-static methods</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><a href="https://javascript.info/class#not-just-a-syntactic-sugar">class vs regular fn</a></p>
-<ul>
-<li>class auto-strict; methods all non-enum</li>
-<li>constructor label <code>[[FunctionKind]]:&quot;classConstructor&quot;</code> ==&gt;  <code>F()</code> must call by <code>new</code></li>
-<li>str repre <code>class F &#123; .. &#125;</code></li>
-<li>class-expr ..</li>
-</ul>
-</li>
-</ul>
-<h1 id="Class-inheritance"><a href="#Class-inheritance" class="headerlink" title="Class inheritance"></a>Class inheritance</h1><p><code>class F1 extends F2 &#123; .. &#125;</code> <a href="https://javascript.info/static-properties-methods#inheritance-of-static-properties-and-methods">..</a></p>
-<ul>
-<li><strong>F1</strong>.[[Prototype]] = <strong>F2</strong> (for static)</li>
-<li><strong>F1.prototype</strong>.[[Prototype]] = <strong>F2.protptype</strong> (for non-static)</li>
-</ul>
-<p>Override constructor/method: call <code>super(..) </code>  /<code>super.method(..)</code> bf use <code>this</code> (<a href="https://javascript.info/class-inheritance#super-internals-homeobject">why?</a>)</p>
-<ul>
-<li><code>this</code> in child.con (labelled by <code>[[ConstructorKind]]:&quot;derived&quot;</code>) must created by parent.con <ul>
-<li>in regular fn, an empty obj is created for <code>this</code></li>
-</ul>
-</li>
-<li><code>super</code> : bind method.<code>[[HomeObject]]</code> = their class/object (bound forever) <ul>
-<li>so method call “super” not free</li>
-<li><code>super </code>looks for parent methods in <code>[[HomeObject]].[[Prototype]]</code> <a href="https://javascript.info/mixins">..</a></li>
-<li>only work for method syntax <code>method()</code>, not <code>method: function() &#123; .. &#125;</code> <a href="https://javascript.info/class-inheritance#methods-not-function-properties">..</a></li>
-</ul>
-</li>
-<li>task — <a href="https://javascript.info/class-inheritance#extended-clock">Extended clock</a>, <a href="https://javascript.info/class-inheritance#class-extends-object">Class extends Object?</a></li>
-</ul>
-<p>Extending built-in classes</p>
-<ul>
-<li>Built-in classes like <code>Array</code>, <code>Map</code> are extendable</li>
-<li>stop pass extended fnality further in new entities in arr.map/filter: return Array in <code>static get [Symbol.species]()</code></li>
-<li>Built-ins only inherit non-statics, <code>Array.[[Prototype]] !== Object</code></li>
-</ul>
-<h1 id="Class-Type-Checking"><a href="#Class-Type-Checking" class="headerlink" title="Class Type Checking"></a>Class Type Checking</h1><ul>
-<li><code>obj instanceof F </code> <ul>
-<li>F[Symbol.hasInstance](obj)</li>
-<li>F.prototype.isPrototypeOf(obj)</li>
-</ul>
-</li>
-<li><code>Object.prototype.toString</code> =&gt; <strong>[object …]</strong><ul>
-<li>“…”: value of <code>obj[Symbol.toStringTag]</code>, e.g. “Object”, “Number”…</li>
-</ul>
-</li>
-</ul>
-<h1 id="Mixin"><a href="#Mixin" class="headerlink" title="Mixin"></a>Mixin</h1><p>A class / obj contains methods for other classes without inheritance</p>
-<ul>
-<li>add new feature by copying method to prototype <code>Object.assign(F.prototype, mixin)</code> <ul>
-<li>prevent mixin overwrite class methods</li>
-</ul>
-</li>
-<li><a href="https://javascript.info/mixins#eventmixin">EventMixin example</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>IT</category>
-        <category>Programming</category>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>IT</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript miscellaneous</title>
     <url>/blog/2020/05/20/js-miscellaneous/</url>
     <content><![CDATA[<h1 id="‘use-strict’"><a href="#‘use-strict’" class="headerlink" title="‘use strict’"></a>‘use strict’</h1><p>To enable ES5 modification for old features (may break old code)</p>
@@ -953,6 +858,63 @@
 </li>
 <li>Check prototype chain by <code>console.dir(obj)</code> <a href="https://javascript.info/native-prototypes#other-built-in-prototypes">..</a></li>
 <li>task: <a href="https://javascript.info/native-prototypes#add-the-decorating-defer-to-functions">Add decorating “defer()” to fns</a>, <a href="https://javascript.info/prototype-methods#the-difference-between-calls">The difference between calls</a></li>
+</ul>
+<h1 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">F</span> </span>&#123;</span><br><span class="line">  [<span class="keyword">static</span>] field = ..; <span class="comment">// access field in method by &quot;this.xxx&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(..) &#123; <span class="comment">/*..*/</span> &#125; <span class="comment">// called when &quot;new&quot;</span></span><br><span class="line">  </span><br><span class="line">  [<span class="keyword">static</span>] method() &#123; <span class="comment">/*..*/</span> &#125; </span><br><span class="line">  [get/set] method(..) &#123; <span class="comment">/*..*/</span> &#125;</span><br><span class="line">  [expr]() &#123; <span class="comment">/*..*/</span> &#125; <span class="comment">// computed name</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>bind <code>this</code> in method <a href="https://javascript.info/class#making-bound-methods-with-class-fields">..</a><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">this</span>.xxx = <span class="built_in">this</span>.xxx.bind(<span class="built_in">this</span>); <span class="comment">// bind existing method in constructor </span></span><br><span class="line">xxx = <span class="function">() =&gt;</span> &#123;..&#125; <span class="comment">// field store in obj itself (&quot;this&quot; = obj)</span></span><br></pre></td></tr></table></figure></li>
+<li>access <code>static</code> outside <code>F.field = xxx</code> <a href="https://javascript.info/static-properties-methods#static-properties">..</a> / <code>F.method = function() &#123; .. &#125;</code> (pass <code>F</code> as <code>this</code>) <a href="https://javascript.info/static-properties-methods">..</a><ul>
+<li>return obj in static method by <code>new this(..)</code> (factory method)</li>
+</ul>
+</li>
+<li>Class Encapsulation <a href="https://javascript.info/private-protected-properties-methods">..</a><ul>
+<li><strong>protected</strong>: <code>_xxx</code> (convention)</li>
+<li><strong>private</strong>: <code>#xxx</code> (proposal, cannot access by <code>this[&#39;#xxx&#39;]</code>)</li>
+<li><strong>read-only prop</strong>: only getter no setter (set value on con)</li>
+</ul>
+</li>
+<li>task: <a href="https://javascript.info/class#rewrite-to-class">class Clock</a></li>
+</ul>
+<h2 id="Class-vs-fn"><a href="#Class-vs-fn" class="headerlink" title="Class vs fn"></a>Class vs fn</h2><p><code>typeof F</code>: <code>&quot;function&quot;</code> <a href="https://javascript.info/class#what-is-a-class">..</a></p>
+<ul>
+<li><code>class F &#123; .. &#125;</code>: <strong>F</strong> (con-fn) &amp; <strong>F.prototype</strong> <a href="https://javascript.info/class#what-is-a-class">..</a><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">F: &#123;</span><br><span class="line">  ...statics,</span><br><span class="line"> <span class="keyword">constructor</span>(),</span><br><span class="line">  [[Prototype]]: ParentF || Function.prototype </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">F.prototype: &#123; </span><br><span class="line">  ...methods, <span class="comment">// non-enum</span></span><br><span class="line">  <span class="keyword">constructor</span>: F, </span><br><span class="line">   [Prototype]]: ParentF.prototype || Object.prototype </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></li>
+<li><code>new F()</code>: obj<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">obj: &#123;</span><br><span class="line">  ...fields,</span><br><span class="line">  [[Prototype]]: F.prototype <span class="comment">// access to non-static methods</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>class &amp; fn diffs <a href="https://javascript.info/class#not-just-a-syntactic-sugar">..</a></li>
+</ul>
+<h2 id="Class-inheritance"><a href="#Class-inheritance" class="headerlink" title="Class inheritance"></a>Class inheritance</h2><p><strong>“extends” keyword</strong><br><code>class F1 extends F2 &#123; .. &#125;</code> set 2 proto refs: <a href="https://javascript.info/static-properties-methods#inheritance-of-static-properties-and-methods">..</a></p>
+<ul>
+<li><code>F1.[[Prototype]] = F2</code> (con-fn inheritance, for statics)</li>
+<li><code>F1.prototype.[[Prototype]] = F2.protptype</code> (for methods)</li>
+</ul>
+<p><strong>Member overriding</strong></p>
+<ul>
+<li>override con/method: <code>super(..)</code> &amp; <code>super.method(..)</code> <a href="https://javascript.info/class-inheritance#overriding-a-method">..</a><ul>
+<li>default child-con: <code>super(...args)</code> <a href="https://javascript.info/class-inheritance#overriding-constructor">..</a></li>
+<li>call <code>super(..)</code> in child-con bf using <code>this</code> <a href="https://javascript.info/class-inheritance#overriding-constructor">..</a> (<a href="https://javascript.info/class-inheritance#super-internals-homeobject">why?</a>)<ul>
+<li>when <code>new</code>: child-con create <code>this</code> by parent-con (in regular fn, an empty obj created for <code>this</code>) <a href="https://javascript.info/class-inheritance#overriding-constructor">..</a></li>
+<li>method.<code>[[HomeObject]]</code> = their class/obj <a href="https://javascript.info/class-inheritance#homeobject">..</a> (bound forever <a href="https://javascript.info/class-inheritance#methods-are-not-free">..</a>) &amp; <code>super</code> find parent methods in <code>[[HomeObject]].[[Prototype]]</code> <a href="https://javascript.info/mixins#a-mixin-example">..</a></li>
+<li>so method with <code>super</code> not free (it uses <code>[[HomeObject]]</code>) <a href="https://javascript.info/class-inheritance#methods-are-not-free">..</a></li>
+<li><code>super</code> only work for <code>method()</code>, not <code>method: function() &#123; .. &#125;</code> <a href="https://javascript.info/class-inheritance#methods-not-function-properties">..</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>override field: <code>field = ..</code> (parent-con use own field value, not overriden one) <a href="https://javascript.info/class-inheritance#overriding-class-fields-a-tricky-note">..</a></li>
+<li>task: <a href="https://javascript.info/class-inheritance#extended-clock">Extended clock</a>, <a href="https://javascript.info/static-properties-methods#class-extends-object">Class extends Object?</a></li>
+</ul>
+<p><strong>Extending built-in classes</strong> <a href="https://javascript.info/extend-natives">..</a></p>
+<p><strong>Class Type Checking</strong> <a href="https://javascript.info/instanceof">..</a></p>
+<ul>
+<li><code>obj instanceof F</code> — <code>F[Symbol.hasInstance](obj)</code> &amp; <code>F.prototype.isPrototypeOf(obj)</code></li>
+<li><code>Object.prototype.toString</code>: <code>[object xxx]</code> (xxx: value of <code>obj[Symbol.toStringTag]</code>)</li>
+</ul>
+<h2 id="Mixin"><a href="#Mixin" class="headerlink" title="Mixin"></a>Mixin</h2><p>A class / obj contains methods for other classes without inheritance</p>
+<ul>
+<li>imp by copying method into prototype <code>Object.assign(F.prototype, mixin)</code><ul>
+<li>prevent mixin overwrite class methods</li>
+</ul>
+</li>
+<li><a href="https://javascript.info/mixins#eventmixin">EventMixin example</a></li>
 </ul>
 ]]></content>
       <categories>
