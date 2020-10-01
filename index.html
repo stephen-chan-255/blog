@@ -421,7 +421,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-04 18:22:18" itemprop="dateModified" datetime="2020-09-04T18:22:18+08:00">2020-09-04</time>
+        <time title="Modified: 2020-10-01 16:00:29" itemprop="dateModified" datetime="2020-10-01T16:00:29+08:00">2020-10-01</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -460,21 +460,6 @@
 </ul>
 </li>
 <li>Cross-window messaging: call <code>receiverWin.postMessage(..)</code> in sender win &amp; receiver.message event in receiverWin ..</li>
-</ul>
-<p>Popup window <code>window.open(..)</code>: a separate window with own indep JS env</p>
-<ul>
-<li>open a new tab (by default) in browser (or window if sizes provided <a target="_blank" rel="noopener" href="https://javascript.info/popup-windows#summary">..</a>)</li>
-<li>Access popup from window: <code>let popupWin = window.open(..); popupWin.document.xxx; popupWin.focus()</code></li>
-<li>Access window from popup: <code>popupWin.opener</code></li>
-<li>close popup: <code>win.close()</code></li>
-<li>window scrolling &amp; resizing ..</li>
-</ul>
-<p>Embedded window <code>&lt;iframe&gt;</code>: own separate <code>document</code> and <code>window</code> obj</p>
-<ul>
-<li>wrong document pitfall <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#iframe-wrong-document-pitfall">..</a></li>
-<li>window hierarchy &amp; <code>window.frames</code> <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#collection-window-frames">..</a></li>
-<li>iframe <code>sandbox</code> attr (“different origin” state) <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#the-sandbox-iframe-attribute">..</a></li>
-<li>transparent iframe &amp; clickjacking attack <a target="_blank" rel="noopener" href="https://javascript.info/clickjacking">..</a></li>
 </ul>
           <!--noindex-->
             <div class="post-button">
@@ -643,7 +628,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-04 18:22:17" itemprop="dateModified" datetime="2020-09-04T18:22:17+08:00">2020-09-04</time>
+        <time title="Modified: 2020-10-01 16:00:04" itemprop="dateModified" datetime="2020-10-01T16:00:04+08:00">2020-10-01</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -696,56 +681,14 @@
 </ul>
 </li>
 </ul>
-<h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><p>JS obj that links <strong>executor</strong> &amp; <strong>handler</strong> together</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  ...resolve(value) || reject(error) ... </span><br><span class="line">&#125;)</span><br><span class="line">	.then(<span class="function"><span class="params">value</span> =&gt;</span> &#123; <span class="comment">/* handle value */</span> &#125;)</span><br><span class="line">	.catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123; <span class="comment">/* handle error */</span> &#125;)</span><br><span class="line">	.finally &#123;...&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Executor-resolve-reject"><a href="#Executor-resolve-reject" class="headerlink" title="Executor(resolve, reject)"></a>Executor(resolve, reject)</h3><ul>
-<li><p>when <code>new Promise</code>, fn <code>executor(resolve, reject)</code> auto-run</p>
-</li>
-<li><p><code>resolve</code> &amp; <code>reject</code> — pre-defiend callbacks, called once (further calls ignored)</p>
-<ul>
-<li>Promise init props: <strong>[[PromiseStatus]]: “pending”</strong>, <strong>[[PromiseValue]]: undefined</strong></li>
-<li>run <code>resolve(result)</code>: <strong>“resolved”</strong>, <strong>result</strong></li>
-<li>run <code>reject(error)</code> / <strong>error occur</strong> (turn into a rejected promise <a target="_blank" rel="noopener" href="https://javascript.info/promise-error-handling#implicit-try-catch">..</a>): <strong>“rejected”</strong>, <strong>error</strong></li>
-</ul>
-</li>
-<li><p>callback vs promise — promise only single result (callback can be called mtp times) <a target="_blank" rel="noopener" href="https://javascript.info/promisify">..</a></p>
-</li>
-</ul>
-<h3 id="Consumer-then-catch-final"><a href="#Consumer-then-catch-final" class="headerlink" title="Consumer: .then(), .catch(), .final()"></a>Consumer: .then(), .catch(), .final()</h3><p>Wait for promise settled (resolve or reject) &amp; process the value (result or error) by its handler</p>
-<ul>
-<li><code>.then(onFulfill[, onReject])</code></li>
-<li><code>.catch(errorHandler)</code>  === .then(null, errorHandler)<ul>
-<li>error occur in setTimeout (except <code>reject(err)</code>) not catched <a target="_blank" rel="noopener" href="https://javascript.info/promise-error-handling#error-in-settimeout">..</a></li>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/promise-error-handling#unhandled-rejections">unhandlerd rejection &amp; window ‘unhandledrejection’ event</a></li>
-</ul>
-</li>
-<li><code>.finally(fn)</code> — handler no params (just pass result to next handler)</li>
-</ul>
-<h3 id="Promise-Chain"><a href="#Promise-Chain" class="headerlink" title="Promise Chain"></a>Promise Chain</h3><ul>
-<li><code>.then()</code>/ <code>.catch()</code> / <code>.finally()</code> ==&gt; return a promise — can be chainned</li>
-<li>handler return a promise / result — overwrite promise value &amp; pass to next assoc handler<ul>
-<li>handler no return ==&gt; resolve(undefined) || adopt prev-Promise.state</li>
-</ul>
-</li>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/promise-chaining#bigger-example-fetch">promise &amp; fetch</a></li>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/promise-chaining#example-loadscript">customized Thenable obj</a></li>
-</ul>
-<h2 id="async-await"><a href="#async-await" class="headerlink" title="async/await"></a>async/await</h2><p><code>async</code> bf fn =&gt; ensure to return a promise &amp; enable <code>await</code> bf promise (JS wait promise to settle &amp; return the result ) </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// await &amp; try-catch for Promise.then() &amp; catch()</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> response = <span class="keyword">await</span> fetch(<span class="string">&#x27;&#x27;</span>); </span><br><span class="line">    <span class="keyword">let</span> user = <span class="keyword">await</span> response.json();</span><br><span class="line">  &#125; <span class="keyword">catch</span>(err) &#123; </span><br><span class="line">  	<span class="comment">/* ... */</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Promise-API"><a href="#Promise-API" class="headerlink" title="Promise API"></a>Promise API</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="built_in">Promise</span>.all/allSettled/race(...promises);</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><code>Promise.all()</code>=&gt; <strong>Promise.resolve([…values])</strong> / <strong>Promise.reject(err)</strong> — all or nothing</p>
-</li>
-<li><p><code>Promise.allSettled()</code> =&gt; <strong>Promise.resolve([…objs])</strong> — both ‘fulfilled’ &amp; ‘rejected’</p>
-</li>
-<li><p><code>Promise.race()</code> — <strong>1st (fastest) settled</strong> promise.result</p>
-</li>
-</ul>
-<p><strong>Promise.resolve(value) /.reject(err)</strong> ==&gt; return a resolved / rejected promise with value / err, same as</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> resolve(value) || reject(error));</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blog/2020/06/08/js-async/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -801,7 +744,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-20 11:46:38" itemprop="dateModified" datetime="2020-09-20T11:46:38+08:00">2020-09-20</time>
+        <time title="Modified: 2020-10-01 20:57:27" itemprop="dateModified" datetime="2020-10-01T20:57:27+08:00">2020-10-01</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -903,7 +846,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-30 16:54:52" itemprop="dateModified" datetime="2020-09-30T16:54:52+08:00">2020-09-30</time>
+        <time title="Modified: 2020-10-01 21:21:01" itemprop="dateModified" datetime="2020-10-01T21:21:01+08:00">2020-10-01</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -933,12 +876,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Var-Data-types-amp-Ops"><a href="#Var-Data-types-amp-Ops" class="headerlink" title="Var, Data types &amp; Ops"></a>Var, Data types &amp; Ops</h1><h2 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h2><ul>
+          <h1 id="Var-Data-types-amp-Ops"><a href="#Var-Data-types-amp-Ops" class="headerlink" title="Var, Data types &amp; Ops"></a>Var, Data types &amp; Ops</h1><h2 id="Var"><a href="#Var" class="headerlink" title="Var"></a>Var</h2><ul>
 <li><code>let</code>, <code>const</code>: <a target="_blank" rel="noopener" href="https://javascript.info/destructuring-assignment#the-rest-pattern" title="plain code block to group stmts">block</a> scope <a target="_blank" rel="noopener" href="https://javascript.info/closure">..</a> — <a href="" title="fn/global scope; dec hoist/raise, allow redec(latter ignored)">the old “var”</a> &amp; <a href="" title="immediately-invoked fn-expr">IIFE</a></li>
 </ul>
 <h2 id="Data-types"><a href="#Data-types" class="headerlink" title="Data types"></a>Data types</h2><ul>
 <li><strong>dynamic typed</strong>, <a href="" title="num/bigInt, str, bool, null/undefined, obj/symbol">7+1</a> basic data types</li>
-<li><code>typeof</code> =&gt; <strong>lowercase str</strong>, e.g. <code>null</code>: “object”, <code>alert</code>: “function” <a target="_blank" rel="noopener" href="https://javascript.info/types#type-typeof">..</a></li>
+<li><code>typeof</code> — <code>null</code>: “object”, <code>alert</code>: “function” <a target="_blank" rel="noopener" href="https://javascript.info/types#type-typeof">..</a></li>
 </ul>
           <!--noindex-->
             <div class="post-button">

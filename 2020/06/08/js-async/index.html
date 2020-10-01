@@ -30,7 +30,7 @@
 <meta property="og:description" content="async actions — actions init now but finish later (code below it won’t wait) Callback external script loading &amp; callback ..  onload &#x2F; onerror “error-first callback” style &amp; callback hell &#x2F; pyr">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-06-08T11:32:55.000Z">
-<meta property="article:modified_time" content="2020-09-04T10:22:17.893Z">
+<meta property="article:modified_time" content="2020-10-01T08:00:04.778Z">
 <meta property="article:author" content="Stephen Chan">
 <meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
@@ -350,7 +350,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-04 18:22:17" itemprop="dateModified" datetime="2020-09-04T18:22:17+08:00">2020-09-04</time>
+        <time title="Modified: 2020-10-01 16:00:04" itemprop="dateModified" datetime="2020-10-01T16:00:04+08:00">2020-10-01</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -403,6 +403,8 @@
 </ul>
 </li>
 </ul>
+<a id="more"></a>
+
 <h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><p>JS obj that links <strong>executor</strong> &amp; <strong>handler</strong> together</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  ...resolve(value) || reject(error) ... </span><br><span class="line">&#125;)</span><br><span class="line">	.then(<span class="function"><span class="params">value</span> =&gt;</span> &#123; <span class="comment">/* handle value */</span> &#125;)</span><br><span class="line">	.catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123; <span class="comment">/* handle error */</span> &#125;)</span><br><span class="line">	.finally &#123;...&#125;</span><br></pre></td></tr></table></figure>
 

@@ -30,7 +30,7 @@
 <meta property="og:description" content="‘use strict’To enable ES5 modification for old features (may break old code)  off by default — always put &#39;use script&#39; on top of script&#x2F;fn-body auto enable for class &amp; module no way to can">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-05-20T11:08:31.000Z">
-<meta property="article:modified_time" content="2020-09-20T03:46:38.442Z">
+<meta property="article:modified_time" content="2020-10-01T12:57:27.744Z">
 <meta property="article:author" content="Stephen Chan">
 <meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E2%80%98use-strict%E2%80%99"><span class="nav-number">1.</span> <span class="nav-text">‘use strict’</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Error-handling"><span class="nav-number">2.</span> <span class="nav-text">Error handling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Generator"><span class="nav-number">3.</span> <span class="nav-text">Generator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS-engine-internal"><span class="nav-number">4.</span> <span class="nav-text">JS engine internal</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-loop-microtasks-and-macrotasks"><span class="nav-number">4.1.</span> <span class="nav-text">Event loop: microtasks and macrotasks</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Programming-pattern"><span class="nav-number">5.</span> <span class="nav-text">Programming pattern</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code-quality"><span class="nav-number">6.</span> <span class="nav-text">Code quality</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other-concepts-amp-Resources"><span class="nav-number">7.</span> <span class="nav-text">Other concepts &amp; Resources</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E2%80%98use-strict%E2%80%99"><span class="nav-number">1.</span> <span class="nav-text">‘use strict’</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Built-in-Data-types"><span class="nav-number">2.</span> <span class="nav-text">Built-in Data types</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Date-amp-time"><span class="nav-number">2.1.</span> <span class="nav-text">Date &amp; time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map-amp-Set-WeakMap-amp-WeakSet"><span class="nav-number">2.2.</span> <span class="nav-text">Map &amp; Set, WeakMap &amp; WeakSet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Error-handling"><span class="nav-number">3.</span> <span class="nav-text">Error handling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Generator"><span class="nav-number">4.</span> <span class="nav-text">Generator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS-engine-internal"><span class="nav-number">5.</span> <span class="nav-text">JS engine internal</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-loop-microtasks-and-macrotasks"><span class="nav-number">5.1.</span> <span class="nav-text">Event loop: microtasks and macrotasks</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Programming-pattern"><span class="nav-number">6.</span> <span class="nav-text">Programming pattern</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code-quality"><span class="nav-number">7.</span> <span class="nav-text">Code quality</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other-concepts-amp-Resources"><span class="nav-number">8.</span> <span class="nav-text">Other concepts &amp; Resources</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -350,7 +350,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-20 11:46:38" itemprop="dateModified" datetime="2020-09-20T11:46:38+08:00">2020-09-20</time>
+        <time title="Modified: 2020-10-01 20:57:27" itemprop="dateModified" datetime="2020-10-01T20:57:27+08:00">2020-10-01</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -391,6 +391,33 @@
 </ul>
 <a id="more"></a>
 
+<h1 id="Built-in-Data-types"><a href="#Built-in-Data-types" class="headerlink" title="Built-in Data types"></a>Built-in Data types</h1><h2 id="Date-amp-time"><a href="#Date-amp-time" class="headerlink" title="Date &amp; time"></a>Date &amp; time</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/date#creation">creation</a> &amp; <code>Date.parse(str)</code> <a target="_blank" rel="noopener" href="https://javascript.info/date#date-parse-from-a-string">..</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/date#access-date-components">get/set date components</a>: <code>get/set*()</code>, <a target="_blank" rel="noopener" href="https://javascript.info/date#autocorrection">auto-correction</a></li>
+<li>work on timestamp<ul>
+<li><code>Date.now()</code>: get timestamp without intermediate Date obj</li>
+<li><code>date.getTime()</code>: faster than auto-date-to-num-convert (by +/-) <a target="_blank" rel="noopener" href="https://javascript.info/date#benchmarking">..</a><ul>
+<li>more precise time measure <a target="_blank" rel="noopener" href="https://javascript.info/date#summary">..</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>tasks: <a target="_blank" rel="noopener" href="https://javascript.info/date#show-a-weekday">Show a weekday</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/date#european-weekday">European weekday</a>, <a target="_blank" rel="noopener" href="https://javascript.info/date#which-day-of-month-was-many-days-ago">getDateAgo(date, days)</a>, <a target="_blank" rel="noopener" href="https://javascript.info/date#last-day-of-month">getLastDayOfMonth(year, month)</a></li>
+</ul>
+<h2 id="Map-amp-Set-WeakMap-amp-WeakSet"><a href="#Map-amp-Set-WeakMap-amp-WeakSet" class="headerlink" title="Map &amp; Set, WeakMap &amp; WeakSet"></a>Map &amp; Set, WeakMap &amp; WeakSet</h2><p><code>Map</code>: obj with key of any type, key compare: <code>===</code> &amp; <code>NaN === NaN</code></p>
+<ul>
+<li><code>new Map([ [_,_], [_,_] ..])</code> &amp; obj &lt;=&gt; map, <code>forEach(..)</code></li>
+</ul>
+<p><code>Set</code>: unique values</p>
+<ul>
+<li>methods similar to map, get/set() =&gt; add(), iter by insertion order <a target="_blank" rel="noopener" href="https://javascript.info/map-set#summary">..</a></li>
+<li>Filter unique array members: <code>Array.from(new Set(arr))</code><a target="_blank" rel="noopener" href="https://javascript.info/map-set#filter-unique-array-members">..</a></li>
+</ul>
+<p><code>WeakMap</code>/<code>WeakSet</code>: obj unreachable by other means -&gt; rmed from memory &amp; WM/WS</p>
+<ul>
+<li>only <strong>obj</strong> as key/items in WM/WS</li>
+<li>methods <a target="_blank" rel="noopener" href="https://javascript.info/weakmap-weakset#weakmap">..</a></li>
+</ul>
 <h1 id="Error-handling"><a href="#Error-handling" class="headerlink" title="Error handling"></a>Error handling</h1><ul>
 <li>Error obj <ul>
 <li>creation:<code>new Error/SyntaxError/ReferenceError/TypeError(msg)</code> <a target="_blank" rel="noopener" href="https://javascript.info/try-catch#throw-operator">..</a></li>
@@ -459,8 +486,6 @@
 </ol>
 </li>
 <li><a target="_blank" rel="noopener" href="https://javascript.info/event-loop#summary">cpu-heavy event &amp; web worker: another thread</a></li>
-</ul>
-<ul>
 <li><code>new Function([...params], body)</code>: create fn dynamically at run time <a target="_blank" rel="noopener" href="https://javascript.info/new-function">..</a></li>
 </ul>
 <h1 id="Programming-pattern"><a href="#Programming-pattern" class="headerlink" title="Programming pattern"></a>Programming pattern</h1><p><strong>Fn decorator</strong> <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators">..</a></p>
