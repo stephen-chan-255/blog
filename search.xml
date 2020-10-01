@@ -21,93 +21,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Asynchronous programming in JavaScript</title>
-    <url>/blog/2020/06/08/js-async/</url>
-    <content><![CDATA[<p><strong>async</strong> actions — actions init now but finish later (code below it won’t wait)</p>
-<h2 id="Callback"><a href="#Callback" class="headerlink" title="Callback"></a>Callback</h2><ul>
-<li><p>external script loading &amp; callback <a href="https://javascript.info/callbacks">..</a></p>
-<ul>
-<li><code>onload</code> / <code>onerror</code></li>
-<li>“error-first callback” style &amp; callback hell / pyramid of doom (code grows to the right)</li>
-</ul>
-</li>
-<li><p>Fn Call Scheduling by<code>setTimeout/setInterval()</code></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> timerId = <span class="built_in">setTimeout</span>/<span class="built_in">setInterval</span>(fn, delay=<span class="number">0</span>, ...args); <span class="comment">// keep fn-ref in scheduler (not GC) </span></span><br><span class="line"><span class="built_in">clearTimeout</span>/<span class="built_in">clearInterval</span>(timerId); <span class="comment">// &quot;timerId keep same&quot; af clear (not null)</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>setTimeout()</strong>: call a regular fn without <code>arguments</code> and set <code>this=window</code> <a href="https://javascript.info/call-apply-decorators#delaying-decorator">..</a></p>
-</li>
-<li><p><strong>setInterval()</strong>: fn-exe-time &gt; delay <a href="https://javascript.info/settimeout-setinterval#nested-settimeout">..</a></p>
-</li>
-<li><p><strong>nested setTimeout</strong> vs setInterval ..</p>
-</li>
-<li><p>tasks — <a href="https://javascript.info/settimeout-setinterval#output-every-second">Output every second</a></p>
-</li>
-</ul>
-</li>
-</ul>
-<a id="more"></a>
-
-<h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><p>JS obj that links <strong>executor</strong> &amp; <strong>handler</strong> together</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  ...resolve(value) || reject(error) ... </span><br><span class="line">&#125;)</span><br><span class="line">	.then(<span class="function"><span class="params">value</span> =&gt;</span> &#123; <span class="comment">/* handle value */</span> &#125;)</span><br><span class="line">	.catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123; <span class="comment">/* handle error */</span> &#125;)</span><br><span class="line">	.finally &#123;...&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Executor-resolve-reject"><a href="#Executor-resolve-reject" class="headerlink" title="Executor(resolve, reject)"></a>Executor(resolve, reject)</h3><ul>
-<li><p>when <code>new Promise</code>, fn <code>executor(resolve, reject)</code> auto-run</p>
-</li>
-<li><p><code>resolve</code> &amp; <code>reject</code> — pre-defiend callbacks, called once (further calls ignored)</p>
-<ul>
-<li>Promise init props: <strong>[[PromiseStatus]]: “pending”</strong>, <strong>[[PromiseValue]]: undefined</strong></li>
-<li>run <code>resolve(result)</code>: <strong>“resolved”</strong>, <strong>result</strong></li>
-<li>run <code>reject(error)</code> / <strong>error occur</strong> (turn into a rejected promise <a href="https://javascript.info/promise-error-handling#implicit-try-catch">..</a>): <strong>“rejected”</strong>, <strong>error</strong></li>
-</ul>
-</li>
-<li><p>callback vs promise — promise only single result (callback can be called mtp times) <a href="https://javascript.info/promisify">..</a></p>
-</li>
-</ul>
-<h3 id="Consumer-then-catch-final"><a href="#Consumer-then-catch-final" class="headerlink" title="Consumer: .then(), .catch(), .final()"></a>Consumer: .then(), .catch(), .final()</h3><p>Wait for promise settled (resolve or reject) &amp; process the value (result or error) by its handler</p>
-<ul>
-<li><code>.then(onFulfill[, onReject])</code></li>
-<li><code>.catch(errorHandler)</code>  === .then(null, errorHandler)<ul>
-<li>error occur in setTimeout (except <code>reject(err)</code>) not catched <a href="https://javascript.info/promise-error-handling#error-in-settimeout">..</a></li>
-<li><a href="https://javascript.info/promise-error-handling#unhandled-rejections">unhandlerd rejection &amp; window ‘unhandledrejection’ event</a></li>
-</ul>
-</li>
-<li><code>.finally(fn)</code> — handler no params (just pass result to next handler)</li>
-</ul>
-<h3 id="Promise-Chain"><a href="#Promise-Chain" class="headerlink" title="Promise Chain"></a>Promise Chain</h3><ul>
-<li><code>.then()</code>/ <code>.catch()</code> / <code>.finally()</code> ==&gt; return a promise — can be chainned</li>
-<li>handler return a promise / result — overwrite promise value &amp; pass to next assoc handler<ul>
-<li>handler no return ==&gt; resolve(undefined) || adopt prev-Promise.state</li>
-</ul>
-</li>
-<li><a href="https://javascript.info/promise-chaining#bigger-example-fetch">promise &amp; fetch</a></li>
-<li><a href="https://javascript.info/promise-chaining#example-loadscript">customized Thenable obj</a></li>
-</ul>
-<h2 id="async-await"><a href="#async-await" class="headerlink" title="async/await"></a>async/await</h2><p><code>async</code> bf fn =&gt; ensure to return a promise &amp; enable <code>await</code> bf promise (JS wait promise to settle &amp; return the result ) </p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// await &amp; try-catch for Promise.then() &amp; catch()</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> response = <span class="keyword">await</span> fetch(<span class="string">&#x27;&#x27;</span>); </span><br><span class="line">    <span class="keyword">let</span> user = <span class="keyword">await</span> response.json();</span><br><span class="line">  &#125; <span class="keyword">catch</span>(err) &#123; </span><br><span class="line">  	<span class="comment">/* ... */</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Promise-API"><a href="#Promise-API" class="headerlink" title="Promise API"></a>Promise API</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="built_in">Promise</span>.all/allSettled/race(...promises);</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><code>Promise.all()</code>=&gt; <strong>Promise.resolve([…values])</strong> / <strong>Promise.reject(err)</strong> — all or nothing</p>
-</li>
-<li><p><code>Promise.allSettled()</code> =&gt; <strong>Promise.resolve([…objs])</strong> — both ‘fulfilled’ &amp; ‘rejected’</p>
-</li>
-<li><p><code>Promise.race()</code> — <strong>1st (fastest) settled</strong> promise.result</p>
-</li>
-</ul>
-<p><strong>Promise.resolve(value) /.reject(err)</strong> ==&gt; return a resolved / rejected promise with value / err, same as</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> resolve(value) || reject(error));</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>IT</category>
-        <category>Programming</category>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>IT</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript miscellaneous</title>
     <url>/blog/2020/05/20/js-miscellaneous/</url>
     <content><![CDATA[<h1 id="‘use-strict’"><a href="#‘use-strict’" class="headerlink" title="‘use strict’"></a>‘use strict’</h1><p>To enable ES5 modification for old features (may break old code)</p>
@@ -252,6 +165,93 @@
 </li>
 </ul>
 ]]></content>
+      <categories>
+        <category>IT</category>
+        <category>Programming</category>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>IT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Asynchronous programming in JavaScript</title>
+    <url>/blog/2020/06/08/js-async/</url>
+    <content><![CDATA[<p><strong>async</strong> actions — actions init now but finish later (code below it won’t wait)</p>
+<h2 id="Callback"><a href="#Callback" class="headerlink" title="Callback"></a>Callback</h2><ul>
+<li><p>external script loading &amp; callback <a href="https://javascript.info/callbacks">..</a></p>
+<ul>
+<li><code>onload</code> / <code>onerror</code></li>
+<li>“error-first callback” style &amp; callback hell / pyramid of doom (code grows to the right)</li>
+</ul>
+</li>
+<li><p>Fn Call Scheduling by<code>setTimeout/setInterval()</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> timerId = <span class="built_in">setTimeout</span>/<span class="built_in">setInterval</span>(fn, delay=<span class="number">0</span>, ...args); <span class="comment">// keep fn-ref in scheduler (not GC) </span></span><br><span class="line"><span class="built_in">clearTimeout</span>/<span class="built_in">clearInterval</span>(timerId); <span class="comment">// &quot;timerId keep same&quot; af clear (not null)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>setTimeout()</strong>: call a regular fn without <code>arguments</code> and set <code>this=window</code> <a href="https://javascript.info/call-apply-decorators#delaying-decorator">..</a></p>
+</li>
+<li><p><strong>setInterval()</strong>: fn-exe-time &gt; delay <a href="https://javascript.info/settimeout-setinterval#nested-settimeout">..</a></p>
+</li>
+<li><p><strong>nested setTimeout</strong> vs setInterval ..</p>
+</li>
+<li><p>tasks — <a href="https://javascript.info/settimeout-setinterval#output-every-second">Output every second</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><p>JS obj that links <strong>executor</strong> &amp; <strong>handler</strong> together</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  ...resolve(value) || reject(error) ... </span><br><span class="line">&#125;)</span><br><span class="line">	.then(<span class="function"><span class="params">value</span> =&gt;</span> &#123; <span class="comment">/* handle value */</span> &#125;)</span><br><span class="line">	.catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123; <span class="comment">/* handle error */</span> &#125;)</span><br><span class="line">	.finally &#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Executor-resolve-reject"><a href="#Executor-resolve-reject" class="headerlink" title="Executor(resolve, reject)"></a>Executor(resolve, reject)</h3><ul>
+<li><p>when <code>new Promise</code>, fn <code>executor(resolve, reject)</code> auto-run</p>
+</li>
+<li><p><code>resolve</code> &amp; <code>reject</code> — pre-defiend callbacks, called once (further calls ignored)</p>
+<ul>
+<li>Promise init props: <strong>[[PromiseStatus]]: “pending”</strong>, <strong>[[PromiseValue]]: undefined</strong></li>
+<li>run <code>resolve(result)</code>: <strong>“resolved”</strong>, <strong>result</strong></li>
+<li>run <code>reject(error)</code> / <strong>error occur</strong> (turn into a rejected promise <a href="https://javascript.info/promise-error-handling#implicit-try-catch">..</a>): <strong>“rejected”</strong>, <strong>error</strong></li>
+</ul>
+</li>
+<li><p>callback vs promise — promise only single result (callback can be called mtp times) <a href="https://javascript.info/promisify">..</a></p>
+</li>
+</ul>
+<h3 id="Consumer-then-catch-final"><a href="#Consumer-then-catch-final" class="headerlink" title="Consumer: .then(), .catch(), .final()"></a>Consumer: .then(), .catch(), .final()</h3><p>Wait for promise settled (resolve or reject) &amp; process the value (result or error) by its handler</p>
+<ul>
+<li><code>.then(onFulfill[, onReject])</code></li>
+<li><code>.catch(errorHandler)</code>  === .then(null, errorHandler)<ul>
+<li>error occur in setTimeout (except <code>reject(err)</code>) not catched <a href="https://javascript.info/promise-error-handling#error-in-settimeout">..</a></li>
+<li><a href="https://javascript.info/promise-error-handling#unhandled-rejections">unhandlerd rejection &amp; window ‘unhandledrejection’ event</a></li>
+</ul>
+</li>
+<li><code>.finally(fn)</code> — handler no params (just pass result to next handler)</li>
+</ul>
+<h3 id="Promise-Chain"><a href="#Promise-Chain" class="headerlink" title="Promise Chain"></a>Promise Chain</h3><ul>
+<li><code>.then()</code>/ <code>.catch()</code> / <code>.finally()</code> ==&gt; return a promise — can be chainned</li>
+<li>handler return a promise / result — overwrite promise value &amp; pass to next assoc handler<ul>
+<li>handler no return ==&gt; resolve(undefined) || adopt prev-Promise.state</li>
+</ul>
+</li>
+<li><a href="https://javascript.info/promise-chaining#bigger-example-fetch">promise &amp; fetch</a></li>
+<li><a href="https://javascript.info/promise-chaining#example-loadscript">customized Thenable obj</a></li>
+</ul>
+<h2 id="async-await"><a href="#async-await" class="headerlink" title="async/await"></a>async/await</h2><p><code>async</code> bf fn =&gt; ensure to return a promise &amp; enable <code>await</code> bf promise (JS wait promise to settle &amp; return the result ) </p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// await &amp; try-catch for Promise.then() &amp; catch()</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> response = <span class="keyword">await</span> fetch(<span class="string">&#x27;&#x27;</span>); </span><br><span class="line">    <span class="keyword">let</span> user = <span class="keyword">await</span> response.json();</span><br><span class="line">  &#125; <span class="keyword">catch</span>(err) &#123; </span><br><span class="line">  	<span class="comment">/* ... */</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Promise-API"><a href="#Promise-API" class="headerlink" title="Promise API"></a>Promise API</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="built_in">Promise</span>.all/allSettled/race(...promises);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>Promise.all()</code>=&gt; <strong>Promise.resolve([…values])</strong> / <strong>Promise.reject(err)</strong> — all or nothing</p>
+</li>
+<li><p><code>Promise.allSettled()</code> =&gt; <strong>Promise.resolve([…objs])</strong> — both ‘fulfilled’ &amp; ‘rejected’</p>
+</li>
+<li><p><code>Promise.race()</code> — <strong>1st (fastest) settled</strong> promise.result</p>
+</li>
+</ul>
+<p><strong>Promise.resolve(value) /.reject(err)</strong> ==&gt; return a resolved / rejected promise with value / err, same as</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> resolve(value) || reject(error));</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>IT</category>
         <category>Programming</category>
@@ -538,6 +538,348 @@
 </li>
 </ul>
 <p><a href="https://javascript.info/template-element">Template element</a><br><code>&lt;template&gt;</code> tag: contents ignored by browser (elems inside not render, style/script not work) until inserted to doc (by <code>elem.append(tmpl.content)</code>)</p>
+]]></content>
+      <categories>
+        <category>IT</category>
+        <category>Programming</category>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>IT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript basics</title>
+    <url>/blog/2020/05/18/js-basics/</url>
+    <content><![CDATA[<h1 id="Var-Data-types-amp-Ops"><a href="#Var-Data-types-amp-Ops" class="headerlink" title="Var, Data types &amp; Ops"></a>Var, Data types &amp; Ops</h1><h2 id="Var"><a href="#Var" class="headerlink" title="Var"></a>Var</h2><ul>
+<li><code>let</code>, <code>const</code>: <a href="https://javascript.info/destructuring-assignment#the-rest-pattern" title="plain code block to group stmts">block</a> scope <a href="https://javascript.info/closure">..</a> — <a href="" title="fn/global scope; dec hoist/raise, allow redec(latter ignored)">the old “var”</a> &amp; <a href="" title="immediately-invoked fn-expr">IIFE</a></li>
+</ul>
+<h2 id="Data-types"><a href="#Data-types" class="headerlink" title="Data types"></a>Data types</h2><ul>
+<li><strong>dynamic typed</strong>, <a href="" title="num/bigInt, str, bool, null/undefined, obj/symbol">7+1</a> basic data types</li>
+<li><code>typeof</code> — <code>null</code>: “object”, <code>alert</code>: “function” <a href="https://javascript.info/types#type-typeof">..</a></li>
+</ul>
+<a id="more"></a>
+
+<h3 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h3><ul>
+<li>int/float &amp; <code>Infinity</code>, <code>-Infinity</code>, <code>NaN</code> <a href="https://javascript.info/types#number">..</a><ul>
+<li>64-bit — Imprecise calc &amp; BigInt <a href="https://javascript.info/number">..</a></li>
+<li>repre: <code>e</code>, hex/binary/octal — <code>parseInt/-float()</code>, <code>toString(base)</code></li>
+<li>check for int: <code>Math.round(n) == n</code> <a href="https://javascript.info/testing-mocha">..</a></li>
+<li>regular num &amp; NaN test: <code>isFinite()</code>, <code>isNaN()</code> vs <code>Object.is()</code></li>
+</ul>
+</li>
+<li>auto type convert: unary <code>+</code>, math-op/fn &amp; <code>Number(value)</code></li>
+<li>rouding: multiply-and-divide &amp; <code>toFixed(n)</code></li>
+<li>tasks: <a href="https://javascript.info/number#why-6-35-tofixed-1-6-3">Why 6.35.toFixed(1) == 6.3?</a>, <a href="https://javascript.info/number#a-random-integer-from-min-to-max">random int from min to max</a></li>
+</ul>
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><ul>
+<li>quotes &amp; <code>...$&#123;...&#125;</code> <a href="https://javascript.info/types#string">..</a></li>
+<li>special chars: line break <code>\n</code>; escape char <code>\</code> <a href="https://javascript.info/string#special-characters">..</a></li>
+<li>auto type convert: in output e.g. <code>alert(..)</code>, <code>toString()</code>: <a href="https://javascript.info/object-toprimitive#toprimitive">obj as key</a>, <a href="https://javascript.info/json#custom-tojson">JSON.stringify()</a> <a href="https://javascript.info/type-conversions#summary">..</a> &amp; <code>String(..)</code></li>
+<li>substr <code>str.slice()</code>, str compare <code>str.localeCompare(str2)</code>, <code>str.repeat(n)</code>, charCode <code>String.fromCodePoint(code)</code> &amp; <code>str.codePointAt(i)</code> (in generate pwd <a href="https://javascript.info/generators#generator-composition">..</a>) <a href="https://javascript.info/string">..</a></li>
+<li>task: <a href="https://javascript.info/string#truncate-the-text">Truncate text</a></li>
+</ul>
+<h3 id="Bool"><a href="#Bool" class="headerlink" title="Bool"></a>Bool</h3><ul>
+<li>6 falsy values <a href="https://javascript.info/type-conversions#boolean-conversion">..</a></li>
+<li>auto type convert: logical op <code>!!</code>, compareson &amp; <code>Boolean(..)</code></li>
+</ul>
+<h3 id="null-amp-undefined"><a href="#null-amp-undefined" class="headerlink" title="null &amp; undefined"></a>null &amp; undefined</h3><ul>
+<li><code>null</code> : value unknown; </li>
+<li><code>undefined</code>: unassigned-var init val &amp; default fn-return </li>
+</ul>
+<h2 id="Ops"><a href="#Ops" class="headerlink" title="Ops"></a>Ops</h2><ul>
+<li>compare diff type (convert to num) &amp; <code>null == undefined</code> , <code>NaN != NaN</code> &amp; <code>===</code></li>
+<li>Nullish coalescing op <code>??</code> (check for “null/undefined”), obj optional chaining <code>?.</code>, comma <a href="https://javascript.info/operators#comma">..</a></li>
+</ul>
+<h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><p><strong>Fn creation</strong> <a href="https://javascript.info/function-expressions#function-expression-vs-function-declaration">..</a></p>
+<ul>
+<li><strong>fn dec</strong>: block-level if strict, def-hoisting<ul>
+<li><code>function ..</code>: start of fn-dec (require a name &amp; cannot be called immediately) <a href="https://javascript.info/var#iife">..</a></li>
+</ul>
+</li>
+<li><strong>fn-expr</strong>: easy dynamic def (pass <em>anonymous</em> as callback <a href="https://javascript.info/callbacks">..</a>)</li>
+<li><strong>arrow-fn</strong> (see obj)</li>
+<li><code>new Function([...params], body)</code>: create fn dynamically at run time <a href="https://javascript.info/new-function">..</a></li>
+</ul>
+<p><strong>Closure</strong></p>
+<ul>
+<li>block scope &amp; Lexical Environment (EnvRecord &amp; outer-ref, created on run time) …</li>
+<li>LE var/fn pre-populate &amp; var “dead zone” <a href="https://javascript.info/closure#is-variable-visible">..</a></li>
+<li>access var through <strong>LE chain</strong> (inner-outer) <a href="https://javascript.info/closure#step-3-inner-and-outer-lexical-environment">..</a> &amp; updated on the LE it lives <a href="https://javascript.info/closure#step-4-returning-a-function">..</a></li>
+</ul>
+<p><a href="https://javascript.info/closure#step-4-returning-a-function">Closure</a>: a fn that remembers its outer vars and can access them by e.g. return a fn (or as obj prop) <a href="https://javascript.info/closure#nested-functions">..</a></p>
+<ul>
+<li>run outerFn: new outerFn.LE &amp; nestedFn created, <code>nestedFn.[[Env..]] = outerFn.LE</code> (set once &amp; forever)<ul>
+<li>so outerFn.LE still reachable &amp; not GC <a href="https://javascript.info/closure#garbage-collection">..</a></li>
+<li>call outerFn mtp times: diff outerFn.LE &amp; nestedFn created (nestedFn independent) <a href="https://javascript.info/closure#are-counters-independent">..</a></li>
+</ul>
+</li>
+<li>run nestedFn: new nestedFn.LE created &amp; <code>nestedFn.LE -&gt; outerFn.LE</code> (ref value taken from [[Env..]])</li>
+<li>Task: <a href="https://javascript.info/closure#counter-object">Counter object</a>, <a href="https://javascript.info/closure#sum-with-closures">Sum with closures</a>, <a href="https://javascript.info/closure#filter-through-function">Filter through function</a>, <a href="https://javascript.info/closure#sort-by-field">Sort by field</a>, <a href="https://javascript.info/closure#army-of-functions">Army of functions</a></li>
+</ul>
+<h1 id="Obj-Symbol-Arrow-Fn"><a href="#Obj-Symbol-Arrow-Fn" class="headerlink" title="Obj, Symbol, Arrow Fn"></a>Obj, Symbol, Arrow Fn</h1><p><strong>Obj</strong>: keyed values collection</p>
+<ul>
+<li>key type: str || symbol; value: any type (except <code>__proto__</code>)<ul>
+<li>key can be reserved word, non-str/symbol key ==&gt; toString <a href="https://javascript.info/object#property-names-limitations">..</a></li>
+<li>key existence test: <code>in</code> op &amp; optional chaining syntax <code>?.</code>  (check <code>null/undefined</code>)</li>
+<li>key iterate: <code>for..in</code> loop &amp; prop order ..</li>
+</ul>
+</li>
+<li>value access: <code>.</code> vs <code>obj[&quot;prop&quot;]</code> <a href="https://javascript.info/object#square-brackets">..</a><ul>
+<li>prop add/set: <code>obj.prop = xxx</code>, delete: <code>delete obj.prop</code> <a href="https://javascript.info/object#literals-and-properties">..</a></li>
+</ul>
+</li>
+<li>computed prop, prop value shorthand ..</li>
+<li>obj deep cloning by <code>for..in</code> loop <a href="https://javascript.info/object-copy#cloning-and-merging-object-assign">..</a> &amp; <code>typeof</code></li>
+</ul>
+<p>tasks <a href="https://javascript.info/object#ordered-like-an-object">Check for emptiness</a></p>
+<!-- more -->
+
+<h2 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h2><p>unique (even same desc) vs global symbol (1 key 1 symbol)</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">alert(<span class="built_in">Symbol</span>(<span class="string">&quot;id&quot;</span>));    <span class="comment">// TypeError (not auto-convert to string)</span></span><br><span class="line">alert(id.toString()); 	<span class="comment">// Symbol(id)</span></span><br><span class="line">alert(id.description);  <span class="comment">// id</span></span><br></pre></td></tr></table></figure>
+<p><strong>Symbol as obj key</strong></p>
+<ul>
+<li>skip in <code>for..in</code> loop &amp; <code>Object.keys(obj)</code> (looks like non-emutable) but in <code>Object.assign()</code> <a href="https://javascript.info/symbol#symbols-are-skipped-by-for-in">..</a></li>
+<li>get by <code>Object.getOwnPropertySymbols(obj)</code> <a href="https://javascript.info/prototype-methods#summary">..</a></li>
+</ul>
+<h2 id="Methods-amp-“this”"><a href="#Methods-amp-“this”" class="headerlink" title="Methods &amp; “this”"></a>Methods &amp; “this”</h2><ul>
+<li>method def: fn-expr shorthand || copy from fn <a href="https://javascript.info/object-methods#method-examples">..</a></li>
+<li><code>this</code> eval at run-time — <a href="https://javascript.info/bind#losing-this" title="obj method passed around &amp; called in another context">losing “this” problem</a><ul>
+<li>call fn with obj (“this” in methods): <code>this=obj</code> <a href="https://javascript.info/object-methods#this-in-methods">..</a></li>
+<li>call fn without obj (as fn itself) <a href="https://javascript.info/object-methods#this-is-not-bound">..</a><ul>
+<li><code>this=undefined</code> if strict &amp; <code>arr.forEach(fn)</code> <a href="https://javascript.info/arrow-functions#arrow-functions-have-no-this">..</a></li>
+<li><code>this=window</code> if non-strict &amp; <code>setTimeout(fn, ms)</code> <a href="https://javascript.info/bind#losing-this">..</a>, <a href="https://javascript.info/call-apply-decorators#delaying-decorator">..</a></li>
+</ul>
+</li>
+<li>tasks: <a href="https://javascript.info/object-methods#using-this-in-object-literal">Using “this” in object literal</a>, <a href="https://javascript.info/object-methods#create-a-calculator">calculator</a>, <a href="https://javascript.info/object-methods#create-a-calculator">Chaining</a></li>
+</ul>
+</li>
+<li>bind “this”<ul>
+<li><a href="https://javascript.info/bind#solution-2-bind">fn binding</a>: <code>fn.bind(context, [...startingArgs])</code><ul>
+<li><code>this=context</code> (bound <a href="https://javascript.info/bind#bound-function-as-a-method" title="use pre-bound context value (even bound obj changes later), so cannot re-bound">hard-fixed</a>), partial <a href="https://javascript.info/bind#partial-functions">..</a>, <a href="https://javascript.info/bind#going-partial-without-context">..</a></li>
+<li>tasks: <a href="https://javascript.info/bind#bound-function-as-a-method">Bound fn in method</a>, <a href="https://javascript.info/bind#second-bind">re-bound ignored</a>, <a href="https://javascript.info/bind#function-property-after-bind">Fn prop lost af bind</a>, <a href="https://javascript.info/bind#fix-a-function-that-loses-this">method bind context in callbacks</a>, <a href="https://javascript.info/bind#partial-application-for-login">Partial &amp; method</a></li>
+</ul>
+</li>
+<li><a href="https://javascript.info/call-apply-decorators#func-apply" title="Passing all args context to another fn">call forwarding</a>: <code>fn.apply(context, args: arrLike)</code> (prefer) &amp; <code>fn.call(context, ...args);</code></li>
+<li><a href="https://javascript.info/call-apply-decorators#method-borrowing" title="take a method from an obj and call it in the context of another obj">fn-borrowing</a>: <code>[].join.call(arguments);</code> in fn-body</li>
+</ul>
+</li>
+</ul>
+<h2 id="Global-obj"><a href="#Global-obj" class="headerlink" title="Global obj"></a>Global obj</h2><p>Provide built-in var &amp; fn (can be access directly), e.g. <code>window</code> in browser &amp; <code>global</code> in node </p>
+<ul>
+<li>e.g. <code>window.alert</code>, <code>window.innerHeight</code> &amp; global fn || <strong>var</strong>-var</li>
+<li>make value global: <code>window.xxx = ...</code> (props of global-obj)</li>
+</ul>
+<h1 id="Obj-amp-Fn"><a href="#Obj-amp-Fn" class="headerlink" title="Obj &amp; Fn"></a>Obj &amp; Fn</h1><h2 id="Arrow-fn"><a href="#Arrow-fn" class="headerlink" title="Arrow fn"></a>Arrow fn</h2><p><code>(...args) =&gt; expr || &#123; ...body &#125; || (obj-litiral)</code> <a href="https://javascript.info/array-methods#map-to-objects">..</a></p>
+<ul>
+<li>no own <code>this</code> (cann’t run with <code>new</code>) 、<code>super</code> <a href="https://javascript.info/class-inheritance#overriding-a-method">..</a> &amp; <code>arguments</code> (no own context <a href="https://javascript.info/arrow-functions">..</a>) <a href="https://javascript.info/arrow-functions#summary">..</a> — take from outer LE</li>
+</ul>
+<h2 id="F-Constructor-fn"><a href="#F-Constructor-fn" class="headerlink" title="F: Constructor fn"></a>F: Constructor fn</h2><ul>
+<li>set props &amp; methods <code>this.xxx = ...</code></li>
+<li>call by <code>new</code> op (execute “internal algorithm”)<ul>
+<li>return this ||  another obj (prim-return ignored)</li>
+<li>Constructor mode test: <code>new.target</code></li>
+</ul>
+</li>
+<li>singleton obj <code>new function() &#123; ... &#125;</code></li>
+</ul>
+<h2 id="Fn-is-obj"><a href="#Fn-is-obj" class="headerlink" title="Fn is obj"></a>Fn is obj</h2><p>Fn: callable action (instead of data) obj <a href="https://javascript.info/function-object">..</a></p>
+<ul>
+<li>fn-def: store the fn-obj in same named var, call by <code>fnName(...args)</code> — callback fn <a href="https://javascript.info/function-expressions">..</a></li>
+<li>Fn built-in props: <code>name</code> (str, “” for anonymous), <code>length</code> (param #, rest param not count)</li>
+<li>custom prop/helper method: <code>fnName.xxx = ..</code></li>
+<li>tasks: <a href="https://javascript.info/function-object#set-and-decrease-for-counter">Set and decrease for counter</a>, <a href="https://javascript.info/function-object#sum-with-an-arbitrary-amount-of-brackets">Sum with an arbitrary amount of brackets</a></li>
+</ul>
+<h2 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h2><p><strong>Obj prop config</strong></p>
+<ul>
+<li>prop descriptor: <code>value</code> + <code>writable</code>, <code>enumerable</code>, <code>configurable</code> <a href="https://javascript.info/property-descriptors">..</a><ul>
+<li>get/set desc: <code>Object.getOwnPropertyDescriptor()</code>, <code>Object.defineProperty()</code><ul>
+<li>obj created “the usually way”: flags default <code>true</code>; flags not supplied in desc defalut <code>false</code></li>
+</ul>
+</li>
+<li>built-in <code>toString()</code> non-enumerable</li>
+</ul>
+</li>
+<li>Sealing an object globally ..</li>
+</ul>
+<p><strong>Accessor props</strong><br><code>get/set xxx([value]) &#123;..&#125;</code>, trigger when <code>xxx</code> prop read/assign</p>
+<ul>
+<li>desc: <code>get/set([value]) &#123;..&#125;</code>, <code>enumerable</code>, <code>configurable</code></li>
+<li>smarter g/setter: store value in another internal prop</li>
+</ul>
+<p><strong>Primitive as Obj</strong><br>provide methods to op prim but keep them fast &amp; lightweight e.g.  <code>String</code>, <code>Number</code>, <code>Boolean</code>, <code>Symbol</code> </p>
+<ul>
+<li>temporary wrapper obj created &amp; destroyed <a href="https://javascript.info/primitives-methods#a-primitive-as-an-object">..</a> — manually modify obj wrap =&gt; err (strict) || undefined <a href="https://javascript.info/primitives-methods#can-i-add-a-string-property">..</a></li>
+</ul>
+<p><strong>Obj -&gt; primitive</strong></p>
+<ul>
+<li><a href="" title="which type to convert">3 hints</a>: <code>&quot;string&quot;</code>, <code>&quot;number&quot;</code> &amp; <code>&quot;default&quot;</code> (no boolean hint: all <strong>obj  =&gt; true</strong>)</li>
+<li>3 methods: must return a prim value <a href="https://javascript.info/object-toprimitive#return-types">..</a><ul>
+<li><code>[Symbol.toPrimitive](hint)</code> return obj ==&gt; err</li>
+<li>built-in <code>toString()</code> =&gt; “[object Object]”, <code>valueOf()</code> =&gt; obj itself (ignored) <a href="https://javascript.info/object-toprimitive#tostring-valueof">..</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="Built-in-Data-Structure"><a href="#Built-in-Data-Structure" class="headerlink" title="Built-in Data Structure"></a>Built-in Data Structure</h1><ul>
+<li><code>Object</code> key: str/symbol</li>
+<li><code>Array</code> key: int (ordered collection, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">MDN</a>)</li>
+<li><code>Map</code> key: any type</li>
+<li><code>Set</code>: unique values</li>
+</ul>
+<h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><ul>
+<li>value indexing: <code>arr[i]</code>, value iter: <code>for..of</code> || <code>arr.forEach()</code></li>
+<li><code>arr.length</code> = greatest index + 1, init as item #, writable<ul>
+<li>manually increase: <code>undefined</code> values (<code>&quot;&quot;</code> in <code>toString()</code>)</li>
+<li>manually decrease: elem lost — clear arr <code>arr.length = 0</code>    </li>
+</ul>
+</li>
+<li><code>delete arr[i]</code>: value =&gt; <code>undefined</code> (<code>length</code> keep same) <a href="https://javascript.info/array-methods#splice">..</a></li>
+<li><code>arr.toString()</code> =&gt; <code>_,_,_...</code></li>
+<li><a href="https://javascript.info/keys-values-entries#object-keys-values-entries">Object.keys/values/entries(obj)</a> =&gt; arr (enum &amp; non-symbol key)<ul>
+<li>task: <a href="https://javascript.info/keys-values-entries#sum-the-properties">Sum the props</a></li>
+</ul>
+</li>
+</ul>
+<!-- more  -->
+<p>Methods <a href="https://javascript.info/array-methods#summary">..</a></p>
+<ul>
+<li><code>splice(..)</code> : […rmed-elems]</li>
+<li><code>filter(fn)</code>: […matchedItems], <code>indexOf()</code>, <code>includes()</code></li>
+<li><code>map(fn)</code> &amp; <code>reduce(..)</code>, <code>sort(..)</code> &amp; <code>reverse()</code></li>
+<li><code>arr.join(glue=&#39;,&#39;)</code> &amp; <code>str.split(delim)</code> (<code>(&#39;&#39;)</code>: char[])</li>
+<li><code>Array.isArray(value)</code></li>
+</ul>
+<p><strong>Iterable &amp; array-like</strong></p>
+<ul>
+<li><strong>iterable</strong> (e.g. arr &amp; str) can be used in <code>for..of</code> <a href="https://javascript.info/iterable">..</a></li>
+<li>array-like: obj with <strong>numeric index &amp; length</strong> <a href="https://javascript.info/iterable#array-like">..</a></li>
+<li>str both iter &amp; arr-like <a href="https://javascript.info/iterable#array-like">..</a> — <code>str[i]</code> &amp; <code>str.length</code> </li>
+<li>iter/arr-like =&gt; array: <code>Array.from(obj, ..)</code></li>
+</ul>
+<p><code>...</code>: <strong>Spread syntax &amp; Rest param</strong></p>
+<ul>
+<li>Spread syntax: <code>...iter</code>: item list (use <strong>for..of</strong> internally) <ul>
+<li>copy/merge/convert by <code>[...iter]</code> / <code>&#123;...obj&#125;</code></li>
+</ul>
+</li>
+<li>Rest params: <code>...arr</code> in fn-def<ul>
+<li>fn can be called with any # of args (only args assoc with param will be count) <a href="https://javascript.info/rest-parameters-spread#rest-parameters">..</a></li>
+<li>the old <code>arguments</code> (both iter &amp; arr-like) <a href="https://javascript.info/rest-parameters-spread#the-arguments-variable">..</a></li>
+</ul>
+</li>
+</ul>
+<p><strong>Destructuring assignment syntax</strong></p>
+<ul>
+<li>Copying iter-items into vars: <code>let [...vars]/&#123;...obj-props&#125; = arr/obj</code> (keep origin unmodified)<ul>
+<li>ignore item by extra <code>,</code> <a href="https://javascript.info/destructuring-assignment#array-destructuring">..</a>, <code>=</code> for default value (unprovide value as <strong>undefined</strong>) <a href="https://javascript.info/destructuring-assignment#default-values">..</a>, <code>:</code> for prop-var rename <a href="https://javascript.info/destructuring-assignment#object-destructuring">..</a></li>
+</ul>
+</li>
+<li>easy swap: <code>[guest, admin] = [admin, guest];</code></li>
+<li><a href="https://javascript.info/destructuring-assignment#nested-destructuring">nested desructing</a> : same structure (no var for the group one)</li>
+<li><a href="https://javascript.info/destructuring-assignment#smart-function-parameters">Smart fn params</a>: pass obj as fn param</li>
+<li>obj destcructing to existing var: <code>(</code>{…}<code>)</code> ({} in main code flow as code block) <a href="https://javascript.info/destructuring-assignment#the-rest-pattern">..</a></li>
+</ul>
+<p>Tasks </p>
+<ul>
+<li><a href="https://javascript.info/array#a-maximal-subarray">A maximal subarray</a></li>
+<li><a href="https://javascript.info/array-methods#filter-range-in-place">Filter range “in place”</a></li>
+<li><a href="https://javascript.info/array-methods#sort-in-decreasing-order">Sort in decreasing order</a></li>
+<li><a href="https://javascript.info/array-methods#create-an-extendable-calculator">Create an extendable calculator</a></li>
+<li><a href="https://javascript.info/array-methods#sort-users-by-age">Sort users by age</a></li>
+<li><a href="https://javascript.info/array-methods#shuffle-an-array">Shuffle an array</a></li>
+<li><a href="https://javascript.info/array-methods#filter-unique-array-members">Filter unique array members</a></li>
+<li><a href="https://javascript.info/array-methods#create-keyed-object-from-array">Create keyed object from array</a></li>
+</ul>
+<h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2><ul>
+<li>Send data: <code>JSON.stringify(obj, ..)</code> &amp; <code>obj.toJSON()</code>: formatted str (aka <em>serialized</em> obj)</li>
+<li>Get data: <code>JSON.parse(str, ..)</code> =&gt; obj</li>
+</ul>
+<h1 id="Prototypal-inheritance"><a href="#Prototypal-inheritance" class="headerlink" title="Prototypal inheritance"></a>Prototypal inheritance</h1><p><strong>[[Prototype]] &amp; prototype</strong></p>
+<ul>
+<li><code>[[Prototype]]</code>: null || obj (aka <strong>prototype</strong>) <a href="https://javascript.info/prototype-inheritance">..</a>, accessor methods &amp; fully obj-clone <a href="https://javascript.info/prototype-methods">..</a></li>
+<li>the deprecated <code>__proto__</code> prop <a href="https://javascript.info/prototype-inheritance#prototype">..</a>, reside in <code>Object.prototype</code> <a href="https://javascript.info/prototype-methods#very-plain">..</a> (why depr &amp; “Very plain / pure dict” obj <a href="https://javascript.info/prototype-methods#very-plain">..</a>)</li>
+</ul>
+<p><strong>Prototypal inheritance</strong>: prop not exist in the obj -&gt; find from proto (follow <code>[[Prototype]]</code> ref chain) <a href="https://javascript.info/prototype-inheritance#summary">..</a></p>
+<ul>
+<li>proto only for reading prop, write/delete data prop act on the obj (write may call setter in proto) <a href="https://javascript.info/prototype-inheritance#writing-doesn-t-use-prototype">..</a></li>
+<li>proto search opt <a href="https://javascript.info/prototype-inheritance#searching-algorithm">..</a></li>
+<li><code>this</code> in proto method: ref to obj bf <code>.</code> (method shared but obj state not) <a href="https://javascript.info/prototype-inheritance#the-value-of-this">..</a></li>
+<li>inherited prop in <code>for..in</code> (if enum) but not in <code>Object.keys/values()</code> , diff by <code>obj.hasOwnProperty(key)</code> <a href="https://javascript.info/prototype-inheritance#for-in-loop">..</a></li>
+<li>task: <a href="https://javascript.info/prototype-methods#add-tostring-to-the-dictionary">add toString() to the “very plain” obj</a></li>
+</ul>
+<p><strong>F.protoype</strong>: a “normal” prop of con-fn F, set <code>[[Proto..]]</code> for obj from F when <code>new F()</code></p>
+<ul>
+<li><code>let obj = new F()</code>: set <code>obj.[[Prototype]] = F.prototype</code> (<code>&#123;constructor: F&#125;</code> by default)</li>
+<li>so <code>obj.constructor === F</code> &amp; <code>let obj2 = new obj.constructor()</code><ul>
+<li>Task: <a href="https://javascript.info/function-prototype#create-an-object-with-the-same-constructor">Create obj with same constructor</a></li>
+</ul>
+</li>
+<li>re-assign <strong>F.protoype</strong> to another obj: prev created obj.[[Prototype]] not affect</li>
+<li>native F.prototypes<ul>
+<li><code>Object.prototype</code>: inherited to all obj, ref to a huge obj with toString and other methods<ul>
+<li><code>Object.prototype.__proto__ = null</code></li>
+</ul>
+</li>
+<li>Built-in obj (e.g. obj, arr, fn, num 5): store data in obj itself, store methods in prototype <a href="https://javascript.info/native-prototypes#other-built-in-prototypes">..</a> &amp; <a href="https://javascript.info/native-prototypes#summary">..</a></li>
+</ul>
+</li>
+<li>Check prototype chain by <code>console.dir(obj)</code> <a href="https://javascript.info/native-prototypes#other-built-in-prototypes">..</a></li>
+<li>task: <a href="https://javascript.info/native-prototypes#add-the-decorating-defer-to-functions">Add decorating “defer()” to fns</a>, <a href="https://javascript.info/prototype-methods#the-difference-between-calls">The difference between calls</a></li>
+</ul>
+<h1 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">F</span> </span>&#123;</span><br><span class="line">  [<span class="keyword">static</span>] field = ..; <span class="comment">// access field in method by &quot;this.xxx&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(..) &#123; <span class="comment">/*..*/</span> &#125; <span class="comment">// called when &quot;new&quot;</span></span><br><span class="line">  </span><br><span class="line">  [<span class="keyword">static</span>] method() &#123; <span class="comment">/*..*/</span> &#125; </span><br><span class="line">  [get/set] method(..) &#123; <span class="comment">/*..*/</span> &#125;</span><br><span class="line">  [expr]() &#123; <span class="comment">/*..*/</span> &#125; <span class="comment">// computed name</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>bind <code>this</code> in method <a href="https://javascript.info/class#making-bound-methods-with-class-fields">..</a><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">this</span>.xxx = <span class="built_in">this</span>.xxx.bind(<span class="built_in">this</span>); <span class="comment">// bind existing method in constructor </span></span><br><span class="line">xxx = <span class="function">() =&gt;</span> &#123;..&#125; <span class="comment">// field store in obj itself (&quot;this&quot; = obj)</span></span><br></pre></td></tr></table></figure></li>
+<li>access <code>static</code> outside F: <code>F.xxx</code> <a href="https://javascript.info/static-properties-methods#static-properties">..</a>, <a href="https://javascript.info/static-properties-methods">..</a><ul>
+<li>return obj in static method by <code>new this(..)</code> (factory method)</li>
+</ul>
+</li>
+<li>Class Encapsulation <a href="https://javascript.info/private-protected-properties-methods">..</a><ul>
+<li><strong>protected</strong>: <code>_xxx</code> (convention)</li>
+<li><strong>private</strong>: <code>#xxx</code> (proposal, cannot access by <code>this[&#39;#xxx&#39;]</code>)</li>
+<li><strong>read-only prop</strong>: only getter no setter (set value on con)</li>
+</ul>
+</li>
+<li>task: <a href="https://javascript.info/class#rewrite-to-class">class Clock</a></li>
+</ul>
+<h2 id="Class-vs-fn"><a href="#Class-vs-fn" class="headerlink" title="Class vs fn"></a>Class vs fn</h2><p><code>typeof F</code>: <code>&quot;function&quot;</code> <a href="https://javascript.info/class#what-is-a-class">..</a></p>
+<ul>
+<li><code>class F &#123; .. &#125;</code>: <strong>F</strong> (con-fn) &amp; <strong>F.prototype</strong> <a href="https://javascript.info/class#what-is-a-class">..</a><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">F: &#123;</span><br><span class="line">  ...statics,</span><br><span class="line"> <span class="keyword">constructor</span>(),</span><br><span class="line">  [[Prototype]]: ParentF || Function.prototype </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">F.prototype: &#123; </span><br><span class="line">  ...methods, <span class="comment">// non-enum</span></span><br><span class="line">  <span class="keyword">constructor</span>: F, </span><br><span class="line">   [Prototype]]: ParentF.prototype || Object.prototype </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></li>
+<li><code>new F()</code>: obj<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">obj: &#123;</span><br><span class="line">  ...fields,</span><br><span class="line">  [[Prototype]]: F.prototype <span class="comment">// access to non-static methods</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>class &amp; fn diffs <a href="https://javascript.info/class#not-just-a-syntactic-sugar">..</a></li>
+</ul>
+<h2 id="Class-inheritance"><a href="#Class-inheritance" class="headerlink" title="Class inheritance"></a>Class inheritance</h2><p><code>extends</code> set 2 proto refs: <a href="https://javascript.info/static-properties-methods#inheritance-of-static-properties-and-methods">..</a></p>
+<ul>
+<li><code>F1.[[Prototype]] = F2</code> (con-fn inheritance, for statics)</li>
+<li><code>F1.prototype.[[Prototype]] = F2.protptype</code> (for methods)</li>
+</ul>
+<p><strong>Member overriding</strong></p>
+<ul>
+<li>override con/method: <code>super(..)</code> &amp; <code>super.method(..)</code> <a href="https://javascript.info/class-inheritance#overriding-a-method">..</a><ul>
+<li>default child-con: <code>super(...args)</code> <a href="https://javascript.info/class-inheritance#overriding-constructor">..</a></li>
+<li>call <code>super(..)</code> in child-con bf using <code>this</code> <a href="https://javascript.info/class-inheritance#overriding-constructor">..</a> (<a href="https://javascript.info/class-inheritance#super-internals-homeobject">why?</a>)<ul>
+<li>when <code>new</code>: child-con create <code>this</code> by parent-con (in regular fn, an empty obj created for <code>this</code>) <a href="https://javascript.info/class-inheritance#overriding-constructor">..</a></li>
+<li>method.<code>[[HomeObject]]</code> = their class/obj <a href="https://javascript.info/class-inheritance#homeobject">..</a> (bound forever <a href="https://javascript.info/class-inheritance#methods-are-not-free">..</a>) &amp; <code>super</code> find parent methods in <code>[[HomeObject]].[[Prototype]]</code> <a href="https://javascript.info/mixins#a-mixin-example">..</a></li>
+<li>so method with <code>super</code> not free (it uses <code>[[HomeObject]]</code>) <a href="https://javascript.info/class-inheritance#methods-are-not-free">..</a></li>
+<li><code>super</code> only work for <code>method()</code>, not <code>method: function() &#123; .. &#125;</code> <a href="https://javascript.info/class-inheritance#methods-not-function-properties">..</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>override field: <code>field = ..</code> (parent-con use own field value, not overriden one) <a href="https://javascript.info/class-inheritance#overriding-class-fields-a-tricky-note">..</a></li>
+<li>task: <a href="https://javascript.info/class-inheritance#extended-clock">Extended clock</a>, <a href="https://javascript.info/static-properties-methods#class-extends-object">Class extends Object?</a></li>
+</ul>
+<p><strong>Extending built-in classes</strong> <a href="https://javascript.info/extend-natives">..</a></p>
+<p><strong>Class Type Checking</strong> <a href="https://javascript.info/instanceof">..</a></p>
+<ul>
+<li><code>obj instanceof F</code> — <code>F[Symbol.hasInstance](obj)</code> &amp; <code>F.prototype.isPrototypeOf(obj)</code></li>
+<li><code>Object.prototype.toString</code>: <code>[object xxx]</code> (xxx: value of <code>obj[Symbol.toStringTag]</code>)</li>
+</ul>
+<h2 id="Mixin"><a href="#Mixin" class="headerlink" title="Mixin"></a>Mixin</h2><p>A class / obj contains methods for other classes without inheritance</p>
+<ul>
+<li>imp by copying method into prototype <code>Object.assign(F.prototype, mixin)</code> (prevent overwrite)</li>
+<li><a href="https://javascript.info/mixins#eventmixin">EventMixin example</a></li>
+</ul>
 ]]></content>
       <categories>
         <category>IT</category>
@@ -921,348 +1263,6 @@
 <li>execution tracking…</li>
 <li>logging with <code>console.log(...)</code></li>
 <li>ref: <a href="https://javascript.info/debugging-chrome">https://javascript.info/debugging-chrome</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>IT</category>
-        <category>Programming</category>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>IT</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript basics</title>
-    <url>/blog/2020/05/18/js-basics/</url>
-    <content><![CDATA[<h1 id="Var-Data-types-amp-Ops"><a href="#Var-Data-types-amp-Ops" class="headerlink" title="Var, Data types &amp; Ops"></a>Var, Data types &amp; Ops</h1><h2 id="Var"><a href="#Var" class="headerlink" title="Var"></a>Var</h2><ul>
-<li><code>let</code>, <code>const</code>: <a href="https://javascript.info/destructuring-assignment#the-rest-pattern" title="plain code block to group stmts">block</a> scope <a href="https://javascript.info/closure">..</a> — <a href="" title="fn/global scope; dec hoist/raise, allow redec(latter ignored)">the old “var”</a> &amp; <a href="" title="immediately-invoked fn-expr">IIFE</a></li>
-</ul>
-<h2 id="Data-types"><a href="#Data-types" class="headerlink" title="Data types"></a>Data types</h2><ul>
-<li><strong>dynamic typed</strong>, <a href="" title="num/bigInt, str, bool, null/undefined, obj/symbol">7+1</a> basic data types</li>
-<li><code>typeof</code> — <code>null</code>: “object”, <code>alert</code>: “function” <a href="https://javascript.info/types#type-typeof">..</a></li>
-</ul>
-<a id="more"></a>
-
-<h3 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h3><ul>
-<li>int/float &amp; <code>Infinity</code>, <code>-Infinity</code>, <code>NaN</code> <a href="https://javascript.info/types#number">..</a><ul>
-<li>64-bit — Imprecise calc &amp; BigInt <a href="https://javascript.info/number">..</a></li>
-<li>repre: <code>e</code>, hex/binary/octal — <code>parseInt/-float()</code>, <code>toString(base)</code></li>
-<li>check for int: <code>Math.round(n) == n</code> <a href="https://javascript.info/testing-mocha">..</a></li>
-<li>regular num &amp; NaN test: <code>isFinite()</code>, <code>isNaN()</code> vs <code>Object.is()</code></li>
-</ul>
-</li>
-<li>auto type convert: unary <code>+</code>, math-op/fn &amp; <code>Number(value)</code></li>
-<li>rouding: multiply-and-divide &amp; <code>toFixed(n)</code></li>
-<li>tasks: <a href="https://javascript.info/number#why-6-35-tofixed-1-6-3">Why 6.35.toFixed(1) == 6.3?</a>, <a href="https://javascript.info/number#a-random-integer-from-min-to-max">random int from min to max</a></li>
-</ul>
-<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><ul>
-<li>quotes &amp; <code>...$&#123;...&#125;</code> <a href="https://javascript.info/types#string">..</a></li>
-<li>special chars: line break <code>\n</code>; escape char <code>\</code> <a href="https://javascript.info/string#special-characters">..</a></li>
-<li>auto type convert: in output e.g. <code>alert(..)</code>, <code>toString()</code>: <a href="https://javascript.info/object-toprimitive#toprimitive">obj as key</a>, <a href="https://javascript.info/json#custom-tojson">JSON.stringify()</a> <a href="https://javascript.info/type-conversions#summary">..</a> &amp; <code>String(..)</code></li>
-<li>substr <code>str.slice()</code>, str compare <code>str.localeCompare(str2)</code>, <code>str.repeat(n)</code>, charCode <code>String.fromCodePoint(code)</code> &amp; <code>str.codePointAt(i)</code> (in generate pwd <a href="https://javascript.info/generators#generator-composition">..</a>) <a href="https://javascript.info/string">..</a></li>
-<li>task: <a href="https://javascript.info/string#truncate-the-text">Truncate text</a></li>
-</ul>
-<h3 id="Bool"><a href="#Bool" class="headerlink" title="Bool"></a>Bool</h3><ul>
-<li>6 falsy values <a href="https://javascript.info/type-conversions#boolean-conversion">..</a></li>
-<li>auto type convert: logical op <code>!!</code>, compareson &amp; <code>Boolean(..)</code></li>
-</ul>
-<h3 id="null-amp-undefined"><a href="#null-amp-undefined" class="headerlink" title="null &amp; undefined"></a>null &amp; undefined</h3><ul>
-<li><code>null</code> : value unknown; </li>
-<li><code>undefined</code>: unassigned-var init val &amp; default fn-return </li>
-</ul>
-<h2 id="Ops"><a href="#Ops" class="headerlink" title="Ops"></a>Ops</h2><ul>
-<li>compare diff type (convert to num) &amp; <code>null == undefined</code> , <code>NaN != NaN</code> &amp; <code>===</code></li>
-<li>Nullish coalescing op <code>??</code> (check for “null/undefined”), obj optional chaining <code>?.</code>, comma <a href="https://javascript.info/operators#comma">..</a></li>
-</ul>
-<h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><p><strong>Fn creation</strong> <a href="https://javascript.info/function-expressions#function-expression-vs-function-declaration">..</a></p>
-<ul>
-<li><strong>fn dec</strong>: block-level if strict, def-hoisting<ul>
-<li><code>function ..</code>: start of fn-dec (require a name &amp; cannot be called immediately) <a href="https://javascript.info/var#iife">..</a></li>
-</ul>
-</li>
-<li><strong>fn-expr</strong>: easy dynamic def (pass <em>anonymous</em> as callback <a href="https://javascript.info/callbacks">..</a>)</li>
-<li><strong>arrow-fn</strong> (see obj)</li>
-<li><code>new Function([...params], body)</code>: create fn dynamically at run time <a href="https://javascript.info/new-function">..</a></li>
-</ul>
-<p><strong>Closure</strong></p>
-<ul>
-<li>block scope &amp; Lexical Environment (EnvRecord &amp; outer-ref, created on run time) …</li>
-<li>LE var/fn pre-populate &amp; var “dead zone” <a href="https://javascript.info/closure#is-variable-visible">..</a></li>
-<li>access var through <strong>LE chain</strong> (inner-outer) <a href="https://javascript.info/closure#step-3-inner-and-outer-lexical-environment">..</a> &amp; updated on the LE it lives <a href="https://javascript.info/closure#step-4-returning-a-function">..</a></li>
-</ul>
-<p><a href="https://javascript.info/closure#step-4-returning-a-function">Closure</a>: a fn that remembers its outer vars and can access them by e.g. return a fn (or as obj prop) <a href="https://javascript.info/closure#nested-functions">..</a></p>
-<ul>
-<li>run outerFn: new outerFn.LE &amp; nestedFn created, <code>nestedFn.[[Env..]] = outerFn.LE</code> (set once &amp; forever)<ul>
-<li>so outerFn.LE still reachable &amp; not GC <a href="https://javascript.info/closure#garbage-collection">..</a></li>
-<li>call outerFn mtp times: diff outerFn.LE &amp; nestedFn created (nestedFn independent) <a href="https://javascript.info/closure#are-counters-independent">..</a></li>
-</ul>
-</li>
-<li>run nestedFn: new nestedFn.LE created &amp; <code>nestedFn.LE -&gt; outerFn.LE</code> (ref value taken from [[Env..]])</li>
-<li>Task: <a href="https://javascript.info/closure#counter-object">Counter object</a>, <a href="https://javascript.info/closure#sum-with-closures">Sum with closures</a>, <a href="https://javascript.info/closure#filter-through-function">Filter through function</a>, <a href="https://javascript.info/closure#sort-by-field">Sort by field</a>, <a href="https://javascript.info/closure#army-of-functions">Army of functions</a></li>
-</ul>
-<h1 id="Obj-Symbol-Arrow-Fn"><a href="#Obj-Symbol-Arrow-Fn" class="headerlink" title="Obj, Symbol, Arrow Fn"></a>Obj, Symbol, Arrow Fn</h1><p><strong>Obj</strong>: keyed values collection</p>
-<ul>
-<li>key type: str || symbol; value: any type (except <code>__proto__</code>)<ul>
-<li>key can be reserved word, non-str/symbol key ==&gt; toString <a href="https://javascript.info/object#property-names-limitations">..</a></li>
-<li>key existence test: <code>in</code> op &amp; optional chaining syntax <code>?.</code>  (check <code>null/undefined</code>)</li>
-<li>key iterate: <code>for..in</code> loop &amp; prop order ..</li>
-</ul>
-</li>
-<li>value access: <code>.</code> vs <code>obj[&quot;prop&quot;]</code> <a href="https://javascript.info/object#square-brackets">..</a><ul>
-<li>prop add/set: <code>obj.prop = xxx</code>, delete: <code>delete obj.prop</code> <a href="https://javascript.info/object#literals-and-properties">..</a></li>
-</ul>
-</li>
-<li>computed prop, prop value shorthand ..</li>
-<li>obj deep cloning by <code>for..in</code> loop <a href="https://javascript.info/object-copy#cloning-and-merging-object-assign">..</a> &amp; <code>typeof</code></li>
-</ul>
-<p>tasks <a href="https://javascript.info/object#ordered-like-an-object">Check for emptiness</a></p>
-<!-- more -->
-
-<h2 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h2><p>unique (even same desc) vs global symbol (1 key 1 symbol)</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">alert(<span class="built_in">Symbol</span>(<span class="string">&quot;id&quot;</span>));    <span class="comment">// TypeError (not auto-convert to string)</span></span><br><span class="line">alert(id.toString()); 	<span class="comment">// Symbol(id)</span></span><br><span class="line">alert(id.description);  <span class="comment">// id</span></span><br></pre></td></tr></table></figure>
-<p><strong>Symbol as obj key</strong></p>
-<ul>
-<li>skip in <code>for..in</code> loop &amp; <code>Object.keys(obj)</code> (looks like non-emutable) but in <code>Object.assign()</code> <a href="https://javascript.info/symbol#symbols-are-skipped-by-for-in">..</a></li>
-<li>get by <code>Object.getOwnPropertySymbols(obj)</code> <a href="https://javascript.info/prototype-methods#summary">..</a></li>
-</ul>
-<h2 id="Methods-amp-“this”"><a href="#Methods-amp-“this”" class="headerlink" title="Methods &amp; “this”"></a>Methods &amp; “this”</h2><ul>
-<li>method def: fn-expr shorthand || copy from fn <a href="https://javascript.info/object-methods#method-examples">..</a></li>
-<li><code>this</code> eval at run-time — <a href="https://javascript.info/bind#losing-this" title="obj method passed around &amp; called in another context">losing “this” problem</a><ul>
-<li>call fn with obj (“this” in methods): <code>this=obj</code> <a href="https://javascript.info/object-methods#this-in-methods">..</a></li>
-<li>call fn without obj (as fn itself) <a href="https://javascript.info/object-methods#this-is-not-bound">..</a><ul>
-<li><code>this=undefined</code> if strict &amp; <code>arr.forEach(fn)</code> <a href="https://javascript.info/arrow-functions#arrow-functions-have-no-this">..</a></li>
-<li><code>this=window</code> if non-strict &amp; <code>setTimeout(fn, ms)</code> <a href="https://javascript.info/bind#losing-this">..</a>, <a href="https://javascript.info/call-apply-decorators#delaying-decorator">..</a></li>
-</ul>
-</li>
-<li>tasks: <a href="https://javascript.info/object-methods#using-this-in-object-literal">Using “this” in object literal</a>, <a href="https://javascript.info/object-methods#create-a-calculator">calculator</a>, <a href="https://javascript.info/object-methods#create-a-calculator">Chaining</a></li>
-</ul>
-</li>
-<li>bind “this”<ul>
-<li><a href="https://javascript.info/bind#solution-2-bind">fn binding</a>: <code>fn.bind(context, [...startingArgs])</code><ul>
-<li><code>this=context</code> (bound <a href="https://javascript.info/bind#bound-function-as-a-method" title="use pre-bound context value (even bound obj changes later), so cannot re-bound">hard-fixed</a>), partial <a href="https://javascript.info/bind#partial-functions">..</a>, <a href="https://javascript.info/bind#going-partial-without-context">..</a></li>
-<li>tasks: <a href="https://javascript.info/bind#bound-function-as-a-method">Bound fn in method</a>, <a href="https://javascript.info/bind#second-bind">re-bound ignored</a>, <a href="https://javascript.info/bind#function-property-after-bind">Fn prop lost af bind</a>, <a href="https://javascript.info/bind#fix-a-function-that-loses-this">method bind context in callbacks</a>, <a href="https://javascript.info/bind#partial-application-for-login">Partial &amp; method</a></li>
-</ul>
-</li>
-<li><a href="https://javascript.info/call-apply-decorators#func-apply" title="Passing all args context to another fn">call forwarding</a>: <code>fn.apply(context, args: arrLike)</code> (prefer) &amp; <code>fn.call(context, ...args);</code></li>
-<li><a href="https://javascript.info/call-apply-decorators#method-borrowing" title="take a method from an obj and call it in the context of another obj">fn-borrowing</a>: <code>[].join.call(arguments);</code> in fn-body</li>
-</ul>
-</li>
-</ul>
-<h2 id="Global-obj"><a href="#Global-obj" class="headerlink" title="Global obj"></a>Global obj</h2><p>Provide built-in var &amp; fn (can be access directly), e.g. <code>window</code> in browser &amp; <code>global</code> in node </p>
-<ul>
-<li>e.g. <code>window.alert</code>, <code>window.innerHeight</code> &amp; global fn || <strong>var</strong>-var</li>
-<li>make value global: <code>window.xxx = ...</code> (props of global-obj)</li>
-</ul>
-<h1 id="Obj-amp-Fn"><a href="#Obj-amp-Fn" class="headerlink" title="Obj &amp; Fn"></a>Obj &amp; Fn</h1><h2 id="Arrow-fn"><a href="#Arrow-fn" class="headerlink" title="Arrow fn"></a>Arrow fn</h2><p><code>(...args) =&gt; expr || &#123; ...body &#125; || (obj-litiral)</code> <a href="https://javascript.info/array-methods#map-to-objects">..</a></p>
-<ul>
-<li>no own <code>this</code> (cann’t run with <code>new</code>) 、<code>super</code> <a href="https://javascript.info/class-inheritance#overriding-a-method">..</a> &amp; <code>arguments</code> (no own context <a href="https://javascript.info/arrow-functions">..</a>) <a href="https://javascript.info/arrow-functions#summary">..</a> — take from outer LE</li>
-</ul>
-<h2 id="F-Constructor-fn"><a href="#F-Constructor-fn" class="headerlink" title="F: Constructor fn"></a>F: Constructor fn</h2><ul>
-<li>set props &amp; methods <code>this.xxx = ...</code></li>
-<li>call by <code>new</code> op (execute “internal algorithm”)<ul>
-<li>return this ||  another obj (prim-return ignored)</li>
-<li>Constructor mode test: <code>new.target</code></li>
-</ul>
-</li>
-<li>singleton obj <code>new function() &#123; ... &#125;</code></li>
-</ul>
-<h2 id="Fn-is-obj"><a href="#Fn-is-obj" class="headerlink" title="Fn is obj"></a>Fn is obj</h2><p>Fn: callable action (instead of data) obj <a href="https://javascript.info/function-object">..</a></p>
-<ul>
-<li>fn-def: store the fn-obj in same named var, call by <code>fnName(...args)</code> — callback fn <a href="https://javascript.info/function-expressions">..</a></li>
-<li>Fn built-in props: <code>name</code> (str, “” for anonymous), <code>length</code> (param #, rest param not count)</li>
-<li>custom prop/helper method: <code>fnName.xxx = ..</code></li>
-<li>tasks: <a href="https://javascript.info/function-object#set-and-decrease-for-counter">Set and decrease for counter</a>, <a href="https://javascript.info/function-object#sum-with-an-arbitrary-amount-of-brackets">Sum with an arbitrary amount of brackets</a></li>
-</ul>
-<h2 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h2><p><strong>Obj prop config</strong></p>
-<ul>
-<li>prop descriptor: <code>value</code> + <code>writable</code>, <code>enumerable</code>, <code>configurable</code> <a href="https://javascript.info/property-descriptors">..</a><ul>
-<li>get/set desc: <code>Object.getOwnPropertyDescriptor()</code>, <code>Object.defineProperty()</code><ul>
-<li>obj created “the usually way”: flags default <code>true</code>; flags not supplied in desc defalut <code>false</code></li>
-</ul>
-</li>
-<li>built-in <code>toString()</code> non-enumerable</li>
-</ul>
-</li>
-<li>Sealing an object globally ..</li>
-</ul>
-<p><strong>Accessor props</strong><br><code>get/set xxx([value]) &#123;..&#125;</code>, trigger when <code>xxx</code> prop read/assign</p>
-<ul>
-<li>desc: <code>get/set([value]) &#123;..&#125;</code>, <code>enumerable</code>, <code>configurable</code></li>
-<li>smarter g/setter: store value in another internal prop</li>
-</ul>
-<p><strong>Primitive as Obj</strong><br>provide methods to op prim but keep them fast &amp; lightweight e.g.  <code>String</code>, <code>Number</code>, <code>Boolean</code>, <code>Symbol</code> </p>
-<ul>
-<li>temporary wrapper obj created &amp; destroyed <a href="https://javascript.info/primitives-methods#a-primitive-as-an-object">..</a> — manually modify obj wrap =&gt; err (strict) || undefined <a href="https://javascript.info/primitives-methods#can-i-add-a-string-property">..</a></li>
-</ul>
-<p><strong>Obj -&gt; primitive</strong></p>
-<ul>
-<li><a href="" title="which type to convert">3 hints</a>: <code>&quot;string&quot;</code>, <code>&quot;number&quot;</code> &amp; <code>&quot;default&quot;</code> (no boolean hint: all <strong>obj  =&gt; true</strong>)</li>
-<li>3 methods: must return a prim value <a href="https://javascript.info/object-toprimitive#return-types">..</a><ul>
-<li><code>[Symbol.toPrimitive](hint)</code> return obj ==&gt; err</li>
-<li>built-in <code>toString()</code> =&gt; “[object Object]”, <code>valueOf()</code> =&gt; obj itself (ignored) <a href="https://javascript.info/object-toprimitive#tostring-valueof">..</a></li>
-</ul>
-</li>
-</ul>
-<h1 id="Built-in-Data-Structure"><a href="#Built-in-Data-Structure" class="headerlink" title="Built-in Data Structure"></a>Built-in Data Structure</h1><ul>
-<li><code>Object</code> key: str/symbol</li>
-<li><code>Array</code> key: int (ordered collection, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">MDN</a>)</li>
-<li><code>Map</code> key: any type</li>
-<li><code>Set</code>: unique values</li>
-</ul>
-<h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><ul>
-<li>value indexing: <code>arr[i]</code>, value iter: <code>for..of</code> || <code>arr.forEach()</code></li>
-<li><code>arr.length</code> = greatest index + 1, init as item #, writable<ul>
-<li>manually increase: <code>undefined</code> values (<code>&quot;&quot;</code> in <code>toString()</code>)</li>
-<li>manually decrease: elem lost — clear arr <code>arr.length = 0</code>    </li>
-</ul>
-</li>
-<li><code>delete arr[i]</code>: value =&gt; <code>undefined</code> (<code>length</code> keep same) <a href="https://javascript.info/array-methods#splice">..</a></li>
-<li><code>arr.toString()</code> =&gt; <code>_,_,_...</code></li>
-<li><a href="https://javascript.info/keys-values-entries#object-keys-values-entries">Object.keys/values/entries(obj)</a> =&gt; arr (enum &amp; non-symbol key)<ul>
-<li>task: <a href="https://javascript.info/keys-values-entries#sum-the-properties">Sum the props</a></li>
-</ul>
-</li>
-</ul>
-<!-- more  -->
-<p>Methods <a href="https://javascript.info/array-methods#summary">..</a></p>
-<ul>
-<li><code>splice(..)</code> : […rmed-elems]</li>
-<li><code>filter(fn)</code>: […matchedItems], <code>indexOf()</code>, <code>includes()</code></li>
-<li><code>map(fn)</code> &amp; <code>reduce(..)</code>, <code>sort(..)</code> &amp; <code>reverse()</code></li>
-<li><code>arr.join(glue=&#39;,&#39;)</code> &amp; <code>str.split(delim)</code> (<code>(&#39;&#39;)</code>: char[])</li>
-<li><code>Array.isArray(value)</code></li>
-</ul>
-<p><strong>Iterable &amp; array-like</strong></p>
-<ul>
-<li><strong>iterable</strong> (e.g. arr &amp; str) can be used in <code>for..of</code> <a href="https://javascript.info/iterable">..</a></li>
-<li>array-like: obj with <strong>numeric index &amp; length</strong> <a href="https://javascript.info/iterable#array-like">..</a></li>
-<li>str both iter &amp; arr-like <a href="https://javascript.info/iterable#array-like">..</a> — <code>str[i]</code> &amp; <code>str.length</code> </li>
-<li>iter/arr-like =&gt; array: <code>Array.from(obj, ..)</code></li>
-</ul>
-<p><code>...</code>: <strong>Spread syntax &amp; Rest param</strong></p>
-<ul>
-<li>Spread syntax: <code>...iter</code>: item list (use <strong>for..of</strong> internally) <ul>
-<li>copy/merge/convert by <code>[...iter]</code> / <code>&#123;...obj&#125;</code></li>
-</ul>
-</li>
-<li>Rest params: <code>...arr</code> in fn-def<ul>
-<li>fn can be called with any # of args (only args assoc with param will be count) <a href="https://javascript.info/rest-parameters-spread#rest-parameters">..</a></li>
-<li>the old <code>arguments</code> (both iter &amp; arr-like) <a href="https://javascript.info/rest-parameters-spread#the-arguments-variable">..</a></li>
-</ul>
-</li>
-</ul>
-<p><strong>Destructuring assignment syntax</strong></p>
-<ul>
-<li>Copying iter-items into vars: <code>let [...vars]/&#123;...obj-props&#125; = arr/obj</code> (keep origin unmodified)<ul>
-<li>ignore item by extra <code>,</code> <a href="https://javascript.info/destructuring-assignment#array-destructuring">..</a>, <code>=</code> for default value (unprovide value as <strong>undefined</strong>) <a href="https://javascript.info/destructuring-assignment#default-values">..</a>, <code>:</code> for prop-var rename <a href="https://javascript.info/destructuring-assignment#object-destructuring">..</a></li>
-</ul>
-</li>
-<li>easy swap: <code>[guest, admin] = [admin, guest];</code></li>
-<li><a href="https://javascript.info/destructuring-assignment#nested-destructuring">nested desructing</a> : same structure (no var for the group one)</li>
-<li><a href="https://javascript.info/destructuring-assignment#smart-function-parameters">Smart fn params</a>: pass obj as fn param</li>
-<li>obj destcructing to existing var: <code>(</code>{…}<code>)</code> ({} in main code flow as code block) <a href="https://javascript.info/destructuring-assignment#the-rest-pattern">..</a></li>
-</ul>
-<p>Tasks </p>
-<ul>
-<li><a href="https://javascript.info/array#a-maximal-subarray">A maximal subarray</a></li>
-<li><a href="https://javascript.info/array-methods#filter-range-in-place">Filter range “in place”</a></li>
-<li><a href="https://javascript.info/array-methods#sort-in-decreasing-order">Sort in decreasing order</a></li>
-<li><a href="https://javascript.info/array-methods#create-an-extendable-calculator">Create an extendable calculator</a></li>
-<li><a href="https://javascript.info/array-methods#sort-users-by-age">Sort users by age</a></li>
-<li><a href="https://javascript.info/array-methods#shuffle-an-array">Shuffle an array</a></li>
-<li><a href="https://javascript.info/array-methods#filter-unique-array-members">Filter unique array members</a></li>
-<li><a href="https://javascript.info/array-methods#create-keyed-object-from-array">Create keyed object from array</a></li>
-</ul>
-<h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2><ul>
-<li>Send data: <code>JSON.stringify(obj, ..)</code> &amp; <code>obj.toJSON()</code>: formatted str (aka <em>serialized</em> obj)</li>
-<li>Get data: <code>JSON.parse(str, ..)</code> =&gt; obj</li>
-</ul>
-<h1 id="Prototypal-inheritance"><a href="#Prototypal-inheritance" class="headerlink" title="Prototypal inheritance"></a>Prototypal inheritance</h1><p><strong>[[Prototype]] &amp; prototype</strong></p>
-<ul>
-<li><code>[[Prototype]]</code>: null || obj (aka <strong>prototype</strong>) <a href="https://javascript.info/prototype-inheritance">..</a>, accessor methods &amp; fully obj-clone <a href="https://javascript.info/prototype-methods">..</a></li>
-<li>the deprecated <code>__proto__</code> prop <a href="https://javascript.info/prototype-inheritance#prototype">..</a>, reside in <code>Object.prototype</code> <a href="https://javascript.info/prototype-methods#very-plain">..</a> (why depr &amp; “Very plain / pure dict” obj <a href="https://javascript.info/prototype-methods#very-plain">..</a>)</li>
-</ul>
-<p><strong>Prototypal inheritance</strong>: prop not exist in the obj -&gt; find from proto (follow <code>[[Prototype]]</code> ref chain) <a href="https://javascript.info/prototype-inheritance#summary">..</a></p>
-<ul>
-<li>proto only for reading prop, write/delete data prop act on the obj (write may call setter in proto) <a href="https://javascript.info/prototype-inheritance#writing-doesn-t-use-prototype">..</a></li>
-<li>proto search opt <a href="https://javascript.info/prototype-inheritance#searching-algorithm">..</a></li>
-<li><code>this</code> in proto method: ref to obj bf <code>.</code> (method shared but obj state not) <a href="https://javascript.info/prototype-inheritance#the-value-of-this">..</a></li>
-<li>inherited prop in <code>for..in</code> (if enum) but not in <code>Object.keys/values()</code> , diff by <code>obj.hasOwnProperty(key)</code> <a href="https://javascript.info/prototype-inheritance#for-in-loop">..</a></li>
-<li>task: <a href="https://javascript.info/prototype-methods#add-tostring-to-the-dictionary">add toString() to the “very plain” obj</a></li>
-</ul>
-<p><strong>F.protoype</strong>: a “normal” prop of con-fn F, set <code>[[Proto..]]</code> for obj from F when <code>new F()</code></p>
-<ul>
-<li><code>let obj = new F()</code>: set <code>obj.[[Prototype]] = F.prototype</code> (<code>&#123;constructor: F&#125;</code> by default)</li>
-<li>so <code>obj.constructor === F</code> &amp; <code>let obj2 = new obj.constructor()</code><ul>
-<li>Task: <a href="https://javascript.info/function-prototype#create-an-object-with-the-same-constructor">Create obj with same constructor</a></li>
-</ul>
-</li>
-<li>re-assign <strong>F.protoype</strong> to another obj: prev created obj.[[Prototype]] not affect</li>
-<li>native F.prototypes<ul>
-<li><code>Object.prototype</code>: inherited to all obj, ref to a huge obj with toString and other methods<ul>
-<li><code>Object.prototype.__proto__ = null</code></li>
-</ul>
-</li>
-<li>Built-in obj (e.g. obj, arr, fn, num 5): store data in obj itself, store methods in prototype <a href="https://javascript.info/native-prototypes#other-built-in-prototypes">..</a> &amp; <a href="https://javascript.info/native-prototypes#summary">..</a></li>
-</ul>
-</li>
-<li>Check prototype chain by <code>console.dir(obj)</code> <a href="https://javascript.info/native-prototypes#other-built-in-prototypes">..</a></li>
-<li>task: <a href="https://javascript.info/native-prototypes#add-the-decorating-defer-to-functions">Add decorating “defer()” to fns</a>, <a href="https://javascript.info/prototype-methods#the-difference-between-calls">The difference between calls</a></li>
-</ul>
-<h1 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">F</span> </span>&#123;</span><br><span class="line">  [<span class="keyword">static</span>] field = ..; <span class="comment">// access field in method by &quot;this.xxx&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(..) &#123; <span class="comment">/*..*/</span> &#125; <span class="comment">// called when &quot;new&quot;</span></span><br><span class="line">  </span><br><span class="line">  [<span class="keyword">static</span>] method() &#123; <span class="comment">/*..*/</span> &#125; </span><br><span class="line">  [get/set] method(..) &#123; <span class="comment">/*..*/</span> &#125;</span><br><span class="line">  [expr]() &#123; <span class="comment">/*..*/</span> &#125; <span class="comment">// computed name</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>bind <code>this</code> in method <a href="https://javascript.info/class#making-bound-methods-with-class-fields">..</a><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">this</span>.xxx = <span class="built_in">this</span>.xxx.bind(<span class="built_in">this</span>); <span class="comment">// bind existing method in constructor </span></span><br><span class="line">xxx = <span class="function">() =&gt;</span> &#123;..&#125; <span class="comment">// field store in obj itself (&quot;this&quot; = obj)</span></span><br></pre></td></tr></table></figure></li>
-<li>access <code>static</code> outside F: <code>F.xxx</code> <a href="https://javascript.info/static-properties-methods#static-properties">..</a>, <a href="https://javascript.info/static-properties-methods">..</a><ul>
-<li>return obj in static method by <code>new this(..)</code> (factory method)</li>
-</ul>
-</li>
-<li>Class Encapsulation <a href="https://javascript.info/private-protected-properties-methods">..</a><ul>
-<li><strong>protected</strong>: <code>_xxx</code> (convention)</li>
-<li><strong>private</strong>: <code>#xxx</code> (proposal, cannot access by <code>this[&#39;#xxx&#39;]</code>)</li>
-<li><strong>read-only prop</strong>: only getter no setter (set value on con)</li>
-</ul>
-</li>
-<li>task: <a href="https://javascript.info/class#rewrite-to-class">class Clock</a></li>
-</ul>
-<h2 id="Class-vs-fn"><a href="#Class-vs-fn" class="headerlink" title="Class vs fn"></a>Class vs fn</h2><p><code>typeof F</code>: <code>&quot;function&quot;</code> <a href="https://javascript.info/class#what-is-a-class">..</a></p>
-<ul>
-<li><code>class F &#123; .. &#125;</code>: <strong>F</strong> (con-fn) &amp; <strong>F.prototype</strong> <a href="https://javascript.info/class#what-is-a-class">..</a><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">F: &#123;</span><br><span class="line">  ...statics,</span><br><span class="line"> <span class="keyword">constructor</span>(),</span><br><span class="line">  [[Prototype]]: ParentF || Function.prototype </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">F.prototype: &#123; </span><br><span class="line">  ...methods, <span class="comment">// non-enum</span></span><br><span class="line">  <span class="keyword">constructor</span>: F, </span><br><span class="line">   [Prototype]]: ParentF.prototype || Object.prototype </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></li>
-<li><code>new F()</code>: obj<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">obj: &#123;</span><br><span class="line">  ...fields,</span><br><span class="line">  [[Prototype]]: F.prototype <span class="comment">// access to non-static methods</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>class &amp; fn diffs <a href="https://javascript.info/class#not-just-a-syntactic-sugar">..</a></li>
-</ul>
-<h2 id="Class-inheritance"><a href="#Class-inheritance" class="headerlink" title="Class inheritance"></a>Class inheritance</h2><p><code>extends</code> set 2 proto refs: <a href="https://javascript.info/static-properties-methods#inheritance-of-static-properties-and-methods">..</a></p>
-<ul>
-<li><code>F1.[[Prototype]] = F2</code> (con-fn inheritance, for statics)</li>
-<li><code>F1.prototype.[[Prototype]] = F2.protptype</code> (for methods)</li>
-</ul>
-<p><strong>Member overriding</strong></p>
-<ul>
-<li>override con/method: <code>super(..)</code> &amp; <code>super.method(..)</code> <a href="https://javascript.info/class-inheritance#overriding-a-method">..</a><ul>
-<li>default child-con: <code>super(...args)</code> <a href="https://javascript.info/class-inheritance#overriding-constructor">..</a></li>
-<li>call <code>super(..)</code> in child-con bf using <code>this</code> <a href="https://javascript.info/class-inheritance#overriding-constructor">..</a> (<a href="https://javascript.info/class-inheritance#super-internals-homeobject">why?</a>)<ul>
-<li>when <code>new</code>: child-con create <code>this</code> by parent-con (in regular fn, an empty obj created for <code>this</code>) <a href="https://javascript.info/class-inheritance#overriding-constructor">..</a></li>
-<li>method.<code>[[HomeObject]]</code> = their class/obj <a href="https://javascript.info/class-inheritance#homeobject">..</a> (bound forever <a href="https://javascript.info/class-inheritance#methods-are-not-free">..</a>) &amp; <code>super</code> find parent methods in <code>[[HomeObject]].[[Prototype]]</code> <a href="https://javascript.info/mixins#a-mixin-example">..</a></li>
-<li>so method with <code>super</code> not free (it uses <code>[[HomeObject]]</code>) <a href="https://javascript.info/class-inheritance#methods-are-not-free">..</a></li>
-<li><code>super</code> only work for <code>method()</code>, not <code>method: function() &#123; .. &#125;</code> <a href="https://javascript.info/class-inheritance#methods-not-function-properties">..</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>override field: <code>field = ..</code> (parent-con use own field value, not overriden one) <a href="https://javascript.info/class-inheritance#overriding-class-fields-a-tricky-note">..</a></li>
-<li>task: <a href="https://javascript.info/class-inheritance#extended-clock">Extended clock</a>, <a href="https://javascript.info/static-properties-methods#class-extends-object">Class extends Object?</a></li>
-</ul>
-<p><strong>Extending built-in classes</strong> <a href="https://javascript.info/extend-natives">..</a></p>
-<p><strong>Class Type Checking</strong> <a href="https://javascript.info/instanceof">..</a></p>
-<ul>
-<li><code>obj instanceof F</code> — <code>F[Symbol.hasInstance](obj)</code> &amp; <code>F.prototype.isPrototypeOf(obj)</code></li>
-<li><code>Object.prototype.toString</code>: <code>[object xxx]</code> (xxx: value of <code>obj[Symbol.toStringTag]</code>)</li>
-</ul>
-<h2 id="Mixin"><a href="#Mixin" class="headerlink" title="Mixin"></a>Mixin</h2><p>A class / obj contains methods for other classes without inheritance</p>
-<ul>
-<li>imp by copying method into prototype <code>Object.assign(F.prototype, mixin)</code> (prevent overwrite)</li>
-<li><a href="https://javascript.info/mixins#eventmixin">EventMixin example</a></li>
 </ul>
 ]]></content>
       <categories>
