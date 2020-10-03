@@ -22,15 +22,15 @@
     var CONFIG = {"hostname":"stephen-chan255.github.io","root":"/blog/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="async actions — actions init now but finish later (code below it won’t wait) Callback external script loading &amp; callback ..  onload &#x2F; onerror “error-first callback” style &amp; callback hell &#x2F; pyr">
+  <meta name="description" content="async actions: actions init now but finish later (code below it won’t wait) .. CallbackloadScript(src, callback) example ..: “error-first callback” style — callback hell &#x2F; pyramid of doom (code grows">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Asynchronous programming in JavaScript">
+<meta property="og:title" content="Async programming in JavaScript">
 <meta property="og:url" content="https://stephen-chan255.github.io/blog/2020/06/08/js-async/index.html">
 <meta property="og:site_name" content="Stephen&#39;s notes">
-<meta property="og:description" content="async actions — actions init now but finish later (code below it won’t wait) Callback external script loading &amp; callback ..  onload &#x2F; onerror “error-first callback” style &amp; callback hell &#x2F; pyr">
+<meta property="og:description" content="async actions: actions init now but finish later (code below it won’t wait) .. CallbackloadScript(src, callback) example ..: “error-first callback” style — callback hell &#x2F; pyramid of doom (code grows">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-06-08T11:32:55.000Z">
-<meta property="article:modified_time" content="2020-10-01T08:00:04.778Z">
+<meta property="article:modified_time" content="2020-10-03T13:46:38.092Z">
 <meta property="article:author" content="Stephen Chan">
 <meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>Asynchronous programming in JavaScript | Stephen's notes</title>
+  <title>Async programming in JavaScript | Stephen's notes</title>
   
 
 
@@ -225,7 +225,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Callback"><span class="nav-number">1.</span> <span class="nav-text">Callback</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise"><span class="nav-number">2.</span> <span class="nav-text">Promise</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Executor-resolve-reject"><span class="nav-number">2.1.</span> <span class="nav-text">Executor(resolve, reject)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Consumer-then-catch-final"><span class="nav-number">2.2.</span> <span class="nav-text">Consumer: .then(), .catch(), .final()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise-Chain"><span class="nav-number">2.3.</span> <span class="nav-text">Promise Chain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#async-await"><span class="nav-number">3.</span> <span class="nav-text">async&#x2F;await</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise-API"><span class="nav-number">4.</span> <span class="nav-text">Promise API</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Callback"><span class="nav-number">1.</span> <span class="nav-text">Callback</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Promise"><span class="nav-number">2.</span> <span class="nav-text">Promise</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#async-await"><span class="nav-number">3.</span> <span class="nav-text">async&#x2F;await</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Promise-API"><span class="nav-number">4.</span> <span class="nav-text">Promise API</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -332,7 +332,7 @@
     
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Asynchronous programming in JavaScript
+          Async programming in JavaScript
         </h1>
 
         <div class="post-meta-container">
@@ -350,7 +350,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-01 16:00:04" itemprop="dateModified" datetime="2020-10-01T16:00:04+08:00">2020-10-01</time>
+        <time title="Modified: 2020-10-03 21:46:38" itemprop="dateModified" datetime="2020-10-03T21:46:38+08:00">2020-10-03</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -380,80 +380,36 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p><strong>async</strong> actions — actions init now but finish later (code below it won’t wait)</p>
-<h2 id="Callback"><a href="#Callback" class="headerlink" title="Callback"></a>Callback</h2><ul>
-<li><p>external script loading &amp; callback <a target="_blank" rel="noopener" href="https://javascript.info/callbacks">..</a></p>
-<ul>
-<li><code>onload</code> / <code>onerror</code></li>
-<li>“error-first callback” style &amp; callback hell / pyramid of doom (code grows to the right)</li>
-</ul>
-</li>
-<li><p>Fn Call Scheduling by<code>setTimeout/setInterval()</code></p>
+        <p><strong>async</strong> actions: actions init now but finish later (code below it won’t wait) <a target="_blank" rel="noopener" href="https://javascript.info/callbacks">..</a></p>
+<h1 id="Callback"><a href="#Callback" class="headerlink" title="Callback"></a>Callback</h1><p><code>loadScript(src, callback)</code> example <a target="_blank" rel="noopener" href="https://javascript.info/callbacks">..</a>: “error-first callback” style — callback hell / pyramid of doom (code grows to the right)</p>
+<p><strong>Fn Call Scheduling</strong>: <code>setTimeout/setInterval(..)</code> <a target="_blank" rel="noopener" href="https://javascript.info/settimeout-setinterval">..</a> (enqueue in macrotask <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#event-loop">..</a>)</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> timerId = <span class="built_in">setTimeout</span>/<span class="built_in">setInterval</span>(fn, delay=<span class="number">0</span>, ...args); <span class="comment">// keep fn-ref in scheduler (not GC) </span></span><br><span class="line"><span class="built_in">clearTimeout</span>/<span class="built_in">clearInterval</span>(timerId); <span class="comment">// &quot;timerId keep same&quot; af clear (not null)</span></span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p><strong>setTimeout()</strong>: call a regular fn without <code>arguments</code> and set <code>this=window</code> <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#delaying-decorator">..</a></p>
-</li>
-<li><p><strong>setInterval()</strong>: fn-exe-time &gt; delay <a target="_blank" rel="noopener" href="https://javascript.info/settimeout-setinterval#nested-settimeout">..</a></p>
-</li>
-<li><p><strong>nested setTimeout</strong> vs setInterval ..</p>
-</li>
-<li><p>tasks — <a target="_blank" rel="noopener" href="https://javascript.info/settimeout-setinterval#output-every-second">Output every second</a></p>
-</li>
-</ul>
-</li>
+<li><strong>setTimeout()</strong>: set <code>this=window</code> <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#delaying-decorator">..</a></li>
+<li><strong>setInterval()</strong>: fn-exe-time &gt; delay? <a target="_blank" rel="noopener" href="https://javascript.info/settimeout-setinterval#nested-settimeout">..</a></li>
+<li><strong>nested setTimeout</strong> vs setInterval ..</li>
+<li>tasks: <a target="_blank" rel="noopener" href="https://javascript.info/settimeout-setinterval#output-every-second">Output every second</a></li>
 </ul>
 <a id="more"></a>
 
-<h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><p>JS obj that links <strong>executor</strong> &amp; <strong>handler</strong> together</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  ...resolve(value) || reject(error) ... </span><br><span class="line">&#125;)</span><br><span class="line">	.then(<span class="function"><span class="params">value</span> =&gt;</span> &#123; <span class="comment">/* handle value */</span> &#125;)</span><br><span class="line">	.catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123; <span class="comment">/* handle error */</span> &#125;)</span><br><span class="line">	.finally &#123;...&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Executor-resolve-reject"><a href="#Executor-resolve-reject" class="headerlink" title="Executor(resolve, reject)"></a>Executor(resolve, reject)</h3><ul>
-<li><p>when <code>new Promise</code>, fn <code>executor(resolve, reject)</code> auto-run</p>
-</li>
-<li><p><code>resolve</code> &amp; <code>reject</code> — pre-defiend callbacks, called once (further calls ignored)</p>
+<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> .. ) <span class="comment">// Executor(res, rej), auto-run when &quot;new Promise&quot;</span></span><br><span class="line">  <span class="comment">// Consumers: pass prev settled result &amp; return a promise (can be chainned)</span></span><br><span class="line">  .then(<span class="function"><span class="params">value</span> =&gt;</span> .. ) <span class="comment">// onresolve</span></span><br><span class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> .. )  <span class="comment">// onreject / err occur [https://javascript.info/promise-error-handling#implicit-try-catch]</span></span><br><span class="line">  .finally &#123; .. &#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>Promise init props: <strong>[[PromiseStatus]]: “pending”</strong>, <strong>[[PromiseValue]]: undefined</strong></li>
-<li>run <code>resolve(result)</code>: <strong>“resolved”</strong>, <strong>result</strong></li>
-<li>run <code>reject(error)</code> / <strong>error occur</strong> (turn into a rejected promise <a target="_blank" rel="noopener" href="https://javascript.info/promise-error-handling#implicit-try-catch">..</a>): <strong>“rejected”</strong>, <strong>error</strong></li>
-</ul>
-</li>
-<li><p>callback vs promise — promise only single result (callback can be called mtp times) <a target="_blank" rel="noopener" href="https://javascript.info/promisify">..</a></p>
-</li>
-</ul>
-<h3 id="Consumer-then-catch-final"><a href="#Consumer-then-catch-final" class="headerlink" title="Consumer: .then(), .catch(), .final()"></a>Consumer: .then(), .catch(), .final()</h3><p>Wait for promise settled (resolve or reject) &amp; process the value (result or error) by its handler</p>
-<ul>
-<li><code>.then(onFulfill[, onReject])</code></li>
-<li><code>.catch(errorHandler)</code>  === .then(null, errorHandler)<ul>
+<li><code>resolve</code> &amp; <code>reject</code>: pre-defiend callbacks, called once (further calls ignored)</li>
 <li>error occur in setTimeout (except <code>reject(err)</code>) not catched <a target="_blank" rel="noopener" href="https://javascript.info/promise-error-handling#error-in-settimeout">..</a></li>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/promise-error-handling#unhandled-rejections">unhandlerd rejection &amp; window ‘unhandledrejection’ event</a></li>
+<li>unhandlerd rejection &amp; window ‘unhandledrejection’ event <a target="_blank" rel="noopener" href="https://javascript.info/promise-error-handling#unhandled-rejections">..</a></li>
+<li><code>.finally(fn)</code>: handler no params (just pass result to next handler)</li>
+<li>callback vs promise: promise only single result (callback can be called mtp times) <a target="_blank" rel="noopener" href="https://javascript.info/promisify">..</a></li>
 </ul>
-</li>
-<li><code>.finally(fn)</code> — handler no params (just pass result to next handler)</li>
-</ul>
-<h3 id="Promise-Chain"><a href="#Promise-Chain" class="headerlink" title="Promise Chain"></a>Promise Chain</h3><ul>
-<li><code>.then()</code>/ <code>.catch()</code> / <code>.finally()</code> ==&gt; return a promise — can be chainned</li>
-<li>handler return a promise / result — overwrite promise value &amp; pass to next assoc handler<ul>
-<li>handler no return ==&gt; resolve(undefined) || adopt prev-Promise.state</li>
-</ul>
-</li>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/promise-chaining#bigger-example-fetch">promise &amp; fetch</a></li>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/promise-chaining#example-loadscript">customized Thenable obj</a></li>
-</ul>
-<h2 id="async-await"><a href="#async-await" class="headerlink" title="async/await"></a>async/await</h2><p><code>async</code> bf fn =&gt; ensure to return a promise &amp; enable <code>await</code> bf promise (JS wait promise to settle &amp; return the result ) </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// await &amp; try-catch for Promise.then() &amp; catch()</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> response = <span class="keyword">await</span> fetch(<span class="string">&#x27;&#x27;</span>); </span><br><span class="line">    <span class="keyword">let</span> user = <span class="keyword">await</span> response.json();</span><br><span class="line">  &#125; <span class="keyword">catch</span>(err) &#123; </span><br><span class="line">  	<span class="comment">/* ... */</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="async-await"><a href="#async-await" class="headerlink" title="async/await"></a>async/await</h1><p><code>async</code> bf fn: return a promise &amp; enable <code>await</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// await &amp; try-catch for Promise.then() &amp; catch()</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> response = <span class="keyword">await</span> fetch(<span class="string">&#x27;..&#x27;</span>); </span><br><span class="line">    <span class="keyword">let</span> user = <span class="keyword">await</span> response.json();</span><br><span class="line">  &#125; <span class="keyword">catch</span>(err) &#123; </span><br><span class="line">  	<span class="comment">/* ... */</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Promise-API"><a href="#Promise-API" class="headerlink" title="Promise API"></a>Promise API</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="built_in">Promise</span>.all/allSettled/race(...promises);</span><br></pre></td></tr></table></figure>
-
+<h1 id="Promise-API"><a href="#Promise-API" class="headerlink" title="Promise API"></a>Promise API</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="built_in">Promise</span>.all/allSettled/race(...promises);</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p><code>Promise.all()</code>=&gt; <strong>Promise.resolve([…values])</strong> / <strong>Promise.reject(err)</strong> — all or nothing</p>
-</li>
-<li><p><code>Promise.allSettled()</code> =&gt; <strong>Promise.resolve([…objs])</strong> — both ‘fulfilled’ &amp; ‘rejected’</p>
-</li>
-<li><p><code>Promise.race()</code> — <strong>1st (fastest) settled</strong> promise.result</p>
-</li>
+<li><code>Promise.all()</code>: <strong>Promise.resolve([…values])</strong> / <strong>Promise.reject(err)</strong> (all or nothing)</li>
+<li><code>Promise.allSettled()</code>: <strong>Promise.resolve([…objs])</strong> (contain both ‘fulfilled’ &amp; ‘rejected’)</li>
+<li><code>Promise.race()</code>: <strong>1st (fastest) settled</strong> promise.result</li>
 </ul>
-<p><strong>Promise.resolve(value) /.reject(err)</strong> ==&gt; return a resolved / rejected promise with value / err, same as</p>
+<p><strong>Promise.resolve(value) /.reject(err)</strong>: a resolved / rejected promise with value / err, same as</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> resolve(value) || reject(error));</span><br></pre></td></tr></table></figure>
     </div>
 
