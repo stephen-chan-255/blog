@@ -1009,17 +1009,19 @@
 <li>mouse event also inc info of modifier keys: <code>e.shiftKey/altKey/ctrlKey/metaKey</code>(Mac): bool (true if pressed) <a href="https://javascript.info/mouse-events-basics#modifiers-shift-alt-ctrl-and-meta">..</a></li>
 <li>disable selection (on dblclick) &amp; copy: <code>onmousedown/oncopy return false</code> <a href="https://javascript.info/mouse-events-basics#preventing-selection-on-mousedown">..</a></li>
 </ul>
-<h2 id="Mouse-Move-Event"><a href="#Mouse-Move-Event" class="headerlink" title="Mouse Move Event"></a>Mouse Move Event</h2><p><code>mousemove</code> <a href="https://javascript.info/mouse-events-basics#coordinates-clientx-y-pagex-y">..</a>, <code>mouseover/out</code> event &amp; <code>e.relatedTarget</code> (diff with <code>mouseenter/leave</code>) <a href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#summary">..</a></p>
+<h2 id="Mouse-amp-Pointer-Event"><a href="#Mouse-amp-Pointer-Event" class="headerlink" title="Mouse &amp; Pointer Event"></a>Mouse &amp; Pointer Event</h2><p><code>mousemove</code> <a href="https://javascript.info/mouse-events-basics#coordinates-clientx-y-pagex-y">..</a>, <code>mouseover/out</code> event &amp; <code>e.relatedTarget</code> (diff with <code>mouseenter/leave</code>) <a href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#summary">..</a></p>
 <ul>
 <li>event delegation example <a href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#event-delegation">..</a></li>
 <li>task: <a href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#smart-tooltip">“Smart” tooltip</a> (tooltip style)</li>
-</ul>
-<h2 id="Drag’n’Drop-Event"><a href="#Drag’n’Drop-Event" class="headerlink" title="Drag’n’Drop Event"></a>Drag’n’Drop Event</h2><ul>
 <li>impl by mouse events: overall algorithm <a href="https://javascript.info/mouse-drag-and-drop#drag-n-drop-algorithm">..</a>, pointer correct positioning <a href="https://javascript.info/mouse-drag-and-drop#correct-positioning">..</a>, drappable elem hightlight <a href="https://javascript.info/mouse-drag-and-drop#potential-drop-targets-droppables">..</a><ul>
-<li>draggable elem always above other elem when dragging &amp; mouse event only happen on the top elem, so eh on other elem not work, can fix by<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">draggble.hidden = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">let</span> elemBelow = <span class="built_in">document</span>.elementFromPoint(e.clientX, event.clientY);</span><br><span class="line">draggble.hidden = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure></li>
+<li>draggable elem always above other elem when dragging &amp; mouse event only happen on the top elem, so eh on other elem not work, can fix by<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">draggble.hidden = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">let</span> elemBelow = <span class="built_in">document</span>.elementFromPoint(e.clientX, event.clientY);</span><br><span class="line">draggble.hidden = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>task: <a href="https://javascript.info/mouse-drag-and-drop#slider">Slider</a>, <a href="https://javascript.info/mouse-drag-and-drop#drag-superheroes-around-the-field">Drag superheroes around the field</a> (not checked yet)</li>
 </ul>
 </li>
-<li>task: <a href="https://javascript.info/mouse-drag-and-drop#slider">Slider</a>, <a href="https://javascript.info/mouse-drag-and-drop#drag-superheroes-around-the-field">Drag superheroes around the field</a> (not checked yet)</li>
+</ul>
+</li>
+<li>Pointer Event: handling mouse, touch and pen events simultaneously, with a single piece of code <a href="https://javascript.info/pointer-events#summary">..</a></li>
 </ul>
 <h2 id="Scroll-Event"><a href="#Scroll-Event" class="headerlink" title="Scroll Event"></a>Scroll Event</h2><ul>
 <li><code>scroll</code> event on elem &amp; win <a href="https://javascript.info/onscroll">..</a></li>
