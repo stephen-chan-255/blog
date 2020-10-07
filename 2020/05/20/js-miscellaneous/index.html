@@ -22,15 +22,15 @@
     var CONFIG = {"hostname":"stephen-chan255.github.io","root":"/blog/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="‘use strict’To enable ES5 modification for old features (may break old code)  off by default — always put &#39;use script&#39; on top of script&#x2F;fn-body auto enable for class &amp; module no way to can">
+  <meta name="description" content="Chrome console &amp; DebuggingChrome console .. &amp; debuging in chrome ..  logging with console.log(...) breakpoints &amp; debugger cmd, execution tracking …  ‘use strict’To enable ES5  off by defau">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript miscellaneous">
 <meta property="og:url" content="https://stephen-chan255.github.io/blog/2020/05/20/js-miscellaneous/index.html">
 <meta property="og:site_name" content="Stephen&#39;s notes">
-<meta property="og:description" content="‘use strict’To enable ES5 modification for old features (may break old code)  off by default — always put &#39;use script&#39; on top of script&#x2F;fn-body auto enable for class &amp; module no way to can">
+<meta property="og:description" content="Chrome console &amp; DebuggingChrome console .. &amp; debuging in chrome ..  logging with console.log(...) breakpoints &amp; debugger cmd, execution tracking …  ‘use strict’To enable ES5  off by defau">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-05-20T11:08:31.000Z">
-<meta property="article:modified_time" content="2020-10-03T02:08:15.860Z">
+<meta property="article:modified_time" content="2020-10-07T12:46:10.295Z">
 <meta property="article:author" content="Stephen Chan">
 <meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E2%80%98use-strict%E2%80%99"><span class="nav-number">1.</span> <span class="nav-text">‘use strict’</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-types"><span class="nav-number">2.</span> <span class="nav-text">Data types</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Date-amp-time"><span class="nav-number">2.1.</span> <span class="nav-text">Date &amp; time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map-amp-Set-WeakMap-amp-WeakSet"><span class="nav-number">2.2.</span> <span class="nav-text">Map &amp; Set, WeakMap &amp; WeakSet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Obj-advanced"><span class="nav-number">3.</span> <span class="nav-text">Obj advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol-type"><span class="nav-number">3.1.</span> <span class="nav-text">Symbol type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Global-obj"><span class="nav-number">3.2.</span> <span class="nav-text">Global obj</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Obj-prop-config"><span class="nav-number">3.3.</span> <span class="nav-text">Obj prop config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Accessor-props"><span class="nav-number">3.4.</span> <span class="nav-text">Accessor props</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Primitive-as-Obj"><span class="nav-number">3.5.</span> <span class="nav-text">Primitive as Obj</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Obj-gt-primitive"><span class="nav-number">3.6.</span> <span class="nav-text">Obj -&gt; primitive</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Generator"><span class="nav-number">4.</span> <span class="nav-text">Generator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS-engine-internal"><span class="nav-number">5.</span> <span class="nav-text">JS engine internal</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-loop-microtasks-and-macrotasks"><span class="nav-number">5.1.</span> <span class="nav-text">Event loop: microtasks and macrotasks</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Programming-pattern"><span class="nav-number">6.</span> <span class="nav-text">Programming pattern</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code-quality"><span class="nav-number">7.</span> <span class="nav-text">Code quality</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other-concepts-amp-Resources"><span class="nav-number">8.</span> <span class="nav-text">Other concepts &amp; Resources</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chrome-console-amp-Debugging"><span class="nav-number">1.</span> <span class="nav-text">Chrome console &amp; Debugging</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E2%80%98use-strict%E2%80%99"><span class="nav-number">2.</span> <span class="nav-text">‘use strict’</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-types"><span class="nav-number">3.</span> <span class="nav-text">Data types</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Date-amp-time"><span class="nav-number">3.1.</span> <span class="nav-text">Date &amp; time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map-amp-Set-WeakMap-amp-WeakSet"><span class="nav-number">3.2.</span> <span class="nav-text">Map &amp; Set, WeakMap &amp; WeakSet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Obj-advanced"><span class="nav-number">4.</span> <span class="nav-text">Obj advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol-type"><span class="nav-number">4.1.</span> <span class="nav-text">Symbol type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Global-obj"><span class="nav-number">4.2.</span> <span class="nav-text">Global obj</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Obj-prop-config"><span class="nav-number">4.3.</span> <span class="nav-text">Obj prop config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Accessor-props"><span class="nav-number">4.4.</span> <span class="nav-text">Accessor props</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Primitive-as-Obj"><span class="nav-number">4.5.</span> <span class="nav-text">Primitive as Obj</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Obj-gt-primitive"><span class="nav-number">4.6.</span> <span class="nav-text">Obj -&gt; primitive</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS-engine-internal-Event-loop"><span class="nav-number">5.</span> <span class="nav-text">JS engine internal: Event loop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Generator"><span class="nav-number">6.</span> <span class="nav-text">Generator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Programming-pattern"><span class="nav-number">7.</span> <span class="nav-text">Programming pattern</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM"><span class="nav-number">8.</span> <span class="nav-text">DOM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other-concepts-amp-Resources"><span class="nav-number">9.</span> <span class="nav-text">Other concepts &amp; Resources</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -350,7 +350,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-03 10:08:15" itemprop="dateModified" datetime="2020-10-03T10:08:15+08:00">2020-10-03</time>
+        <time title="Modified: 2020-10-07 20:46:10" itemprop="dateModified" datetime="2020-10-07T20:46:10+08:00">2020-10-07</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -380,7 +380,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="‘use-strict’"><a href="#‘use-strict’" class="headerlink" title="‘use strict’"></a>‘use strict’</h1><p>To enable ES5 modification for old features (may break old code)</p>
+        <h1 id="Chrome-console-amp-Debugging"><a href="#Chrome-console-amp-Debugging" class="headerlink" title="Chrome console &amp; Debugging"></a>Chrome console &amp; Debugging</h1><p>Chrome console <a target="_blank" rel="noopener" href="https://javascript.info/devtools#google-chrome">..</a> &amp; debuging in chrome <a target="_blank" rel="noopener" href="https://javascript.info/debugging-chrome">..</a></p>
+<ul>
+<li>logging with <code>console.log(...)</code></li>
+<li><strong>breakpoints</strong> &amp; <code>debugger</code> cmd, execution tracking …</li>
+</ul>
+<h1 id="‘use-strict’"><a href="#‘use-strict’" class="headerlink" title="‘use strict’"></a>‘use strict’</h1><p>To enable ES5</p>
 <ul>
 <li>off by default — always put <code>&#39;use script&#39;</code> on <strong>top</strong> of script/fn-body<ul>
 <li>auto enable for <code>class</code> &amp; <code>module</code></li>
@@ -392,7 +397,7 @@
 <a id="more"></a>
 
 <h1 id="Data-types"><a href="#Data-types" class="headerlink" title="Data types"></a>Data types</h1><ul>
-<li><code>Object</code> key: str/symbol</li>
+<li><code>Object</code> key: str/symbol (keyed values collection)</li>
 <li><code>Array</code> key: int (ordered collection, <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">MDN</a>)</li>
 <li><code>Map</code> key: any type</li>
 <li><code>Set</code>: unique values</li>
@@ -412,7 +417,8 @@
 </ul>
 <h2 id="Map-amp-Set-WeakMap-amp-WeakSet"><a href="#Map-amp-Set-WeakMap-amp-WeakSet" class="headerlink" title="Map &amp; Set, WeakMap &amp; WeakSet"></a>Map &amp; Set, WeakMap &amp; WeakSet</h2><p><code>Map</code>: obj with key of any type, key compare: <code>===</code> &amp; <code>NaN === NaN</code></p>
 <ul>
-<li><code>new Map([ [_,_], [_,_] ..])</code> &amp; obj &lt;=&gt; map, <code>forEach(..)</code></li>
+<li><code>new Map([ [_,_], [_,_] ..])</code> &amp; obj &lt;=&gt; map: <code>new Map(Object.entries(obj))</code> <a target="_blank" rel="noopener" href="https://javascript.info/map-set#object-entries-map-from-object">..</a> &amp; <code>Object.fromEntries(map)</code> <a target="_blank" rel="noopener" href="https://javascript.info/map-set#object-fromentries-object-from-map">..</a></li>
+<li>iter: <code>forEach(..)</code>, <code>keys/values/entries()</code> <a target="_blank" rel="noopener" href="https://javascript.info/map-set#iteration-over-map">..</a></li>
 </ul>
 <p><code>Set</code>: unique values</p>
 <ul>
@@ -422,7 +428,8 @@
 <p><code>WeakMap</code>/<code>WeakSet</code>: obj unreachable by other means -&gt; rmed from memory &amp; WM/WS</p>
 <ul>
 <li>only <strong>obj</strong> as key/items in WM/WS</li>
-<li>methods <a target="_blank" rel="noopener" href="https://javascript.info/weakmap-weakset#weakmap">..</a></li>
+<li>methods <a target="_blank" rel="noopener" href="https://javascript.info/weakmap-weakset#weakmap">..</a> </li>
+<li>WeakMap use cases: <a target="_blank" rel="noopener" href="https://javascript.info/weakmap-weakset#use-case-additional-data">additional data</a>, <a target="_blank" rel="noopener" href="https://javascript.info/weakmap-weakset#use-case-caching">caching</a></li>
 </ul>
 <h1 id="Obj-advanced"><a href="#Obj-advanced" class="headerlink" title="Obj advanced"></a>Obj advanced</h1><h2 id="Symbol-type"><a href="#Symbol-type" class="headerlink" title="Symbol type"></a>Symbol type</h2><p>unique (even same desc) vs global symbol (1 key 1 symbol)</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="built_in">Symbol</span>(<span class="string">&quot;id&quot;</span>));    <span class="comment">// TypeError (not auto-convert to string)</span></span><br><span class="line">alert(id.toString()); 	<span class="comment">// Symbol(id)</span></span><br><span class="line">alert(id.description);  <span class="comment">// id</span></span><br></pre></td></tr></table></figure>
@@ -438,10 +445,8 @@
 </ul>
 <h2 id="Obj-prop-config"><a href="#Obj-prop-config" class="headerlink" title="Obj prop config"></a>Obj prop config</h2><ul>
 <li>prop descriptor: <code>value</code> + <code>writable</code>, <code>enumerable</code>, <code>configurable</code> <a target="_blank" rel="noopener" href="https://javascript.info/property-descriptors">..</a><ul>
-<li>get/set desc: <code>Object.getOwnPropertyDescriptor()</code>, <code>Object.defineProperty()</code><ul>
+<li>get/set desc: <code>Object.getOwnPropertyDescriptor()</code>, <code>Object.defineProperty()</code> &amp; clone with desc <a target="_blank" rel="noopener" href="https://javascript.info/property-descriptors#object-getownpropertydescriptors">..</a></li>
 <li>obj created “the usually way”: flags default <code>true</code>; flags not supplied in desc defalut <code>false</code></li>
-</ul>
-</li>
 <li>built-in <code>toString()</code> non-enumerable</li>
 </ul>
 </li>
@@ -451,6 +456,7 @@
 <ul>
 <li>desc: <code>get/set([value]) &#123;..&#125;</code>, <code>enumerable</code>, <code>configurable</code></li>
 <li>smarter g/setter: store value in another internal prop</li>
+<li>age -&gt; birthday example <a target="_blank" rel="noopener" href="https://javascript.info/property-accessors#using-for-compatibility">..</a></li>
 </ul>
 <h2 id="Primitive-as-Obj"><a href="#Primitive-as-Obj" class="headerlink" title="Primitive as Obj"></a>Primitive as Obj</h2><p>provide methods to op prim but keep them fast &amp; lightweight e.g.  <code>String</code>, <code>Number</code>, <code>Boolean</code>, <code>Symbol</code> </p>
 <ul>
@@ -463,6 +469,31 @@
 <li>built-in <code>toString()</code> =&gt; “[object Object]”, <code>valueOf()</code> =&gt; obj itself (ignored) <a target="_blank" rel="noopener" href="https://javascript.info/object-toprimitive#tostring-valueof">..</a></li>
 </ul>
 </li>
+</ul>
+<h1 id="JS-engine-internal-Event-loop"><a href="#JS-engine-internal-Event-loop" class="headerlink" title="JS engine internal: Event loop"></a>JS engine internal: Event loop</h1><p><a target="_blank" rel="noopener" href="https://javascript.info/event-loop#event-loop">Macrotask queue</a>: handle tasks e.g. <strong>current regular sync script</strong>, <strong>external script</strong> load &amp; exe, <strong>UI/network event handler</strong> (e.g. <code>mousemove</code>), setTimeout <strong>callback</strong></p>
+<ul>
+<li>tasks come while engine busy — enqueued to the queue</li>
+<li>re-render only af task complete — if current task tasks long time:  <strong>Page Unresponsive</strong> alert</li>
+<li>enqueue a macrotask:  <code>setTimeout(f)</code></li>
+<li>use case: <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#use-case-1-splitting-cpu-hungry-tasks">split CUP-heavy task by setTimeout</a> =&gt; react other tasks in-btn / <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#use-case-2-progress-indication">progress indication</a> <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#summary">…</a></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://javascript.info/microtask-queue">Microtask queue</a> (aka <code>PromiseJobs</code> queue): handle async promise handlers in <code>.then/catch/finally</code> &amp; <code>await</code></p>
+<ul>
+<li>handler enqueued when promise settled, run af current code &amp; prev micro finished <a target="_blank" rel="noopener" href="https://javascript.info/microtask-queue#microtasks-queue">..</a></li>
+<li>global <code>unhandledrejection</code> event: triggered when microtask queue completed but exist “rejected” promise</li>
+<li>make code exe af <code>.then/catch/finally</code>: chained by <code>.then()</code></li>
+<li>enqueue a microtask — <code>queueMicrotask(f)</code> <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#macrotasks-and-microtasks">..</a></li>
+</ul>
+<p>JS exe-flow based on <em>event loop</em>: engine sleep until tasks appear, then exe from the oldest one (FIFO) <a target="_blank" rel="noopener" href="https://javascript.info/event-loop">..</a></p>
+<ul>
+<li>exe process (no macrotask in-btw microtask — ensure app-env same) <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#summary">..</a><ol>
+<li><strong>current regular sync script</strong> (=&gt; <strong>all microtasks</strong> =&gt;  <strong>render</strong>) </li>
+<li><strong>some macrotask</strong> (=&gt; <strong>all microtasks</strong> =&gt;  <strong>render</strong>)</li>
+<li><strong>another macrotask</strong> </li>
+<li>…</li>
+</ol>
+</li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/event-loop#summary">cpu-heavy event &amp; web worker: another thread</a></li>
 </ul>
 <h1 id="Generator"><a href="#Generator" class="headerlink" title="Generator"></a>Generator</h1><p>Regualr fn retur 1 value ==&gt; Generators “yield” mtp values 1-by-1 (allow create data stream)</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">generateSequence</span>(<span class="params"></span>) </span>&#123;    <span class="comment">// generator function</span></span><br><span class="line">  <span class="keyword">yield</span> <span class="number">1</span>;                        <span class="comment">// no value af &#x27;yield&#x27; means &#x27;undefined&#x27;</span></span><br><span class="line">  <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> generator = generateSequence(); <span class="comment">// when called, return a Generator instead of run the fn </span></span><br><span class="line">alert(generator);                   <span class="comment">// [object Generator]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// call generator.next() to get result</span></span><br><span class="line">&#123;<span class="attr">value</span>: <span class="number">1</span>, <span class="attr">done</span>: <span class="literal">false</span>&#125;  </span><br><span class="line">&#123;<span class="attr">value</span>: <span class="number">2</span>, <span class="attr">done</span>: <span class="literal">false</span>&#125; </span><br><span class="line">&#123;<span class="attr">value</span>: <span class="number">3</span>, <span class="attr">done</span>: <span class="literal">true</span>&#125;              <span class="comment">// done:true for &quot;return&quot;</span></span><br><span class="line">&#123;<span class="attr">done</span>: <span class="literal">true</span>&#125;                        <span class="comment">// no more value af &#x27;return&#x27;</span></span><br></pre></td></tr></table></figure>
@@ -487,36 +518,10 @@
 <li><code>[Symbol.asyncIterator]()</code> for <a target="_blank" rel="noopener" href="https://javascript.info/async-iterators-generators#async-iterators">async iterator</a> — iter over data that comes asyncly (e.g. paginated data) &amp; use in <code>for await ..of</code> loop</li>
 <li><a target="_blank" rel="noopener" href="https://javascript.info/async-iterators-generators#real-life-example">the <code>async function* fetchCommits(repo)</code> example</a></li>
 </ul>
-<h1 id="JS-engine-internal"><a href="#JS-engine-internal" class="headerlink" title="JS engine internal"></a>JS engine internal</h1><h2 id="Event-loop-microtasks-and-macrotasks"><a href="#Event-loop-microtasks-and-macrotasks" class="headerlink" title="Event loop: microtasks and macrotasks"></a>Event loop: microtasks and macrotasks</h2><p><a target="_blank" rel="noopener" href="https://javascript.info/event-loop#event-loop">Macrotask queue</a>: handle tasks e.g. <strong>current regular sync script</strong>, <strong>external script</strong> load &amp; exe, <strong>UI/network event handler</strong> (e.g. <code>mousemove</code>), setTimeout <strong>callback</strong></p>
-<ul>
-<li>tasks come while engine busy — enqueued to the queue</li>
-<li>re-render only af task complete — if current task tasks long time:  <strong>Page Unresponsive</strong> alert</li>
-<li>enqueue a macrotask:  <code>setTimeout(f)</code></li>
-<li>use case — <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#use-case-1-splitting-cpu-hungry-tasks">split CUP-heavy task by setTimeout</a> =&gt; react other tasks in-btn / <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#use-case-2-progress-indication">progress indication</a> <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#summary">…</a></li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://javascript.info/microtask-queue">Microtask queue</a> (aka <code>PromiseJobs</code> queue): handle async promise handlers in <code>.then/catch/finally</code> &amp; <code>await</code></p>
-<ul>
-<li>handler enqueued when promise settled, run af current code &amp; prev micro finished <a target="_blank" rel="noopener" href="https://javascript.info/microtask-queue#microtasks-queue">..</a></li>
-<li>global <code>unhandledrejection</code> event — triggered when microtask queue completed but exist “rejected” promise<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&#x27;unhandledrejection&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> alert(event.reason));</span><br></pre></td></tr></table></figure></li>
-<li>make code exe af <code>.then/catch/finally</code> — chained by <code>.then()</code></li>
-<li>enqueue a microtask — <code>queueMicrotask(f)</code> <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#macrotasks-and-microtasks">..</a></li>
-</ul>
-<p>JS execution flow based on <em>event loop</em>: engine sleep until (async) tasks appear, then exe them starting from the oldest one (FIFO)</p>
-<ul>
-<li>exe process (no macrotask in-btw microtask — ensure app-env same) <a target="_blank" rel="noopener" href="https://javascript.info/event-loop#summary">..</a><ol>
-<li><strong>current regular sync script</strong> (=&gt; <strong>all microtasks</strong> =&gt;  <strong>render</strong>) </li>
-<li><strong>some macrotask</strong> (=&gt; <strong>all microtasks</strong> =&gt;  <strong>render</strong>)</li>
-<li><strong>another macrotask</strong> </li>
-<li>…</li>
-</ol>
-</li>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/event-loop#summary">cpu-heavy event &amp; web worker: another thread</a></li>
-<li><code>new Function([...params], body)</code>: create fn dynamically at run time <a target="_blank" rel="noopener" href="https://javascript.info/new-function">..</a></li>
-</ul>
 <h1 id="Programming-pattern"><a href="#Programming-pattern" class="headerlink" title="Programming pattern"></a>Programming pattern</h1><p><strong>Fn decorator</strong> <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators">..</a></p>
 <ul>
 <li>fn-wrapper that takes fn as param (callback) and alters its behavior</li>
-<li>tasks: <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#spy-decorator">Spy decorator</a>, <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#delaying-decorator">Delaying decorator</a>, <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#debounce-decorator">Debounce decorator</a>, </li>
+<li>tasks: <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#spy-decorator">spy(fn)</a>, <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#delaying-decorator">delay(fn)</a>, <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#debounce-decorator">debounce(fn, ms)</a>, <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#throttle-decorator">throttle(fn, ms)</a></li>
 </ul>
 <p><strong>Recursion</strong> <a target="_blank" rel="noopener" href="https://javascript.info/recursion">..</a></p>
 <ul>
@@ -530,18 +535,22 @@
 </ul>
 </li>
 <li>recursive structure &amp; linked list: <code>node = &#123;value, next -&gt; node2 / null&#125;</code> </li>
-<li>task: <a target="_blank" rel="noopener" href="https://javascript.info/recursion#fibonacci-numbers">Fib numbers</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#sum-all-numbers-till-the-given-one">Sum 1..n</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#output-a-single-linked-list">Print list</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#output-a-single-linked-list-in-the-reverse-order">Print list revresely</a></li>
+<li>task: <a target="_blank" rel="noopener" href="https://javascript.info/recursion#fibonacci-numbers">Fib numbers</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#sum-all-numbers-till-the-given-one">Sum 1..n</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#output-a-single-linked-list">Print list</a>, <a target="_blank" rel="noopener" href="https://javascript.info/recursion#output-a-single-linked-list-in-the-reverse-order">Print list revresely</a> </li>
 </ul>
-<h1 id="Code-quality"><a href="#Code-quality" class="headerlink" title="Code quality"></a>Code quality</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/coding-style">Coding style &amp; linters</a></li>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/comments">Comments &amp; JSDoc</a></li>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/testing-mocha">Auto-testing lib &amp; BDD</a></li>
+<h1 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h1><ul>
+<li>range &amp; selection <a target="_blank" rel="noopener" href="https://javascript.info/selection-range">..</a></li>
+<li>mutation observer: fire callback when change observed on a DOM node, childList &amp; subtree, attributes, text content <a target="_blank" rel="noopener" href="https://javascript.info/mutation-observer">..</a><ul>
+<li>div <code>contentEditable</code> attr</li>
+</ul>
+</li>
 </ul>
 <h1 id="Other-concepts-amp-Resources"><a href="#Other-concepts-amp-Resources" class="headerlink" title="Other concepts &amp; Resources"></a>Other concepts &amp; Resources</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/coding-style">code style &amp; linter</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/testing-mocha">Auto-testing lib &amp; BDD</a></li>
 <li><a target="_blank" rel="noopener" href="https://javascript.info/manuals-specifications">Manuals &amp; specs</a></li>
 <li><a target="_blank" rel="noopener" href="https://javascript.info/polyfills">Polyfill &amp; Babel</a> <ul>
 <li>JS keep evolving &amp; some features may not implemented in all engines</li>
-<li><a target="_blank" rel="noopener" href="https://babeljs.io/">Babel</a> — transpiler (new syntax constructs) +  polyfill (updates/adds new fns)</li>
+<li><a target="_blank" rel="noopener" href="https://babeljs.io/">Babel</a>: transpiler (new syntax constructs) +  polyfill (updates/adds new fns)</li>
 <li><a target="_blank" rel="noopener" href="https://javascript.info/intro#languages-over-javascript">Langs “over” JS</a></li>
 </ul>
 </li>

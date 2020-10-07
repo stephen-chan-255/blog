@@ -66,7 +66,12 @@
   <entry>
     <title>JavaScript miscellaneous</title>
     <url>/blog/2020/05/20/js-miscellaneous/</url>
-    <content><![CDATA[<h1 id="‘use-strict’"><a href="#‘use-strict’" class="headerlink" title="‘use strict’"></a>‘use strict’</h1><p>To enable ES5 modification for old features (may break old code)</p>
+    <content><![CDATA[<h1 id="Chrome-console-amp-Debugging"><a href="#Chrome-console-amp-Debugging" class="headerlink" title="Chrome console &amp; Debugging"></a>Chrome console &amp; Debugging</h1><p>Chrome console <a href="https://javascript.info/devtools#google-chrome">..</a> &amp; debuging in chrome <a href="https://javascript.info/debugging-chrome">..</a></p>
+<ul>
+<li>logging with <code>console.log(...)</code></li>
+<li><strong>breakpoints</strong> &amp; <code>debugger</code> cmd, execution tracking …</li>
+</ul>
+<h1 id="‘use-strict’"><a href="#‘use-strict’" class="headerlink" title="‘use strict’"></a>‘use strict’</h1><p>To enable ES5</p>
 <ul>
 <li>off by default — always put <code>&#39;use script&#39;</code> on <strong>top</strong> of script/fn-body<ul>
 <li>auto enable for <code>class</code> &amp; <code>module</code></li>
@@ -78,7 +83,7 @@
 <a id="more"></a>
 
 <h1 id="Data-types"><a href="#Data-types" class="headerlink" title="Data types"></a>Data types</h1><ul>
-<li><code>Object</code> key: str/symbol</li>
+<li><code>Object</code> key: str/symbol (keyed values collection)</li>
 <li><code>Array</code> key: int (ordered collection, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">MDN</a>)</li>
 <li><code>Map</code> key: any type</li>
 <li><code>Set</code>: unique values</li>
@@ -98,7 +103,8 @@
 </ul>
 <h2 id="Map-amp-Set-WeakMap-amp-WeakSet"><a href="#Map-amp-Set-WeakMap-amp-WeakSet" class="headerlink" title="Map &amp; Set, WeakMap &amp; WeakSet"></a>Map &amp; Set, WeakMap &amp; WeakSet</h2><p><code>Map</code>: obj with key of any type, key compare: <code>===</code> &amp; <code>NaN === NaN</code></p>
 <ul>
-<li><code>new Map([ [_,_], [_,_] ..])</code> &amp; obj &lt;=&gt; map, <code>forEach(..)</code></li>
+<li><code>new Map([ [_,_], [_,_] ..])</code> &amp; obj &lt;=&gt; map: <code>new Map(Object.entries(obj))</code> <a href="https://javascript.info/map-set#object-entries-map-from-object">..</a> &amp; <code>Object.fromEntries(map)</code> <a href="https://javascript.info/map-set#object-fromentries-object-from-map">..</a></li>
+<li>iter: <code>forEach(..)</code>, <code>keys/values/entries()</code> <a href="https://javascript.info/map-set#iteration-over-map">..</a></li>
 </ul>
 <p><code>Set</code>: unique values</p>
 <ul>
@@ -108,7 +114,8 @@
 <p><code>WeakMap</code>/<code>WeakSet</code>: obj unreachable by other means -&gt; rmed from memory &amp; WM/WS</p>
 <ul>
 <li>only <strong>obj</strong> as key/items in WM/WS</li>
-<li>methods <a href="https://javascript.info/weakmap-weakset#weakmap">..</a></li>
+<li>methods <a href="https://javascript.info/weakmap-weakset#weakmap">..</a> </li>
+<li>WeakMap use cases: <a href="https://javascript.info/weakmap-weakset#use-case-additional-data">additional data</a>, <a href="https://javascript.info/weakmap-weakset#use-case-caching">caching</a></li>
 </ul>
 <h1 id="Obj-advanced"><a href="#Obj-advanced" class="headerlink" title="Obj advanced"></a>Obj advanced</h1><h2 id="Symbol-type"><a href="#Symbol-type" class="headerlink" title="Symbol type"></a>Symbol type</h2><p>unique (even same desc) vs global symbol (1 key 1 symbol)</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">alert(<span class="built_in">Symbol</span>(<span class="string">&quot;id&quot;</span>));    <span class="comment">// TypeError (not auto-convert to string)</span></span><br><span class="line">alert(id.toString()); 	<span class="comment">// Symbol(id)</span></span><br><span class="line">alert(id.description);  <span class="comment">// id</span></span><br></pre></td></tr></table></figure>
@@ -124,10 +131,8 @@
 </ul>
 <h2 id="Obj-prop-config"><a href="#Obj-prop-config" class="headerlink" title="Obj prop config"></a>Obj prop config</h2><ul>
 <li>prop descriptor: <code>value</code> + <code>writable</code>, <code>enumerable</code>, <code>configurable</code> <a href="https://javascript.info/property-descriptors">..</a><ul>
-<li>get/set desc: <code>Object.getOwnPropertyDescriptor()</code>, <code>Object.defineProperty()</code><ul>
+<li>get/set desc: <code>Object.getOwnPropertyDescriptor()</code>, <code>Object.defineProperty()</code> &amp; clone with desc <a href="https://javascript.info/property-descriptors#object-getownpropertydescriptors">..</a></li>
 <li>obj created “the usually way”: flags default <code>true</code>; flags not supplied in desc defalut <code>false</code></li>
-</ul>
-</li>
 <li>built-in <code>toString()</code> non-enumerable</li>
 </ul>
 </li>
@@ -137,6 +142,7 @@
 <ul>
 <li>desc: <code>get/set([value]) &#123;..&#125;</code>, <code>enumerable</code>, <code>configurable</code></li>
 <li>smarter g/setter: store value in another internal prop</li>
+<li>age -&gt; birthday example <a href="https://javascript.info/property-accessors#using-for-compatibility">..</a></li>
 </ul>
 <h2 id="Primitive-as-Obj"><a href="#Primitive-as-Obj" class="headerlink" title="Primitive as Obj"></a>Primitive as Obj</h2><p>provide methods to op prim but keep them fast &amp; lightweight e.g.  <code>String</code>, <code>Number</code>, <code>Boolean</code>, <code>Symbol</code> </p>
 <ul>
@@ -149,6 +155,31 @@
 <li>built-in <code>toString()</code> =&gt; “[object Object]”, <code>valueOf()</code> =&gt; obj itself (ignored) <a href="https://javascript.info/object-toprimitive#tostring-valueof">..</a></li>
 </ul>
 </li>
+</ul>
+<h1 id="JS-engine-internal-Event-loop"><a href="#JS-engine-internal-Event-loop" class="headerlink" title="JS engine internal: Event loop"></a>JS engine internal: Event loop</h1><p><a href="https://javascript.info/event-loop#event-loop">Macrotask queue</a>: handle tasks e.g. <strong>current regular sync script</strong>, <strong>external script</strong> load &amp; exe, <strong>UI/network event handler</strong> (e.g. <code>mousemove</code>), setTimeout <strong>callback</strong></p>
+<ul>
+<li>tasks come while engine busy — enqueued to the queue</li>
+<li>re-render only af task complete — if current task tasks long time:  <strong>Page Unresponsive</strong> alert</li>
+<li>enqueue a macrotask:  <code>setTimeout(f)</code></li>
+<li>use case: <a href="https://javascript.info/event-loop#use-case-1-splitting-cpu-hungry-tasks">split CUP-heavy task by setTimeout</a> =&gt; react other tasks in-btn / <a href="https://javascript.info/event-loop#use-case-2-progress-indication">progress indication</a> <a href="https://javascript.info/event-loop#summary">…</a></li>
+</ul>
+<p><a href="https://javascript.info/microtask-queue">Microtask queue</a> (aka <code>PromiseJobs</code> queue): handle async promise handlers in <code>.then/catch/finally</code> &amp; <code>await</code></p>
+<ul>
+<li>handler enqueued when promise settled, run af current code &amp; prev micro finished <a href="https://javascript.info/microtask-queue#microtasks-queue">..</a></li>
+<li>global <code>unhandledrejection</code> event: triggered when microtask queue completed but exist “rejected” promise</li>
+<li>make code exe af <code>.then/catch/finally</code>: chained by <code>.then()</code></li>
+<li>enqueue a microtask — <code>queueMicrotask(f)</code> <a href="https://javascript.info/event-loop#macrotasks-and-microtasks">..</a></li>
+</ul>
+<p>JS exe-flow based on <em>event loop</em>: engine sleep until tasks appear, then exe from the oldest one (FIFO) <a href="https://javascript.info/event-loop">..</a></p>
+<ul>
+<li>exe process (no macrotask in-btw microtask — ensure app-env same) <a href="https://javascript.info/event-loop#summary">..</a><ol>
+<li><strong>current regular sync script</strong> (=&gt; <strong>all microtasks</strong> =&gt;  <strong>render</strong>) </li>
+<li><strong>some macrotask</strong> (=&gt; <strong>all microtasks</strong> =&gt;  <strong>render</strong>)</li>
+<li><strong>another macrotask</strong> </li>
+<li>…</li>
+</ol>
+</li>
+<li><a href="https://javascript.info/event-loop#summary">cpu-heavy event &amp; web worker: another thread</a></li>
 </ul>
 <h1 id="Generator"><a href="#Generator" class="headerlink" title="Generator"></a>Generator</h1><p>Regualr fn retur 1 value ==&gt; Generators “yield” mtp values 1-by-1 (allow create data stream)</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">generateSequence</span>(<span class="params"></span>) </span>&#123;    <span class="comment">// generator function</span></span><br><span class="line">  <span class="keyword">yield</span> <span class="number">1</span>;                        <span class="comment">// no value af &#x27;yield&#x27; means &#x27;undefined&#x27;</span></span><br><span class="line">  <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> generator = generateSequence(); <span class="comment">// when called, return a Generator instead of run the fn </span></span><br><span class="line">alert(generator);                   <span class="comment">// [object Generator]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// call generator.next() to get result</span></span><br><span class="line">&#123;<span class="attr">value</span>: <span class="number">1</span>, <span class="attr">done</span>: <span class="literal">false</span>&#125;  </span><br><span class="line">&#123;<span class="attr">value</span>: <span class="number">2</span>, <span class="attr">done</span>: <span class="literal">false</span>&#125; </span><br><span class="line">&#123;<span class="attr">value</span>: <span class="number">3</span>, <span class="attr">done</span>: <span class="literal">true</span>&#125;              <span class="comment">// done:true for &quot;return&quot;</span></span><br><span class="line">&#123;<span class="attr">done</span>: <span class="literal">true</span>&#125;                        <span class="comment">// no more value af &#x27;return&#x27;</span></span><br></pre></td></tr></table></figure>
@@ -173,36 +204,10 @@
 <li><code>[Symbol.asyncIterator]()</code> for <a href="https://javascript.info/async-iterators-generators#async-iterators">async iterator</a> — iter over data that comes asyncly (e.g. paginated data) &amp; use in <code>for await ..of</code> loop</li>
 <li><a href="https://javascript.info/async-iterators-generators#real-life-example">the <code>async function* fetchCommits(repo)</code> example</a></li>
 </ul>
-<h1 id="JS-engine-internal"><a href="#JS-engine-internal" class="headerlink" title="JS engine internal"></a>JS engine internal</h1><h2 id="Event-loop-microtasks-and-macrotasks"><a href="#Event-loop-microtasks-and-macrotasks" class="headerlink" title="Event loop: microtasks and macrotasks"></a>Event loop: microtasks and macrotasks</h2><p><a href="https://javascript.info/event-loop#event-loop">Macrotask queue</a>: handle tasks e.g. <strong>current regular sync script</strong>, <strong>external script</strong> load &amp; exe, <strong>UI/network event handler</strong> (e.g. <code>mousemove</code>), setTimeout <strong>callback</strong></p>
-<ul>
-<li>tasks come while engine busy — enqueued to the queue</li>
-<li>re-render only af task complete — if current task tasks long time:  <strong>Page Unresponsive</strong> alert</li>
-<li>enqueue a macrotask:  <code>setTimeout(f)</code></li>
-<li>use case — <a href="https://javascript.info/event-loop#use-case-1-splitting-cpu-hungry-tasks">split CUP-heavy task by setTimeout</a> =&gt; react other tasks in-btn / <a href="https://javascript.info/event-loop#use-case-2-progress-indication">progress indication</a> <a href="https://javascript.info/event-loop#summary">…</a></li>
-</ul>
-<p><a href="https://javascript.info/microtask-queue">Microtask queue</a> (aka <code>PromiseJobs</code> queue): handle async promise handlers in <code>.then/catch/finally</code> &amp; <code>await</code></p>
-<ul>
-<li>handler enqueued when promise settled, run af current code &amp; prev micro finished <a href="https://javascript.info/microtask-queue#microtasks-queue">..</a></li>
-<li>global <code>unhandledrejection</code> event — triggered when microtask queue completed but exist “rejected” promise<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&#x27;unhandledrejection&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> alert(event.reason));</span><br></pre></td></tr></table></figure></li>
-<li>make code exe af <code>.then/catch/finally</code> — chained by <code>.then()</code></li>
-<li>enqueue a microtask — <code>queueMicrotask(f)</code> <a href="https://javascript.info/event-loop#macrotasks-and-microtasks">..</a></li>
-</ul>
-<p>JS execution flow based on <em>event loop</em>: engine sleep until (async) tasks appear, then exe them starting from the oldest one (FIFO)</p>
-<ul>
-<li>exe process (no macrotask in-btw microtask — ensure app-env same) <a href="https://javascript.info/event-loop#summary">..</a><ol>
-<li><strong>current regular sync script</strong> (=&gt; <strong>all microtasks</strong> =&gt;  <strong>render</strong>) </li>
-<li><strong>some macrotask</strong> (=&gt; <strong>all microtasks</strong> =&gt;  <strong>render</strong>)</li>
-<li><strong>another macrotask</strong> </li>
-<li>…</li>
-</ol>
-</li>
-<li><a href="https://javascript.info/event-loop#summary">cpu-heavy event &amp; web worker: another thread</a></li>
-<li><code>new Function([...params], body)</code>: create fn dynamically at run time <a href="https://javascript.info/new-function">..</a></li>
-</ul>
 <h1 id="Programming-pattern"><a href="#Programming-pattern" class="headerlink" title="Programming pattern"></a>Programming pattern</h1><p><strong>Fn decorator</strong> <a href="https://javascript.info/call-apply-decorators">..</a></p>
 <ul>
 <li>fn-wrapper that takes fn as param (callback) and alters its behavior</li>
-<li>tasks: <a href="https://javascript.info/call-apply-decorators#spy-decorator">Spy decorator</a>, <a href="https://javascript.info/call-apply-decorators#delaying-decorator">Delaying decorator</a>, <a href="https://javascript.info/call-apply-decorators#debounce-decorator">Debounce decorator</a>, </li>
+<li>tasks: <a href="https://javascript.info/call-apply-decorators#spy-decorator">spy(fn)</a>, <a href="https://javascript.info/call-apply-decorators#delaying-decorator">delay(fn)</a>, <a href="https://javascript.info/call-apply-decorators#debounce-decorator">debounce(fn, ms)</a>, <a href="https://javascript.info/call-apply-decorators#throttle-decorator">throttle(fn, ms)</a></li>
 </ul>
 <p><strong>Recursion</strong> <a href="https://javascript.info/recursion">..</a></p>
 <ul>
@@ -216,18 +221,22 @@
 </ul>
 </li>
 <li>recursive structure &amp; linked list: <code>node = &#123;value, next -&gt; node2 / null&#125;</code> </li>
-<li>task: <a href="https://javascript.info/recursion#fibonacci-numbers">Fib numbers</a>, <a href="https://javascript.info/recursion#sum-all-numbers-till-the-given-one">Sum 1..n</a>, <a href="https://javascript.info/recursion#output-a-single-linked-list">Print list</a>, <a href="https://javascript.info/recursion#output-a-single-linked-list-in-the-reverse-order">Print list revresely</a></li>
+<li>task: <a href="https://javascript.info/recursion#fibonacci-numbers">Fib numbers</a>, <a href="https://javascript.info/recursion#sum-all-numbers-till-the-given-one">Sum 1..n</a>, <a href="https://javascript.info/recursion#output-a-single-linked-list">Print list</a>, <a href="https://javascript.info/recursion#output-a-single-linked-list-in-the-reverse-order">Print list revresely</a> </li>
 </ul>
-<h1 id="Code-quality"><a href="#Code-quality" class="headerlink" title="Code quality"></a>Code quality</h1><ul>
-<li><a href="https://javascript.info/coding-style">Coding style &amp; linters</a></li>
-<li><a href="https://javascript.info/comments">Comments &amp; JSDoc</a></li>
-<li><a href="https://javascript.info/testing-mocha">Auto-testing lib &amp; BDD</a></li>
+<h1 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h1><ul>
+<li>range &amp; selection <a href="https://javascript.info/selection-range">..</a></li>
+<li>mutation observer: fire callback when change observed on a DOM node, childList &amp; subtree, attributes, text content <a href="https://javascript.info/mutation-observer">..</a><ul>
+<li>div <code>contentEditable</code> attr</li>
+</ul>
+</li>
 </ul>
 <h1 id="Other-concepts-amp-Resources"><a href="#Other-concepts-amp-Resources" class="headerlink" title="Other concepts &amp; Resources"></a>Other concepts &amp; Resources</h1><ul>
+<li><a href="https://javascript.info/coding-style">code style &amp; linter</a></li>
+<li><a href="https://javascript.info/testing-mocha">Auto-testing lib &amp; BDD</a></li>
 <li><a href="https://javascript.info/manuals-specifications">Manuals &amp; specs</a></li>
 <li><a href="https://javascript.info/polyfills">Polyfill &amp; Babel</a> <ul>
 <li>JS keep evolving &amp; some features may not implemented in all engines</li>
-<li><a href="https://babeljs.io/">Babel</a> — transpiler (new syntax constructs) +  polyfill (updates/adds new fns)</li>
+<li><a href="https://babeljs.io/">Babel</a>: transpiler (new syntax constructs) +  polyfill (updates/adds new fns)</li>
 <li><a href="https://javascript.info/intro#languages-over-javascript">Langs “over” JS</a></li>
 </ul>
 </li>
@@ -519,6 +528,9 @@
 </li>
 </ul>
 <p><a href="https://javascript.info/template-element">Template element</a><br><code>&lt;template&gt;</code> tag: contents ignored by browser (elems inside not render, style/script not work) until inserted to doc (by <code>elem.append(tmpl.content)</code>)</p>
+<ul>
+<li>based on <code>DocumentFragment</code> <a href="https://javascript.info/modifying-document#document-fragment">..</a></li>
+</ul>
 ]]></content>
       <categories>
         <category>IT</category>
@@ -574,10 +586,17 @@
 </ul>
 <h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><p><strong>Fn creation</strong> <a href="https://javascript.info/function-expressions#function-expression-vs-function-declaration">..</a></p>
 <ul>
-<li><strong>fn dec</strong>: block-level if strict, def-hoisting (start with <code>function</code>, require a name &amp; cannot be called immediately <a href="https://javascript.info/var#iife">..</a>)</li>
-<li><strong>fn-expr</strong>: easy dynamic def (pass <em>anonymous</em> as callback <a href="https://javascript.info/callbacks">..</a>)</li>
+<li><strong>fn dec</strong>: block-level (if strict), def-hoisting (start with <code>function</code>, require a name &amp; cannot be called immediately <a href="https://javascript.info/var#iife">..</a>)</li>
+<li><strong>fn-expr</strong>: easy dynamic def </li>
 <li><strong>arrow-fn</strong> (see obj)</li>
-<li><code>new Function([...params], body)</code>: create fn dynamically at run time <a href="https://javascript.info/new-function">..</a></li>
+<li><code>new Function([...params]: ...str, body: str)</code>: create fn dynamically at run time (golbal scope) <a href="https://javascript.info/new-function">..</a> — <code>eval(code: str)</code> <a href="https://javascript.info/eval">..</a></li>
+</ul>
+<p><strong>Fn is obj</strong><br>Fn: a callable action (instead of data <a href="https://javascript.info/function-expressions#callback-functions">..</a>) obj <a href="https://javascript.info/function-object">..</a></p>
+<ul>
+<li>fn-def: store the fn-obj in same named var, call by <code>fnName(...args)</code> — callback &amp; <em>anonymous</em> <a href="https://javascript.info/function-expressions#callback-functions">..</a></li>
+<li>Fn built-in props: <code>name</code> (str, “” for anonymous), <code>length</code> (param #, rest param not count)</li>
+<li>custom prop/helper method: <code>fnName.xxx = ..</code></li>
+<li>tasks: <a href="https://javascript.info/function-object#set-and-decrease-for-counter">Set and decrease for counter</a>, <a href="https://javascript.info/function-object#sum-with-an-arbitrary-amount-of-brackets">Sum with an arbitrary amount of brackets</a></li>
 </ul>
 <p><strong>Closure</strong></p>
 <ul>
@@ -595,7 +614,12 @@
 <li>run nestedFn: new nestedFn.LE created &amp; <code>nestedFn.LE -&gt; outerFn.LE</code> (ref value taken from [[Env..]])</li>
 <li>task: <a href="https://javascript.info/closure#counter-object">Counter object</a>, <a href="https://javascript.info/closure#sum-with-closures">Sum with closures</a>, <a href="https://javascript.info/closure#filter-through-function">Filter through function</a>, <a href="https://javascript.info/closure#sort-by-field">Sort by field</a>, <a href="https://javascript.info/closure#army-of-functions">Army of functions</a></li>
 </ul>
-<h1 id="Obj-Arrow-Fn"><a href="#Obj-Arrow-Fn" class="headerlink" title="Obj, Arrow Fn"></a>Obj, Arrow Fn</h1><p><strong>obj</strong>: keyed values collection (str/symbol: any type)</p>
+<p><strong>Currying</strong></p>
+<ul>
+<li>transform <strong>f(a, b, c)</strong> –&gt; <strong>f(a)(b)(c)</strong> — easily for partial (see below): let fn = f(a), then fn(b)(c) <a href="https://javascript.info/currying-partials#currying-what-for">..</a></li>
+<li>implementation <a href="https://javascript.info/currying-partials#advanced-curry-implementation">..</a></li>
+</ul>
+<h1 id="Obj-Arrow-Fn-Con-Fn"><a href="#Obj-Arrow-Fn-Con-Fn" class="headerlink" title="Obj, Arrow Fn, Con-Fn"></a>Obj, Arrow Fn, Con-Fn</h1><p><strong>obj</strong> — str/symbol: any type</p>
 <ul>
 <li>key can be reserved word, non-str/symbol key ==&gt; toString <a href="https://javascript.info/object#property-names-limitations">..</a></li>
 </ul>
@@ -621,6 +645,7 @@
 </ul>
 </li>
 <li>tasks: <a href="https://javascript.info/object-methods#using-this-in-object-literal">Using “this” in object literal</a>, <a href="https://javascript.info/object-methods#create-a-calculator">calculator</a>, <a href="https://javascript.info/object-methods#create-a-calculator">Chaining</a></li>
+<li>losing this problem &amp; <a href="https://javascript.info/reference-type">reference type</a>, task: <a href="https://javascript.info/reference-type#explain-the-value-of-this">Explain the value of “this”</a></li>
 </ul>
 <p>bind “this”</p>
 <ul>
@@ -634,7 +659,7 @@
 </ul>
 <h2 id="Obj-amp-Fn"><a href="#Obj-amp-Fn" class="headerlink" title="Obj &amp; Fn"></a>Obj &amp; Fn</h2><h3 id="Arrow-fn"><a href="#Arrow-fn" class="headerlink" title="Arrow fn"></a>Arrow fn</h3><p><code>(...args) =&gt; expr || &#123; ...body &#125; || (obj-litiral)</code> <a href="https://javascript.info/array-methods#map-to-objects">..</a></p>
 <ul>
-<li>no own <code>this</code> (cann’t run with <code>new</code>) 、<code>super</code> <a href="https://javascript.info/class-inheritance#overriding-a-method">..</a> &amp; <code>arguments</code> (no own context <a href="https://javascript.info/arrow-functions">..</a>) <a href="https://javascript.info/arrow-functions#summary">..</a> — take from outer LE</li>
+<li>no own <code>this</code> (cann’t run with <code>new</code>) 、<code>super</code> <a href="https://javascript.info/class-inheritance#overriding-a-method">..</a> &amp; <code>arguments</code> (no own context <a href="https://javascript.info/arrow-functions">..</a>, take from outer LE) <a href="https://javascript.info/arrow-functions#summary">..</a></li>
 </ul>
 <h3 id="F-Constructor-fn"><a href="#F-Constructor-fn" class="headerlink" title="F: Constructor fn"></a>F: Constructor fn</h3><ul>
 <li>set props &amp; methods <code>this.xxx = ...</code></li>
@@ -644,13 +669,6 @@
 </ul>
 </li>
 <li>singleton obj <code>new function() &#123; ... &#125;</code></li>
-</ul>
-<h3 id="Fn-is-obj"><a href="#Fn-is-obj" class="headerlink" title="Fn is obj"></a>Fn is obj</h3><p>Fn: callable action (instead of data) obj <a href="https://javascript.info/function-object">..</a></p>
-<ul>
-<li>fn-def: store the fn-obj in same named var, call by <code>fnName(...args)</code> — callback fn <a href="https://javascript.info/function-expressions">..</a></li>
-<li>Fn built-in props: <code>name</code> (str, “” for anonymous), <code>length</code> (param #, rest param not count)</li>
-<li>custom prop/helper method: <code>fnName.xxx = ..</code></li>
-<li>tasks: <a href="https://javascript.info/function-object#set-and-decrease-for-counter">Set and decrease for counter</a>, <a href="https://javascript.info/function-object#sum-with-an-arbitrary-amount-of-brackets">Sum with an arbitrary amount of brackets</a></li>
 </ul>
 <h1 id="Built-in-Data-Structure"><a href="#Built-in-Data-Structure" class="headerlink" title="Built-in Data Structure"></a>Built-in Data Structure</h1><h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><ul>
 <li>value indexing: <code>arr[i]</code>, value iter: <code>for..of</code> || <code>arr.forEach()</code></li>
@@ -670,7 +688,7 @@
 <p>Methods <a href="https://javascript.info/array-methods#summary">..</a></p>
 <ul>
 <li><code>splice(..)</code> : […rmed-elems]</li>
-<li><code>filter(fn)</code>: […matchedItems], <code>indexOf()</code>, <code>includes()</code></li>
+<li><code>filter(fn)</code>: […matchedItems], <code>find(fn)</code>, <code>indexOf()</code>, <code>includes()</code></li>
 <li><code>map(fn)</code> &amp; <code>reduce(..)</code>, <code>sort(..)</code> &amp; <code>reverse()</code></li>
 <li><code>arr.join(glue=&#39;,&#39;)</code> &amp; <code>str.split(delim)</code> (<code>(&#39;&#39;)</code>: char[])</li>
 <li><code>Array.isArray(value)</code></li>
@@ -718,7 +736,7 @@
 </ul>
 <h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2><ul>
 <li>Send data: <code>JSON.stringify(obj, ..)</code> &amp; <code>obj.toJSON()</code>: formatted str (aka <em>serialized</em> obj)</li>
-<li>Get data: <code>JSON.parse(str, ..)</code> =&gt; obj</li>
+<li>Get data: <code>JSON.parse(str, ..)</code>: obj</li>
 </ul>
 <h1 id="Prototypal-inheritance"><a href="#Prototypal-inheritance" class="headerlink" title="Prototypal inheritance"></a>Prototypal inheritance</h1><p><strong>[[Prototype]] &amp; prototype</strong></p>
 <ul>
@@ -750,12 +768,12 @@
 </ul>
 </li>
 <li>Check prototype chain by <code>console.dir(obj)</code> <a href="https://javascript.info/native-prototypes#other-built-in-prototypes">..</a></li>
-<li>task: <a href="https://javascript.info/native-prototypes#add-the-decorating-defer-to-functions">Add decorating “defer()” to fns</a>, <a href="https://javascript.info/prototype-methods#the-difference-between-calls">The difference between calls</a></li>
+<li>task: <a href="https://javascript.info/native-prototypes#add-the-decorating-defer-to-functions">Add decorating “defer()” to fns</a>, <a href="https://javascript.info/prototype-methods#the-difference-between-calls">the diff btw calls</a></li>
 </ul>
 <h1 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">F</span> </span>&#123;</span><br><span class="line">  [<span class="keyword">static</span>] field = ..; <span class="comment">// access field in method by &quot;this.xxx&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(..) &#123; <span class="comment">/*..*/</span> &#125; <span class="comment">// called when &quot;new&quot;</span></span><br><span class="line">  </span><br><span class="line">  [<span class="keyword">static</span>] method() &#123; <span class="comment">/*..*/</span> &#125; </span><br><span class="line">  [get/set] method(..) &#123; <span class="comment">/*..*/</span> &#125;</span><br><span class="line">  [expr]() &#123; <span class="comment">/*..*/</span> &#125; <span class="comment">// computed name</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>bind <code>this</code> in method <a href="https://javascript.info/class#making-bound-methods-with-class-fields">..</a><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">this</span>.xxx = <span class="built_in">this</span>.xxx.bind(<span class="built_in">this</span>); <span class="comment">// bind existing method in constructor </span></span><br><span class="line">xxx = <span class="function">() =&gt;</span> &#123;..&#125; <span class="comment">// field store in obj itself (&quot;this&quot; = obj)</span></span><br></pre></td></tr></table></figure></li>
-<li>access <code>static</code> outside F: <code>F.xxx</code> <a href="https://javascript.info/static-properties-methods#static-properties">..</a>, <a href="https://javascript.info/static-properties-methods">..</a><ul>
+<li>bind <code>this</code> in method <a href="https://javascript.info/class#making-bound-methods-with-class-fields">..</a><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">xxx = <span class="function">() =&gt;</span> &#123;..&#125; <span class="comment">// field store in obj itself (&quot;this&quot; = obj)</span></span><br><span class="line"><span class="built_in">this</span>.xxx = <span class="built_in">this</span>.xxx.bind(<span class="built_in">this</span>); <span class="comment">// bind existing method in constructor </span></span><br></pre></td></tr></table></figure></li>
+<li>access <code>static</code> outside F: <code>F.xxx</code> (<code>F</code> as     <code>this</code>) <a href="https://javascript.info/static-properties-methods#static-properties">..</a>, <a href="https://javascript.info/static-properties-methods">..</a><ul>
 <li>return obj in static method by <code>new this(..)</code> (factory method)</li>
 </ul>
 </li>
@@ -819,7 +837,7 @@
 <p>custom err/ extending err: <code>ValidationError</code> <a href="https://javascript.info/custom-errors#extending-error">..</a> &amp; <code>PropertyRequiredError</code> example <a href="https://javascript.info/custom-errors#further-inheritance">..</a></p>
 <ul>
 <li>set name: <code>this.name = this.constructor.name;</code></li>
-<li>wrapping-exception pattern: catche syntax &amp; validation errs and throws ReadError <a href="https://javascript.info/custom-errors#wrapping-exceptions">..</a></li>
+<li>wrapping-exception pattern: catch syntax &amp; validation errs and throws ReadError <a href="https://javascript.info/custom-errors#wrapping-exceptions">..</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -835,375 +853,244 @@
     <title>JavaScript &amp; DOM</title>
     <url>/blog/2020/06/30/js-dom/</url>
     <content><![CDATA[<h1 id="JS-intro"><a href="#JS-intro" class="headerlink" title="JS intro"></a>JS intro</h1><ul>
-<li>init to <strong>make webpages alive</strong></li>
-<li>run on platform with <a href="https://javascript.info/intro#what-is-javascript">JS engine</a> (e.g. browser JS VM <a href="https://mrale.ph/">V8</a>) in Chrome &amp; Opera) ==&gt; <a href="https://javascript.info/browser-environment">host env</a></li>
-<li>JS in HTML: <code>&lt;script&gt;...&lt;/script&gt;</code> &amp; <code>&lt;script src=...&gt;&lt;/script&gt;</code> <a href="https://javascript.info/hello-world">..</a> <ul>
-<li><strong>type=”text/javascript” language=”javascript”</strong> attr no need anymore</li>
-<li>inline content ignored if <code>src</code> set</li>
-<li>browser cache external script for reuse ==&gt; make complex scripts external</li>
+<li>init to <strong>make webpages alive</strong> <a href="https://javascript.info/intro">..</a>, run on platforms with <strong>JS engine</strong> (in browser aka “JS VM”,  e.g. “V8” in Chrome &amp; Opera) <a href="https://javascript.info/intro#what-is-javascript">..</a><ul>
+<li>browser env: <code>window</code> (root obj) =&gt; JS / DOM / BOM <a href="https://javascript.info/browser-environment">..</a></li>
+<li><a href="https://javascript.info/browser-environment#bom-browser-object-model">BOM</a>: <code>navigator</code> obj, <code>location.href</code>, model win fn: <code>alert()</code>, <code>prompt()</code>, <code>confirm()</code> <a href="https://javascript.info/alert-prompt-confirm">..</a></li>
 </ul>
 </li>
-<li>in-browser JS restrictions: access file system &amp; devices, browser <strong>Same Origin Policy</strong></li>
+<li>JS in HTML: <code>&lt;script&gt;..&lt;/script&gt;</code> &amp; <code>&lt;script src=..&gt;&lt;/script&gt;</code> <a href="https://javascript.info/hello-world">..</a> <ul>
+<li><code>type=&quot;text/javascript&quot; language=&quot;javascript&quot;</code> attr no need anymore <a href="https://javascript.info/hello-world#modern-markup">..</a></li>
+<li>inline content ignored if <code>src</code> set <a href="https://javascript.info/hello-world#external-scripts">..</a></li>
+<li>browser cache external script for re-use <a href="https://javascript.info/hello-world#external-scripts">..</a></li>
+</ul>
+</li>
+<li>in-browser JS restrictions <a href="https://javascript.info/intro#what-can-t-in-browser-javascript-do">…</a></li>
 </ul>
 <a id="more"></a>
 
-<h1 id="Browser-env"><a href="#Browser-env" class="headerlink" title="Browser env"></a>Browser env</h1><ul>
-<li><code>window</code> =&gt; JS (global obj) / DOM / BOM (the browser window obj) <a href="https://javascript.info/browser-environment">..</a></li>
-<li><a href="https://javascript.info/browser-environment#bom-browser-object-model">BOM</a>: <code>navigator</code> obj, <code>location.href</code> =&gt; URL, <a href="https://javascript.info/alert-prompt-confirm">model window fn</a>: <code>alert()</code>, <code>prompt()</code>, <code>confirm()</code></li>
-</ul>
 <h1 id="DOM-tree"><a href="#DOM-tree" class="headerlink" title="DOM tree"></a>DOM tree</h1><ul>
-<li>repre HTML/XML doc structure <a href="https://javascript.info/dom-nodes#summary">..</a>, contains eth in HTML, inc <code>&lt;!DOCTYPE HTML&gt;</code> <a href="https://javascript.info/dom-nodes#other-node-types">..</a></li>
-<li>rooted at <code>document</code> (whole doc<a href="https://javascript.info/dom-nodes#other-node-types">..</a>) =&gt; <strong>document.documentElement</strong> / <strong>.head</strong> / .<strong>body</strong> <a href="https://javascript.info/dom-navigation#on-top-documentelement-and-body">..</a></li>
-<li>build on load pages <a href="https://javascript.info/dom-attributes-and-properties">..</a><ul>
-<li><strong>document.body = null</strong> for &lt;head&gt;.script <a href="https://javascript.info/dom-navigation#on-top-documentelement-and-body">..</a></li>
-<li>browser auto-correction when building the DOM, e.g. &lt;table&gt; always have &lt;tbody&gt; <a href="https://javascript.info/dom-nodes#autocorrection">..</a></li>
+<li>repre HTML/XML doc structure <a href="https://javascript.info/dom-nodes#summary">..</a> (inc <code>&lt;!DOCTYPE HTML&gt;</code> <a href="https://javascript.info/dom-nodes#other-node-types">..</a>), built when pages loading <a href="https://javascript.info/dom-attributes-and-properties">..</a> (auto-correction <a href="https://javascript.info/dom-nodes#autocorrection">..</a>)</li>
+<li>rooted at <code>document</code> (repre the whole doc<a href="https://javascript.info/dom-nodes#other-node-types">..</a>) — <code>document.documentElement/.head /.body</code> <a href="https://javascript.info/dom-navigation#on-top-documentelement-and-body">..</a></li>
+<li>interact DOM elem in console <a href="https://javascript.info/dom-nodes#interaction-with-console">..</a></li>
 </ul>
-</li>
-<li><a href="https://javascript.info/dom-nodes#interaction-with-console">interact DOM elem in console</a></li>
-</ul>
-<h1 id="DOM-class-hierarchy"><a href="#DOM-class-hierarchy" class="headerlink" title="DOM class hierarchy"></a>DOM class hierarchy</h1><ul>
-<li><p>abstract <strong>EventTarget</strong> =&gt; abstract <strong>Node</strong> (inc. nav props) =&gt; <a href="https://javascript.info/basic-dom-node-properties#dom-node-classes">..</a></p>
+<p>DOM node class hierarchy <a href="https://javascript.info/basic-dom-node-properties#dom-node-classes">..</a></p>
 <ul>
-<li><strong>Element</strong> =&gt; HTMLElement …<ul>
-<li><code>console.dir(elem)</code> (DOM tree elem) <strong>vs</strong> <code>console.log(elem)</code> (DOM obj &amp; props) <a href="https://javascript.info/basic-dom-node-properties#dom-node-classes">..</a></li>
+<li>Node: Element, Text, Comment, Document (e.g. <code>HTMLDocument</code> instance <code>document</code> <a href="https://javascript.info/basic-dom-node-properties#where-s-the-document-in-the-hierarchy">..</a>)</li>
+<li>type check: <code>node.nodeName</code> / <code>elem.tagName</code> <a href="https://javascript.info/basic-dom-node-properties#tag-nodename-and-tagname">..</a></li>
+</ul>
+<h1 id="HTML-Attr-amp-JS-Prop"><a href="#HTML-Attr-amp-JS-Prop" class="headerlink" title="HTML Attr &amp; JS Prop"></a>HTML Attr &amp; JS Prop</h1><ul>
+<li><strong>HTML-attr</strong>: case-insensitive &amp; value: str <a href="https://javascript.info/dom-attributes-and-properties#html-attributes">..</a><ul>
+<li>HTML <code>hidden</code> attr — <code>style=&quot;display:none</code> <a href="https://javascript.info/basic-dom-node-properties#the-hidden-property">..</a></li>
 </ul>
 </li>
-<li><strong>Text</strong>, <strong>Comment</strong></li>
-<li><strong>Document</strong> =&gt; <strong>HTMLDocument</strong>, instance <code>document</code> <a href="https://javascript.info/basic-dom-node-properties#where-s-the-document-in-the-hierarchy">..</a></li>
-</ul>
-</li>
-<li><p>check node type</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">alert( node.nodeName );     <span class="comment">// #comment, #document, BODY</span></span><br><span class="line">alert( elem.tagName );      <span class="comment">// BODY</span></span><br><span class="line"></span><br><span class="line">alert( <span class="built_in">document</span>.body.constructor.name ); <span class="comment">// HTMLBodyElement</span></span><br><span class="line"><span class="comment">// by toString()</span></span><br><span class="line">alert( <span class="built_in">document</span>.body );     <span class="comment">// [object HTMLBodyElement]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// the old &quot;nodeType&quot;</span></span><br><span class="line">alert(node.nodeType);       <span class="comment">// 1 =&gt; element, 3 = text, 9 = document</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h1 id="Attr-amp-Prop"><a href="#Attr-amp-Prop" class="headerlink" title="Attr &amp; Prop"></a>Attr &amp; Prop</h1><ul>
-<li><strong>HTML-attr</strong>: case-insensitive (all lowercase in HTML) &amp; value: str<ul>
-<li>HTML <code>hidden</code> attr === <code>style=&quot;display:none</code> <a href="https://javascript.info/basic-dom-node-properties#the-hidden-property">..</a></li>
-</ul>
-</li>
-<li><strong>DOM prop</strong>: case-sensitive &amp; value: any type</li>
-<li>interact: <code>elem.get/remove/hasAttribute(name)</code> / <code>setAttribute(name, value)</code> / <code>attributes</code><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// std attr &lt;-&gt; prop</span></span><br><span class="line">input.setAttribute(<span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;id&#x27;</span>);         <span class="comment">// input.id: id </span></span><br><span class="line">input.id = <span class="string">&#x27;newId&#x27;</span>;                     <span class="comment">// input.getAttribute(&#x27;id&#x27;)): newId</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// input value attr -&gt; input.value</span></span><br><span class="line">input.setAttribute(<span class="string">&#x27;value&#x27;</span>, <span class="string">&#x27;text&#x27;</span>);    <span class="comment">// input.value: text</span></span><br><span class="line">input.value = <span class="string">&#x27;newValue&#x27;</span>;               <span class="comment">// input.getAttribute(&#x27;value&#x27;): text (attr not updated)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// DOM prop value type: not only str</span></span><br><span class="line">input.getAttribute(<span class="string">&#x27;checked&#x27;</span>)           <span class="comment">// &#x27;&#x27;</span></span><br><span class="line">input.checked                           <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">div.getAttribute(<span class="string">&#x27;style&#x27;</span>)               <span class="comment">// color:red;font-size:120%</span></span><br><span class="line">div.style                               <span class="comment">// [object CSSStyleDeclaration]</span></span><br><span class="line"></span><br><span class="line">a.getAttribute(<span class="string">&#x27;href&#x27;</span>));                <span class="comment">// #hello (relative path)</span></span><br><span class="line">a.href                                  <span class="comment">// full URL </span></span><br></pre></td></tr></table></figure></li>
-<li><strong>customized attr</strong><ul>
-<li>pass data to JS || “mark” HTML-elem for JS ==&gt; <strong>querySelector(‘tag[attr]’)</strong></li>
-<li>naming by <code>data-*</code> (avoid conflict of become standard later), access by <strong>dataset.xxx</strong> (mtp-word camelCase)</li>
+<li><strong>DOM prop</strong>: case-sensitive &amp; value: any type <a href="https://javascript.info/dom-attributes-and-properties#dom-properties">..</a></li>
+<li>access attr by elem methods <a href="https://javascript.info/dom-attributes-and-properties#html-attributes">..</a></li>
+<li>prop-attr sync <a href="https://javascript.info/dom-attributes-and-properties#property-attribute-synchronization">..</a> &amp; prop-attr type diff <a href="https://javascript.info/dom-attributes-and-properties#dom-properties-are-typed">..</a></li>
+<li>customized attr <a href="https://javascript.info/dom-attributes-and-properties#non-standard-attributes-dataset">..</a>: pass data to JS || “mark” HTML-elem for JS<ul>
+<li>naming: <code>data-*</code>, access: <code>dataset.xxx</code> (mtp-word camelCase)</li>
 </ul>
 </li>
 </ul>
-<h1 id="DOM-modification"><a href="#DOM-modification" class="headerlink" title="DOM modification"></a>DOM modification</h1><h2 id="Node-creation"><a href="#Node-creation" class="headerlink" title="Node creation"></a>Node creation</h2><ul>
-<li><code>document.createElement(tag: str)</code> / <strong>createTextNode</strong>(text: str) <a href="https://javascript.info/modifying-document#creating-an-element">..</a></li>
-<li>elem.<strong>cloneNode</strong>(isDeepCopy: bool) ==&gt; deep copy (all attrs &amp; sub-elems), false without sub-elems <a href="https://javascript.info/modifying-document#cloning-nodes-clonenode">..</a></li>
-</ul>
-<h2 id="Node-Select"><a href="#Node-Select" class="headerlink" title="Node Select"></a>Node Select</h2><ul>
-<li><code>elem.querySelectorAll(css: str)</code>: static-collection &amp; <code>elem.querySelector(css)</code>: 1st-elem <a href="https://javascript.info/searching-elements-dom#querySelectorAll">..</a> <ul>
-<li>css: <strong>‘tag[attr]’</strong> <a href="https://javascript.info/dom-attributes-and-properties#make-external-links-orange">..</a> &amp; <a href="https://javascript.info/searching-elements-dom#matches">..</a></li>
-</ul>
-</li>
-<li><code>document.getElementById(id: str)</code><ul>
-<li>or just id (the id-named gloabal var) || <strong>window[‘xxx’]</strong> (for comp, not recomm)</li>
-<li><a href="https://javascript.info/searching-elements-dom#getelementsby">the old getElemetsBy* methods</a></li>
-</ul>
-</li>
-<li>elem.<strong>closest(css)</strong> =&gt; closest ancestor (inc elem itself)</li>
-<li><strong>nav props</strong> (child, parent, sibling, read-only) <a href="https://javascript.info/dom-navigation">..</a><ul>
-<li><code>childNodes: nodes</code> &amp; <code>children: elems</code> =&gt; DOM collection (array-like iter obj)</li>
-<li>for <code>&lt;html&gt;</code>, parentNode =&gt; <code>document</code>, parentElement =&gt; <code>null</code></li>
-</ul>
-</li>
-<li><strong>elemA.contains(elemB)</strong>(true if B descendant or same) / <strong>elem.matches</strong>(css) =&gt; bool </li>
+<h1 id="DOM-modification"><a href="#DOM-modification" class="headerlink" title="DOM modification"></a>DOM modification</h1><p><strong>Node Creation</strong>: <code>document.createElement(tag: str)</code><a href="https://javascript.info/modifying-document#creating-an-element">..</a>, <code>elem.cloneNode(..)</code> <a href="https://javascript.info/modifying-document#cloning-nodes-clonenode">..</a></p>
+<p><strong>Node Selection</strong> <a href="https://javascript.info/searching-elements-dom">..</a></p>
+<ul>
+<li><code>elem.querySelector*(css: str)</code> — css: <code>&#39;tag[attr]&#39;</code> <a href="https://javascript.info/dom-attributes-and-properties#make-external-links-orange">..</a> &amp; <a href="https://javascript.info/searching-elements-dom#matches">..</a></li>
+<li>other query methods <a href="https://javascript.info/searching-elements-dom#summary">..</a> </li>
+<li><strong>nav props</strong> (child, parent, sibling, read-only) <a href="https://javascript.info/dom-navigation">..</a></li>
 <li>table props <a href="https://javascript.info/dom-navigation#dom-navigation-tables">..</a></li>
 </ul>
 <h2 id="Node-modification"><a href="#Node-modification" class="headerlink" title="Node modification"></a>Node modification</h2><h3 id="Content"><a href="#Content" class="headerlink" title="Content"></a>Content</h3><ul>
 <li><code>elem.innerHTML</code> <a href="https://javascript.info/basic-dom-node-properties#innerhtml-the-contents">..</a><ul>
-<li>innerHTML += xxx — replace instead addition (resrc reload, selection &amp; input removed)</li>
-<li>insert script-tag by innerHTML — inserted but not executed</li>
-<li>elem.<strong>outerHTML</strong> =&gt; innerHTML + elem itself <a href="https://javascript.info/basic-dom-node-properties#outerhtml-full-html-of-the-element">..</a><ul>
-<li>replace in the DOM but <strong>not change elem</strong> itself (var still ref to the old value) — get new value by query again</li>
+<li>innerHTML += xxx: replace instead addition (resrc reload, selection &amp; input rmed)</li>
+<li>insert <code>&lt;script&gt;</code> by innerHTML: inserted but not executed</li>
+<li>elem.<strong>outerHTML</strong> = innerHTML + elem itself <a href="https://javascript.info/basic-dom-node-properties#outerhtml-full-html-of-the-element">..</a><ul>
+<li>write to elem.outerHTML: replace node in DOM but <strong>not change elem</strong> itself (var still ref to the old value) — query again</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><code>elem.textContent</code> — inner text without tags || insert as text (safer then .innerHTML)</li>
-<li><code>Text/Comment.data</code> — text/comment content of the node (similar to <strong>nodeValue</strong> prop) <a href="https://javascript.info/basic-dom-node-properties#nodevalue-data-text-node-content">..</a></li>
+<li><code>elem.textContent</code>: inner text without tags, insert as text (safer then <code>innerHTML</code>)</li>
+<li><code>Text/Comment.data</code>: text/cmt content of the node (similar to <strong>nodeValue</strong> prop) <a href="https://javascript.info/basic-dom-node-properties#nodevalue-data-text-node-content">..</a></li>
 <li>task: <a href="https://javascript.info/basic-dom-node-properties#count-descendants">Count descendants</a>, <a href="https://javascript.info/modifying-document#create-a-calendar">Create a calendar</a>, <a href="https://javascript.info/modifying-document#sort-the-table">Sort the table</a></li>
 </ul>
-<h3 id="Style"><a href="#Style" class="headerlink" title="Style"></a>Style</h3><ul>
-<li>prefer class-attr than style-attr for styling</li>
-<li><code>getComputedStyle</code>(elem, [pseudo: str]).<strong>camelCaseProp</strong> =&gt; <strong>str with unit</strong> (of resolved value) <strong>from CSS-class</strong> <a href="https://javascript.info/styles-and-classes#computed-styles-getcomputedstyle">..</a><ul>
-<li><strong>resolved value</strong> (fixed or absolute, with unit, e.g. “20px”) vs <strong>computed style value</strong> (could be relative, e.g. “em”, “125%”)</li>
-<li>prop use full name, e.g.marginTop instead of margin (otherwise may inconsist among browsers)</li>
-<li>set class: elem.<strong>className</strong> (whole replace) / <strong>.classList</strong> (iter, with methods <strong>add/remove/toggle/contains</strong>(“class”), for indiv set)</li>
+<h3 id="Style"><a href="#Style" class="headerlink" title="Style"></a>Style</h3><p>css class style (prefer <a href="https://javascript.info/styles-and-classes">..</a>)</p>
+<ul>
+<li>read class style: <code>getComputedStyle(elem, ..).&lt;camelCaseProp&gt;</code>: str with unit (of resolved value), e.g. “20px” <a href="https://javascript.info/styles-and-classes#computed-styles-getcomputedstyle">..</a></li>
+<li>set class: <code>elem.className</code> (whole replace) / <code>elem.classList</code> (single class) <a href="https://javascript.info/styles-and-classes#classname-and-classlist">..</a> </li>
+</ul>
+<p>style-attr style: <code>elem.style.&lt;camelCaseProp&gt;</code>: str with unit, e.g. “100px”, writable <a href="https://javascript.info/styles-and-classes#element-style">..</a></p>
+<ul>
+<li>rm style : <code>elem.style.xxx = &#39;&#39;</code></li>
+<li>full rewrite <code>elem.style.cssText = xxx</code> || <code>setAttribute(&#39;style&#39;, cssText)</code> <a href="https://javascript.info/styles-and-classes#resetting-the-style-property">..</a></li>
+</ul>
+<h3 id="Size-coords-amp-scroll"><a href="#Size-coords-amp-scroll" class="headerlink" title="Size, coords &amp; scroll"></a>Size, coords &amp; scroll</h3><p>geometry props: return num (in “px”) <a href="https://javascript.info/size-and-scroll#geometry">..</a></p>
+<ul>
+<li>Size props: <code>offset*</code>, <code>client*</code> <a href="https://javascript.info/size-and-scroll#geometry">…</a></li>
+<li>scrolled props: <code>scroll*</code> <a href="https://javascript.info/size-and-scroll#scrollwidth-height">…</a>, <a href="https://javascript.info/size-and-scroll#scrollleft-scrolltop">…</a>  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">elem.style.height = <span class="string">`<span class="subst">$&#123;elem.scrollHeight&#125;</span>px`</span>; <span class="comment">// expand elem to full height</span></span><br><span class="line"></span><br><span class="line">elem.scrollTop = elem.scrollHeight; <span class="comment">// auto-scroll up [Events mouseover/mouseout, relatedTarget]</span></span><br><span class="line">elem.scrollTop = <span class="number">0</span> / <span class="literal">Infinity</span>       <span class="comment">// scroll to top/bottom</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>get doc scrolled-out part size: <code>window.pageX/YOffset</code> (num in px) <a href="https://javascript.info/size-and-scroll-window#page-scroll">..</a></li>
+<li>scroll doc: <code>window.scrollBy/To(..)</code> <a href="https://javascript.info/size-and-scroll-window#window-scroll">..</a> &amp; <code>elem.scrollToView(top=true)</code>: scroll page to make elem top / bottom of the win</li>
+<li>enable/forbid scroll: <code>style.overflow[X/Y]=&#39;scroll/hidden&#39;</code> (same as CSS overflow[-x/-y]) <a href="https://javascript.info/size-and-scroll#what-is-the-scrollbar-width">..</a> &amp; <a href="https://javascript.info/size-and-scroll-window#forbid-the-scrolling">..</a></li>
 </ul>
 </li>
-<li>elem.<code>style</code>.camelCaseProp =&gt; <strong>str with unit</strong> from <strong>style-attr</strong> (no access to CSS value <a href="https://javascript.info/styles-and-classes#computed-styles-getcomputedstyle">..</a>)<ul>
-<li>reset by elem.<strong>style.xxx = ‘’</strong> (back to CSS classes and its built-in styles normally)</li>
-<li>style prop <strong>default = ‘’</strong> for unsetted prop, e.g. style prop from CSS class &amp; style set without unit</li>
-<li>full rewrite — <strong>style.cssText = xxx</strong>, same as <strong>setAttribute(‘style’, cssText)</strong></li>
+<li>coords props <a href="https://javascript.info/coordinates">..</a>: <ul>
+<li><code>clientX/Y</code> (rel to win, css position: <strong>fixed</strong>) &amp; <code>pageX/Y</code> (rel to doc, css position: <strong>absolute</strong>) <a href="https://javascript.info/coordinates">..</a>, <a href="https://javascript.info/coordinates#getCoords">..</a><ul>
+<li><code>document.elementFromPoint(clientX, clientY)</code>: most nested elem, null if out of win <a href="https://javascript.info/coordinates#elementFromPoint">..</a></li>
 </ul>
 </li>
-</ul>
-<h3 id="Size-coords-amp-scroll"><a href="#Size-coords-amp-scroll" class="headerlink" title="Size, coords &amp; scroll"></a>Size, coords &amp; scroll</h3><h4 id="Geometry-props"><a href="#Geometry-props" class="headerlink" title="Geometry props"></a>Geometry props</h4><ul>
-<li>return number (without “px”, only for displayed elem)</li>
-<li><strong>offsetParent</strong> — for calc coords when render: nearest CSS-positioned ancestor || <code>td</code>, <code>th</code>, <code>table</code> || <code>body</code> <a href="https://javascript.info/size-and-scroll#offsetparent-offsetleft-top">..</a><ul>
-<li><strong>offsetLeft/Top</strong>, <code>offsetWidth/Height</code> (<strong>outer size</strong>: outer border = CSS-w/h (inc scrollbar) + padding + border)</li>
-<li><strong>clientTop/Left</strong> (border + sbar), <code>clientWidth/Height</code> (<strong>inner size</strong>: inside sbar &amp; broder = (CSS-w/h - sbar) + padding)</li>
-<li>task — <a href="https://javascript.info/size-and-scroll#what-is-the-scrollbar-width">What is the scrollbar width?</a></li>
-</ul>
-</li>
-<li><code>elem.getBoundingClientRect()</code> =&gt; X/Y, top/left &amp; bottom/right (outer border rel to window), width/height <a href="https://javascript.info/coordinates#element-coordinates-getboundingclientrect">..</a><ul>
-<li>convert <code>clientX/Y</code> (rel to window, ==&gt; position: <strong>fixed</strong>) to <code>pageX/Y</code> (position: <strong>absolute</strong>):<br><strong>getBoundingClientRect().left/top + window.pageX/YOffect</strong> (scrolled-out part of doc) <a href="https://javascript.info/coordinates#getCoords">..</a></li>
-<li>tasks — <a href="https://javascript.info/coordinates#find-window-coordinates-of-the-field">Find window coordinates of the field</a>, <a href="https://javascript.info/coordinates#position-the-note-inside-absolute">Position the note inside (absolute)</a></li>
-</ul>
-</li>
+<li>get coords: <ul>
+<li><code>elem.getBoundingClientRect()</code> return num (in “px”) <a href="https://javascript.info/coordinates#element-coordinates-getboundingclientrect">…</a></li>
 <li><code>style.left/top</code> <a href="https://javascript.info/size-and-scroll#place-the-ball-in-the-field-center">..</a>, <code>style.width/height</code> <a href="https://javascript.info/size-and-scroll#what-is-the-scrollbar-width">..</a> =&gt; <strong>str with unit</strong></li>
-<li><code>document.elementFromPoint(clientX, clientY)</code>: most nested elem, null if out of window <a href="https://javascript.info/coordinates#elementFromPoint">..</a></li>
 </ul>
-<h4 id="Scroll-props"><a href="#Scroll-props" class="headerlink" title="Scroll props"></a>Scroll props</h4><p>Get scrolled-out part size:</p>
-<ul>
-<li>for whole doc: <strong>window.pageX/YOffset</strong> <a href="https://javascript.info/size-and-scroll-window#page-scroll">..</a></li>
-<li>for some elem: elem.<strong>scrollTop/Left</strong> (scrolled out part, <strong>writable</strong>) = elem.<strong>scrollWidth/Height</strong> - elem.clientWidth/Height<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">elem.style.height = <span class="string">`<span class="subst">$&#123;elem.scrollHeight&#125;</span>px`</span>; <span class="comment">// expand elem to full height</span></span><br><span class="line"></span><br><span class="line">elem.scrollTop = elem.scrollHeight; <span class="comment">// auto-scroll up [Events mouseover/mouseout, relatedTarget]</span></span><br><span class="line">elem.scrollTop = <span class="number">0</span> / <span class="literal">Infinity</span>       <span class="comment">// scroll to top/bottom</span></span><br><span class="line"><span class="keyword">let</span> scrollBottom = elem.scrollHeight - elem.scrollTop - elem.clientHeight; <span class="comment">// [Task1]</span></span><br></pre></td></tr></table></figure>
-
+</li>
+<li>tasks: <a href="https://javascript.info/coordinates#find-window-coordinates-of-the-field">Find win coords of the field</a>, <a href="https://javascript.info/coordinates#position-the-note-inside-absolute">Position the note inside (absolute)</a></li>
+</ul>
 </li>
 </ul>
-<p>Scroll the doc</p>
+<p>Notes</p>
 <ul>
-<li><code>window.scrollBy(x,y)</code> &amp; <code>window.scrollTo(pageX,pageY)</code> <a href="https://javascript.info/size-and-scroll-window#window-scroll">..</a></li>
-<li><code>elem.scrollToView(top=true)</code>: scroll page to make elem top / bottom of the window</li>
-</ul>
-<p>Set/forbid scroll</p>
-<ul>
-<li><code>style.overflow[X/Y]=&#39;scroll/hidden&#39;</code> (same as CSS overflow[-x/-y]) <a href="https://javascript.info/size-and-scroll#what-is-the-scrollbar-width">..</a> &amp; <a href="https://javascript.info/size-and-scroll-window#forbid-the-scrolling">..</a></li>
-</ul>
-<h4 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h4><ul>
-<li>text overflow ==&gt; padding-bottom area may filled with text <a href="https://javascript.info/size-and-scroll#sample-element">..</a></li>
-<li>cases for geometry prop = 0 &amp; offsetParent = null <a href="https://javascript.info/size-and-scroll">..</a></li>
-<li>for elem width/height/distance, <strong>use geometry prop (e.g. clientWidth) instead</strong> getComputedStyle() <a href="https://javascript.info/size-and-scroll#don-t-take-width-height-from-css">..</a> &amp; <a href="https://javascript.info/size-and-scroll#the-difference-css-width-versus-clientwidth">..</a></li>
-<li>get window size — <strong>document.documentElement.clientWidth/H</strong> (without sbar)  vs <strong>window.innerWeight/H</strong> (inc sbar) <a href="https://javascript.info/size-and-scroll-window#width-height-of-the-window">..</a></li>
+<li>text overflow — padding-bottom area may filled with text <a href="https://javascript.info/size-and-scroll#sample-element">..</a></li>
+<li>for elem width/height/distance, <strong>use geometry prop (e.g. clientWidth) instead</strong> getComputedStyle() <a href="https://javascript.info/size-and-scroll#don-t-take-width-height-from-css">..</a>, <a href="https://javascript.info/size-and-scroll#the-difference-css-width-versus-clientwidth">..</a></li>
+<li>get win size: <code>document.documentElement.clientWidth/H</code> (without sbar)  vs <code>window.innerWeight/H</code> (inc sbar) <a href="https://javascript.info/size-and-scroll-window#width-height-of-the-window">..</a></li>
 <li>get doc size (with scroll out part) <a href="https://javascript.info/size-and-scroll-window#width-height-of-the-document">..</a></li>
 </ul>
-<h2 id="Node-insert-move-amp-remove"><a href="#Node-insert-move-amp-remove" class="headerlink" title="Node insert, move &amp; remove"></a>Node insert, move &amp; remove</h2><p><strong>Insert elem || text</strong>: <code>node.append/prepend/before/after(...nodes || textStrs)</code> <a href="https://javascript.info/modifying-document#insertion-methods">..</a></p>
-<ul>
-<li>auto remove existing node from old place</li>
-<li><a href="https://javascript.info/modifying-document#old-school-insert-remove-methods">the old insert/remove methods</a></li>
-</ul>
-<p><strong>Insert HTML</strong>: <code>elem.insertAdjacentHTML(where, html: str)</code> <a href="https://javascript.info/modifying-document#insertadjacenthtml-text-element">..</a> </p>
-<ul>
-<li>where = “beforebegin/afterbegin/beforeend/afterend” </li>
-<li>elem.<strong>insertAdjacentElement/Text</strong> can be replaced by node.<strong>append/prepend/before/after</strong></li>
-</ul>
-<p><strong>Replace node</strong>: <code>node.replaceWith(...nodes || textStrs)</code> <a href="https://javascript.info/modifying-document#insertion-methods">..</a></p>
-<p><strong>Remove node</strong>: <code>node.remove()</code> <a href="https://javascript.info/modifying-document#node-removal">..</a></p>
-<p><strong>Node groups</strong>: node-array &amp; DocumentFragment obj <a href="https://javascript.info/modifying-document#document-fragment">..</a></p>
-<p><a href="https://javascript.info/modifying-document#a-word-about-document-write">The old <strong>document.write</strong>(html: str)</a>: call when onload (call af load replace page content)</p>
-<h1 id="UI-Event-handle"><a href="#UI-Event-handle" class="headerlink" title="UI Event handle"></a>UI Event handle</h1><h2 id="UI-Event"><a href="#UI-Event" class="headerlink" title="UI Event"></a>UI Event</h2><p>Event Obj <a href="https://javascript.info/introduction-browser-events#event-object">..</a></p>
-<ul>
-<li><code>e.type</code>: e.g. “click”</li>
-<li><code>e.clientX/Y</code>: window-rel coors</li>
-</ul>
-<p>Event phase &amp; event delegation</p>
-<ul>
-<li><strong>event capturing <a href="https://javascript.info/bubbling-and-capturing#capturing">..</a> &amp; event bubbling</strong> (most events bubble, except <strong>focus</strong>) <a href="https://javascript.info/bubbling-and-capturing#bubbling">..</a><ul>
-<li>Event delegation &amp; event bubble: handle event on container for mtp elems <a href="https://javascript.info/event-delegation#summary">..</a></li>
-<li>tasks — <a href="https://javascript.info/event-delegation#hide-messages-with-delegation">Hide messages with delegation</a>, <a href="https://javascript.info/event-delegation#tree-menu">toogle tree menu</a>, <a href="https://javascript.info/event-delegation#sortable-table">Sortable table</a>, <a href="https://javascript.info/event-delegation#tooltip-behavior">Tooltip behavior</a></li>
-<li>stop bubbling by <ul>
-<li><strong>e.stopPropagation()</strong> (stop current handler)</li>
-<li><strong>e.stopImmediatePropagation()</strong> (stop all handlers)</li>
+<h2 id="Node-insert-move-amp-rm"><a href="#Node-insert-move-amp-rm" class="headerlink" title="Node insert, move &amp; rm"></a>Node insert, move &amp; rm</h2><ul>
+<li>insert (replace) as text: <code>node.append/prepend/before/after/replaceWith(..)</code> <a href="https://javascript.info/modifying-document#insertion-methods">..</a><ul>
+<li>move nodes by inserting existing one (auto rm from old place) <a href="https://javascript.info/modifying-document#node-removal">..</a></li>
 </ul>
 </li>
+<li>insert as HTML: <code>elem.insertAdjacentHTML(..)</code> <a href="https://javascript.info/modifying-document#insertadjacenthtml-text-element">..</a> </li>
+<li>removal: <code>node.remove()</code> <a href="https://javascript.info/modifying-document#node-removal">..</a></li>
+<li>the old insert/rm methods <a href="https://javascript.info/modifying-document#old-school-insert-remove-methods">..</a> &amp; <code>document.write(html: str)</code> <a href="https://javascript.info/modifying-document#a-word-about-document-write">..</a>: call when onload to write html into page “right here and now” (call af load replace page content)</li>
 </ul>
-</li>
+<h1 id="Event-handling"><a href="#Event-handling" class="headerlink" title="Event handling"></a>Event handling</h1><h2 id="Event"><a href="#Event" class="headerlink" title="Event"></a>Event</h2><p>events list <a href="https://javascript.info/introduction-browser-events">…</a></p>
+<p>event happen -&gt; browser create event-obj with details &amp; pass to event handler <a href="https://javascript.info/introduction-browser-events#event-object">..</a> </p>
+<p>Event obj: <code>e.type</code> (e.g. “click”) <a href="https://javascript.info/introduction-browser-events#event-object">..</a></p>
+<p>Event Bubbling &amp; event delegation pattern</p>
+<ul>
+<li>3 Event phase (<a href="https://javascript.info/bubbling-and-capturing#capturing">Capturing</a>, Target, <a href="https://javascript.info/bubbling-and-capturing#bubbling">Bubbling</a> — <code>e.eventPhase</code> <a href="https://javascript.info/bubbling-and-capturing#summary">..</a>)</li>
+<li>event delegation (handle event on container for mtp elems) <a href="https://javascript.info/event-delegation">..</a></li>
 <li><code>e.target</code>, <code>e.currentTarget</code> <a href="https://javascript.info/bubbling-and-capturing#event-target">..</a></li>
-<li><code>e.eventPhase</code>: capturing=1, target=2, bubbling=3 <a href="https://javascript.info/bubbling-and-capturing#summary">..</a></li>
+<li>stop bubbling <a href="https://javascript.info/bubbling-and-capturing#stopping-bubbling">…</a></li>
+<li>tasks: <a href="https://javascript.info/event-delegation#hide-messages-with-delegation">Hide messages with delegation</a>, <a href="https://javascript.info/event-delegation#tree-menu">toogle tree menu</a>, <a href="https://javascript.info/event-delegation#sortable-table">Sortable table</a>, <a href="https://javascript.info/event-delegation#tooltip-behavior">Tooltip behavior</a></li>
 </ul>
-<h2 id="Custom-Event-Construct-amp-dispatch"><a href="#Custom-Event-Construct-amp-dispatch" class="headerlink" title="Custom Event Construct &amp; dispatch"></a>Custom Event Construct &amp; dispatch</h2><p>Script-gen events &amp; dispatch to elem <a href="https://javascript.info/dispatch-events#event-constructor">..</a> &amp; <a href="https://javascript.info/dispatch-events#custom-events">..</a></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> event = <span class="keyword">new</span> CustomEvent(type: str, <span class="attr">options</span>: &#123;<span class="attr">bubbles</span>: <span class="literal">false</span>, <span class="attr">cancelable</span>: <span class="literal">false</span>&#125;); </span><br><span class="line">elem.dispatchEvent(event, &#123;<span class="attr">detail</span>: obj); <span class="comment">// access by e.detail.xxx in event handler</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// diff user event &amp; script-gen event</span></span><br><span class="line">event.isTrusted <span class="comment">// true for user action, false for script-gen</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Event-handler"><a href="#Event-handler" class="headerlink" title="Event handler"></a>Event handler</h2><p><strong>Event handler</strong>: fn(eventObj) <a href="https://javascript.info/introduction-browser-events#event-handlers">..</a></p>
-<h3 id="Add-event-handler"><a href="#Add-event-handler" class="headerlink" title="Add event handler"></a>Add event handler</h3><p>3 ways to add event handler to elem: </p>
-<ol>
-<li><code>elem.addEventListener()</code><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">elem.add/removeEventListener(event, handler, [options])</span><br></pre></td></tr></table></figure></li>
-</ol>
+<p>script-gen event <a href="https://javascript.info/dispatch-events">..</a> </p>
 <ul>
-<li>work for custom event <a href="https://javascript.info/dispatch-events#bubbling-example">..</a></li>
-<li>allow mtp handlers (by mtp calls to <strong>elem.addEventListener</strong>)</li>
-<li>work for <strong>document.addEventListener(“DOMContentLoaded”, handler)</strong> &amp; <code>focusin</code>\ <code>focusout</code> event <a href="https://javascript.info/focus-blur#delegation-focusin-focusout">..</a></li>
-<li>support <strong>obj with method handleEvent(event)</strong> as handler <a href="https://javascript.info/introduction-browser-events#object-handlers-handleevent">..</a></li>
-<li><code>options</code>: {once/cature/passive: bool}</li>
+<li>construct <a href="https://javascript.info/dispatch-events#event-constructor">..</a> &amp; <a href="https://javascript.info/dispatch-events#mouseevent-keyboardevent-and-others">..</a>, dispatch <a href="https://javascript.info/dispatch-events#dispatchevent">..</a></li>
+<li>diff user event &amp; script-gen event: <code>e.isTrusted</code> <a href="https://javascript.info/dispatch-events#dispatchevent">..</a></li>
+<li>custom event &amp; <code>detail</code> prop <a href="https://javascript.info/dispatch-events#custom-events">..</a>, <a href="https://javascript.info/dispatch-events#summary">..</a></li>
 </ul>
-<ol start="2">
-<li>HTML attr <code>on&lt;event&gt;=&quot;fn-body&quot;</code> || DOM prop <code>elem.on&lt;event&gt;function() &#123; ... &#125;</code> <a href="https://javascript.info/introduction-browser-events#event-handlers">..</a>, e.g. onclick<ul>
-<li>only work for built-in events <a href="https://javascript.info/dispatch-events#bubbling-example">..</a></li>
-<li>can only assign 1 handler (overwrite if DOM prop &amp; HTML attr both set) <a href="https://javascript.info/introduction-browser-events#dom-property">..</a></li>
-<li><code>elem.setAttribute(&#39;on&lt;event&gt;&#39;, handler)</code> not work for event handler <a href="https://javascript.info/introduction-browser-events#possible-mistakes">..</a></li>
-<li><code>this</code> in handler = e.currentTarget <a href="https://javascript.info/introduction-browser-events#accessing-the-element-this">..</a> &amp; <a href="https://javascript.info/introduction-browser-events#event-object">..</a></li>
-<li>rm by <code>elem.on&lt;event&gt; = null</code> <a href="https://javascript.info/introduction-browser-events#dom-property">..</a></li>
+<p>Event Processing Queue: Asycnly &amp; Syncly <a href="https://javascript.info/dispatch-events#events-in-events-are-synchronous">..</a> </p>
+<h2 id="Event-handler-fn-e"><a href="#Event-handler-fn-e" class="headerlink" title="Event handler: fn(e)"></a>Event handler: fn(e)</h2><p>add/rm Event handler</p>
+<ul>
+<li><code>elem.addEventListener(e-type, handler, ..)</code> <a href="https://javascript.info/introduction-browser-events#addeventlistener">..</a><ul>
+<li>work for custom event <a href="https://javascript.info/dispatch-events#bubbling-example">..</a>; allow mtp handlers (call it mtp times)</li>
+<li>support <code>obj.handleEvent(e)</code> as handler <a href="https://javascript.info/introduction-browser-events#object-handlers-handleevent">..</a></li>
 </ul>
 </li>
-</ol>
-<p>Tasks: <a href="https://javascript.info/introduction-browser-events#move-the-ball-across-the-field">Move the ball across the field</a>, <a href="https://javascript.info/introduction-browser-events#create-a-sliding-menu">Create a sliding menu</a>, <a href="https://javascript.info/introduction-browser-events#add-a-closing-button">Add a closing button</a>, <a href="https://javascript.info/introduction-browser-events#carousel">Carousel</a></p>
-<h3 id="Prevent-default-actions"><a href="#Prevent-default-actions" class="headerlink" title="Prevent default actions"></a>Prevent default actions</h3><ul>
+<li>HTML attr <code>on&lt;event&gt;=&quot;fn-body&quot;</code> <a href="https://javascript.info/introduction-browser-events#possible-mistakes">..</a> || DOM prop <code>elem.on&lt;event&gt; = fn</code> <a href="https://javascript.info/introduction-browser-events#event-handlers">..</a>, e.g. onclick<ul>
+<li>built-in events <a href="https://javascript.info/dispatch-events#bubbling-example">..</a>, 1 handler <a href="https://javascript.info/introduction-browser-events#dom-property">..</a></li>
+</ul>
+</li>
+<li><code>this</code> in handler: e.currentTarget <a href="https://javascript.info/introduction-browser-events#accessing-the-element-this">..</a> &amp; <a href="https://javascript.info/introduction-browser-events#event-object">..</a></li>
+<li>note: <code>elem.setAttribute(&#39;on&lt;event&gt;&#39;, handler)</code> not work for event handler <a href="https://javascript.info/introduction-browser-events#possible-mistakes">..</a></li>
+<li>Tasks: <a href="https://javascript.info/introduction-browser-events#move-the-ball-across-the-field">Move the ball across the field</a>, <a href="https://javascript.info/introduction-browser-events#create-a-sliding-menu">Create a sliding menu</a>, <a href="https://javascript.info/introduction-browser-events#add-a-closing-button">Add a closing button</a>, <a href="https://javascript.info/introduction-browser-events#carousel">Carousel</a></li>
+</ul>
+<p>Prevent default actions: <code>e.preventDefault()</code> on handler || <code> on&lt;event&gt;</code> handler return false  <a href="https://javascript.info/default-browser-action#preventing-browser-actions">..</a></p>
+<ul>
+<li><code>e.preventDefault()</code> — <code>e.defaultPrevented</code>: true (means the event is handled somewhere) <a href="https://javascript.info/default-browser-action#event-defaultprevented">..</a> &amp; <code>elem.dispatchEvent(event)</code> return false <a href="https://javascript.info/dispatch-events#event-preventdefault">..</a></li>
+<li><code>passive: true</code> option of <code>addEventListener</code>: signals that the handler not to call preventDefault() <a href="https://javascript.info/default-browser-action#the-passive-handler-option">why needed?</a></li>
 <li>default browser action list <a href="https://javascript.info/default-browser-action#summary">..</a></li>
-<li>prevent by call <code>e.preventDefault()</code> on handler || <code> on&lt;event&gt;</code> handler return false (other return value ignored) <a href="https://javascript.info/default-browser-action#preventing-browser-actions">..</a><ul>
-<li>call <strong>e.preventDefault()</strong>  ==&gt; <strong>e.defaultPrevented</strong>: true (means the event is handled somewhere) <a href="https://javascript.info/default-browser-action#event-defaultprevented">..</a> &amp; elem.<strong>dispatchEvent(event)</strong> return false <a href="https://javascript.info/dispatch-events#event-preventdefault">..</a></li>
-<li><code>passive: true</code> option of <code>addEventListener</code>: signals the browser that the handler is not going to call preventDefault() <a href="https://javascript.info/default-browser-action#the-passive-handler-option">why needed?</a></li>
+<li>Tasks: <a href="https://javascript.info/default-browser-action#why-return-false-doesn-t-work">Why “return false” doesn’t work?</a>, <a href="https://javascript.info/default-browser-action#image-gallery">Image gallery</a></li>
 </ul>
-</li>
-<li>Tasks — <a href="https://javascript.info/default-browser-action#why-return-false-doesn-t-work">Why “return false” doesn’t work?</a>, <a href="https://javascript.info/default-browser-action#image-gallery">Image gallery</a></li>
-</ul>
-<h2 id="Event-Processing-Queue"><a href="#Event-Processing-Queue" class="headerlink" title="Event Processing Queue"></a>Event Processing Queue</h2><p>Asycnly &amp; Syncly <a href="https://javascript.info/dispatch-events#events-in-events-are-synchronous">..</a> </p>
 <h1 id="Mouse-Event"><a href="#Mouse-Event" class="headerlink" title="Mouse Event"></a>Mouse Event</h1><ul>
-<li>simple &amp; complext events <a href="https://javascript.info/mouse-events-basics#mouse-event-types">..</a> &amp; events order, e.g. click: mousedown =&gt; mouseup =&gt; click <a href="https://javascript.info/mouse-events-basics#events-order">..</a></li>
-<li>mouse coords: <code>e.clientX/Y, e.pageX/Y</code> <a href="https://javascript.info/mouse-events-basics#coordinates-clientx-y-pagex-y">..</a></li>
-<li>mouse btn &amp; <code>e.button</code> (=0 left-btn, =1 middle, =2 right-btn)<ul>
-<li>deprecated <code>e.which</code> <a href="https://javascript.info/mouse-events-basics#mouse-button">..</a></li>
+<li>events list <a href="https://javascript.info/mouse-events-basics#mouse-event-types">..</a></li>
+<li>mouse coords: <code>e.clientX/Y, e.pageX/Y</code> <a href="https://javascript.info/mouse-events-basics#coordinates-clientx-y-pagex-y">..</a>, mouse btn: <code>e.button</code> (=0 left-btn, =1 middle, =2 right-btn) <a href="https://javascript.info/mouse-events-basics#mouse-button">..</a></li>
+<li>mouse event also inc info of modifier keys: <code>e.shiftKey/altKey/ctrlKey/metaKey</code>(Mac): bool (true if pressed) <a href="https://javascript.info/mouse-events-basics#modifiers-shift-alt-ctrl-and-meta">..</a></li>
+<li>disable selection (on dblclick) &amp; copy: <code>onmousedown/oncopy return false</code> <a href="https://javascript.info/mouse-events-basics#preventing-selection-on-mousedown">..</a></li>
 </ul>
-</li>
-<li>mouse event also inc info of modifier keys: <code>e.shiftKey/altKey/ctrlKey/metaKey</code>(Mac): bool (true if pressed) <a href="https://javascript.info/mouse-events-basics#modifiers-shift-alt-ctrl-and-meta">..</a><ul>
-<li>Ctrl in Windows vs Cmd (metaKey) in MacOS — left-click + ctrl = right-click on MacOS</li>
-</ul>
-</li>
-<li>disable selection (on dblclick) &amp; copy: <code>onmousedown/oncopy=&quot;return false</code> <a href="https://javascript.info/mouse-events-basics#disabling-selection">..</a></li>
-</ul>
-<h2 id="Mouse-Move-Event"><a href="#Mouse-Move-Event" class="headerlink" title="Mouse Move Event"></a>Mouse Move Event</h2><p><code>mousemove</code> <a href="https://javascript.info/mouse-events-basics#coordinates-clientx-y-pagex-y">..</a>:</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">onmousemove</span>=<span class="string">&quot;this.value=event.clientX+&#x27;:&#x27;+event.clientY&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Mouse over me&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><code>mouseover/mouseout</code> event &amp; <code>e.relatedTarget</code> <a href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#events-mouseover-mouseout-relatedtarget">..</a></p>
+<h2 id="Mouse-Move-Event"><a href="#Mouse-Move-Event" class="headerlink" title="Mouse Move Event"></a>Mouse Move Event</h2><p><code>mousemove</code> <a href="https://javascript.info/mouse-events-basics#coordinates-clientx-y-pagex-y">..</a>, <code>mouseover/out</code> event &amp; <code>e.relatedTarget</code> (diff with <code>mouseenter/leave</code>) <a href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#summary">..</a></p>
 <ul>
-<li>may skip elems in-btw if move fast <a href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#skipping-elements">..</a> &amp; <strong>e.relatedTarget</strong> can be null if from outside of window</li>
-<li>If <strong>mouseover</strong> triggered, there must be <strong>mouseout</strong></li>
-<li>vs <code>mouseenter/mouseleave</code> <a href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#events-mouseenter-and-mouseleave">..</a><ul>
-<li>event bubble — event delegation <a href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#event-delegation">..</a></li>
-<li><strong>mouseout</strong> trigger on elem when mouse move from elem to descendants (mouse only over a single elem at a time: most nested /top one) <a href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#mouseout-when-leaving-for-a-child">..</a></li>
-</ul>
-</li>
-<li>task — <a href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#smart-tooltip">“Smart” tooltip</a> (tooltip style)</li>
+<li>event delegation example <a href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#event-delegation">..</a></li>
+<li>task: <a href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#smart-tooltip">“Smart” tooltip</a> (tooltip style)</li>
 </ul>
 <h2 id="Drag’n’Drop-Event"><a href="#Drag’n’Drop-Event" class="headerlink" title="Drag’n’Drop Event"></a>Drag’n’Drop Event</h2><ul>
-<li>native event (e.g. <strong>dragstart, dragend</strong>) limitation <a href="https://javascript.info/mouse-drag-and-drop">..</a></li>
-<li>implement Drag’n’Drop by mouse events: <code>mousedown</code> =&gt; <code>mousemove</code> =&gt; <code>mouseup</code> <a href="https://javascript.info/mouse-drag-and-drop#drag-n-drop-algorithm">..</a> &amp; <a href="https://javascript.info/mouse-drag-and-drop#correct-positioning">..</a></li>
-<li>highlight droppable elem <a href="https://javascript.info/mouse-drag-and-drop#potential-drop-targets-droppables">..</a><ul>
-<li>draggable elem always above other elem when dragging &amp; mouse event only happen on the top elem, so eh on other elem not work, can fix by<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">draggble.hidden = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">let</span> elemBelow = <span class="built_in">document</span>.elementFromPoint(event.clientX, event.clientY);</span><br><span class="line">draggble.hidden = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure></li>
+<li>impl by mouse events: overall algorithm <a href="https://javascript.info/mouse-drag-and-drop#drag-n-drop-algorithm">..</a>, pointer correct positioning <a href="https://javascript.info/mouse-drag-and-drop#correct-positioning">..</a>, drappable elem hightlight <a href="https://javascript.info/mouse-drag-and-drop#potential-drop-targets-droppables">..</a><ul>
+<li>draggable elem always above other elem when dragging &amp; mouse event only happen on the top elem, so eh on other elem not work, can fix by<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">draggble.hidden = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">let</span> elemBelow = <span class="built_in">document</span>.elementFromPoint(e.clientX, event.clientY);</span><br><span class="line">draggble.hidden = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
-<li>task — <a href="https://javascript.info/mouse-drag-and-drop#slider">Slider</a>, <a href="https://javascript.info/mouse-drag-and-drop#drag-superheroes-around-the-field">Drag superheroes around the field</a> (not checked yet)</li>
+<li>task: <a href="https://javascript.info/mouse-drag-and-drop#slider">Slider</a>, <a href="https://javascript.info/mouse-drag-and-drop#drag-superheroes-around-the-field">Drag superheroes around the field</a> (not checked yet)</li>
 </ul>
 <h2 id="Scroll-Event"><a href="#Scroll-Event" class="headerlink" title="Scroll Event"></a>Scroll Event</h2><ul>
-<li><p><code>scroll</code> event on elem &amp; window <a href="https://javascript.info/onscroll">..</a></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&#x27;scroll&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">&#x27;showScroll&#x27;</span>).innerHTML = <span class="built_in">window</span>.pageYOffset + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>task — <a href="https://javascript.info/onscroll#endless-page">Endless page</a>, <a href="https://javascript.info/onscroll#up-down-button">Up/down button</a>, <a href="https://javascript.info/onscroll#load-visible-images">Load visible images</a></p>
-</li>
+<li><code>scroll</code> event on elem &amp; win <a href="https://javascript.info/onscroll">..</a></li>
+<li>task: <a href="https://javascript.info/onscroll#endless-page">Endless page</a>, <a href="https://javascript.info/onscroll#up-down-button">Up/down button</a>, <a href="https://javascript.info/onscroll#load-visible-images">Load visible images</a></li>
 </ul>
 <h1 id="Keyboard-Event"><a href="#Keyboard-Event" class="headerlink" title="Keyboard Event"></a>Keyboard Event</h1><p><code>keydown</code>, <code>keyup</code> <a href="https://javascript.info/keyboard-events#keydown-and-keyup">..</a></p>
 <ul>
 <li><code>e.code</code> (physical key loc, e.g “KeyZ”, “ShiftLeft”) vs <code>event.key</code> (meaning of key, ie. char inputted, e.g. “z” || “Z”) <a href="https://javascript.info/keyboard-events#event-code-and-event-key">..</a></li>
-<li><code>e.repeat</code>= true when many “keydown” (key pressed for a long enough time) &amp; single “keyup”</li>
-<li>prevent default action by <code>onkeydown=&#39;return false;&#39;</code> <a href="https://javascript.info/keyboard-events#default-actions">..</a></li>
-<li><a href="https://javascript.info/keyboard-events#legacy">the old “keypress”, “keyCode”, “charCode”, “which”</a></li>
-<li>task — <a href="https://javascript.info/keyboard-events#extended-hotkeys">Extended hotkeys</a></li>
+<li>key repeat: key pressed for a long enough time <a href="https://javascript.info/keyboard-events#auto-repeat">..</a></li>
+<li>task: <a href="https://javascript.info/keyboard-events#extended-hotkeys">Extended hotkeys</a></li>
 </ul>
 <h1 id="Form-Ctrl"><a href="#Form-Ctrl" class="headerlink" title="Form Ctrl"></a>Form Ctrl</h1><ul>
-<li>named collection: <code>document.forms.formName</code> &amp; <code>form/fieldset.elements.ctrlElemName</code> (fieldset as subform) <a href="https://javascript.info/form-elements#navigation-form-and-elements">..</a></li>
+<li>named collection: <code>document.forms</code> &amp; <code>form/fieldset.elements</code> (fieldset as subform) <a href="https://javascript.info/form-elements#navigation-form-and-elements">..</a></li>
+<li>back-ref: <code>elem.form</code> <a href="https://javascript.info/form-elements#backreference-element-form">..</a></li>
+<li>Form elements: input/textarea, select and option <a href="https://javascript.info/form-elements#form-elements">..</a></li>
 </ul>
-<h2 id="Form-elem-props"><a href="#Form-elem-props" class="headerlink" title="Form elem props"></a>Form elem props</h2><p><code>form.elements[index/name]</code> &amp; <code>elem.form</code> <a href="https://javascript.info/form-elements#backreference-element-form">..</a></p>
-<p><strong>input &amp; textarea</strong> <a href="https://javascript.info/form-elements#input-and-textarea">..</a></p>
+<h2 id="Focusing-Event"><a href="#Focusing-Event" class="headerlink" title="Focusing Event"></a>Focusing Event</h2><p><code>focus</code> / <code>blur</code> event <a href="https://javascript.info/focus-blur#events-focus-blur">..</a> &amp; <code>elem.focus/blur()</code> <a href="https://javascript.info/focus-blur#methods-focus-blur">..</a></p>
 <ul>
-<li><code>input/textarea.value</code>: str, <code>input.checked</code>: bool (for checkboxes and radio btns)</li>
+<li>event not bubble (but capturable) — bubble version <code>focusin</code> / <code>focusout</code> event (handler assign by <code>elem.addEventListener</code>)</li>
 </ul>
-<p><strong>select &amp; option</strong> <a href="https://javascript.info/form-elements#select-and-option">..</a></p>
+<p>Others</p>
 <ul>
-<li><code>select.options</code>: option collection &amp; <code>select.value/selectedIndex</code>: <code>selectedOption.value/index</code></li>
-<li><code>option.selected</code>: bool, <code>option.value\text</code>, <code>option.index</code></li>
-<li>new Option(…) <a href="https://javascript.info/form-elements#new-option">..</a><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 3 ways to set select value</span></span><br><span class="line">select.options[<span class="number">2</span>].selected = <span class="literal">true</span>;</span><br><span class="line">select.selectedIndex = <span class="number">2</span>;</span><br><span class="line">select.value = <span class="string">&#x27;banana&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// get all selected values from &lt;select multiple&gt;</span></span><br><span class="line"><span class="keyword">let</span> selected = <span class="built_in">Array</span>.from(select.options)</span><br><span class="line">  .filter(<span class="function"><span class="params">option</span> =&gt;</span> option.selected)</span><br><span class="line">  .map(<span class="function"><span class="params">option</span> =&gt;</span> option.value);</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>get current focused elem: <code>document.activeElement</code> <a href="https://javascript.info/focus-blur#summary">..</a> — css <code>:focus</code> <a href="https://javascript.info/focus-blur#allow-focusing-on-any-element-tabindex">..</a></li>
+<li><code>autofocus</code> attr <a href="https://javascript.info/focus-blur">..</a></li>
+<li>enable any elem focusable: <code>tabindex</code> attr || <code>elem.tabindex</code> <a href="https://javascript.info/focus-blur#allow-focusing-on-any-element-tabindex">..</a></li>
+<li>input validate attr: <code>required</code>, <code>pattern</code> <a href="https://javascript.info/focus-blur#events-focus-blur">…</a></li>
 </ul>
-<h2 id="Focusing-Event"><a href="#Focusing-Event" class="headerlink" title="Focusing Event"></a>Focusing Event</h2><ul>
-<li><code>focus</code> / <code>blur</code> event <a href="https://javascript.info/focus-blur#events-focus-blur">..</a> &amp; <code>elem.focus/blur()</code> <a href="https://javascript.info/focus-blur#methods-focus-blur">..</a><ul>
-<li>event not bubble (but capturable) ==&gt; <strong>focusin</strong> / <strong>focusout</strong> event (handler assign by <strong>elem.addEventListener</strong>)</li>
-<li><code>autofocus</code> attr [..] (<a href="https://javascript.info/focus-blur">https://javascript.info/focus-blur</a>) &amp; <code>:focus</code> in css <a href="https://javascript.info/focus-blur#allow-focusing-on-any-element-tabindex">..</a></li>
-<li>input validate attr: <code>required</code>, <code>pattern</code> <a href="https://javascript.info/focus-blur#events-focus-blur">..</a></li>
-</ul>
-</li>
-<li>enable any elem focusable by <code>tabindex*</code> attr || elem.<strong>tabindex</strong> (0, -1, …) &amp; switch order <a href="https://javascript.info/focus-blur#allow-focusing-on-any-element-tabindex">..</a></li>
-<li>get focused elem: <code>document.activeElement</code> <a href="https://javascript.info/focus-blur#summary">..</a></li>
-<li>task — <a href="https://javascript.info/focus-blur#editable-div">Editable div</a>, <a href="https://javascript.info/focus-blur#edit-td-on-click">Edit TD on click</a>, <a href="https://javascript.info/focus-blur#keyboard-driven-mouse">Keyboard-driven mouse</a></li>
-</ul>
+<p>task: <a href="https://javascript.info/focus-blur#editable-div">Editable div</a>, <a href="https://javascript.info/focus-blur#edit-td-on-click">Edit TD on click</a>, <a href="https://javascript.info/focus-blur#keyboard-driven-mouse">Keyboard-driven mouse</a></p>
 <h2 id="Data-update-events"><a href="#Data-update-events" class="headerlink" title="Data update events"></a>Data update events</h2><ul>
-<li><code>input</code> event: on any value change <a href="https://javascript.info/events-change-input#event-input">..</a></li>
 <li><code>change</code> event: on finish change, e.g. text-input elem blur, select-opt changes <a href="https://javascript.info/events-change-input#event-change">..</a></li>
+<li><code>input</code> event: on any value change <a href="https://javascript.info/events-change-input#event-input">..</a></li>
 <li><code>cut/copy/paste</code> event <a href="https://javascript.info/events-change-input#events-cut-copy-paste">..</a></li>
 </ul>
-<h2 id="Form-submit-event"><a href="#Form-submit-event" class="headerlink" title="Form submit event"></a>Form submit event</h2><ul>
-<li><code>submit</code> event on form (sent data to server): <ul>
+<h2 id="Form-submit-event"><a href="#Form-submit-event" class="headerlink" title="Form submit event"></a>Form submit event</h2><p><code>submit</code> event on form (sent data to server): </p>
+<ul>
 <li>trigger on press “Enter” on input field =&gt; trigger <strong>click</strong> on input[type=submit] <a href="https://javascript.info/forms-submit#event-submit">..</a></li>
-<li>form.<strong>submit()</strong>: submit form manually (<code>submit</code> event not generated, i.e. submit handler not run)</li>
-<li>tasks — <a href="https://javascript.info/forms-submit#modal-form">Modal form</a></li>
+<li>submit form manually: <code>form.submit()</code>:  (<code>submit</code> event not generated)</li>
+<li>tasks: <a href="https://javascript.info/forms-submit#modal-form">Modal form</a></li>
+</ul>
+<h1 id="Doc-amp-resrc-loading"><a href="#Doc-amp-resrc-loading" class="headerlink" title="Doc &amp; resrc loading"></a>Doc &amp; resrc loading</h1><h2 id="Page-load-events"><a href="#Page-load-events" class="headerlink" title="Page load events"></a>Page load events</h2><ul>
+<li><code>document.DOMContentLoaded</code>: HTML &amp; DOM tree ready, form autofill <a href="https://javascript.info/onload-ondomcontentloaded#built-in-browser-autofill">..</a><ul>
+<li>see <code>&lt;img&gt;</code> node but size = 0</li>
+<li><strong>wait non-async script</strong> exe <a href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded-and-scripts">..</a>, but <strong>not wait external-CSS</strong> (unless script require it) <a href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded-and-styles">..</a></li>
+<li>handle by <code>addEventListener()</code> <a href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded">..</a></li>
 </ul>
 </li>
+<li><code>window.load</code>: external resrc (css, img) loaded (img size known) <a href="https://javascript.info/onload-ondomcontentloaded#window-onload">..</a></li>
+<li><code>window.beforeunload/unload</code>: user leaving this page …</li>
 </ul>
-<h1 id="Doc-amp-resrc-loading"><a href="#Doc-amp-resrc-loading" class="headerlink" title="Doc &amp; resrc loading"></a>Doc &amp; resrc loading</h1><h2 id="Page-load-events"><a href="#Page-load-events" class="headerlink" title="Page load events"></a>Page load events</h2><p><code>DOMContentLoaded</code> event: HTML &amp; DOM tree ready (no external resrc) =&gt; DOM nodes ready</p>
+<p>Others</p>
 <ul>
-<li><strong>wait non-async script</strong> execution bf continuing building the DOM <a href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded-and-scripts">..</a></li>
-<li><strong>not wait external-CSS</strong> unless script require it <a href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded-and-styles">..</a></li>
-<li>form-autofill on <code>DOMContentLoaded</code> <a href="https://javascript.info/onload-ondomcontentloaded#built-in-browser-autofill">..</a></li>
-<li>handle by <code>document.addEventListener</code> <a href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded">..</a></li>
+<li><code>document.readState</code>: “loading”, “interactive” , “complete” — the old <strong>document.readystatechange</strong> <a href="https://javascript.info/onload-ondomcontentloaded#readystate">..</a></li>
+<li>Whole process <a href="https://javascript.info/onload-ondomcontentloaded#readystate">…</a></li>
 </ul>
-<p><code>window.onload</code> event: HTML &amp; DOM tree ready + external resrc loaded ==&gt; CSS applied, image sizes known  <a href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded">..</a> &amp; <a href="https://javascript.info/onload-ondomcontentloaded#window-onload">..</a></p>
-<p><code>window.onunload</code> <a href="https://javascript.info/onload-ondomcontentloaded#window-onunload">..</a> &amp; <code>onbeforeunload</code> <a href="https://javascript.info/onload-ondomcontentloaded#window.onbeforeunload">..</a></p>
-<p><code>document.readState</code> = “loading”, “interactive” , “complete” &amp; the old <strong>document.readystatechange</strong> <a href="https://javascript.info/onload-ondomcontentloaded#readystate">..</a></p>
-<p><strong>Whole process</strong> <a href="https://javascript.info/onload-ondomcontentloaded#readystate">..</a></p>
+<h2 id="Script-attr-async-defer"><a href="#Script-attr-async-defer" class="headerlink" title="Script attr: async, defer"></a>Script attr: async, defer</h2><p>Both load not-block (load script in bg)</p>
 <ul>
-<li>readState: loading &amp; readState: interactive</li>
-<li>DOMContentLoaded</li>
-<li>ex-resrc onload &amp; readyState:complete</li>
-<li>window onload </li>
+<li><code>async</code>: run in load-1st order <a href="https://javascript.info/script-async-defer#async">..</a><ul>
+<li>Dynamic scripts (gen by JS) load af insert to the doc &amp; run in in load-1st order  <a href="https://javascript.info/script-async-defer#dynamic-scripts">..</a>    </li>
 </ul>
-<h2 id="Script-attr-async-defer"><a href="#Script-attr-async-defer" class="headerlink" title="Script attr: async, defer"></a>Script attr: async, defer</h2><p>Both load not block page rendering (load script in bg)</p>
-<ul>
-<li><code>defer</code>: run when DOM ready but bf DOMContentLoaded event<ul>
+</li>
+<li><code>defer</code>: run when DOM ready (but bf DOMContentLoaded event) <a href="https://javascript.info/script-async-defer#defer">..</a><ul>
 <li>only for external script, run on doc order</li>
 </ul>
 </li>
-<li><code>async</code>: run in load-1st order (load 1st, run 1st, not wait for each other)<ul>
-<li><strong>dynamicScript.async = true</strong> by default</li>
-<li>Dynamic scripts (&amp; other resrc) load af insert to the doc <a href="https://javascript.info/onload-onerror#other-resources">..</a></li>
 </ul>
-</li>
-</ul>
-<h2 id="Resrc-loading-event"><a href="#Resrc-loading-event" class="headerlink" title="Resrc loading event"></a>Resrc loading event</h2><p><code>load</code>, <code>error</code> — track <strong>loading process</strong> of resrc with <strong>src</strong> attr, e.g. script, img, css <a href="https://javascript.info/onload-onerror">..</a></p>
+<h2 id="Resrc-loading-event"><a href="#Resrc-loading-event" class="headerlink" title="Resrc loading event"></a>Resrc loading event</h2><p>Most resrcs start loading when added to the doc, except <code>&lt;img&gt;</code> (load when gets src &amp; cached <a href="https://javascript.info/onload-onerror#load-images-with-a-callback">..</a>)</p>
 <ul>
-<li><code>onload</code> — trigger af script loaded successfully &amp; executed</li>
-<li><code>onerror</code> — trigger when error occurs during loading</li>
-</ul>
-<p>Most resources start loading when added to the doc</p>
-<ul>
-<li>img start loading when gets src <a href="https://javascript.info/onload-onerror#other-resources">..</a> &amp; catched <a href="https://javascript.info/onload-onerror#load-images-with-a-callback">..</a> </li>
+<li><code>load/error</code> events: external resrc (tag with <code>src</code> attr <a href="https://javascript.info/onload-onerror#other-resources">..</a>, e.g. script, img, css) loaded successfully / err  <a href="https://javascript.info/onload-onerror">..</a></li>
 <li>iframe.onload: on loading finished ( successful || error) (history) <a href="https://javascript.info/onload-onerror#other-resources">..</a></li>
 <li>track other errors: <code>window.onerror</code> <a href="https://javascript.info/onload-onerror#script-onerror">..</a></li>
-<li><a href="CORS">cross-origin policy</a> &amp; script.crossorigin attr (commu with remove server) <a href="https://javascript.info/onload-onerror#crossorigin-policy">..</a></li>
-</ul>
-<h1 id="Others-1"><a href="#Others-1" class="headerlink" title="Others"></a>Others</h1><h2 id="Range-amp-Selection"><a href="#Range-amp-Selection" class="headerlink" title="Range &amp; Selection"></a>Range &amp; Selection</h2><p>range <a href="https://javascript.info/selection-range#range">..</a> &amp; props &amp; methods …</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> range = <span class="keyword">new</span> Range();</span><br><span class="line">range.setStart/End(node, <span class="attr">offset</span>: num); <span class="comment">// offset: child index, offset=0 means 1st child</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// apply the selection</span></span><br><span class="line"><span class="built_in">document</span>/<span class="built_in">window</span>.getSelection().addRange(range)/removeAllRanges();</span><br></pre></td></tr></table></figure>
-
-<p>selection <a href="https://javascript.info/selection-range#selection">..</a></p>
-<ul>
-<li>get by <strong>window/document.getSelection()</strong> — singloten???</li>
-<li>all browsers (except Firefox), a Selection contains maximum 1 range</li>
-<li>props, methods &amp; events …</li>
-<li>selection in form ctrls …</li>
-<li>Making unselectable <a href="https://javascript.info/selection-range#making-unselectable">..</a></li>
-</ul>
-<h2 id="Mutation-observer"><a href="#Mutation-observer" class="headerlink" title="Mutation observer"></a>Mutation observer</h2><p>A built-in obj that observes a DOM node &amp; fire callback in case of changes: childList &amp; subtree, attributes, data</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> observer = <span class="keyword">new</span> MutationObserver(callback); </span><br><span class="line"><span class="comment">// callback: fn(mutationRecords: [...MutationRecord-objs], observer: the observer itself)	</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// attach to DOM node </span></span><br><span class="line">observer.observe(node, <span class="attr">config</span>: &#123;bool-options&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// stop observing</span></span><br><span class="line">observer.disconnect();</span><br><span class="line"></span><br><span class="line"><span class="comment">// handle unprocessed mutations when stopping observing</span></span><br><span class="line"><span class="keyword">let</span> mutationRecords = observer.takeRecords();</span><br></pre></td></tr></table></figure>
-
-<p><strong>Usages</strong> <a href="https://javascript.info/mutation-observer#usage-for-integration">..</a><br><strong>observer &amp; GC</strong> — node observed doesn’t prevent GC(weak ref)</p>
-<h2 id="Chrome-console-amp-Debugging-in-Chrome"><a href="#Chrome-console-amp-Debugging-in-Chrome" class="headerlink" title="Chrome console &amp; Debugging in Chrome"></a>Chrome console &amp; Debugging in Chrome</h2><p>Chrome console <a href="https://javascript.info/devtools#google-chrome">..</a></p>
-<ul>
-<li><strong>breakpoints</strong> &amp; <code>debugger</code> cmd</li>
-<li>execution tracking…</li>
-<li>logging with <code>console.log(...)</code></li>
-<li>ref: <a href="https://javascript.info/debugging-chrome">https://javascript.info/debugging-chrome</a></li>
+<li>CORS &amp; script <code>crossorigin</code> attr <a href="https://javascript.info/onload-onerror#crossorigin-policy">…</a></li>
 </ul>
 ]]></content>
       <categories>

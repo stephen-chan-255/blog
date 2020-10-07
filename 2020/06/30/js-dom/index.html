@@ -22,15 +22,15 @@
     var CONFIG = {"hostname":"stephen-chan255.github.io","root":"/blog/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="JS intro init to make webpages alive run on platform with JS engine (e.g. browser JS VM V8) in Chrome &amp; Opera) &#x3D;&#x3D;&gt; host env JS in HTML: &lt;script&gt;...&lt;&#x2F;script&gt; &amp; &lt;script src&#x3D;...">
+  <meta name="description" content="JS intro init to make webpages alive .., run on platforms with JS engine (in browser aka “JS VM”,  e.g. “V8” in Chrome &amp; Opera) .. browser env: window (root obj) &#x3D;&gt; JS &#x2F; DOM &#x2F; BOM .. BOM: navig">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript &amp; DOM">
 <meta property="og:url" content="https://stephen-chan255.github.io/blog/2020/06/30/js-dom/index.html">
 <meta property="og:site_name" content="Stephen&#39;s notes">
-<meta property="og:description" content="JS intro init to make webpages alive run on platform with JS engine (e.g. browser JS VM V8) in Chrome &amp; Opera) &#x3D;&#x3D;&gt; host env JS in HTML: &lt;script&gt;...&lt;&#x2F;script&gt; &amp; &lt;script src&#x3D;...">
+<meta property="og:description" content="JS intro init to make webpages alive .., run on platforms with JS engine (in browser aka “JS VM”,  e.g. “V8” in Chrome &amp; Opera) .. browser env: window (root obj) &#x3D;&gt; JS &#x2F; DOM &#x2F; BOM .. BOM: navig">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-06-30T08:34:11.000Z">
-<meta property="article:modified_time" content="2020-09-04T10:22:18.026Z">
+<meta property="article:modified_time" content="2020-10-07T09:23:12.465Z">
 <meta property="article:author" content="Stephen Chan">
 <meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JS-intro"><span class="nav-number">1.</span> <span class="nav-text">JS intro</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Browser-env"><span class="nav-number">2.</span> <span class="nav-text">Browser env</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM-tree"><span class="nav-number">3.</span> <span class="nav-text">DOM tree</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM-class-hierarchy"><span class="nav-number">4.</span> <span class="nav-text">DOM class hierarchy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Attr-amp-Prop"><span class="nav-number">5.</span> <span class="nav-text">Attr &amp; Prop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM-modification"><span class="nav-number">6.</span> <span class="nav-text">DOM modification</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-creation"><span class="nav-number">6.1.</span> <span class="nav-text">Node creation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-Select"><span class="nav-number">6.2.</span> <span class="nav-text">Node Select</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-modification"><span class="nav-number">6.3.</span> <span class="nav-text">Node modification</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Content"><span class="nav-number">6.3.1.</span> <span class="nav-text">Content</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Style"><span class="nav-number">6.3.2.</span> <span class="nav-text">Style</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Size-coords-amp-scroll"><span class="nav-number">6.3.3.</span> <span class="nav-text">Size, coords &amp; scroll</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Geometry-props"><span class="nav-number">6.3.3.1.</span> <span class="nav-text">Geometry props</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Scroll-props"><span class="nav-number">6.3.3.2.</span> <span class="nav-text">Scroll props</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Others"><span class="nav-number">6.3.3.3.</span> <span class="nav-text">Others</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-insert-move-amp-remove"><span class="nav-number">6.4.</span> <span class="nav-text">Node insert, move &amp; remove</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UI-Event-handle"><span class="nav-number">7.</span> <span class="nav-text">UI Event handle</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UI-Event"><span class="nav-number">7.1.</span> <span class="nav-text">UI Event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Custom-Event-Construct-amp-dispatch"><span class="nav-number">7.2.</span> <span class="nav-text">Custom Event Construct &amp; dispatch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-handler"><span class="nav-number">7.3.</span> <span class="nav-text">Event handler</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-event-handler"><span class="nav-number">7.3.1.</span> <span class="nav-text">Add event handler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prevent-default-actions"><span class="nav-number">7.3.2.</span> <span class="nav-text">Prevent default actions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-Processing-Queue"><span class="nav-number">7.4.</span> <span class="nav-text">Event Processing Queue</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mouse-Event"><span class="nav-number">8.</span> <span class="nav-text">Mouse Event</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mouse-Move-Event"><span class="nav-number">8.1.</span> <span class="nav-text">Mouse Move Event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Drag%E2%80%99n%E2%80%99Drop-Event"><span class="nav-number">8.2.</span> <span class="nav-text">Drag’n’Drop Event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scroll-Event"><span class="nav-number">8.3.</span> <span class="nav-text">Scroll Event</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keyboard-Event"><span class="nav-number">9.</span> <span class="nav-text">Keyboard Event</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Form-Ctrl"><span class="nav-number">10.</span> <span class="nav-text">Form Ctrl</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Form-elem-props"><span class="nav-number">10.1.</span> <span class="nav-text">Form elem props</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Focusing-Event"><span class="nav-number">10.2.</span> <span class="nav-text">Focusing Event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-update-events"><span class="nav-number">10.3.</span> <span class="nav-text">Data update events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Form-submit-event"><span class="nav-number">10.4.</span> <span class="nav-text">Form submit event</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Doc-amp-resrc-loading"><span class="nav-number">11.</span> <span class="nav-text">Doc &amp; resrc loading</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Page-load-events"><span class="nav-number">11.1.</span> <span class="nav-text">Page load events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Script-attr-async-defer"><span class="nav-number">11.2.</span> <span class="nav-text">Script attr: async, defer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Resrc-loading-event"><span class="nav-number">11.3.</span> <span class="nav-text">Resrc loading event</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Others-1"><span class="nav-number">12.</span> <span class="nav-text">Others</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Range-amp-Selection"><span class="nav-number">12.1.</span> <span class="nav-text">Range &amp; Selection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mutation-observer"><span class="nav-number">12.2.</span> <span class="nav-text">Mutation observer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome-console-amp-Debugging-in-Chrome"><span class="nav-number">12.3.</span> <span class="nav-text">Chrome console &amp; Debugging in Chrome</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JS-intro"><span class="nav-number">1.</span> <span class="nav-text">JS intro</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM-tree"><span class="nav-number">2.</span> <span class="nav-text">DOM tree</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML-Attr-amp-JS-Prop"><span class="nav-number">3.</span> <span class="nav-text">HTML Attr &amp; JS Prop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM-modification"><span class="nav-number">4.</span> <span class="nav-text">DOM modification</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-modification"><span class="nav-number">4.1.</span> <span class="nav-text">Node modification</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Content"><span class="nav-number">4.1.1.</span> <span class="nav-text">Content</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Style"><span class="nav-number">4.1.2.</span> <span class="nav-text">Style</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Size-coords-amp-scroll"><span class="nav-number">4.1.3.</span> <span class="nav-text">Size, coords &amp; scroll</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-insert-move-amp-rm"><span class="nav-number">4.2.</span> <span class="nav-text">Node insert, move &amp; rm</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Event-handling"><span class="nav-number">5.</span> <span class="nav-text">Event handling</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Event"><span class="nav-number">5.1.</span> <span class="nav-text">Event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-handler-fn-e"><span class="nav-number">5.2.</span> <span class="nav-text">Event handler: fn(e)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mouse-Event"><span class="nav-number">6.</span> <span class="nav-text">Mouse Event</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mouse-Move-Event"><span class="nav-number">6.1.</span> <span class="nav-text">Mouse Move Event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Drag%E2%80%99n%E2%80%99Drop-Event"><span class="nav-number">6.2.</span> <span class="nav-text">Drag’n’Drop Event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scroll-Event"><span class="nav-number">6.3.</span> <span class="nav-text">Scroll Event</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keyboard-Event"><span class="nav-number">7.</span> <span class="nav-text">Keyboard Event</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Form-Ctrl"><span class="nav-number">8.</span> <span class="nav-text">Form Ctrl</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Focusing-Event"><span class="nav-number">8.1.</span> <span class="nav-text">Focusing Event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-update-events"><span class="nav-number">8.2.</span> <span class="nav-text">Data update events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Form-submit-event"><span class="nav-number">8.3.</span> <span class="nav-text">Form submit event</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Doc-amp-resrc-loading"><span class="nav-number">9.</span> <span class="nav-text">Doc &amp; resrc loading</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Page-load-events"><span class="nav-number">9.1.</span> <span class="nav-text">Page load events</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Script-attr-async-defer"><span class="nav-number">9.2.</span> <span class="nav-text">Script attr: async, defer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Resrc-loading-event"><span class="nav-number">9.3.</span> <span class="nav-text">Resrc loading event</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -350,7 +350,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-04 18:22:18" itemprop="dateModified" datetime="2020-09-04T18:22:18+08:00">2020-09-04</time>
+        <time title="Modified: 2020-10-07 17:23:12" itemprop="dateModified" datetime="2020-10-07T17:23:12+08:00">2020-10-07</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -381,375 +381,244 @@
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="JS-intro"><a href="#JS-intro" class="headerlink" title="JS intro"></a>JS intro</h1><ul>
-<li>init to <strong>make webpages alive</strong></li>
-<li>run on platform with <a target="_blank" rel="noopener" href="https://javascript.info/intro#what-is-javascript">JS engine</a> (e.g. browser JS VM <a target="_blank" rel="noopener" href="https://mrale.ph/">V8</a>) in Chrome &amp; Opera) ==&gt; <a target="_blank" rel="noopener" href="https://javascript.info/browser-environment">host env</a></li>
-<li>JS in HTML: <code>&lt;script&gt;...&lt;/script&gt;</code> &amp; <code>&lt;script src=...&gt;&lt;/script&gt;</code> <a target="_blank" rel="noopener" href="https://javascript.info/hello-world">..</a> <ul>
-<li><strong>type=”text/javascript” language=”javascript”</strong> attr no need anymore</li>
-<li>inline content ignored if <code>src</code> set</li>
-<li>browser cache external script for reuse ==&gt; make complex scripts external</li>
+<li>init to <strong>make webpages alive</strong> <a target="_blank" rel="noopener" href="https://javascript.info/intro">..</a>, run on platforms with <strong>JS engine</strong> (in browser aka “JS VM”,  e.g. “V8” in Chrome &amp; Opera) <a target="_blank" rel="noopener" href="https://javascript.info/intro#what-is-javascript">..</a><ul>
+<li>browser env: <code>window</code> (root obj) =&gt; JS / DOM / BOM <a target="_blank" rel="noopener" href="https://javascript.info/browser-environment">..</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/browser-environment#bom-browser-object-model">BOM</a>: <code>navigator</code> obj, <code>location.href</code>, model win fn: <code>alert()</code>, <code>prompt()</code>, <code>confirm()</code> <a target="_blank" rel="noopener" href="https://javascript.info/alert-prompt-confirm">..</a></li>
 </ul>
 </li>
-<li>in-browser JS restrictions: access file system &amp; devices, browser <strong>Same Origin Policy</strong></li>
+<li>JS in HTML: <code>&lt;script&gt;..&lt;/script&gt;</code> &amp; <code>&lt;script src=..&gt;&lt;/script&gt;</code> <a target="_blank" rel="noopener" href="https://javascript.info/hello-world">..</a> <ul>
+<li><code>type=&quot;text/javascript&quot; language=&quot;javascript&quot;</code> attr no need anymore <a target="_blank" rel="noopener" href="https://javascript.info/hello-world#modern-markup">..</a></li>
+<li>inline content ignored if <code>src</code> set <a target="_blank" rel="noopener" href="https://javascript.info/hello-world#external-scripts">..</a></li>
+<li>browser cache external script for re-use <a target="_blank" rel="noopener" href="https://javascript.info/hello-world#external-scripts">..</a></li>
+</ul>
+</li>
+<li>in-browser JS restrictions <a target="_blank" rel="noopener" href="https://javascript.info/intro#what-can-t-in-browser-javascript-do">…</a></li>
 </ul>
 <a id="more"></a>
 
-<h1 id="Browser-env"><a href="#Browser-env" class="headerlink" title="Browser env"></a>Browser env</h1><ul>
-<li><code>window</code> =&gt; JS (global obj) / DOM / BOM (the browser window obj) <a target="_blank" rel="noopener" href="https://javascript.info/browser-environment">..</a></li>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/browser-environment#bom-browser-object-model">BOM</a>: <code>navigator</code> obj, <code>location.href</code> =&gt; URL, <a target="_blank" rel="noopener" href="https://javascript.info/alert-prompt-confirm">model window fn</a>: <code>alert()</code>, <code>prompt()</code>, <code>confirm()</code></li>
-</ul>
 <h1 id="DOM-tree"><a href="#DOM-tree" class="headerlink" title="DOM tree"></a>DOM tree</h1><ul>
-<li>repre HTML/XML doc structure <a target="_blank" rel="noopener" href="https://javascript.info/dom-nodes#summary">..</a>, contains eth in HTML, inc <code>&lt;!DOCTYPE HTML&gt;</code> <a target="_blank" rel="noopener" href="https://javascript.info/dom-nodes#other-node-types">..</a></li>
-<li>rooted at <code>document</code> (whole doc<a target="_blank" rel="noopener" href="https://javascript.info/dom-nodes#other-node-types">..</a>) =&gt; <strong>document.documentElement</strong> / <strong>.head</strong> / .<strong>body</strong> <a target="_blank" rel="noopener" href="https://javascript.info/dom-navigation#on-top-documentelement-and-body">..</a></li>
-<li>build on load pages <a target="_blank" rel="noopener" href="https://javascript.info/dom-attributes-and-properties">..</a><ul>
-<li><strong>document.body = null</strong> for &lt;head&gt;.script <a target="_blank" rel="noopener" href="https://javascript.info/dom-navigation#on-top-documentelement-and-body">..</a></li>
-<li>browser auto-correction when building the DOM, e.g. &lt;table&gt; always have &lt;tbody&gt; <a target="_blank" rel="noopener" href="https://javascript.info/dom-nodes#autocorrection">..</a></li>
+<li>repre HTML/XML doc structure <a target="_blank" rel="noopener" href="https://javascript.info/dom-nodes#summary">..</a> (inc <code>&lt;!DOCTYPE HTML&gt;</code> <a target="_blank" rel="noopener" href="https://javascript.info/dom-nodes#other-node-types">..</a>), built when pages loading <a target="_blank" rel="noopener" href="https://javascript.info/dom-attributes-and-properties">..</a> (auto-correction <a target="_blank" rel="noopener" href="https://javascript.info/dom-nodes#autocorrection">..</a>)</li>
+<li>rooted at <code>document</code> (repre the whole doc<a target="_blank" rel="noopener" href="https://javascript.info/dom-nodes#other-node-types">..</a>) — <code>document.documentElement/.head /.body</code> <a target="_blank" rel="noopener" href="https://javascript.info/dom-navigation#on-top-documentelement-and-body">..</a></li>
+<li>interact DOM elem in console <a target="_blank" rel="noopener" href="https://javascript.info/dom-nodes#interaction-with-console">..</a></li>
 </ul>
-</li>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/dom-nodes#interaction-with-console">interact DOM elem in console</a></li>
-</ul>
-<h1 id="DOM-class-hierarchy"><a href="#DOM-class-hierarchy" class="headerlink" title="DOM class hierarchy"></a>DOM class hierarchy</h1><ul>
-<li><p>abstract <strong>EventTarget</strong> =&gt; abstract <strong>Node</strong> (inc. nav props) =&gt; <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#dom-node-classes">..</a></p>
+<p>DOM node class hierarchy <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#dom-node-classes">..</a></p>
 <ul>
-<li><strong>Element</strong> =&gt; HTMLElement …<ul>
-<li><code>console.dir(elem)</code> (DOM tree elem) <strong>vs</strong> <code>console.log(elem)</code> (DOM obj &amp; props) <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#dom-node-classes">..</a></li>
+<li>Node: Element, Text, Comment, Document (e.g. <code>HTMLDocument</code> instance <code>document</code> <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#where-s-the-document-in-the-hierarchy">..</a>)</li>
+<li>type check: <code>node.nodeName</code> / <code>elem.tagName</code> <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#tag-nodename-and-tagname">..</a></li>
+</ul>
+<h1 id="HTML-Attr-amp-JS-Prop"><a href="#HTML-Attr-amp-JS-Prop" class="headerlink" title="HTML Attr &amp; JS Prop"></a>HTML Attr &amp; JS Prop</h1><ul>
+<li><strong>HTML-attr</strong>: case-insensitive &amp; value: str <a target="_blank" rel="noopener" href="https://javascript.info/dom-attributes-and-properties#html-attributes">..</a><ul>
+<li>HTML <code>hidden</code> attr — <code>style=&quot;display:none</code> <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#the-hidden-property">..</a></li>
 </ul>
 </li>
-<li><strong>Text</strong>, <strong>Comment</strong></li>
-<li><strong>Document</strong> =&gt; <strong>HTMLDocument</strong>, instance <code>document</code> <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#where-s-the-document-in-the-hierarchy">..</a></li>
-</ul>
-</li>
-<li><p>check node type</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">alert( node.nodeName );     <span class="comment">// #comment, #document, BODY</span></span><br><span class="line">alert( elem.tagName );      <span class="comment">// BODY</span></span><br><span class="line"></span><br><span class="line">alert( <span class="built_in">document</span>.body.constructor.name ); <span class="comment">// HTMLBodyElement</span></span><br><span class="line"><span class="comment">// by toString()</span></span><br><span class="line">alert( <span class="built_in">document</span>.body );     <span class="comment">// [object HTMLBodyElement]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// the old &quot;nodeType&quot;</span></span><br><span class="line">alert(node.nodeType);       <span class="comment">// 1 =&gt; element, 3 = text, 9 = document</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h1 id="Attr-amp-Prop"><a href="#Attr-amp-Prop" class="headerlink" title="Attr &amp; Prop"></a>Attr &amp; Prop</h1><ul>
-<li><strong>HTML-attr</strong>: case-insensitive (all lowercase in HTML) &amp; value: str<ul>
-<li>HTML <code>hidden</code> attr === <code>style=&quot;display:none</code> <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#the-hidden-property">..</a></li>
-</ul>
-</li>
-<li><strong>DOM prop</strong>: case-sensitive &amp; value: any type</li>
-<li>interact: <code>elem.get/remove/hasAttribute(name)</code> / <code>setAttribute(name, value)</code> / <code>attributes</code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// std attr &lt;-&gt; prop</span></span><br><span class="line">input.setAttribute(<span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;id&#x27;</span>);         <span class="comment">// input.id: id </span></span><br><span class="line">input.id = <span class="string">&#x27;newId&#x27;</span>;                     <span class="comment">// input.getAttribute(&#x27;id&#x27;)): newId</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// input value attr -&gt; input.value</span></span><br><span class="line">input.setAttribute(<span class="string">&#x27;value&#x27;</span>, <span class="string">&#x27;text&#x27;</span>);    <span class="comment">// input.value: text</span></span><br><span class="line">input.value = <span class="string">&#x27;newValue&#x27;</span>;               <span class="comment">// input.getAttribute(&#x27;value&#x27;): text (attr not updated)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// DOM prop value type: not only str</span></span><br><span class="line">input.getAttribute(<span class="string">&#x27;checked&#x27;</span>)           <span class="comment">// &#x27;&#x27;</span></span><br><span class="line">input.checked                           <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">div.getAttribute(<span class="string">&#x27;style&#x27;</span>)               <span class="comment">// color:red;font-size:120%</span></span><br><span class="line">div.style                               <span class="comment">// [object CSSStyleDeclaration]</span></span><br><span class="line"></span><br><span class="line">a.getAttribute(<span class="string">&#x27;href&#x27;</span>));                <span class="comment">// #hello (relative path)</span></span><br><span class="line">a.href                                  <span class="comment">// full URL </span></span><br></pre></td></tr></table></figure></li>
-<li><strong>customized attr</strong><ul>
-<li>pass data to JS || “mark” HTML-elem for JS ==&gt; <strong>querySelector(‘tag[attr]’)</strong></li>
-<li>naming by <code>data-*</code> (avoid conflict of become standard later), access by <strong>dataset.xxx</strong> (mtp-word camelCase)</li>
+<li><strong>DOM prop</strong>: case-sensitive &amp; value: any type <a target="_blank" rel="noopener" href="https://javascript.info/dom-attributes-and-properties#dom-properties">..</a></li>
+<li>access attr by elem methods <a target="_blank" rel="noopener" href="https://javascript.info/dom-attributes-and-properties#html-attributes">..</a></li>
+<li>prop-attr sync <a target="_blank" rel="noopener" href="https://javascript.info/dom-attributes-and-properties#property-attribute-synchronization">..</a> &amp; prop-attr type diff <a target="_blank" rel="noopener" href="https://javascript.info/dom-attributes-and-properties#dom-properties-are-typed">..</a></li>
+<li>customized attr <a target="_blank" rel="noopener" href="https://javascript.info/dom-attributes-and-properties#non-standard-attributes-dataset">..</a>: pass data to JS || “mark” HTML-elem for JS<ul>
+<li>naming: <code>data-*</code>, access: <code>dataset.xxx</code> (mtp-word camelCase)</li>
 </ul>
 </li>
 </ul>
-<h1 id="DOM-modification"><a href="#DOM-modification" class="headerlink" title="DOM modification"></a>DOM modification</h1><h2 id="Node-creation"><a href="#Node-creation" class="headerlink" title="Node creation"></a>Node creation</h2><ul>
-<li><code>document.createElement(tag: str)</code> / <strong>createTextNode</strong>(text: str) <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#creating-an-element">..</a></li>
-<li>elem.<strong>cloneNode</strong>(isDeepCopy: bool) ==&gt; deep copy (all attrs &amp; sub-elems), false without sub-elems <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#cloning-nodes-clonenode">..</a></li>
-</ul>
-<h2 id="Node-Select"><a href="#Node-Select" class="headerlink" title="Node Select"></a>Node Select</h2><ul>
-<li><code>elem.querySelectorAll(css: str)</code>: static-collection &amp; <code>elem.querySelector(css)</code>: 1st-elem <a target="_blank" rel="noopener" href="https://javascript.info/searching-elements-dom#querySelectorAll">..</a> <ul>
-<li>css: <strong>‘tag[attr]’</strong> <a target="_blank" rel="noopener" href="https://javascript.info/dom-attributes-and-properties#make-external-links-orange">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/searching-elements-dom#matches">..</a></li>
-</ul>
-</li>
-<li><code>document.getElementById(id: str)</code><ul>
-<li>or just id (the id-named gloabal var) || <strong>window[‘xxx’]</strong> (for comp, not recomm)</li>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/searching-elements-dom#getelementsby">the old getElemetsBy* methods</a></li>
-</ul>
-</li>
-<li>elem.<strong>closest(css)</strong> =&gt; closest ancestor (inc elem itself)</li>
-<li><strong>nav props</strong> (child, parent, sibling, read-only) <a target="_blank" rel="noopener" href="https://javascript.info/dom-navigation">..</a><ul>
-<li><code>childNodes: nodes</code> &amp; <code>children: elems</code> =&gt; DOM collection (array-like iter obj)</li>
-<li>for <code>&lt;html&gt;</code>, parentNode =&gt; <code>document</code>, parentElement =&gt; <code>null</code></li>
-</ul>
-</li>
-<li><strong>elemA.contains(elemB)</strong>(true if B descendant or same) / <strong>elem.matches</strong>(css) =&gt; bool </li>
+<h1 id="DOM-modification"><a href="#DOM-modification" class="headerlink" title="DOM modification"></a>DOM modification</h1><p><strong>Node Creation</strong>: <code>document.createElement(tag: str)</code><a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#creating-an-element">..</a>, <code>elem.cloneNode(..)</code> <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#cloning-nodes-clonenode">..</a></p>
+<p><strong>Node Selection</strong> <a target="_blank" rel="noopener" href="https://javascript.info/searching-elements-dom">..</a></p>
+<ul>
+<li><code>elem.querySelector*(css: str)</code> — css: <code>&#39;tag[attr]&#39;</code> <a target="_blank" rel="noopener" href="https://javascript.info/dom-attributes-and-properties#make-external-links-orange">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/searching-elements-dom#matches">..</a></li>
+<li>other query methods <a target="_blank" rel="noopener" href="https://javascript.info/searching-elements-dom#summary">..</a> </li>
+<li><strong>nav props</strong> (child, parent, sibling, read-only) <a target="_blank" rel="noopener" href="https://javascript.info/dom-navigation">..</a></li>
 <li>table props <a target="_blank" rel="noopener" href="https://javascript.info/dom-navigation#dom-navigation-tables">..</a></li>
 </ul>
 <h2 id="Node-modification"><a href="#Node-modification" class="headerlink" title="Node modification"></a>Node modification</h2><h3 id="Content"><a href="#Content" class="headerlink" title="Content"></a>Content</h3><ul>
 <li><code>elem.innerHTML</code> <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#innerhtml-the-contents">..</a><ul>
-<li>innerHTML += xxx — replace instead addition (resrc reload, selection &amp; input removed)</li>
-<li>insert script-tag by innerHTML — inserted but not executed</li>
-<li>elem.<strong>outerHTML</strong> =&gt; innerHTML + elem itself <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#outerhtml-full-html-of-the-element">..</a><ul>
-<li>replace in the DOM but <strong>not change elem</strong> itself (var still ref to the old value) — get new value by query again</li>
+<li>innerHTML += xxx: replace instead addition (resrc reload, selection &amp; input rmed)</li>
+<li>insert <code>&lt;script&gt;</code> by innerHTML: inserted but not executed</li>
+<li>elem.<strong>outerHTML</strong> = innerHTML + elem itself <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#outerhtml-full-html-of-the-element">..</a><ul>
+<li>write to elem.outerHTML: replace node in DOM but <strong>not change elem</strong> itself (var still ref to the old value) — query again</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><code>elem.textContent</code> — inner text without tags || insert as text (safer then .innerHTML)</li>
-<li><code>Text/Comment.data</code> — text/comment content of the node (similar to <strong>nodeValue</strong> prop) <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#nodevalue-data-text-node-content">..</a></li>
+<li><code>elem.textContent</code>: inner text without tags, insert as text (safer then <code>innerHTML</code>)</li>
+<li><code>Text/Comment.data</code>: text/cmt content of the node (similar to <strong>nodeValue</strong> prop) <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#nodevalue-data-text-node-content">..</a></li>
 <li>task: <a target="_blank" rel="noopener" href="https://javascript.info/basic-dom-node-properties#count-descendants">Count descendants</a>, <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#create-a-calendar">Create a calendar</a>, <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#sort-the-table">Sort the table</a></li>
 </ul>
-<h3 id="Style"><a href="#Style" class="headerlink" title="Style"></a>Style</h3><ul>
-<li>prefer class-attr than style-attr for styling</li>
-<li><code>getComputedStyle</code>(elem, [pseudo: str]).<strong>camelCaseProp</strong> =&gt; <strong>str with unit</strong> (of resolved value) <strong>from CSS-class</strong> <a target="_blank" rel="noopener" href="https://javascript.info/styles-and-classes#computed-styles-getcomputedstyle">..</a><ul>
-<li><strong>resolved value</strong> (fixed or absolute, with unit, e.g. “20px”) vs <strong>computed style value</strong> (could be relative, e.g. “em”, “125%”)</li>
-<li>prop use full name, e.g.marginTop instead of margin (otherwise may inconsist among browsers)</li>
-<li>set class: elem.<strong>className</strong> (whole replace) / <strong>.classList</strong> (iter, with methods <strong>add/remove/toggle/contains</strong>(“class”), for indiv set)</li>
+<h3 id="Style"><a href="#Style" class="headerlink" title="Style"></a>Style</h3><p>css class style (prefer <a target="_blank" rel="noopener" href="https://javascript.info/styles-and-classes">..</a>)</p>
+<ul>
+<li>read class style: <code>getComputedStyle(elem, ..).&lt;camelCaseProp&gt;</code>: str with unit (of resolved value), e.g. “20px” <a target="_blank" rel="noopener" href="https://javascript.info/styles-and-classes#computed-styles-getcomputedstyle">..</a></li>
+<li>set class: <code>elem.className</code> (whole replace) / <code>elem.classList</code> (single class) <a target="_blank" rel="noopener" href="https://javascript.info/styles-and-classes#classname-and-classlist">..</a> </li>
+</ul>
+<p>style-attr style: <code>elem.style.&lt;camelCaseProp&gt;</code>: str with unit, e.g. “100px”, writable <a target="_blank" rel="noopener" href="https://javascript.info/styles-and-classes#element-style">..</a></p>
+<ul>
+<li>rm style : <code>elem.style.xxx = &#39;&#39;</code></li>
+<li>full rewrite <code>elem.style.cssText = xxx</code> || <code>setAttribute(&#39;style&#39;, cssText)</code> <a target="_blank" rel="noopener" href="https://javascript.info/styles-and-classes#resetting-the-style-property">..</a></li>
+</ul>
+<h3 id="Size-coords-amp-scroll"><a href="#Size-coords-amp-scroll" class="headerlink" title="Size, coords &amp; scroll"></a>Size, coords &amp; scroll</h3><p>geometry props: return num (in “px”) <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#geometry">..</a></p>
+<ul>
+<li>Size props: <code>offset*</code>, <code>client*</code> <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#geometry">…</a></li>
+<li>scrolled props: <code>scroll*</code> <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#scrollwidth-height">…</a>, <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#scrollleft-scrolltop">…</a>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">elem.style.height = <span class="string">`<span class="subst">$&#123;elem.scrollHeight&#125;</span>px`</span>; <span class="comment">// expand elem to full height</span></span><br><span class="line"></span><br><span class="line">elem.scrollTop = elem.scrollHeight; <span class="comment">// auto-scroll up [Events mouseover/mouseout, relatedTarget]</span></span><br><span class="line">elem.scrollTop = <span class="number">0</span> / <span class="literal">Infinity</span>       <span class="comment">// scroll to top/bottom</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>get doc scrolled-out part size: <code>window.pageX/YOffset</code> (num in px) <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll-window#page-scroll">..</a></li>
+<li>scroll doc: <code>window.scrollBy/To(..)</code> <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll-window#window-scroll">..</a> &amp; <code>elem.scrollToView(top=true)</code>: scroll page to make elem top / bottom of the win</li>
+<li>enable/forbid scroll: <code>style.overflow[X/Y]=&#39;scroll/hidden&#39;</code> (same as CSS overflow[-x/-y]) <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#what-is-the-scrollbar-width">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll-window#forbid-the-scrolling">..</a></li>
 </ul>
 </li>
-<li>elem.<code>style</code>.camelCaseProp =&gt; <strong>str with unit</strong> from <strong>style-attr</strong> (no access to CSS value <a target="_blank" rel="noopener" href="https://javascript.info/styles-and-classes#computed-styles-getcomputedstyle">..</a>)<ul>
-<li>reset by elem.<strong>style.xxx = ‘’</strong> (back to CSS classes and its built-in styles normally)</li>
-<li>style prop <strong>default = ‘’</strong> for unsetted prop, e.g. style prop from CSS class &amp; style set without unit</li>
-<li>full rewrite — <strong>style.cssText = xxx</strong>, same as <strong>setAttribute(‘style’, cssText)</strong></li>
+<li>coords props <a target="_blank" rel="noopener" href="https://javascript.info/coordinates">..</a>: <ul>
+<li><code>clientX/Y</code> (rel to win, css position: <strong>fixed</strong>) &amp; <code>pageX/Y</code> (rel to doc, css position: <strong>absolute</strong>) <a target="_blank" rel="noopener" href="https://javascript.info/coordinates">..</a>, <a target="_blank" rel="noopener" href="https://javascript.info/coordinates#getCoords">..</a><ul>
+<li><code>document.elementFromPoint(clientX, clientY)</code>: most nested elem, null if out of win <a target="_blank" rel="noopener" href="https://javascript.info/coordinates#elementFromPoint">..</a></li>
 </ul>
 </li>
-</ul>
-<h3 id="Size-coords-amp-scroll"><a href="#Size-coords-amp-scroll" class="headerlink" title="Size, coords &amp; scroll"></a>Size, coords &amp; scroll</h3><h4 id="Geometry-props"><a href="#Geometry-props" class="headerlink" title="Geometry props"></a>Geometry props</h4><ul>
-<li>return number (without “px”, only for displayed elem)</li>
-<li><strong>offsetParent</strong> — for calc coords when render: nearest CSS-positioned ancestor || <code>td</code>, <code>th</code>, <code>table</code> || <code>body</code> <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#offsetparent-offsetleft-top">..</a><ul>
-<li><strong>offsetLeft/Top</strong>, <code>offsetWidth/Height</code> (<strong>outer size</strong>: outer border = CSS-w/h (inc scrollbar) + padding + border)</li>
-<li><strong>clientTop/Left</strong> (border + sbar), <code>clientWidth/Height</code> (<strong>inner size</strong>: inside sbar &amp; broder = (CSS-w/h - sbar) + padding)</li>
-<li>task — <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#what-is-the-scrollbar-width">What is the scrollbar width?</a></li>
-</ul>
-</li>
-<li><code>elem.getBoundingClientRect()</code> =&gt; X/Y, top/left &amp; bottom/right (outer border rel to window), width/height <a target="_blank" rel="noopener" href="https://javascript.info/coordinates#element-coordinates-getboundingclientrect">..</a><ul>
-<li>convert <code>clientX/Y</code> (rel to window, ==&gt; position: <strong>fixed</strong>) to <code>pageX/Y</code> (position: <strong>absolute</strong>):<br><strong>getBoundingClientRect().left/top + window.pageX/YOffect</strong> (scrolled-out part of doc) <a target="_blank" rel="noopener" href="https://javascript.info/coordinates#getCoords">..</a></li>
-<li>tasks — <a target="_blank" rel="noopener" href="https://javascript.info/coordinates#find-window-coordinates-of-the-field">Find window coordinates of the field</a>, <a target="_blank" rel="noopener" href="https://javascript.info/coordinates#position-the-note-inside-absolute">Position the note inside (absolute)</a></li>
-</ul>
-</li>
+<li>get coords: <ul>
+<li><code>elem.getBoundingClientRect()</code> return num (in “px”) <a target="_blank" rel="noopener" href="https://javascript.info/coordinates#element-coordinates-getboundingclientrect">…</a></li>
 <li><code>style.left/top</code> <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#place-the-ball-in-the-field-center">..</a>, <code>style.width/height</code> <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#what-is-the-scrollbar-width">..</a> =&gt; <strong>str with unit</strong></li>
-<li><code>document.elementFromPoint(clientX, clientY)</code>: most nested elem, null if out of window <a target="_blank" rel="noopener" href="https://javascript.info/coordinates#elementFromPoint">..</a></li>
 </ul>
-<h4 id="Scroll-props"><a href="#Scroll-props" class="headerlink" title="Scroll props"></a>Scroll props</h4><p>Get scrolled-out part size:</p>
-<ul>
-<li>for whole doc: <strong>window.pageX/YOffset</strong> <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll-window#page-scroll">..</a></li>
-<li>for some elem: elem.<strong>scrollTop/Left</strong> (scrolled out part, <strong>writable</strong>) = elem.<strong>scrollWidth/Height</strong> - elem.clientWidth/Height<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">elem.style.height = <span class="string">`<span class="subst">$&#123;elem.scrollHeight&#125;</span>px`</span>; <span class="comment">// expand elem to full height</span></span><br><span class="line"></span><br><span class="line">elem.scrollTop = elem.scrollHeight; <span class="comment">// auto-scroll up [Events mouseover/mouseout, relatedTarget]</span></span><br><span class="line">elem.scrollTop = <span class="number">0</span> / <span class="literal">Infinity</span>       <span class="comment">// scroll to top/bottom</span></span><br><span class="line"><span class="keyword">let</span> scrollBottom = elem.scrollHeight - elem.scrollTop - elem.clientHeight; <span class="comment">// [Task1]</span></span><br></pre></td></tr></table></figure>
-
+</li>
+<li>tasks: <a target="_blank" rel="noopener" href="https://javascript.info/coordinates#find-window-coordinates-of-the-field">Find win coords of the field</a>, <a target="_blank" rel="noopener" href="https://javascript.info/coordinates#position-the-note-inside-absolute">Position the note inside (absolute)</a></li>
+</ul>
 </li>
 </ul>
-<p>Scroll the doc</p>
+<p>Notes</p>
 <ul>
-<li><code>window.scrollBy(x,y)</code> &amp; <code>window.scrollTo(pageX,pageY)</code> <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll-window#window-scroll">..</a></li>
-<li><code>elem.scrollToView(top=true)</code>: scroll page to make elem top / bottom of the window</li>
-</ul>
-<p>Set/forbid scroll</p>
-<ul>
-<li><code>style.overflow[X/Y]=&#39;scroll/hidden&#39;</code> (same as CSS overflow[-x/-y]) <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#what-is-the-scrollbar-width">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll-window#forbid-the-scrolling">..</a></li>
-</ul>
-<h4 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h4><ul>
-<li>text overflow ==&gt; padding-bottom area may filled with text <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#sample-element">..</a></li>
-<li>cases for geometry prop = 0 &amp; offsetParent = null <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll">..</a></li>
-<li>for elem width/height/distance, <strong>use geometry prop (e.g. clientWidth) instead</strong> getComputedStyle() <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#don-t-take-width-height-from-css">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#the-difference-css-width-versus-clientwidth">..</a></li>
-<li>get window size — <strong>document.documentElement.clientWidth/H</strong> (without sbar)  vs <strong>window.innerWeight/H</strong> (inc sbar) <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll-window#width-height-of-the-window">..</a></li>
+<li>text overflow — padding-bottom area may filled with text <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#sample-element">..</a></li>
+<li>for elem width/height/distance, <strong>use geometry prop (e.g. clientWidth) instead</strong> getComputedStyle() <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#don-t-take-width-height-from-css">..</a>, <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll#the-difference-css-width-versus-clientwidth">..</a></li>
+<li>get win size: <code>document.documentElement.clientWidth/H</code> (without sbar)  vs <code>window.innerWeight/H</code> (inc sbar) <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll-window#width-height-of-the-window">..</a></li>
 <li>get doc size (with scroll out part) <a target="_blank" rel="noopener" href="https://javascript.info/size-and-scroll-window#width-height-of-the-document">..</a></li>
 </ul>
-<h2 id="Node-insert-move-amp-remove"><a href="#Node-insert-move-amp-remove" class="headerlink" title="Node insert, move &amp; remove"></a>Node insert, move &amp; remove</h2><p><strong>Insert elem || text</strong>: <code>node.append/prepend/before/after(...nodes || textStrs)</code> <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#insertion-methods">..</a></p>
-<ul>
-<li>auto remove existing node from old place</li>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#old-school-insert-remove-methods">the old insert/remove methods</a></li>
-</ul>
-<p><strong>Insert HTML</strong>: <code>elem.insertAdjacentHTML(where, html: str)</code> <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#insertadjacenthtml-text-element">..</a> </p>
-<ul>
-<li>where = “beforebegin/afterbegin/beforeend/afterend” </li>
-<li>elem.<strong>insertAdjacentElement/Text</strong> can be replaced by node.<strong>append/prepend/before/after</strong></li>
-</ul>
-<p><strong>Replace node</strong>: <code>node.replaceWith(...nodes || textStrs)</code> <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#insertion-methods">..</a></p>
-<p><strong>Remove node</strong>: <code>node.remove()</code> <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#node-removal">..</a></p>
-<p><strong>Node groups</strong>: node-array &amp; DocumentFragment obj <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#document-fragment">..</a></p>
-<p><a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#a-word-about-document-write">The old <strong>document.write</strong>(html: str)</a>: call when onload (call af load replace page content)</p>
-<h1 id="UI-Event-handle"><a href="#UI-Event-handle" class="headerlink" title="UI Event handle"></a>UI Event handle</h1><h2 id="UI-Event"><a href="#UI-Event" class="headerlink" title="UI Event"></a>UI Event</h2><p>Event Obj <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#event-object">..</a></p>
-<ul>
-<li><code>e.type</code>: e.g. “click”</li>
-<li><code>e.clientX/Y</code>: window-rel coors</li>
-</ul>
-<p>Event phase &amp; event delegation</p>
-<ul>
-<li><strong>event capturing <a target="_blank" rel="noopener" href="https://javascript.info/bubbling-and-capturing#capturing">..</a> &amp; event bubbling</strong> (most events bubble, except <strong>focus</strong>) <a target="_blank" rel="noopener" href="https://javascript.info/bubbling-and-capturing#bubbling">..</a><ul>
-<li>Event delegation &amp; event bubble: handle event on container for mtp elems <a target="_blank" rel="noopener" href="https://javascript.info/event-delegation#summary">..</a></li>
-<li>tasks — <a target="_blank" rel="noopener" href="https://javascript.info/event-delegation#hide-messages-with-delegation">Hide messages with delegation</a>, <a target="_blank" rel="noopener" href="https://javascript.info/event-delegation#tree-menu">toogle tree menu</a>, <a target="_blank" rel="noopener" href="https://javascript.info/event-delegation#sortable-table">Sortable table</a>, <a target="_blank" rel="noopener" href="https://javascript.info/event-delegation#tooltip-behavior">Tooltip behavior</a></li>
-<li>stop bubbling by <ul>
-<li><strong>e.stopPropagation()</strong> (stop current handler)</li>
-<li><strong>e.stopImmediatePropagation()</strong> (stop all handlers)</li>
+<h2 id="Node-insert-move-amp-rm"><a href="#Node-insert-move-amp-rm" class="headerlink" title="Node insert, move &amp; rm"></a>Node insert, move &amp; rm</h2><ul>
+<li>insert (replace) as text: <code>node.append/prepend/before/after/replaceWith(..)</code> <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#insertion-methods">..</a><ul>
+<li>move nodes by inserting existing one (auto rm from old place) <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#node-removal">..</a></li>
 </ul>
 </li>
+<li>insert as HTML: <code>elem.insertAdjacentHTML(..)</code> <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#insertadjacenthtml-text-element">..</a> </li>
+<li>removal: <code>node.remove()</code> <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#node-removal">..</a></li>
+<li>the old insert/rm methods <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#old-school-insert-remove-methods">..</a> &amp; <code>document.write(html: str)</code> <a target="_blank" rel="noopener" href="https://javascript.info/modifying-document#a-word-about-document-write">..</a>: call when onload to write html into page “right here and now” (call af load replace page content)</li>
 </ul>
-</li>
+<h1 id="Event-handling"><a href="#Event-handling" class="headerlink" title="Event handling"></a>Event handling</h1><h2 id="Event"><a href="#Event" class="headerlink" title="Event"></a>Event</h2><p>events list <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events">…</a></p>
+<p>event happen -&gt; browser create event-obj with details &amp; pass to event handler <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#event-object">..</a> </p>
+<p>Event obj: <code>e.type</code> (e.g. “click”) <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#event-object">..</a></p>
+<p>Event Bubbling &amp; event delegation pattern</p>
+<ul>
+<li>3 Event phase (<a target="_blank" rel="noopener" href="https://javascript.info/bubbling-and-capturing#capturing">Capturing</a>, Target, <a target="_blank" rel="noopener" href="https://javascript.info/bubbling-and-capturing#bubbling">Bubbling</a> — <code>e.eventPhase</code> <a target="_blank" rel="noopener" href="https://javascript.info/bubbling-and-capturing#summary">..</a>)</li>
+<li>event delegation (handle event on container for mtp elems) <a target="_blank" rel="noopener" href="https://javascript.info/event-delegation">..</a></li>
 <li><code>e.target</code>, <code>e.currentTarget</code> <a target="_blank" rel="noopener" href="https://javascript.info/bubbling-and-capturing#event-target">..</a></li>
-<li><code>e.eventPhase</code>: capturing=1, target=2, bubbling=3 <a target="_blank" rel="noopener" href="https://javascript.info/bubbling-and-capturing#summary">..</a></li>
+<li>stop bubbling <a target="_blank" rel="noopener" href="https://javascript.info/bubbling-and-capturing#stopping-bubbling">…</a></li>
+<li>tasks: <a target="_blank" rel="noopener" href="https://javascript.info/event-delegation#hide-messages-with-delegation">Hide messages with delegation</a>, <a target="_blank" rel="noopener" href="https://javascript.info/event-delegation#tree-menu">toogle tree menu</a>, <a target="_blank" rel="noopener" href="https://javascript.info/event-delegation#sortable-table">Sortable table</a>, <a target="_blank" rel="noopener" href="https://javascript.info/event-delegation#tooltip-behavior">Tooltip behavior</a></li>
 </ul>
-<h2 id="Custom-Event-Construct-amp-dispatch"><a href="#Custom-Event-Construct-amp-dispatch" class="headerlink" title="Custom Event Construct &amp; dispatch"></a>Custom Event Construct &amp; dispatch</h2><p>Script-gen events &amp; dispatch to elem <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#event-constructor">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#custom-events">..</a></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> event = <span class="keyword">new</span> CustomEvent(type: str, <span class="attr">options</span>: &#123;<span class="attr">bubbles</span>: <span class="literal">false</span>, <span class="attr">cancelable</span>: <span class="literal">false</span>&#125;); </span><br><span class="line">elem.dispatchEvent(event, &#123;<span class="attr">detail</span>: obj); <span class="comment">// access by e.detail.xxx in event handler</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// diff user event &amp; script-gen event</span></span><br><span class="line">event.isTrusted <span class="comment">// true for user action, false for script-gen</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Event-handler"><a href="#Event-handler" class="headerlink" title="Event handler"></a>Event handler</h2><p><strong>Event handler</strong>: fn(eventObj) <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#event-handlers">..</a></p>
-<h3 id="Add-event-handler"><a href="#Add-event-handler" class="headerlink" title="Add event handler"></a>Add event handler</h3><p>3 ways to add event handler to elem: </p>
-<ol>
-<li><code>elem.addEventListener()</code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">elem.add/removeEventListener(event, handler, [options])</span><br></pre></td></tr></table></figure></li>
-</ol>
+<p>script-gen event <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events">..</a> </p>
 <ul>
-<li>work for custom event <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#bubbling-example">..</a></li>
-<li>allow mtp handlers (by mtp calls to <strong>elem.addEventListener</strong>)</li>
-<li>work for <strong>document.addEventListener(“DOMContentLoaded”, handler)</strong> &amp; <code>focusin</code>\ <code>focusout</code> event <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#delegation-focusin-focusout">..</a></li>
-<li>support <strong>obj with method handleEvent(event)</strong> as handler <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#object-handlers-handleevent">..</a></li>
-<li><code>options</code>: {once/cature/passive: bool}</li>
+<li>construct <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#event-constructor">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#mouseevent-keyboardevent-and-others">..</a>, dispatch <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#dispatchevent">..</a></li>
+<li>diff user event &amp; script-gen event: <code>e.isTrusted</code> <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#dispatchevent">..</a></li>
+<li>custom event &amp; <code>detail</code> prop <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#custom-events">..</a>, <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#summary">..</a></li>
 </ul>
-<ol start="2">
-<li>HTML attr <code>on&lt;event&gt;=&quot;fn-body&quot;</code> || DOM prop <code>elem.on&lt;event&gt;function() &#123; ... &#125;</code> <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#event-handlers">..</a>, e.g. onclick<ul>
-<li>only work for built-in events <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#bubbling-example">..</a></li>
-<li>can only assign 1 handler (overwrite if DOM prop &amp; HTML attr both set) <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#dom-property">..</a></li>
-<li><code>elem.setAttribute(&#39;on&lt;event&gt;&#39;, handler)</code> not work for event handler <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#possible-mistakes">..</a></li>
-<li><code>this</code> in handler = e.currentTarget <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#accessing-the-element-this">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#event-object">..</a></li>
-<li>rm by <code>elem.on&lt;event&gt; = null</code> <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#dom-property">..</a></li>
+<p>Event Processing Queue: Asycnly &amp; Syncly <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#events-in-events-are-synchronous">..</a> </p>
+<h2 id="Event-handler-fn-e"><a href="#Event-handler-fn-e" class="headerlink" title="Event handler: fn(e)"></a>Event handler: fn(e)</h2><p>add/rm Event handler</p>
+<ul>
+<li><code>elem.addEventListener(e-type, handler, ..)</code> <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#addeventlistener">..</a><ul>
+<li>work for custom event <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#bubbling-example">..</a>; allow mtp handlers (call it mtp times)</li>
+<li>support <code>obj.handleEvent(e)</code> as handler <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#object-handlers-handleevent">..</a></li>
 </ul>
 </li>
-</ol>
-<p>Tasks: <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#move-the-ball-across-the-field">Move the ball across the field</a>, <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#create-a-sliding-menu">Create a sliding menu</a>, <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#add-a-closing-button">Add a closing button</a>, <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#carousel">Carousel</a></p>
-<h3 id="Prevent-default-actions"><a href="#Prevent-default-actions" class="headerlink" title="Prevent default actions"></a>Prevent default actions</h3><ul>
+<li>HTML attr <code>on&lt;event&gt;=&quot;fn-body&quot;</code> <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#possible-mistakes">..</a> || DOM prop <code>elem.on&lt;event&gt; = fn</code> <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#event-handlers">..</a>, e.g. onclick<ul>
+<li>built-in events <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#bubbling-example">..</a>, 1 handler <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#dom-property">..</a></li>
+</ul>
+</li>
+<li><code>this</code> in handler: e.currentTarget <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#accessing-the-element-this">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#event-object">..</a></li>
+<li>note: <code>elem.setAttribute(&#39;on&lt;event&gt;&#39;, handler)</code> not work for event handler <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#possible-mistakes">..</a></li>
+<li>Tasks: <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#move-the-ball-across-the-field">Move the ball across the field</a>, <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#create-a-sliding-menu">Create a sliding menu</a>, <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#add-a-closing-button">Add a closing button</a>, <a target="_blank" rel="noopener" href="https://javascript.info/introduction-browser-events#carousel">Carousel</a></li>
+</ul>
+<p>Prevent default actions: <code>e.preventDefault()</code> on handler || <code> on&lt;event&gt;</code> handler return false  <a target="_blank" rel="noopener" href="https://javascript.info/default-browser-action#preventing-browser-actions">..</a></p>
+<ul>
+<li><code>e.preventDefault()</code> — <code>e.defaultPrevented</code>: true (means the event is handled somewhere) <a target="_blank" rel="noopener" href="https://javascript.info/default-browser-action#event-defaultprevented">..</a> &amp; <code>elem.dispatchEvent(event)</code> return false <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#event-preventdefault">..</a></li>
+<li><code>passive: true</code> option of <code>addEventListener</code>: signals that the handler not to call preventDefault() <a target="_blank" rel="noopener" href="https://javascript.info/default-browser-action#the-passive-handler-option">why needed?</a></li>
 <li>default browser action list <a target="_blank" rel="noopener" href="https://javascript.info/default-browser-action#summary">..</a></li>
-<li>prevent by call <code>e.preventDefault()</code> on handler || <code> on&lt;event&gt;</code> handler return false (other return value ignored) <a target="_blank" rel="noopener" href="https://javascript.info/default-browser-action#preventing-browser-actions">..</a><ul>
-<li>call <strong>e.preventDefault()</strong>  ==&gt; <strong>e.defaultPrevented</strong>: true (means the event is handled somewhere) <a target="_blank" rel="noopener" href="https://javascript.info/default-browser-action#event-defaultprevented">..</a> &amp; elem.<strong>dispatchEvent(event)</strong> return false <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#event-preventdefault">..</a></li>
-<li><code>passive: true</code> option of <code>addEventListener</code>: signals the browser that the handler is not going to call preventDefault() <a target="_blank" rel="noopener" href="https://javascript.info/default-browser-action#the-passive-handler-option">why needed?</a></li>
+<li>Tasks: <a target="_blank" rel="noopener" href="https://javascript.info/default-browser-action#why-return-false-doesn-t-work">Why “return false” doesn’t work?</a>, <a target="_blank" rel="noopener" href="https://javascript.info/default-browser-action#image-gallery">Image gallery</a></li>
 </ul>
-</li>
-<li>Tasks — <a target="_blank" rel="noopener" href="https://javascript.info/default-browser-action#why-return-false-doesn-t-work">Why “return false” doesn’t work?</a>, <a target="_blank" rel="noopener" href="https://javascript.info/default-browser-action#image-gallery">Image gallery</a></li>
-</ul>
-<h2 id="Event-Processing-Queue"><a href="#Event-Processing-Queue" class="headerlink" title="Event Processing Queue"></a>Event Processing Queue</h2><p>Asycnly &amp; Syncly <a target="_blank" rel="noopener" href="https://javascript.info/dispatch-events#events-in-events-are-synchronous">..</a> </p>
 <h1 id="Mouse-Event"><a href="#Mouse-Event" class="headerlink" title="Mouse Event"></a>Mouse Event</h1><ul>
-<li>simple &amp; complext events <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#mouse-event-types">..</a> &amp; events order, e.g. click: mousedown =&gt; mouseup =&gt; click <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#events-order">..</a></li>
-<li>mouse coords: <code>e.clientX/Y, e.pageX/Y</code> <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#coordinates-clientx-y-pagex-y">..</a></li>
-<li>mouse btn &amp; <code>e.button</code> (=0 left-btn, =1 middle, =2 right-btn)<ul>
-<li>deprecated <code>e.which</code> <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#mouse-button">..</a></li>
+<li>events list <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#mouse-event-types">..</a></li>
+<li>mouse coords: <code>e.clientX/Y, e.pageX/Y</code> <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#coordinates-clientx-y-pagex-y">..</a>, mouse btn: <code>e.button</code> (=0 left-btn, =1 middle, =2 right-btn) <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#mouse-button">..</a></li>
+<li>mouse event also inc info of modifier keys: <code>e.shiftKey/altKey/ctrlKey/metaKey</code>(Mac): bool (true if pressed) <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#modifiers-shift-alt-ctrl-and-meta">..</a></li>
+<li>disable selection (on dblclick) &amp; copy: <code>onmousedown/oncopy return false</code> <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#preventing-selection-on-mousedown">..</a></li>
 </ul>
-</li>
-<li>mouse event also inc info of modifier keys: <code>e.shiftKey/altKey/ctrlKey/metaKey</code>(Mac): bool (true if pressed) <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#modifiers-shift-alt-ctrl-and-meta">..</a><ul>
-<li>Ctrl in Windows vs Cmd (metaKey) in MacOS — left-click + ctrl = right-click on MacOS</li>
-</ul>
-</li>
-<li>disable selection (on dblclick) &amp; copy: <code>onmousedown/oncopy=&quot;return false</code> <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#disabling-selection">..</a></li>
-</ul>
-<h2 id="Mouse-Move-Event"><a href="#Mouse-Move-Event" class="headerlink" title="Mouse Move Event"></a>Mouse Move Event</h2><p><code>mousemove</code> <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#coordinates-clientx-y-pagex-y">..</a>:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">onmousemove</span>=<span class="string">&quot;this.value=event.clientX+&#x27;:&#x27;+event.clientY&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Mouse over me&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><code>mouseover/mouseout</code> event &amp; <code>e.relatedTarget</code> <a target="_blank" rel="noopener" href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#events-mouseover-mouseout-relatedtarget">..</a></p>
+<h2 id="Mouse-Move-Event"><a href="#Mouse-Move-Event" class="headerlink" title="Mouse Move Event"></a>Mouse Move Event</h2><p><code>mousemove</code> <a target="_blank" rel="noopener" href="https://javascript.info/mouse-events-basics#coordinates-clientx-y-pagex-y">..</a>, <code>mouseover/out</code> event &amp; <code>e.relatedTarget</code> (diff with <code>mouseenter/leave</code>) <a target="_blank" rel="noopener" href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#summary">..</a></p>
 <ul>
-<li>may skip elems in-btw if move fast <a target="_blank" rel="noopener" href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#skipping-elements">..</a> &amp; <strong>e.relatedTarget</strong> can be null if from outside of window</li>
-<li>If <strong>mouseover</strong> triggered, there must be <strong>mouseout</strong></li>
-<li>vs <code>mouseenter/mouseleave</code> <a target="_blank" rel="noopener" href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#events-mouseenter-and-mouseleave">..</a><ul>
-<li>event bubble — event delegation <a target="_blank" rel="noopener" href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#event-delegation">..</a></li>
-<li><strong>mouseout</strong> trigger on elem when mouse move from elem to descendants (mouse only over a single elem at a time: most nested /top one) <a target="_blank" rel="noopener" href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#mouseout-when-leaving-for-a-child">..</a></li>
-</ul>
-</li>
-<li>task — <a target="_blank" rel="noopener" href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#smart-tooltip">“Smart” tooltip</a> (tooltip style)</li>
+<li>event delegation example <a target="_blank" rel="noopener" href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#event-delegation">..</a></li>
+<li>task: <a target="_blank" rel="noopener" href="https://javascript.info/mousemove-mouseover-mouseout-mouseenter-mouseleave#smart-tooltip">“Smart” tooltip</a> (tooltip style)</li>
 </ul>
 <h2 id="Drag’n’Drop-Event"><a href="#Drag’n’Drop-Event" class="headerlink" title="Drag’n’Drop Event"></a>Drag’n’Drop Event</h2><ul>
-<li>native event (e.g. <strong>dragstart, dragend</strong>) limitation <a target="_blank" rel="noopener" href="https://javascript.info/mouse-drag-and-drop">..</a></li>
-<li>implement Drag’n’Drop by mouse events: <code>mousedown</code> =&gt; <code>mousemove</code> =&gt; <code>mouseup</code> <a target="_blank" rel="noopener" href="https://javascript.info/mouse-drag-and-drop#drag-n-drop-algorithm">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/mouse-drag-and-drop#correct-positioning">..</a></li>
-<li>highlight droppable elem <a target="_blank" rel="noopener" href="https://javascript.info/mouse-drag-and-drop#potential-drop-targets-droppables">..</a><ul>
-<li>draggable elem always above other elem when dragging &amp; mouse event only happen on the top elem, so eh on other elem not work, can fix by<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">draggble.hidden = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">let</span> elemBelow = <span class="built_in">document</span>.elementFromPoint(event.clientX, event.clientY);</span><br><span class="line">draggble.hidden = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure></li>
+<li>impl by mouse events: overall algorithm <a target="_blank" rel="noopener" href="https://javascript.info/mouse-drag-and-drop#drag-n-drop-algorithm">..</a>, pointer correct positioning <a target="_blank" rel="noopener" href="https://javascript.info/mouse-drag-and-drop#correct-positioning">..</a>, drappable elem hightlight <a target="_blank" rel="noopener" href="https://javascript.info/mouse-drag-and-drop#potential-drop-targets-droppables">..</a><ul>
+<li>draggable elem always above other elem when dragging &amp; mouse event only happen on the top elem, so eh on other elem not work, can fix by<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">draggble.hidden = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">let</span> elemBelow = <span class="built_in">document</span>.elementFromPoint(e.clientX, event.clientY);</span><br><span class="line">draggble.hidden = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
-<li>task — <a target="_blank" rel="noopener" href="https://javascript.info/mouse-drag-and-drop#slider">Slider</a>, <a target="_blank" rel="noopener" href="https://javascript.info/mouse-drag-and-drop#drag-superheroes-around-the-field">Drag superheroes around the field</a> (not checked yet)</li>
+<li>task: <a target="_blank" rel="noopener" href="https://javascript.info/mouse-drag-and-drop#slider">Slider</a>, <a target="_blank" rel="noopener" href="https://javascript.info/mouse-drag-and-drop#drag-superheroes-around-the-field">Drag superheroes around the field</a> (not checked yet)</li>
 </ul>
 <h2 id="Scroll-Event"><a href="#Scroll-Event" class="headerlink" title="Scroll Event"></a>Scroll Event</h2><ul>
-<li><p><code>scroll</code> event on elem &amp; window <a target="_blank" rel="noopener" href="https://javascript.info/onscroll">..</a></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&#x27;scroll&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">&#x27;showScroll&#x27;</span>).innerHTML = <span class="built_in">window</span>.pageYOffset + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>task — <a target="_blank" rel="noopener" href="https://javascript.info/onscroll#endless-page">Endless page</a>, <a target="_blank" rel="noopener" href="https://javascript.info/onscroll#up-down-button">Up/down button</a>, <a target="_blank" rel="noopener" href="https://javascript.info/onscroll#load-visible-images">Load visible images</a></p>
-</li>
+<li><code>scroll</code> event on elem &amp; win <a target="_blank" rel="noopener" href="https://javascript.info/onscroll">..</a></li>
+<li>task: <a target="_blank" rel="noopener" href="https://javascript.info/onscroll#endless-page">Endless page</a>, <a target="_blank" rel="noopener" href="https://javascript.info/onscroll#up-down-button">Up/down button</a>, <a target="_blank" rel="noopener" href="https://javascript.info/onscroll#load-visible-images">Load visible images</a></li>
 </ul>
 <h1 id="Keyboard-Event"><a href="#Keyboard-Event" class="headerlink" title="Keyboard Event"></a>Keyboard Event</h1><p><code>keydown</code>, <code>keyup</code> <a target="_blank" rel="noopener" href="https://javascript.info/keyboard-events#keydown-and-keyup">..</a></p>
 <ul>
 <li><code>e.code</code> (physical key loc, e.g “KeyZ”, “ShiftLeft”) vs <code>event.key</code> (meaning of key, ie. char inputted, e.g. “z” || “Z”) <a target="_blank" rel="noopener" href="https://javascript.info/keyboard-events#event-code-and-event-key">..</a></li>
-<li><code>e.repeat</code>= true when many “keydown” (key pressed for a long enough time) &amp; single “keyup”</li>
-<li>prevent default action by <code>onkeydown=&#39;return false;&#39;</code> <a target="_blank" rel="noopener" href="https://javascript.info/keyboard-events#default-actions">..</a></li>
-<li><a target="_blank" rel="noopener" href="https://javascript.info/keyboard-events#legacy">the old “keypress”, “keyCode”, “charCode”, “which”</a></li>
-<li>task — <a target="_blank" rel="noopener" href="https://javascript.info/keyboard-events#extended-hotkeys">Extended hotkeys</a></li>
+<li>key repeat: key pressed for a long enough time <a target="_blank" rel="noopener" href="https://javascript.info/keyboard-events#auto-repeat">..</a></li>
+<li>task: <a target="_blank" rel="noopener" href="https://javascript.info/keyboard-events#extended-hotkeys">Extended hotkeys</a></li>
 </ul>
 <h1 id="Form-Ctrl"><a href="#Form-Ctrl" class="headerlink" title="Form Ctrl"></a>Form Ctrl</h1><ul>
-<li>named collection: <code>document.forms.formName</code> &amp; <code>form/fieldset.elements.ctrlElemName</code> (fieldset as subform) <a target="_blank" rel="noopener" href="https://javascript.info/form-elements#navigation-form-and-elements">..</a></li>
+<li>named collection: <code>document.forms</code> &amp; <code>form/fieldset.elements</code> (fieldset as subform) <a target="_blank" rel="noopener" href="https://javascript.info/form-elements#navigation-form-and-elements">..</a></li>
+<li>back-ref: <code>elem.form</code> <a target="_blank" rel="noopener" href="https://javascript.info/form-elements#backreference-element-form">..</a></li>
+<li>Form elements: input/textarea, select and option <a target="_blank" rel="noopener" href="https://javascript.info/form-elements#form-elements">..</a></li>
 </ul>
-<h2 id="Form-elem-props"><a href="#Form-elem-props" class="headerlink" title="Form elem props"></a>Form elem props</h2><p><code>form.elements[index/name]</code> &amp; <code>elem.form</code> <a target="_blank" rel="noopener" href="https://javascript.info/form-elements#backreference-element-form">..</a></p>
-<p><strong>input &amp; textarea</strong> <a target="_blank" rel="noopener" href="https://javascript.info/form-elements#input-and-textarea">..</a></p>
+<h2 id="Focusing-Event"><a href="#Focusing-Event" class="headerlink" title="Focusing Event"></a>Focusing Event</h2><p><code>focus</code> / <code>blur</code> event <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#events-focus-blur">..</a> &amp; <code>elem.focus/blur()</code> <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#methods-focus-blur">..</a></p>
 <ul>
-<li><code>input/textarea.value</code>: str, <code>input.checked</code>: bool (for checkboxes and radio btns)</li>
+<li>event not bubble (but capturable) — bubble version <code>focusin</code> / <code>focusout</code> event (handler assign by <code>elem.addEventListener</code>)</li>
 </ul>
-<p><strong>select &amp; option</strong> <a target="_blank" rel="noopener" href="https://javascript.info/form-elements#select-and-option">..</a></p>
+<p>Others</p>
 <ul>
-<li><code>select.options</code>: option collection &amp; <code>select.value/selectedIndex</code>: <code>selectedOption.value/index</code></li>
-<li><code>option.selected</code>: bool, <code>option.value\text</code>, <code>option.index</code></li>
-<li>new Option(…) <a target="_blank" rel="noopener" href="https://javascript.info/form-elements#new-option">..</a><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3 ways to set select value</span></span><br><span class="line">select.options[<span class="number">2</span>].selected = <span class="literal">true</span>;</span><br><span class="line">select.selectedIndex = <span class="number">2</span>;</span><br><span class="line">select.value = <span class="string">&#x27;banana&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// get all selected values from &lt;select multiple&gt;</span></span><br><span class="line"><span class="keyword">let</span> selected = <span class="built_in">Array</span>.from(select.options)</span><br><span class="line">  .filter(<span class="function"><span class="params">option</span> =&gt;</span> option.selected)</span><br><span class="line">  .map(<span class="function"><span class="params">option</span> =&gt;</span> option.value);</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>get current focused elem: <code>document.activeElement</code> <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#summary">..</a> — css <code>:focus</code> <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#allow-focusing-on-any-element-tabindex">..</a></li>
+<li><code>autofocus</code> attr <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur">..</a></li>
+<li>enable any elem focusable: <code>tabindex</code> attr || <code>elem.tabindex</code> <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#allow-focusing-on-any-element-tabindex">..</a></li>
+<li>input validate attr: <code>required</code>, <code>pattern</code> <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#events-focus-blur">…</a></li>
 </ul>
-<h2 id="Focusing-Event"><a href="#Focusing-Event" class="headerlink" title="Focusing Event"></a>Focusing Event</h2><ul>
-<li><code>focus</code> / <code>blur</code> event <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#events-focus-blur">..</a> &amp; <code>elem.focus/blur()</code> <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#methods-focus-blur">..</a><ul>
-<li>event not bubble (but capturable) ==&gt; <strong>focusin</strong> / <strong>focusout</strong> event (handler assign by <strong>elem.addEventListener</strong>)</li>
-<li><code>autofocus</code> attr [..] (<a target="_blank" rel="noopener" href="https://javascript.info/focus-blur">https://javascript.info/focus-blur</a>) &amp; <code>:focus</code> in css <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#allow-focusing-on-any-element-tabindex">..</a></li>
-<li>input validate attr: <code>required</code>, <code>pattern</code> <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#events-focus-blur">..</a></li>
-</ul>
-</li>
-<li>enable any elem focusable by <code>tabindex*</code> attr || elem.<strong>tabindex</strong> (0, -1, …) &amp; switch order <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#allow-focusing-on-any-element-tabindex">..</a></li>
-<li>get focused elem: <code>document.activeElement</code> <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#summary">..</a></li>
-<li>task — <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#editable-div">Editable div</a>, <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#edit-td-on-click">Edit TD on click</a>, <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#keyboard-driven-mouse">Keyboard-driven mouse</a></li>
-</ul>
+<p>task: <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#editable-div">Editable div</a>, <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#edit-td-on-click">Edit TD on click</a>, <a target="_blank" rel="noopener" href="https://javascript.info/focus-blur#keyboard-driven-mouse">Keyboard-driven mouse</a></p>
 <h2 id="Data-update-events"><a href="#Data-update-events" class="headerlink" title="Data update events"></a>Data update events</h2><ul>
-<li><code>input</code> event: on any value change <a target="_blank" rel="noopener" href="https://javascript.info/events-change-input#event-input">..</a></li>
 <li><code>change</code> event: on finish change, e.g. text-input elem blur, select-opt changes <a target="_blank" rel="noopener" href="https://javascript.info/events-change-input#event-change">..</a></li>
+<li><code>input</code> event: on any value change <a target="_blank" rel="noopener" href="https://javascript.info/events-change-input#event-input">..</a></li>
 <li><code>cut/copy/paste</code> event <a target="_blank" rel="noopener" href="https://javascript.info/events-change-input#events-cut-copy-paste">..</a></li>
 </ul>
-<h2 id="Form-submit-event"><a href="#Form-submit-event" class="headerlink" title="Form submit event"></a>Form submit event</h2><ul>
-<li><code>submit</code> event on form (sent data to server): <ul>
+<h2 id="Form-submit-event"><a href="#Form-submit-event" class="headerlink" title="Form submit event"></a>Form submit event</h2><p><code>submit</code> event on form (sent data to server): </p>
+<ul>
 <li>trigger on press “Enter” on input field =&gt; trigger <strong>click</strong> on input[type=submit] <a target="_blank" rel="noopener" href="https://javascript.info/forms-submit#event-submit">..</a></li>
-<li>form.<strong>submit()</strong>: submit form manually (<code>submit</code> event not generated, i.e. submit handler not run)</li>
-<li>tasks — <a target="_blank" rel="noopener" href="https://javascript.info/forms-submit#modal-form">Modal form</a></li>
+<li>submit form manually: <code>form.submit()</code>:  (<code>submit</code> event not generated)</li>
+<li>tasks: <a target="_blank" rel="noopener" href="https://javascript.info/forms-submit#modal-form">Modal form</a></li>
+</ul>
+<h1 id="Doc-amp-resrc-loading"><a href="#Doc-amp-resrc-loading" class="headerlink" title="Doc &amp; resrc loading"></a>Doc &amp; resrc loading</h1><h2 id="Page-load-events"><a href="#Page-load-events" class="headerlink" title="Page load events"></a>Page load events</h2><ul>
+<li><code>document.DOMContentLoaded</code>: HTML &amp; DOM tree ready, form autofill <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#built-in-browser-autofill">..</a><ul>
+<li>see <code>&lt;img&gt;</code> node but size = 0</li>
+<li><strong>wait non-async script</strong> exe <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded-and-scripts">..</a>, but <strong>not wait external-CSS</strong> (unless script require it) <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded-and-styles">..</a></li>
+<li>handle by <code>addEventListener()</code> <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded">..</a></li>
 </ul>
 </li>
+<li><code>window.load</code>: external resrc (css, img) loaded (img size known) <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#window-onload">..</a></li>
+<li><code>window.beforeunload/unload</code>: user leaving this page …</li>
 </ul>
-<h1 id="Doc-amp-resrc-loading"><a href="#Doc-amp-resrc-loading" class="headerlink" title="Doc &amp; resrc loading"></a>Doc &amp; resrc loading</h1><h2 id="Page-load-events"><a href="#Page-load-events" class="headerlink" title="Page load events"></a>Page load events</h2><p><code>DOMContentLoaded</code> event: HTML &amp; DOM tree ready (no external resrc) =&gt; DOM nodes ready</p>
+<p>Others</p>
 <ul>
-<li><strong>wait non-async script</strong> execution bf continuing building the DOM <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded-and-scripts">..</a></li>
-<li><strong>not wait external-CSS</strong> unless script require it <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded-and-styles">..</a></li>
-<li>form-autofill on <code>DOMContentLoaded</code> <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#built-in-browser-autofill">..</a></li>
-<li>handle by <code>document.addEventListener</code> <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded">..</a></li>
+<li><code>document.readState</code>: “loading”, “interactive” , “complete” — the old <strong>document.readystatechange</strong> <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#readystate">..</a></li>
+<li>Whole process <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#readystate">…</a></li>
 </ul>
-<p><code>window.onload</code> event: HTML &amp; DOM tree ready + external resrc loaded ==&gt; CSS applied, image sizes known  <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#domcontentloaded">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#window-onload">..</a></p>
-<p><code>window.onunload</code> <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#window-onunload">..</a> &amp; <code>onbeforeunload</code> <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#window.onbeforeunload">..</a></p>
-<p><code>document.readState</code> = “loading”, “interactive” , “complete” &amp; the old <strong>document.readystatechange</strong> <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#readystate">..</a></p>
-<p><strong>Whole process</strong> <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#readystate">..</a></p>
+<h2 id="Script-attr-async-defer"><a href="#Script-attr-async-defer" class="headerlink" title="Script attr: async, defer"></a>Script attr: async, defer</h2><p>Both load not-block (load script in bg)</p>
 <ul>
-<li>readState: loading &amp; readState: interactive</li>
-<li>DOMContentLoaded</li>
-<li>ex-resrc onload &amp; readyState:complete</li>
-<li>window onload </li>
+<li><code>async</code>: run in load-1st order <a target="_blank" rel="noopener" href="https://javascript.info/script-async-defer#async">..</a><ul>
+<li>Dynamic scripts (gen by JS) load af insert to the doc &amp; run in in load-1st order  <a target="_blank" rel="noopener" href="https://javascript.info/script-async-defer#dynamic-scripts">..</a>    </li>
 </ul>
-<h2 id="Script-attr-async-defer"><a href="#Script-attr-async-defer" class="headerlink" title="Script attr: async, defer"></a>Script attr: async, defer</h2><p>Both load not block page rendering (load script in bg)</p>
-<ul>
-<li><code>defer</code>: run when DOM ready but bf DOMContentLoaded event<ul>
+</li>
+<li><code>defer</code>: run when DOM ready (but bf DOMContentLoaded event) <a target="_blank" rel="noopener" href="https://javascript.info/script-async-defer#defer">..</a><ul>
 <li>only for external script, run on doc order</li>
 </ul>
 </li>
-<li><code>async</code>: run in load-1st order (load 1st, run 1st, not wait for each other)<ul>
-<li><strong>dynamicScript.async = true</strong> by default</li>
-<li>Dynamic scripts (&amp; other resrc) load af insert to the doc <a target="_blank" rel="noopener" href="https://javascript.info/onload-onerror#other-resources">..</a></li>
 </ul>
-</li>
-</ul>
-<h2 id="Resrc-loading-event"><a href="#Resrc-loading-event" class="headerlink" title="Resrc loading event"></a>Resrc loading event</h2><p><code>load</code>, <code>error</code> — track <strong>loading process</strong> of resrc with <strong>src</strong> attr, e.g. script, img, css <a target="_blank" rel="noopener" href="https://javascript.info/onload-onerror">..</a></p>
+<h2 id="Resrc-loading-event"><a href="#Resrc-loading-event" class="headerlink" title="Resrc loading event"></a>Resrc loading event</h2><p>Most resrcs start loading when added to the doc, except <code>&lt;img&gt;</code> (load when gets src &amp; cached <a target="_blank" rel="noopener" href="https://javascript.info/onload-onerror#load-images-with-a-callback">..</a>)</p>
 <ul>
-<li><code>onload</code> — trigger af script loaded successfully &amp; executed</li>
-<li><code>onerror</code> — trigger when error occurs during loading</li>
-</ul>
-<p>Most resources start loading when added to the doc</p>
-<ul>
-<li>img start loading when gets src <a target="_blank" rel="noopener" href="https://javascript.info/onload-onerror#other-resources">..</a> &amp; catched <a target="_blank" rel="noopener" href="https://javascript.info/onload-onerror#load-images-with-a-callback">..</a> </li>
+<li><code>load/error</code> events: external resrc (tag with <code>src</code> attr <a target="_blank" rel="noopener" href="https://javascript.info/onload-onerror#other-resources">..</a>, e.g. script, img, css) loaded successfully / err  <a target="_blank" rel="noopener" href="https://javascript.info/onload-onerror">..</a></li>
 <li>iframe.onload: on loading finished ( successful || error) (history) <a target="_blank" rel="noopener" href="https://javascript.info/onload-onerror#other-resources">..</a></li>
 <li>track other errors: <code>window.onerror</code> <a target="_blank" rel="noopener" href="https://javascript.info/onload-onerror#script-onerror">..</a></li>
-<li><a href="CORS">cross-origin policy</a> &amp; script.crossorigin attr (commu with remove server) <a target="_blank" rel="noopener" href="https://javascript.info/onload-onerror#crossorigin-policy">..</a></li>
-</ul>
-<h1 id="Others-1"><a href="#Others-1" class="headerlink" title="Others"></a>Others</h1><h2 id="Range-amp-Selection"><a href="#Range-amp-Selection" class="headerlink" title="Range &amp; Selection"></a>Range &amp; Selection</h2><p>range <a target="_blank" rel="noopener" href="https://javascript.info/selection-range#range">..</a> &amp; props &amp; methods …</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> range = <span class="keyword">new</span> Range();</span><br><span class="line">range.setStart/End(node, <span class="attr">offset</span>: num); <span class="comment">// offset: child index, offset=0 means 1st child</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// apply the selection</span></span><br><span class="line"><span class="built_in">document</span>/<span class="built_in">window</span>.getSelection().addRange(range)/removeAllRanges();</span><br></pre></td></tr></table></figure>
-
-<p>selection <a target="_blank" rel="noopener" href="https://javascript.info/selection-range#selection">..</a></p>
-<ul>
-<li>get by <strong>window/document.getSelection()</strong> — singloten???</li>
-<li>all browsers (except Firefox), a Selection contains maximum 1 range</li>
-<li>props, methods &amp; events …</li>
-<li>selection in form ctrls …</li>
-<li>Making unselectable <a target="_blank" rel="noopener" href="https://javascript.info/selection-range#making-unselectable">..</a></li>
-</ul>
-<h2 id="Mutation-observer"><a href="#Mutation-observer" class="headerlink" title="Mutation observer"></a>Mutation observer</h2><p>A built-in obj that observes a DOM node &amp; fire callback in case of changes: childList &amp; subtree, attributes, data</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> observer = <span class="keyword">new</span> MutationObserver(callback); </span><br><span class="line"><span class="comment">// callback: fn(mutationRecords: [...MutationRecord-objs], observer: the observer itself)	</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// attach to DOM node </span></span><br><span class="line">observer.observe(node, <span class="attr">config</span>: &#123;bool-options&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// stop observing</span></span><br><span class="line">observer.disconnect();</span><br><span class="line"></span><br><span class="line"><span class="comment">// handle unprocessed mutations when stopping observing</span></span><br><span class="line"><span class="keyword">let</span> mutationRecords = observer.takeRecords();</span><br></pre></td></tr></table></figure>
-
-<p><strong>Usages</strong> <a target="_blank" rel="noopener" href="https://javascript.info/mutation-observer#usage-for-integration">..</a><br><strong>observer &amp; GC</strong> — node observed doesn’t prevent GC(weak ref)</p>
-<h2 id="Chrome-console-amp-Debugging-in-Chrome"><a href="#Chrome-console-amp-Debugging-in-Chrome" class="headerlink" title="Chrome console &amp; Debugging in Chrome"></a>Chrome console &amp; Debugging in Chrome</h2><p>Chrome console <a target="_blank" rel="noopener" href="https://javascript.info/devtools#google-chrome">..</a></p>
-<ul>
-<li><strong>breakpoints</strong> &amp; <code>debugger</code> cmd</li>
-<li>execution tracking…</li>
-<li>logging with <code>console.log(...)</code></li>
-<li>ref: <a target="_blank" rel="noopener" href="https://javascript.info/debugging-chrome">https://javascript.info/debugging-chrome</a></li>
+<li>CORS &amp; script <code>crossorigin</code> attr <a target="_blank" rel="noopener" href="https://javascript.info/onload-onerror#crossorigin-policy">…</a></li>
 </ul>
 
     </div>

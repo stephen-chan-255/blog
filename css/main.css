@@ -2943,6 +2943,9 @@ mark.search-keyword {
   font-size: 0.875em;
   line-height: 22px;
 }
+.post-body h1 {
+  padding-bottom: 3px;
+}
 .post-body h2,
 .post-body h3,
 .post-body h4,
@@ -2950,8 +2953,10 @@ mark.search-keyword {
 .post-body h6 {
   border-bottom: none;
   margin: 0 !important;
+  margin-bottom: 5px !important;
 }
-.post-body h1+h2 {
+.post-body h1+h2,
+.post-body h2+h3 {
   padding-top: 0;
 }
 .post-body h3 {

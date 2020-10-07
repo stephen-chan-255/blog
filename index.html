@@ -421,7 +421,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-01 21:27:43" itemprop="dateModified" datetime="2020-10-01T21:27:43+08:00">2020-10-01</time>
+        <time title="Modified: 2020-10-06 18:39:13" itemprop="dateModified" datetime="2020-10-06T18:39:13+08:00">2020-10-06</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -524,7 +524,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-09-04 18:22:18" itemprop="dateModified" datetime="2020-09-04T18:22:18+08:00">2020-09-04</time>
+        <time title="Modified: 2020-10-07 17:23:12" itemprop="dateModified" datetime="2020-10-07T17:23:12+08:00">2020-10-07</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -555,15 +555,18 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="JS-intro"><a href="#JS-intro" class="headerlink" title="JS intro"></a>JS intro</h1><ul>
-<li>init to <strong>make webpages alive</strong></li>
-<li>run on platform with <a target="_blank" rel="noopener" href="https://javascript.info/intro#what-is-javascript">JS engine</a> (e.g. browser JS VM <a target="_blank" rel="noopener" href="https://mrale.ph/">V8</a>) in Chrome &amp; Opera) ==&gt; <a target="_blank" rel="noopener" href="https://javascript.info/browser-environment">host env</a></li>
-<li>JS in HTML: <code>&lt;script&gt;...&lt;/script&gt;</code> &amp; <code>&lt;script src=...&gt;&lt;/script&gt;</code> <a target="_blank" rel="noopener" href="https://javascript.info/hello-world">..</a> <ul>
-<li><strong>type=”text/javascript” language=”javascript”</strong> attr no need anymore</li>
-<li>inline content ignored if <code>src</code> set</li>
-<li>browser cache external script for reuse ==&gt; make complex scripts external</li>
+<li>init to <strong>make webpages alive</strong> <a target="_blank" rel="noopener" href="https://javascript.info/intro">..</a>, run on platforms with <strong>JS engine</strong> (in browser aka “JS VM”,  e.g. “V8” in Chrome &amp; Opera) <a target="_blank" rel="noopener" href="https://javascript.info/intro#what-is-javascript">..</a><ul>
+<li>browser env: <code>window</code> (root obj) =&gt; JS / DOM / BOM <a target="_blank" rel="noopener" href="https://javascript.info/browser-environment">..</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/browser-environment#bom-browser-object-model">BOM</a>: <code>navigator</code> obj, <code>location.href</code>, model win fn: <code>alert()</code>, <code>prompt()</code>, <code>confirm()</code> <a target="_blank" rel="noopener" href="https://javascript.info/alert-prompt-confirm">..</a></li>
 </ul>
 </li>
-<li>in-browser JS restrictions: access file system &amp; devices, browser <strong>Same Origin Policy</strong></li>
+<li>JS in HTML: <code>&lt;script&gt;..&lt;/script&gt;</code> &amp; <code>&lt;script src=..&gt;&lt;/script&gt;</code> <a target="_blank" rel="noopener" href="https://javascript.info/hello-world">..</a> <ul>
+<li><code>type=&quot;text/javascript&quot; language=&quot;javascript&quot;</code> attr no need anymore <a target="_blank" rel="noopener" href="https://javascript.info/hello-world#modern-markup">..</a></li>
+<li>inline content ignored if <code>src</code> set <a target="_blank" rel="noopener" href="https://javascript.info/hello-world#external-scripts">..</a></li>
+<li>browser cache external script for re-use <a target="_blank" rel="noopener" href="https://javascript.info/hello-world#external-scripts">..</a></li>
+</ul>
+</li>
+<li>in-browser JS restrictions <a target="_blank" rel="noopener" href="https://javascript.info/intro#what-can-t-in-browser-javascript-do">…</a></li>
 </ul>
           <!--noindex-->
             <div class="post-button">
@@ -731,7 +734,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-03 10:08:15" itemprop="dateModified" datetime="2020-10-03T10:08:15+08:00">2020-10-03</time>
+        <time title="Modified: 2020-10-07 20:46:10" itemprop="dateModified" datetime="2020-10-07T20:46:10+08:00">2020-10-07</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -761,7 +764,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="‘use-strict’"><a href="#‘use-strict’" class="headerlink" title="‘use strict’"></a>‘use strict’</h1><p>To enable ES5 modification for old features (may break old code)</p>
+          <h1 id="Chrome-console-amp-Debugging"><a href="#Chrome-console-amp-Debugging" class="headerlink" title="Chrome console &amp; Debugging"></a>Chrome console &amp; Debugging</h1><p>Chrome console <a target="_blank" rel="noopener" href="https://javascript.info/devtools#google-chrome">..</a> &amp; debuging in chrome <a target="_blank" rel="noopener" href="https://javascript.info/debugging-chrome">..</a></p>
+<ul>
+<li>logging with <code>console.log(...)</code></li>
+<li><strong>breakpoints</strong> &amp; <code>debugger</code> cmd, execution tracking …</li>
+</ul>
+<h1 id="‘use-strict’"><a href="#‘use-strict’" class="headerlink" title="‘use strict’"></a>‘use strict’</h1><p>To enable ES5</p>
 <ul>
 <li>off by default — always put <code>&#39;use script&#39;</code> on <strong>top</strong> of script/fn-body<ul>
 <li>auto enable for <code>class</code> &amp; <code>module</code></li>
@@ -833,7 +841,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-03 10:59:23" itemprop="dateModified" datetime="2020-10-03T10:59:23+08:00">2020-10-03</time>
+        <time title="Modified: 2020-10-07 21:10:20" itemprop="dateModified" datetime="2020-10-07T21:10:20+08:00">2020-10-07</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
