@@ -30,7 +30,7 @@
 <meta property="og:description" content="Chrome console &amp; DebuggingChrome console .. &amp; debuging in chrome ..  logging with console.log(...) breakpoints &amp; debugger cmd, execution tracking …  ‘use strict’To enable ES5  off by defau">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-05-20T11:08:31.000Z">
-<meta property="article:modified_time" content="2020-10-07T12:46:10.295Z">
+<meta property="article:modified_time" content="2020-10-08T13:18:05.882Z">
 <meta property="article:author" content="Stephen Chan">
 <meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chrome-console-amp-Debugging"><span class="nav-number">1.</span> <span class="nav-text">Chrome console &amp; Debugging</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E2%80%98use-strict%E2%80%99"><span class="nav-number">2.</span> <span class="nav-text">‘use strict’</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-types"><span class="nav-number">3.</span> <span class="nav-text">Data types</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Date-amp-time"><span class="nav-number">3.1.</span> <span class="nav-text">Date &amp; time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map-amp-Set-WeakMap-amp-WeakSet"><span class="nav-number">3.2.</span> <span class="nav-text">Map &amp; Set, WeakMap &amp; WeakSet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Obj-advanced"><span class="nav-number">4.</span> <span class="nav-text">Obj advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol-type"><span class="nav-number">4.1.</span> <span class="nav-text">Symbol type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Global-obj"><span class="nav-number">4.2.</span> <span class="nav-text">Global obj</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Obj-prop-config"><span class="nav-number">4.3.</span> <span class="nav-text">Obj prop config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Accessor-props"><span class="nav-number">4.4.</span> <span class="nav-text">Accessor props</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Primitive-as-Obj"><span class="nav-number">4.5.</span> <span class="nav-text">Primitive as Obj</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Obj-gt-primitive"><span class="nav-number">4.6.</span> <span class="nav-text">Obj -&gt; primitive</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS-engine-internal-Event-loop"><span class="nav-number">5.</span> <span class="nav-text">JS engine internal: Event loop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Generator"><span class="nav-number">6.</span> <span class="nav-text">Generator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Programming-pattern"><span class="nav-number">7.</span> <span class="nav-text">Programming pattern</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM"><span class="nav-number">8.</span> <span class="nav-text">DOM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other-concepts-amp-Resources"><span class="nav-number">9.</span> <span class="nav-text">Other concepts &amp; Resources</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chrome-console-amp-Debugging"><span class="nav-number">1.</span> <span class="nav-text">Chrome console &amp; Debugging</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E2%80%98use-strict%E2%80%99"><span class="nav-number">2.</span> <span class="nav-text">‘use strict’</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-types"><span class="nav-number">3.</span> <span class="nav-text">Data types</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Date-amp-time"><span class="nav-number">3.1.</span> <span class="nav-text">Date &amp; time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map-amp-Set-WeakMap-amp-WeakSet"><span class="nav-number">3.2.</span> <span class="nav-text">Map &amp; Set, WeakMap &amp; WeakSet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Obj-advanced"><span class="nav-number">4.</span> <span class="nav-text">Obj advanced</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol-type"><span class="nav-number">4.1.</span> <span class="nav-text">Symbol type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Obj-prop-config-descriptor-amp-Accessor"><span class="nav-number">4.2.</span> <span class="nav-text">Obj prop config: descriptor &amp; Accessor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-iter"><span class="nav-number">4.3.</span> <span class="nav-text">Key iter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Global-obj"><span class="nav-number">4.4.</span> <span class="nav-text">Global obj</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Primitive-as-Obj"><span class="nav-number">4.5.</span> <span class="nav-text">Primitive as Obj</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Obj-to-primitive"><span class="nav-number">4.6.</span> <span class="nav-text">Obj to primitive</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS-engine-internal-Event-loop"><span class="nav-number">5.</span> <span class="nav-text">JS engine internal: Event loop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Generator"><span class="nav-number">6.</span> <span class="nav-text">Generator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Programming-pattern"><span class="nav-number">7.</span> <span class="nav-text">Programming pattern</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM"><span class="nav-number">8.</span> <span class="nav-text">DOM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Module"><span class="nav-number">9.</span> <span class="nav-text">Module</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other-concepts-amp-Resources"><span class="nav-number">10.</span> <span class="nav-text">Other concepts &amp; Resources</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -350,7 +350,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-07 20:46:10" itemprop="dateModified" datetime="2020-10-07T20:46:10+08:00">2020-10-07</time>
+        <time title="Modified: 2020-10-08 21:18:05" itemprop="dateModified" datetime="2020-10-08T21:18:05+08:00">2020-10-08</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -433,36 +433,40 @@
 </ul>
 <h1 id="Obj-advanced"><a href="#Obj-advanced" class="headerlink" title="Obj advanced"></a>Obj advanced</h1><h2 id="Symbol-type"><a href="#Symbol-type" class="headerlink" title="Symbol type"></a>Symbol type</h2><p>unique (even same desc) vs global symbol (1 key 1 symbol)</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="built_in">Symbol</span>(<span class="string">&quot;id&quot;</span>));    <span class="comment">// TypeError (not auto-convert to string)</span></span><br><span class="line">alert(id.toString()); 	<span class="comment">// Symbol(id)</span></span><br><span class="line">alert(id.description);  <span class="comment">// id</span></span><br></pre></td></tr></table></figure>
-<p><strong>symbol as obj key</strong></p>
+
+<h2 id="Obj-prop-config-descriptor-amp-Accessor"><a href="#Obj-prop-config-descriptor-amp-Accessor" class="headerlink" title="Obj prop config: descriptor &amp; Accessor"></a>Obj prop config: descriptor &amp; Accessor</h2><p>prop descriptor: <code>value</code> + <code>writable</code>, <code>enumerable</code>, <code>configurable</code> <a target="_blank" rel="noopener" href="https://javascript.info/property-descriptors">..</a></p>
 <ul>
-<li>skip in <code>for..in</code> loop &amp; <code>Object.keys(obj)</code> (looks like non-emutable) but in <code>Object.assign()</code> <a target="_blank" rel="noopener" href="https://javascript.info/symbol#symbols-are-skipped-by-for-in">..</a></li>
-<li>get by <code>Object.getOwnPropertySymbols(obj)</code> <a target="_blank" rel="noopener" href="https://javascript.info/prototype-methods#summary">..</a></li>
+<li>get/set desc: <code>Object.getOwnPropertyDescriptor()</code>, <code>Object.defineProperty()</code> &amp; clone with desc <a target="_blank" rel="noopener" href="https://javascript.info/property-descriptors#object-getownpropertydescriptors">..</a></li>
+<li>obj created “the usually way”: flags default <code>true</code>; flags not supplied in desc defalut <code>false</code></li>
+<li>built-in <code>toString()</code> non-enumerable</li>
+<li>Sealing an object globally …</li>
+</ul>
+<p>Accessor <code>get/set xxx([value]) &#123;..&#125;</code>, trigger when <code>xxx</code> prop read/assign</p>
+<ul>
+<li>desc: <code>get/set([value]) &#123;..&#125;</code>, <code>enumerable</code>, <code>configurable</code></li>
+<li>smarter g/setter: store value in another internal prop</li>
+<li>age -&gt; birthday example <a target="_blank" rel="noopener" href="https://javascript.info/property-accessors#using-for-compatibility">..</a></li>
+</ul>
+<h2 id="Key-iter"><a href="#Key-iter" class="headerlink" title="Key iter"></a>Key iter</h2><ul>
+<li>method differs (all return an arr) <a target="_blank" rel="noopener" href="https://javascript.info/prototype-methods#summary">..</a>, <a target="_blank" rel="noopener" href="https://javascript.info/proxy#iteration-with-ownkeys-and-getownpropertydescriptor">..</a><ul>
+<li><code>Reflect.ownKeys(obj)</code>/<code>obj.hasOwnProperty(key)</code>: own</li>
+<li><code>Object.getOwnPropertyNames</code>: own, non-symbol — <code>Object.getOwnPropertySymbols(obj)</code>: own, symbol</li>
+<li><code>Object.keys/values/entries(obj)</code>: own, <strong>non-symbol</strong> &amp; <code>enum</code></li>
+<li><code>for..in</code>: own + <strong>proto</strong>, <strong>non-symbol</strong> &amp; <code>enum</code></li>
+<li><code>Object.assign()</code>: symbol + non-symbol <a target="_blank" rel="noopener" href="https://javascript.info/symbol#symbols-are-skipped-by-for-in">..</a></li>
+</ul>
+</li>
 </ul>
 <h2 id="Global-obj"><a href="#Global-obj" class="headerlink" title="Global obj"></a>Global obj</h2><p>Provide built-in var &amp; fn (can be access directly), e.g. <code>window</code> in browser &amp; <code>global</code> in node </p>
 <ul>
 <li>e.g. <code>window.alert</code>, <code>window.innerHeight</code> &amp; global fn || <strong>var</strong>-var</li>
 <li>make value global: <code>window.xxx = ...</code> (props of global-obj)</li>
 </ul>
-<h2 id="Obj-prop-config"><a href="#Obj-prop-config" class="headerlink" title="Obj prop config"></a>Obj prop config</h2><ul>
-<li>prop descriptor: <code>value</code> + <code>writable</code>, <code>enumerable</code>, <code>configurable</code> <a target="_blank" rel="noopener" href="https://javascript.info/property-descriptors">..</a><ul>
-<li>get/set desc: <code>Object.getOwnPropertyDescriptor()</code>, <code>Object.defineProperty()</code> &amp; clone with desc <a target="_blank" rel="noopener" href="https://javascript.info/property-descriptors#object-getownpropertydescriptors">..</a></li>
-<li>obj created “the usually way”: flags default <code>true</code>; flags not supplied in desc defalut <code>false</code></li>
-<li>built-in <code>toString()</code> non-enumerable</li>
-</ul>
-</li>
-<li>Sealing an object globally ..</li>
-</ul>
-<h2 id="Accessor-props"><a href="#Accessor-props" class="headerlink" title="Accessor props"></a>Accessor props</h2><p><code>get/set xxx([value]) &#123;..&#125;</code>, trigger when <code>xxx</code> prop read/assign</p>
-<ul>
-<li>desc: <code>get/set([value]) &#123;..&#125;</code>, <code>enumerable</code>, <code>configurable</code></li>
-<li>smarter g/setter: store value in another internal prop</li>
-<li>age -&gt; birthday example <a target="_blank" rel="noopener" href="https://javascript.info/property-accessors#using-for-compatibility">..</a></li>
-</ul>
 <h2 id="Primitive-as-Obj"><a href="#Primitive-as-Obj" class="headerlink" title="Primitive as Obj"></a>Primitive as Obj</h2><p>provide methods to op prim but keep them fast &amp; lightweight e.g.  <code>String</code>, <code>Number</code>, <code>Boolean</code>, <code>Symbol</code> </p>
 <ul>
 <li>temporary wrapper obj created &amp; destroyed <a target="_blank" rel="noopener" href="https://javascript.info/primitives-methods#a-primitive-as-an-object">..</a> — manually modify obj wrap =&gt; err (strict) || undefined <a target="_blank" rel="noopener" href="https://javascript.info/primitives-methods#can-i-add-a-string-property">..</a></li>
 </ul>
-<h2 id="Obj-gt-primitive"><a href="#Obj-gt-primitive" class="headerlink" title="Obj -&gt; primitive"></a>Obj -&gt; primitive</h2><ul>
+<h2 id="Obj-to-primitive"><a href="#Obj-to-primitive" class="headerlink" title="Obj to primitive"></a>Obj to primitive</h2><ul>
 <li><a href="" title="which type to convert">3 hints</a>: <code>&quot;string&quot;</code>, <code>&quot;number&quot;</code> &amp; <code>&quot;default&quot;</code> (no boolean hint: all <strong>obj  =&gt; true</strong>)</li>
 <li>3 methods: must return a prim value <a target="_blank" rel="noopener" href="https://javascript.info/object-toprimitive#return-types">..</a><ul>
 <li><code>[Symbol.toPrimitive](hint)</code> return obj ==&gt; err</li>
@@ -521,7 +525,22 @@
 <h1 id="Programming-pattern"><a href="#Programming-pattern" class="headerlink" title="Programming pattern"></a>Programming pattern</h1><p><strong>Fn decorator</strong> <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators">..</a></p>
 <ul>
 <li>fn-wrapper that takes fn as param (callback) and alters its behavior</li>
+<li>decorated fn lose prop — <code>Proxy</code> ( forward eth to target) <a target="_blank" rel="noopener" href="https://javascript.info/proxy#proxy-apply">..</a></li>
 <li>tasks: <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#spy-decorator">spy(fn)</a>, <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#delaying-decorator">delay(fn)</a>, <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#debounce-decorator">debounce(fn, ms)</a>, <a target="_blank" rel="noopener" href="https://javascript.info/call-apply-decorators#throttle-decorator">throttle(fn, ms)</a></li>
+</ul>
+<p><strong>Currying</strong></p>
+<ul>
+<li>transform <strong>f(a, b, c)</strong> –&gt; <strong>f(a)(b)(c)</strong> — easily for partial (see below): let fn = f(a), then fn(b)(c) <a target="_blank" rel="noopener" href="https://javascript.info/currying-partials#currying-what-for">..</a></li>
+<li>implementation <a target="_blank" rel="noopener" href="https://javascript.info/currying-partials#advanced-curry-implementation">..</a></li>
+</ul>
+<p><strong>Proxy &amp; Reflect</strong><br><code>Proxy</code>: a wrapper obj that intercepts ops (e.g. get/set props) on the target-obj by its handler <a target="_blank" rel="noopener" href="https://javascript.info/proxy">..</a></p>
+<ul>
+<li>ops on <code>proxy</code> =&gt; trigger corresponding trap in <code>handler</code> =&gt; (if no) forwards operations to <code>target</code> <a target="_blank" rel="noopener" href="https://javascript.info/proxy#proxy">..</a> </li>
+<li>proxy no own props, access from <code>target</code> <a target="_blank" rel="noopener" href="https://javascript.info/proxy#proxy">..</a></li>
+<li>ops -&gt; proxy handler methods -&gt; internal methods (low level)</li>
+<li>Proxying a getter with <code>receiver</code> (<a target="_blank" rel="noopener" href="https://javascript.info/proxy#proxying-a-getter">https://javascript.info/proxy#proxying-a-getter</a>)</li>
+<li><code>Reflect</code>: to complement Proxy</li>
+<li>tasks: <a target="_blank" rel="noopener" href="https://javascript.info/proxy#accessing-array-1">array[-1]</a>, <a target="_blank" rel="noopener" href="https://javascript.info/proxy#observable">makeObservable(target)</a></li>
 </ul>
 <p><strong>Recursion</strong> <a target="_blank" rel="noopener" href="https://javascript.info/recursion">..</a></p>
 <ul>
@@ -541,6 +560,42 @@
 <li>range &amp; selection <a target="_blank" rel="noopener" href="https://javascript.info/selection-range">..</a></li>
 <li>mutation observer: fire callback when change observed on a DOM node, childList &amp; subtree, attributes, text content <a target="_blank" rel="noopener" href="https://javascript.info/mutation-observer">..</a><ul>
 <li>div <code>contentEditable</code> attr</li>
+</ul>
+</li>
+</ul>
+<h1 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h1><ul>
+<li>a script file that load each other by <code>export</code> &amp; <code>import</code> <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#what-is-a-module">..</a>, intro in ES6 <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro">..</a></li>
+</ul>
+<p><strong>module in browser</strong></p>
+<ul>
+<li>in-line module: <code>&lt;script type=&quot;module&quot;&gt;</code> <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#what-is-a-module">..</a> (<code>type</code> attr enable <code>import/export</code> <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#build-tools">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#summary">..</a>) — old browser use “nomodule” attr instead <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#compatibility-nomodule">..</a></li>
+<li>module <code>defer</code> <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#module-scripts-are-deferred">..</a> by default <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#summary">..</a>, can <code>async</code> <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#async-works-on-inline-scripts">..</a> (work for both inline/external scripts <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#module-scripts-are-deferred">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#async-works-on-inline-scripts">..</a> — regular script only external <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#async-works-on-inline-scripts">..</a>) </li>
+</ul>
+<p><code>export/import</code> <strong>syntax</strong> <a target="_blank" rel="noopener" href="https://javascript.info/import-export#summary">..</a></p>
+<ul>
+<li>default export (import without <code>&#123;&#125;</code>) vs named export <a target="_blank" rel="noopener" href="https://javascript.info/import-export#export-default">..</a></li>
+<li><code>default</code> keyword ref to the default export <a target="_blank" rel="noopener" href="https://javascript.info/import-export#the-default-name">..</a> (when import, any name works — name it correspond to file name for consistency <a target="_blank" rel="noopener" href="https://javascript.info/import-export#a-word-against-default-exports">..</a>)</li>
+<li><code>as</code> for export/import renaming</li>
+<li>Re-export: <code>export .. from ..</code> (import things &amp; immediately export them): gather scattered pkg fnality into single entry point &amp; expose them (by mtp re-export stmt in 1 file) <a target="_blank" rel="noopener" href="https://javascript.info/import-export#re-export">..</a></li>
+<li><code>import &quot;module&quot;</code>: run module code without assign to var </li>
+</ul>
+<p><strong>dynamic imports</strong> <code>import(&lt;module-path&gt;)</code>: return a <strong>promise</strong> resolves into a module-obj with exports as keys <a target="_blank" rel="noopener" href="https://javascript.info/modules-dynamic-imports">..</a></p>
+<ul>
+<li>a special syntax, not a fn (like super(), cannot copy &amp; use <strong>call/apply</strong>)</li>
+<li>work with regular <code>&lt;script&gt;</code> tag (no need type=”module”)</li>
+</ul>
+<p><strong>module vs regular script</strong> <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#core-module-features">..</a></p>
+<ul>
+<li>auto strict (<code>this == undefined</code>)</li>
+<li>own scope (interchange fnality via <code>import/export</code> <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#summary">..</a>)</li>
+<li>exe only once &amp; export share when imported mtp times (use as init) </li>
+</ul>
+<p><strong>others</strong></p>
+<ul>
+<li>place of <code>import/export</code> stms not matter (script top or bottom), but not work inside “{…}” — dynamic imports <a target="_blank" rel="noopener" href="https://javascript.info/import-export#summary">..</a></li>
+<li><code>import.meta</code>: obj contains info about the current module <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#import-meta">..</a></li>
+<li>build tool (for deployment) e.g. <strong>webpack</strong> (bundle modules toghther &amp; tree-shaking) <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#build-tools">..</a><ul>
+<li>resulting “bundled” script <code>bundle.js</code> no <code>import/export</code> stmt ==&gt; no <code>type=module</code> required (regular script <code>src=&quot;bundle.js&quot;</code>) <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#build-tools">..</a></li>
 </ul>
 </li>
 </ul>

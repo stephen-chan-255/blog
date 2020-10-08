@@ -30,7 +30,7 @@
 <meta property="og:description" content="JS intro init to make webpages alive .., run on platforms with JS engine (in browser aka “JS VM”,  e.g. “V8” in Chrome &amp; Opera) .. browser env: window (root obj) &#x3D;&gt; JS &#x2F; DOM &#x2F; BOM .. BOM: navig">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-06-30T08:34:11.000Z">
-<meta property="article:modified_time" content="2020-10-07T14:16:52.796Z">
+<meta property="article:modified_time" content="2020-10-08T10:52:17.670Z">
 <meta property="article:author" content="Stephen Chan">
 <meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
@@ -350,7 +350,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-07 22:16:52" itemprop="dateModified" datetime="2020-10-07T22:16:52+08:00">2020-10-07</time>
+        <time title="Modified: 2020-10-08 18:52:17" itemprop="dateModified" datetime="2020-10-08T18:52:17+08:00">2020-10-08</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -604,16 +604,13 @@
 <li><code>document.readState</code>: “loading”, “interactive” , “complete” — the old <strong>document.readystatechange</strong> <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#readystate">..</a></li>
 <li>Whole process <a target="_blank" rel="noopener" href="https://javascript.info/onload-ondomcontentloaded#readystate">…</a></li>
 </ul>
-<h2 id="Script-attr-async-defer"><a href="#Script-attr-async-defer" class="headerlink" title="Script attr: async, defer"></a>Script attr: async, defer</h2><p>Both load not-block (load script in bg)</p>
+<h2 id="Script-attr-async-defer"><a href="#Script-attr-async-defer" class="headerlink" title="Script attr: async, defer"></a>Script attr: async, defer</h2><p>Both only for external script (ignored if no <code>src</code> attr) <a target="_blank" rel="noopener" href="https://javascript.info/script-async-defer#defer">..</a> &amp; <a target="_blank" rel="noopener" href="https://javascript.info/modules-intro#async-works-on-inline-scripts">..</a> and load not-block (load script in bg)</p>
 <ul>
 <li><code>async</code>: run in load-1st order <a target="_blank" rel="noopener" href="https://javascript.info/script-async-defer#async">..</a><ul>
-<li>Dynamic scripts (gen by JS) load af insert to the doc &amp; run in in load-1st order  <a target="_blank" rel="noopener" href="https://javascript.info/script-async-defer#dynamic-scripts">..</a>    </li>
+<li>Dynamic scripts (gen by JS) load af insert to the doc <a target="_blank" rel="noopener" href="https://javascript.info/script-async-defer#dynamic-scripts">..</a>    </li>
 </ul>
 </li>
-<li><code>defer</code>: run when DOM ready (but bf DOMContentLoaded event) <a target="_blank" rel="noopener" href="https://javascript.info/script-async-defer#defer">..</a><ul>
-<li>only for external script, run on doc order</li>
-</ul>
-</li>
+<li><code>defer</code>: run (in doc order) when DOM ready (but bf DOMContentLoaded event)  <a target="_blank" rel="noopener" href="https://javascript.info/script-async-defer#defer">..</a></li>
 </ul>
 <h2 id="Resrc-loading-event"><a href="#Resrc-loading-event" class="headerlink" title="Resrc loading event"></a>Resrc loading event</h2><p>Most resrcs start loading when added to the doc, except <code>&lt;img&gt;</code> (load when gets src &amp; cached <a target="_blank" rel="noopener" href="https://javascript.info/onload-onerror#load-images-with-a-callback">..</a>)</p>
 <ul>
