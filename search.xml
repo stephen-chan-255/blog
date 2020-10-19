@@ -66,33 +66,35 @@
   <entry>
     <title>JavaScript network requests</title>
     <url>/blog/2020/08/16/js-network/</url>
-    <content><![CDATA[<p>URL components &amp; char-encoding <a href="https://javascript.info/url">..</a></p>
-<p>Same origin policy &amp; Cross-window Communication</p>
+    <content><![CDATA[<h1 id="Mtp-win-comm"><a href="#Mtp-win-comm" class="headerlink" title="Mtp win comm"></a>Mtp win comm</h1><p><a href="https://javascript.info/popup-windows" title="a sep win with own JS env, safe to open un-trusted 3rd-party site">Popup win</a>: <code>window.open(URL, ..)</code> <a href="https://javascript.info/popup-windows#window-open">..</a> — open a new tab (by default) in browser (or win if sizes provided <a href="https://javascript.info/popup-windows#summary">..</a>)</p>
 <ul>
-<li>Same <a href="%22protocol://domain:port%22">origin</a> policy..<ul>
-<li>can only change the window’s <code>location</code> <a href="https://javascript.info/cross-window-communication#same-origin">..</a></li>
-<li>same 2nd-level domain &amp; “same origin” state: <code>document.domain = &#39;site.com&#39;</code> <a href="https://javascript.info/cross-window-communication#windows-on-subdomains-document-domain">..</a></li>
+<li>win &lt;-&gt; popup: <code>let popupWin = window.open(..);</code> <a href="https://javascript.info/popup-windows#accessing-popup-from-window">..</a>, <code>popupWin.opener</code> <a href="https://javascript.info/popup-windows#accessing-window-from-popup">..</a></li>
+<li>close popup: <code>win.close()</code> &amp; <code>win.closed</code> (status check) <a href="https://javascript.info/popup-windows#closing-a-popup">..</a></li>
+<li>win focus/blur: <code>win.focus/blur()</code> &amp; <code>win.onfocus/onblur</code> <a href="https://javascript.info/popup-windows#focus-blur-on-a-window">..</a></li>
+<li>win scrolling &amp; resizing <a href="https://javascript.info/popup-windows#scrolling-and-resizing">…</a></li>
+</ul>
+<p><a href="ttps://javascript.info/cross-window-communication#in-action-iframe" title="a sep embeded win with own sep `document` and `window` obj">Embedded win</a>: <code>&lt;iframe ..&gt;</code> — <code>iframe.contentWindow/contentDocument</code> <a href="https://javascript.info/cross-window-communication#in-action-iframe">..</a></p>
+<ul>
+<li>wrong doc pitfall: <code>iframe.contentDocument</code> when <code>iframe.onload</code> (wrong for the one immediately af iframe created) <a href="https://javascript.info/cross-window-communication#iframe-wrong-document-pitfall">..</a></li>
+<li><code>window.frames</code> (named coll) &amp; win hierarchy (iframe contains iframes) — check whether iframe by <code>win === top</code> <a href="https://javascript.info/cross-window-communication#collection-window-frames">..</a> </li>
+<li>iframe <code>sandbox</code> attr (exclude certain actions inside iframe) <a href="https://javascript.info/cross-window-communication#the-sandbox-iframe-attribute">…</a></li>
+<li>transparent iframe &amp; clickjacking attack (intercept a single click <a href="https://javascript.info/clickjacking#summary">..</a>) <a href="https://javascript.info/clickjacking">…</a>: </li>
+</ul>
+<p>Same origin policy &amp; Cross-win Comm <a href="https://javascript.info/cross-window-communication">..</a></p>
+<ul>
+<li>origin: “protocol://domain:port” <a href="https://javascript.info/popup-windows#accessing-popup-from-window">..</a> &amp; same origin policy (only allow to set <code>location</code> <a href="https://javascript.info/cross-window-communication#same-origin">..</a> &amp; get ref of <code>iframe.contentWindow</code> <a href="https://javascript.info/cross-window-communication#in-action-iframe">..</a>)<ul>
+<li>make same 2nd-level domain wins <strong>same origin</strong>: <code>document.domain = &#39;site.com&#39;</code> <a href="https://javascript.info/cross-window-communication#windows-on-subdomains-document-domain">..</a></li>
 </ul>
 </li>
-<li>Cross-window messaging: call <code>receiverWin.postMessage(..)</code> in sender win &amp; receiver.message event in receiverWin ..</li>
+<li>cross-win msg (from any origin): sender-win call <code>receiverWin.postMessage(..)</code> &amp; in receiver-win, <code>receiverWin.message</code> event trigger when its <code>postMessage(..)</code> called <a href="https://javascript.info/cross-window-communication#cross-window-messaging">..</a><ul>
+<li>add handler to <code>receiverWin.message</code> event by <code>addEventHandler()</code></li>
+</ul>
+</li>
 </ul>
 <a id="more"></a>
 
-<p>Popup window <code>window.open(..)</code>: a separate window with own indep JS env</p>
-<ul>
-<li>open a new tab (by default) in browser (or window if sizes provided <a href="https://javascript.info/popup-windows#summary">..</a>)</li>
-<li>Access popup from window: <code>let popupWin = window.open(..); popupWin.document.xxx; popupWin.focus()</code></li>
-<li>Access window from popup: <code>popupWin.opener</code></li>
-<li>close popup: <code>win.close()</code></li>
-<li>window scrolling &amp; resizing ..</li>
-</ul>
-<p>Embedded window <code>&lt;iframe&gt;</code>: own separate <code>document</code> and <code>window</code> obj</p>
-<ul>
-<li>wrong document pitfall <a href="https://javascript.info/cross-window-communication#iframe-wrong-document-pitfall">..</a></li>
-<li>window hierarchy &amp; <code>window.frames</code> <a href="https://javascript.info/cross-window-communication#collection-window-frames">..</a></li>
-<li>iframe <code>sandbox</code> attr (“different origin” state) <a href="https://javascript.info/cross-window-communication#the-sandbox-iframe-attribute">..</a></li>
-<li>transparent iframe &amp; clickjacking attack <a href="https://javascript.info/clickjacking">..</a></li>
-</ul>
+<hr>
+<p>URL components &amp; char-encoding <a href="https://javascript.info/url">..</a></p>
 <p>Binary data, files</p>
 <ul>
 <li>deal with files/img (create, upload, download)</li>
@@ -303,45 +305,6 @@
 </li>
 <li>Promise wrapper &amp; <code>try..catch</code> vs Adding <code>onsuccess/onerror</code> to every request</li>
 <li>demo in summary ..</li>
-</ul>
-<p>Web Components</p>
-<ul>
-<li>custom html elem: all-new (no semantics) &amp; extends built-in elem ..<ul>
-<li>html tag <code>&lt;..&gt;</code> / <code>document.createElement(..)</code>: instance of <code>*ELement</code></li>
-<li><code>customElements.define()</code> &amp; <code>:not(:defined)</code></li>
-</ul>
-</li>
-<li>HTML parser process parent bf child<ul>
-<li>access childElem by <code>setTimeout</code> (af html parsing completed) ..</li>
-<li>want outer callback trigger af inner elem ready: inner elem dispatch events &amp; outer listen</li>
-<li><code>&lt;time-formatted&gt;</code> &amp; <code> Intl.DateTimeFormat(..)</code> demo ..</li>
-</ul>
-</li>
-<li>task: Live timer element</li>
-</ul>
-<p>Shadow DOM: component private DOM subtree (encapsulate internal implementation details)</p>
-<ul>
-<li>own stylesheets (local css / non-standard <code>pseudo</code> attr), own id/quary spaces ..</li>
-<li>if shadow DOM, light DOM not displayed — render its light DOM elems (aka “slotted” elems) inside the shadow DOM by <code>&lt;slot&gt;</code> (flattened DOM) <a href="https://javascript.info/slots-composition">..</a><ul>
-<li>shadowRoot can’t handle event, so using the first child</li>
-<li>open/close menu example <a href="https://javascript.info/slots-composition#menu-example">..</a></li>
-</ul>
-</li>
-<li>styling: shadow host &amp; slotted elem and their contents live in outer doc:  <ul>
-<li>local <code>&lt;style&gt;</code> &amp; <code>&lt;link rel=&quot;stylesheet&quot; href=&quot;…&quot;&gt;</code></li>
-<li>host: local? <code>:host*</code> &amp; doc css <a href="https://javascript.info/shadow-dom-style#cascading">..</a> and custom CSS props </li>
-<li>slot: local <code>slot</code> css &amp; <code>::slotted(selector)</code> </li>
-</ul>
-</li>
-<li>events handling <a href="https://javascript.info/shadow-dom-events">..</a>: <ul>
-<li>host elem as target in outer handler (Event retarget) except slotted elems</li>
-<li>event bubbling &amp; <code>e.composedPath()</code>, <code>e.composed</code> (true for e bubble across shadow DOM boundary)</li>
-</ul>
-</li>
-</ul>
-<p><a href="https://javascript.info/template-element">Template element</a><br><code>&lt;template&gt;</code> tag: contents ignored by browser (elems inside not render, style/script not work) until inserted to doc (by <code>elem.append(tmpl.content)</code>)</p>
-<ul>
-<li>based on <code>DocumentFragment</code> <a href="https://javascript.info/modifying-document#document-fragment">..</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -770,8 +733,8 @@
 <li>removal: <code>node.remove()</code> <a href="https://javascript.info/modifying-document#node-removal">..</a></li>
 <li>the old insert/rm methods <a href="https://javascript.info/modifying-document#old-school-insert-remove-methods">..</a> &amp; <code>document.write(html: str)</code> <a href="https://javascript.info/modifying-document#a-word-about-document-write">..</a>: call when onload to write html into page “right here and now” (call af load replace page content)</li>
 </ul>
-<h1 id="Event-handling"><a href="#Event-handling" class="headerlink" title="Event handling"></a>Event handling</h1><h2 id="Event"><a href="#Event" class="headerlink" title="Event"></a>Event</h2><p>events list <a href="https://javascript.info/introduction-browser-events">…</a></p>
-<p>event happen -&gt; browser create event-obj with details &amp; pass to event handler <a href="https://javascript.info/introduction-browser-events#event-object">..</a> </p>
+<h1 id="Event-handling"><a href="#Event-handling" class="headerlink" title="Event handling"></a>Event handling</h1><h2 id="Event-amp-event-obj"><a href="#Event-amp-event-obj" class="headerlink" title="Event &amp; event obj"></a>Event &amp; event obj</h2><p>events list <a href="https://javascript.info/introduction-browser-events">…</a></p>
+<p>event happen -&gt; browser create event-obj (puts details into it) &amp; pass as arg to event handler <a href="https://javascript.info/introduction-browser-events#event-object">..</a> </p>
 <p>Event obj: <code>e.type</code> (e.g. “click”) <a href="https://javascript.info/introduction-browser-events#event-object">..</a></p>
 <p>Event Bubbling &amp; event delegation pattern</p>
 <ul>
@@ -799,19 +762,22 @@
 <li>built-in events <a href="https://javascript.info/dispatch-events#bubbling-example">..</a>, 1 handler <a href="https://javascript.info/introduction-browser-events#dom-property">..</a></li>
 </ul>
 </li>
+</ul>
+<p>Others</p>
+<ul>
 <li><code>this</code> in handler: e.currentTarget <a href="https://javascript.info/introduction-browser-events#accessing-the-element-this">..</a> &amp; <a href="https://javascript.info/introduction-browser-events#event-object">..</a></li>
-<li>note: <code>elem.setAttribute(&#39;on&lt;event&gt;&#39;, handler)</code> not work for event handler <a href="https://javascript.info/introduction-browser-events#possible-mistakes">..</a></li>
+<li><code>elem.setAttribute(&#39;on&lt;event&gt;&#39;, handler)</code> not work for event handler <a href="https://javascript.info/introduction-browser-events#possible-mistakes">..</a></li>
 <li>Tasks: <a href="https://javascript.info/introduction-browser-events#move-the-ball-across-the-field">Move the ball across the field</a>, <a href="https://javascript.info/introduction-browser-events#create-a-sliding-menu">Create a sliding menu</a>, <a href="https://javascript.info/introduction-browser-events#add-a-closing-button">Add a closing button</a>, <a href="https://javascript.info/introduction-browser-events#carousel">Carousel</a></li>
 </ul>
-<p>Prevent default actions: <code>e.preventDefault()</code> on handler || <code> on&lt;event&gt;</code> handler return false  <a href="https://javascript.info/default-browser-action#preventing-browser-actions">..</a></p>
+<h2 id="Prevent-default-actions"><a href="#Prevent-default-actions" class="headerlink" title="Prevent default actions"></a>Prevent default actions</h2><p><code>e.preventDefault()</code> on handler || <code> on&lt;event&gt;</code> handler return false  <a href="https://javascript.info/default-browser-action#preventing-browser-actions">..</a></p>
 <ul>
-<li><code>e.preventDefault()</code> — <code>e.defaultPrevented</code>: true (means the event is handled somewhere) <a href="https://javascript.info/default-browser-action#event-defaultprevented">..</a> &amp; <code>elem.dispatchEvent(event)</code> return false <a href="https://javascript.info/dispatch-events#event-preventdefault">..</a></li>
+<li><code>e.defaultPrevented</code> (status check): true (means the event is handled somewhere) <a href="https://javascript.info/default-browser-action#event-defaultprevented">..</a> &amp; <code>elem.dispatchEvent(event)</code> return false <a href="https://javascript.info/dispatch-events#event-preventdefault">..</a></li>
 <li><code>passive: true</code> option of <code>addEventListener</code>: signals that the handler not to call preventDefault() <a href="https://javascript.info/default-browser-action#the-passive-handler-option">why needed?</a></li>
 <li>default browser action list <a href="https://javascript.info/default-browser-action#summary">..</a></li>
 <li>Tasks: <a href="https://javascript.info/default-browser-action#why-return-false-doesn-t-work">Why “return false” doesn’t work?</a>, <a href="https://javascript.info/default-browser-action#image-gallery">Image gallery</a></li>
 </ul>
 <h1 id="Mouse-Event"><a href="#Mouse-Event" class="headerlink" title="Mouse Event"></a>Mouse Event</h1><ul>
-<li>events list <a href="https://javascript.info/mouse-events-basics#mouse-event-types">..</a></li>
+<li>events list <a href="https://javascript.info/mouse-events-basics#mouse-event-types">…</a></li>
 <li>mouse coords: <code>e.clientX/Y, e.pageX/Y</code> <a href="https://javascript.info/mouse-events-basics#coordinates-clientx-y-pagex-y">..</a>, mouse btn: <code>e.button</code> (=0 left-btn, =1 middle, =2 right-btn) <a href="https://javascript.info/mouse-events-basics#mouse-button">..</a></li>
 <li>mouse event also inc info of modifier keys: <code>e.shiftKey/altKey/ctrlKey/metaKey</code>(Mac): bool (true if pressed) <a href="https://javascript.info/mouse-events-basics#modifiers-shift-alt-ctrl-and-meta">..</a></li>
 <li>disable selection (on dblclick) &amp; copy: <code>onmousedown/oncopy return false</code> <a href="https://javascript.info/mouse-events-basics#preventing-selection-on-mousedown">..</a></li>
@@ -860,7 +826,7 @@
 <h2 id="Data-update-events"><a href="#Data-update-events" class="headerlink" title="Data update events"></a>Data update events</h2><ul>
 <li><code>change</code> event: on finish change, e.g. text-input elem blur, select-opt changes <a href="https://javascript.info/events-change-input#event-change">..</a></li>
 <li><code>input</code> event: on any value change <a href="https://javascript.info/events-change-input#event-input">..</a></li>
-<li><code>cut/copy/paste</code> event <a href="https://javascript.info/events-change-input#events-cut-copy-paste">..</a></li>
+<li><code>cut/copy/paste</code> event <a href="https://javascript.info/events-change-input#events-cut-copy-paste">…</a></li>
 </ul>
 <h2 id="Form-submit-event"><a href="#Form-submit-event" class="headerlink" title="Form submit event"></a>Form submit event</h2><p><code>submit</code> event on form (sent data to server): </p>
 <ul>
@@ -876,7 +842,10 @@
 </ul>
 </li>
 <li><code>window.load</code>: external resrc (css, img) loaded (img size known) <a href="https://javascript.info/onload-ondomcontentloaded#window-onload">..</a></li>
-<li><code>window.beforeunload/unload</code>: user leaving this page …</li>
+<li><code>window.beforeunload/unload</code>: user leaving this page: nav to other pages/close win <a href="https://javascript.info/onload-ondomcontentloaded#window.onbeforeunload">..</a><ul>
+<li><code>window.onbeforeunload</code> return false / non-empty str: cancel the event (prevent default?) &amp; show the str as msg e.g. “change not save, sure to leave?” — answer negative block page-nav? <a href="https://javascript.info/clickjacking#blocking-top-navigation">..</a></li>
+</ul>
+</li>
 </ul>
 <p>Others</p>
 <ul>
@@ -1030,6 +999,48 @@
 </li>
 <li><a href="https://javascript.info/event-loop#summary">cpu-heavy event &amp; web worker: another thread</a></li>
 </ul>
+<h1 id="Web-Components"><a href="#Web-Components" class="headerlink" title="Web Components"></a>Web Components</h1><p><strong>Web components</strong>: custom html elem, Shadow DOM, CSS Scoping <a href="https://javascript.info/webcomponents-intro#component-architecture">…</a></p>
+<h2 id="Custom-HTML-elem"><a href="#Custom-HTML-elem" class="headerlink" title="Custom HTML elem"></a>Custom HTML elem</h2><ul>
+<li><strong>all-new</strong>: extends <code>HTMLElement</code> <a href="https://javascript.info/custom-elements">..</a> (no semantics <a href="https://javascript.info/custom-elements#customized-built-in-elements">..</a>)<ul>
+<li>2-step creation: JS class + <code>customElements.define(tag, js-class)</code> <a href="https://javascript.info/custom-elements">…</a></li>
+<li><code>&lt;time-formatted&gt;</code> &amp; <code> Intl.DateTimeFormat(..)</code> demo …</li>
+</ul>
+</li>
+<li><strong>customized</strong>: extends built-in elem (with semantics) — 3-step creation (<code>&lt;button is=&quot;my-button&quot;&gt;</code>) <a href="https://javascript.info/custom-elements#customized-built-in-elements">…</a></li>
+<li>html tag <code>&lt;my-element&gt;</code> / <code>document.createElement(..)</code>: create instance of <code>MyElement</code> <a href="https://javascript.info/custom-elements">..</a></li>
+<li>CSS selector <code>:not(:defined)</code>: style “undefined” elems, e.g. custom html-tag bf <code>customElements.define(..)</code> <a href="https://javascript.info/custom-elements#example-time-formatted">..</a></li>
+<li>HTML parser process parent bf child <a href="https://javascript.info/custom-elements#rendering-order">…</a><ul>
+<li>access childElem by <code>setTimeout(..)</code> (af html parsing completed)</li>
+<li>want outer callback trigger af inner elem ready: inner elem dispatch events &amp; outer listen</li>
+</ul>
+</li>
+<li>task: <a href="https://javascript.info/custom-elements#live-timer-element">Live timer elem</a></li>
+</ul>
+<h2 id="Shadow-DOM"><a href="#Shadow-DOM" class="headerlink" title="Shadow DOM"></a>Shadow DOM</h2><ul>
+<li>Shadow tree (for encapsulation: own id/quary spaces, styling <a href="https://javascript.info/shadow-dom#encapsulation">..</a>, <a href="https://javascript.info/shadow-dom#summary">..</a>) vs Light tree <a href="https://javascript.info/shadow-dom#shadow-tree">…</a><ul>
+<li>create by <code>elem.attachShadow(..)</code> =&gt; shadow root: <code>elem.shadowRoot</code> <ul>
+<li><code>elem.shadowRoot.host</code>: the elem, shadow tree host <a href="https://javascript.info/shadow-dom#shadow-tree">…</a></li>
+<li>shadow root like elem (<code>innerHTML</code> | DOM methods appliable), but cannot have event handler (use its 1st child) <a href="https://javascript.info/slots-composition#updating-slots">..</a>    </li>
+</ul>
+</li>
+<li>if elem has both -&gt; only render shadow — compose by <strong>slot</strong> <a href="https://javascript.info/slots-composition">…</a><ul>
+<li><code>&lt;slot name=&quot;...&quot;&gt;</code> (shadow) &amp; elem with <code>slot=&quot;...&quot;</code> (light, render as child elem of <code>&lt;slot&gt;</code>)</li>
+<li><code>slotchange</code> event (when slotted-elems add/rm/replace) <a href="https://javascript.info/slots-composition#updating-slots">…</a>, <a href="https://javascript.info/slots-composition#summary">..</a> &amp; slot-related methods <a href="https://javascript.info/slots-composition#slot-api">…</a></li>
+<li>open/close menu example <a href="https://javascript.info/slots-composition#menu-example">…</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>styling</strong>: <code>:host*</code>, <code>::slotted</code>, components custom CSS props <a href="https://javascript.info/shadow-dom-style">…</a> &amp; <code>pseudo</code> attr <a href="https://javascript.info/shadow-dom#built-in-shadow-dom">..</a></li>
+<li><strong>event handling</strong>: event happen in shadow DOM hidden to outside — retarget (bubble) to its <strong>host</strong> elem <a href="https://javascript.info/shadow-dom-events">..</a><ul>
+<li><code>e.composedPath()</code>, <code>e.composed</code> (true for e bubble across shadow DOM boundary) …</li>
+</ul>
+</li>
+</ul>
+<h1 id="Template-elem"><a href="#Template-elem" class="headerlink" title="Template elem"></a>Template elem</h1><p><code>&lt;template&gt;</code> tag: for HTML markup storage (any syntax-valid HTML), content ignored by browser <a href="https://javascript.info/template-element">..</a></p>
+<ul>
+<li>elems not render, style/script not work, until <code>tmpl.content</code>: <code>DocumentFragment</code> <a href="https://javascript.info/template-element#inserting-template">..</a> inserted to doc</li>
+</ul>
 <h1 id="Generator"><a href="#Generator" class="headerlink" title="Generator"></a>Generator</h1><p>Regualr fn retur 1 value ==&gt; Generators “yield” mtp values 1-by-1 (allow create data stream)</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">generateSequence</span>(<span class="params"></span>) </span>&#123;    <span class="comment">// generator function</span></span><br><span class="line">  <span class="keyword">yield</span> <span class="number">1</span>;                        <span class="comment">// no value af &#x27;yield&#x27; means &#x27;undefined&#x27;</span></span><br><span class="line">  <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> generator = generateSequence(); <span class="comment">// when called, return a Generator instead of run the fn </span></span><br><span class="line">alert(generator);                   <span class="comment">// [object Generator]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// call generator.next() to get result</span></span><br><span class="line">&#123;<span class="attr">value</span>: <span class="number">1</span>, <span class="attr">done</span>: <span class="literal">false</span>&#125;  </span><br><span class="line">&#123;<span class="attr">value</span>: <span class="number">2</span>, <span class="attr">done</span>: <span class="literal">false</span>&#125; </span><br><span class="line">&#123;<span class="attr">value</span>: <span class="number">3</span>, <span class="attr">done</span>: <span class="literal">true</span>&#125;              <span class="comment">// done:true for &quot;return&quot;</span></span><br><span class="line">&#123;<span class="attr">done</span>: <span class="literal">true</span>&#125;                        <span class="comment">// no more value af &#x27;return&#x27;</span></span><br></pre></td></tr></table></figure>
 <ul>
@@ -1064,15 +1075,15 @@
 <li>transform <strong>f(a, b, c)</strong> –&gt; <strong>f(a)(b)(c)</strong> — easily for partial (see below): let fn = f(a), then fn(b)(c) <a href="https://javascript.info/currying-partials#currying-what-for">..</a></li>
 <li>implementation <a href="https://javascript.info/currying-partials#advanced-curry-implementation">..</a></li>
 </ul>
-<p><strong>Proxy &amp; Reflect</strong><br><code>Proxy</code>: a wrapper obj that intercepts ops (e.g. get/set props) on the target-obj by its handler <a href="https://javascript.info/proxy">..</a></p>
+<p><strong>Proxy &amp; Reflect</strong><br><code>Proxy</code>: a wrapper obj that intercepts ops (e.g. get/set props) on the target-obj by its handler (obj with traps) <a href="https://javascript.info/proxy">..</a></p>
 <ul>
-<li>ops on <code>proxy</code> =&gt; trigger corresponding trap in <code>handler</code> =&gt; (if no) forwards operations to <code>target</code> <a href="https://javascript.info/proxy#proxy">..</a> </li>
+<li>ops on <code>proxy</code> =&gt; trigger corresponding trap =&gt; (if no) forwards ops to <code>target</code> <a href="https://javascript.info/proxy#proxy">..</a> </li>
 <li>proxy no own props, access from <code>target</code> <a href="https://javascript.info/proxy#proxy">..</a></li>
 <li>ops -&gt; proxy handler methods -&gt; internal methods (low level)</li>
-<li>Proxying a getter with <code>receiver</code> (<a href="https://javascript.info/proxy#proxying-a-getter">https://javascript.info/proxy#proxying-a-getter</a>)</li>
-<li><code>Reflect</code>: to complement Proxy</li>
-<li>tasks: <a href="https://javascript.info/proxy#accessing-array-1">array[-1]</a>, <a href="https://javascript.info/proxy#observable">makeObservable(target)</a></li>
+<li>Proxying a getter with <code>receiver</code> by <code>Reflect.get(target, prop, receiver);</code>: pass <code>receiver</code> (correct obj) as <code>this</code> in getter <a href="https://javascript.info/proxy#proxying-a-getter">…</a></li>
 </ul>
+<p><code>Reflect</code>: to complement Proxy <a href="https://javascript.info/proxy#reflect">…</a></p>
+<p>Tasks: <a href="https://javascript.info/proxy#accessing-array-1">array[-1]</a>, <a href="https://javascript.info/proxy#observable">makeObservable(target)</a></p>
 <p><strong>Recursion</strong> <a href="https://javascript.info/recursion">..</a></p>
 <ul>
 <li><strong>base</strong> (get result without nest calls) &amp; <strong>recursive step</strong><ul>

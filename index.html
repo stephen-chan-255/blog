@@ -421,7 +421,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-06 18:39:13" itemprop="dateModified" datetime="2020-10-06T18:39:13+08:00">2020-10-06</time>
+        <time title="Modified: 2020-10-19 21:22:58" itemprop="dateModified" datetime="2020-10-19T21:22:58+08:00">2020-10-19</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -451,15 +451,30 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>URL components &amp; char-encoding <a target="_blank" rel="noopener" href="https://javascript.info/url">..</a></p>
-<p>Same origin policy &amp; Cross-window Communication</p>
+          <h1 id="Mtp-win-comm"><a href="#Mtp-win-comm" class="headerlink" title="Mtp win comm"></a>Mtp win comm</h1><p><a target="_blank" rel="noopener" href="https://javascript.info/popup-windows" title="a sep win with own JS env, safe to open un-trusted 3rd-party site">Popup win</a>: <code>window.open(URL, ..)</code> <a target="_blank" rel="noopener" href="https://javascript.info/popup-windows#window-open">..</a> — open a new tab (by default) in browser (or win if sizes provided <a target="_blank" rel="noopener" href="https://javascript.info/popup-windows#summary">..</a>)</p>
 <ul>
-<li>Same <a href="%22protocol://domain:port%22">origin</a> policy..<ul>
-<li>can only change the window’s <code>location</code> <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#same-origin">..</a></li>
-<li>same 2nd-level domain &amp; “same origin” state: <code>document.domain = &#39;site.com&#39;</code> <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#windows-on-subdomains-document-domain">..</a></li>
+<li>win &lt;-&gt; popup: <code>let popupWin = window.open(..);</code> <a target="_blank" rel="noopener" href="https://javascript.info/popup-windows#accessing-popup-from-window">..</a>, <code>popupWin.opener</code> <a target="_blank" rel="noopener" href="https://javascript.info/popup-windows#accessing-window-from-popup">..</a></li>
+<li>close popup: <code>win.close()</code> &amp; <code>win.closed</code> (status check) <a target="_blank" rel="noopener" href="https://javascript.info/popup-windows#closing-a-popup">..</a></li>
+<li>win focus/blur: <code>win.focus/blur()</code> &amp; <code>win.onfocus/onblur</code> <a target="_blank" rel="noopener" href="https://javascript.info/popup-windows#focus-blur-on-a-window">..</a></li>
+<li>win scrolling &amp; resizing <a target="_blank" rel="noopener" href="https://javascript.info/popup-windows#scrolling-and-resizing">…</a></li>
+</ul>
+<p><a href="ttps://javascript.info/cross-window-communication#in-action-iframe" title="a sep embeded win with own sep `document` and `window` obj">Embedded win</a>: <code>&lt;iframe ..&gt;</code> — <code>iframe.contentWindow/contentDocument</code> <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#in-action-iframe">..</a></p>
+<ul>
+<li>wrong doc pitfall: <code>iframe.contentDocument</code> when <code>iframe.onload</code> (wrong for the one immediately af iframe created) <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#iframe-wrong-document-pitfall">..</a></li>
+<li><code>window.frames</code> (named coll) &amp; win hierarchy (iframe contains iframes) — check whether iframe by <code>win === top</code> <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#collection-window-frames">..</a> </li>
+<li>iframe <code>sandbox</code> attr (exclude certain actions inside iframe) <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#the-sandbox-iframe-attribute">…</a></li>
+<li>transparent iframe &amp; clickjacking attack (intercept a single click <a target="_blank" rel="noopener" href="https://javascript.info/clickjacking#summary">..</a>) <a target="_blank" rel="noopener" href="https://javascript.info/clickjacking">…</a>: </li>
+</ul>
+<p>Same origin policy &amp; Cross-win Comm <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication">..</a></p>
+<ul>
+<li>origin: “protocol://domain:port” <a target="_blank" rel="noopener" href="https://javascript.info/popup-windows#accessing-popup-from-window">..</a> &amp; same origin policy (only allow to set <code>location</code> <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#same-origin">..</a> &amp; get ref of <code>iframe.contentWindow</code> <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#in-action-iframe">..</a>)<ul>
+<li>make same 2nd-level domain wins <strong>same origin</strong>: <code>document.domain = &#39;site.com&#39;</code> <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#windows-on-subdomains-document-domain">..</a></li>
 </ul>
 </li>
-<li>Cross-window messaging: call <code>receiverWin.postMessage(..)</code> in sender win &amp; receiver.message event in receiverWin ..</li>
+<li>cross-win msg (from any origin): sender-win call <code>receiverWin.postMessage(..)</code> &amp; in receiver-win, <code>receiverWin.message</code> event trigger when its <code>postMessage(..)</code> called <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#cross-window-messaging">..</a><ul>
+<li>add handler to <code>receiverWin.message</code> event by <code>addEventHandler()</code></li>
+</ul>
+</li>
 </ul>
           <!--noindex-->
             <div class="post-button">
@@ -524,7 +539,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-08 18:52:17" itemprop="dateModified" datetime="2020-10-08T18:52:17+08:00">2020-10-08</time>
+        <time title="Modified: 2020-10-18 12:06:36" itemprop="dateModified" datetime="2020-10-18T12:06:36+08:00">2020-10-18</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -734,7 +749,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-08 21:18:05" itemprop="dateModified" datetime="2020-10-08T21:18:05+08:00">2020-10-08</time>
+        <time title="Modified: 2020-10-19 21:20:27" itemprop="dateModified" datetime="2020-10-19T21:20:27+08:00">2020-10-19</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
