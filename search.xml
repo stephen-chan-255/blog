@@ -73,6 +73,8 @@
 <li>win focus/blur: <code>win.focus/blur()</code> &amp; <code>win.onfocus/onblur</code> <a href="https://javascript.info/popup-windows#focus-blur-on-a-window">..</a></li>
 <li>win scrolling &amp; resizing <a href="https://javascript.info/popup-windows#scrolling-and-resizing">…</a></li>
 </ul>
+<a id="more"></a>
+
 <p><a href="ttps://javascript.info/cross-window-communication#in-action-iframe" title="a sep embeded win with own sep `document` and `window` obj">Embedded win</a>: <code>&lt;iframe ..&gt;</code> — <code>iframe.contentWindow/contentDocument</code> <a href="https://javascript.info/cross-window-communication#in-action-iframe">..</a></p>
 <ul>
 <li>wrong doc pitfall: <code>iframe.contentDocument</code> when <code>iframe.onload</code> (wrong for the one immediately af iframe created) <a href="https://javascript.info/cross-window-communication#iframe-wrong-document-pitfall">..</a></li>
@@ -91,40 +93,29 @@
 </ul>
 </li>
 </ul>
-<a id="more"></a>
-
-<hr>
-<p>URL components &amp; char-encoding <a href="https://javascript.info/url">..</a></p>
-<p>Binary data, files</p>
-<ul>
-<li>deal with files/img (create, upload, download)</li>
-<li><code>ArrayBuffer(..)</code>: store raw binary data (seq of bytes)</li>
-<li><strong>view</strong> obj (aka <strong>TypedArray</strong>): interpret data stored in ArrayBuffer (no data on it’s own)</li>
-<li><code>buffer.byteLength</code>, <code>arr.buffer</code>, <code>arr.length</code> &amp; <code>arr.byteLength</code></li>
-<li><code>DataView</code>: untyped view over ArrayBuffer (choose data format at method)</li>
-<li><code>ArrayBufferView</code> &amp; <code>BufferSource</code> ..</li>
-<li>Task: <a href="https://javascript.info/arraybuffer-binary-arrays#concatenate-typed-arrays">Concatenate typed arrays</a></li>
-</ul>
-<p>Blob: binary data with type in File API, immutable</p>
-<ul>
-<li>in file upload/download op &amp; web network request <a href="https://javascript.info/blob#summary">..</a></li>
-<li>Blob to URL (for <code>&lt;a&gt;/&lt;img&gt;</code> tags): <ul>
-<li><code>&lt;a download=&quot;hello.txt&quot;&gt;</code></li>
-<li><code>Blob type: &#39;text/html&#39;</code> (or <code>&#39;text/plain&#39;</code>, becomes Content-Type in network requests, see fetch()) </li>
-<li><code>link.href = URL.createObjectURL(blob)</code> &amp; <code>URL.revokeObjectURL(link.href)</code></li>
-<li><code>link.click()</code>: simulate click on <code>&lt;a&gt;</code></li>
+<h1 id="Binary-data-files"><a href="#Binary-data-files" class="headerlink" title="Binary data, files"></a>Binary data, files</h1><p>meet binary data: files/img (create, upload, download) <a href="https://javascript.info/arraybuffer-binary-arrays">..</a></p>
+<h2 id="BufferSource"><a href="#BufferSource" class="headerlink" title="BufferSource"></a>BufferSource</h2><ul>
+<li><code>ArrayBuffer(byteLength: int)</code>: store raw bin data (byte-seq) — read data by 2 kinds <code>ArrayBufferView</code> <a href="https://javascript.info/arraybuffer-binary-arrays#summary">..</a><ul>
+<li>mtp typed arrays <a href="https://javascript.info/arraybuffer-binary-arrays#typedarray">…</a>: choose data format at constructor, e.g. Uint8Array <a href="https://javascript.info/arraybuffer-binary-arrays#dataview">..</a>  — “out-of-bounds” problem <a href="https://javascript.info/arraybuffer-binary-arrays#out-of-bounds-behavior">..</a> &amp; methods ??? <a href="https://javascript.info/arraybuffer-binary-arrays#typedarray-methods">…</a>, task: <a href="https://javascript.info/arraybuffer-binary-arrays#concatenate-typed-arrays">Concat typed arrays</a></li>
+<li><code>DataView</code>: choose data format at method <a href="https://javascript.info/arraybuffer-binary-arrays#dataview">…</a></li>
 </ul>
 </li>
-<li>Blob to base64 Data URL / ArrayBuffer: <code>fileReader.readAsDataURL / .readAsArrayBuffer(blob)</code> &amp; <code>link.href / arrBuffer = fileReader.result</code></li>
-<li>img to Blob (blob type: <code>&#39;image/png&#39;</code>): <code>context.drawImage(img)</code> &amp; <code>canvas.toBlob(blob =&gt; ..)</code> ..</li>
+<li><code>BufferSource</code>: ArrayBuffer + ArrayBufferView <a href="https://javascript.info/arraybuffer-binary-arrays#summary">..</a></li>
+<li>str &lt;=&gt; bytes: <code>textEncoder.encode(str)</code> (utf-8) &amp; <code>new TextDecoder(encoding, ..).decode(BufferSource, ..)</code> <a href="https://javascript.info/text-decoder">..</a></li>
 </ul>
-<p>File and FileReader</p>
+<h2 id="Blob"><a href="#Blob" class="headerlink" title="Blob"></a>Blob</h2><p><code>Blob</code> bin data type <a href="https://javascript.info/blob">…</a>: file up/download op &amp; web network request <a href="https://javascript.info/blob#summary">..</a></p>
 <ul>
-<li><code>File</code> inherit from <code>Blob</code>, <code>input.files[0]</code> &amp; Drag’n’Drop events</li>
-<li><code>FileReader</code>: <code>fr.readAs*(blob)</code> (as ArrayBuffer, Text, base64 DataURL ..) <code>fr.result / err</code> &amp; other events</li>
+<li>Blob type <code>&#39;text/html | text/plain&#39;</code> → <code>Content-Type</code> in network requests </li>
+<li>Blob → URL (for <code>&lt;a&gt;/&lt;img&gt;</code>) <a href="https://javascript.info/blob#blob-as-url">…</a><br>  <code>&lt;a download=&quot;hello.txt&quot;&gt;</code>, <code>a.href = URL.createObjectURL(blob)</code><br>  <code>a.click()</code>, <code>URL.revokeObjectURL(a.href)</code></li>
+<li>img → Blob (via <code>&lt;convas&gt;</code>) <a href="https://javascript.info/blob#image-to-blob">…</a></li>
 </ul>
-<p>String &lt;=&gt; bytes by utf-8: <code>TextEncoder.encode(str)</code> (to bytes) &amp; <code>TextDecoder.decode()</code> (get str)</p>
-<p>Network requests &amp; fetch()<br><code>fetch(url, [options])</code> &amp; AJAX ..</p>
+<h2 id="File-amp-FileReader"><a href="#File-amp-FileReader" class="headerlink" title="File &amp; FileReader"></a>File &amp; FileReader</h2><ul>
+<li><code>File</code>: inherit from <code>Blob</code>, get from <code>input.files[0]</code> &amp; Drag’n’Drop events <a href="https://javascript.info/file">..</a></li>
+<li><code>FileReader</code>: read data from <code>Blob</code> via <code>fr.readAs*(blob)</code> (async), <code>load/error</code> events &amp; <code>fr.result / error</code> <a href="https://javascript.info/file#filereader">..</a></li>
+<li>sent file over network: <code>Fetch</code>/ <code>XHR</code> <a href="https://javascript.info/file#summary">..</a></li>
+</ul>
+<hr>
+<h1 id="Network-requests-amp-fetch"><a href="#Network-requests-amp-fetch" class="headerlink" title="Network requests &amp; fetch()"></a>Network requests &amp; fetch()</h1><p><code>fetch(url, [options])</code> &amp; AJAX ..</p>
 <ul>
 <li><code>fetch(url)</code>: GET request (downloading content of the url) ==&gt; fetch API <a href="https://javascript.info/fetch-api">..</a></li>
 <li><strong>options</strong>: <code>&#123; method, headers, body &#125;</code><ul>
@@ -852,7 +843,7 @@
 <li><code>document.readState</code>: “loading”, “interactive” , “complete” — the old <strong>document.readystatechange</strong> <a href="https://javascript.info/onload-ondomcontentloaded#readystate">..</a></li>
 <li>Whole process <a href="https://javascript.info/onload-ondomcontentloaded#readystate">…</a></li>
 </ul>
-<h2 id="Script-attr-async-defer"><a href="#Script-attr-async-defer" class="headerlink" title="Script attr: async, defer"></a>Script attr: async, defer</h2><p>Both only for external script (ignored if no <code>src</code> attr) <a href="https://javascript.info/script-async-defer#defer">..</a> &amp; <a href="https://javascript.info/modules-intro#async-works-on-inline-scripts">..</a> and load not-block (load script in bg)</p>
+<h2 id="External-script-attr-async-defer"><a href="#External-script-attr-async-defer" class="headerlink" title="External script attr: async, defer"></a>External script attr: async, defer</h2><p>Both only for external script (ignored if no <code>src</code> attr) <a href="https://javascript.info/script-async-defer#defer">..</a>, <a href="https://javascript.info/modules-intro#async-works-on-inline-scripts">..</a> and load not-block (load script in bg)</p>
 <ul>
 <li><code>async</code>: run in load-1st order <a href="https://javascript.info/script-async-defer#async">..</a><ul>
 <li>Dynamic scripts (gen by JS) load af insert to the doc <a href="https://javascript.info/script-async-defer#dynamic-scripts">..</a>    </li>
@@ -934,7 +925,7 @@
 <h1 id="Obj-advanced"><a href="#Obj-advanced" class="headerlink" title="Obj advanced"></a>Obj advanced</h1><h2 id="Symbol-type"><a href="#Symbol-type" class="headerlink" title="Symbol type"></a>Symbol type</h2><p>unique (even same desc) vs global symbol (1 key 1 symbol)</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">alert(<span class="built_in">Symbol</span>(<span class="string">&quot;id&quot;</span>));    <span class="comment">// TypeError (not auto-convert to string)</span></span><br><span class="line">alert(id.toString()); 	<span class="comment">// Symbol(id)</span></span><br><span class="line">alert(id.description);  <span class="comment">// id</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="Obj-prop-config-descriptor-amp-Accessor"><a href="#Obj-prop-config-descriptor-amp-Accessor" class="headerlink" title="Obj prop config: descriptor &amp; Accessor"></a>Obj prop config: descriptor &amp; Accessor</h2><p>prop descriptor: <code>value</code> + <code>writable</code>, <code>enumerable</code>, <code>configurable</code> <a href="https://javascript.info/property-descriptors">..</a></p>
+<h2 id="Obj-prop-config"><a href="#Obj-prop-config" class="headerlink" title="Obj prop config"></a>Obj prop config</h2><p>prop descriptor: <code>value</code> + <code>writable</code>, <code>enumerable</code>, <code>configurable</code> <a href="https://javascript.info/property-descriptors">..</a></p>
 <ul>
 <li>get/set desc: <code>Object.getOwnPropertyDescriptor()</code>, <code>Object.defineProperty()</code> &amp; clone with desc <a href="https://javascript.info/property-descriptors#object-getownpropertydescriptors">..</a></li>
 <li>obj created “the usually way”: flags default <code>true</code>; flags not supplied in desc defalut <code>false</code></li>
@@ -974,7 +965,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="JS-engine-internal-Event-loop"><a href="#JS-engine-internal-Event-loop" class="headerlink" title="JS engine internal: Event loop"></a>JS engine internal: Event loop</h1><p><a href="https://javascript.info/event-loop#event-loop">Macrotask queue</a>: handle tasks e.g. <strong>current regular sync script</strong>, <strong>external script</strong> load &amp; exe, <strong>UI/network event handler</strong> (e.g. <code>mousemove</code>), setTimeout <strong>callback</strong></p>
+<h1 id="JS-engine-internal-Event-loop"><a href="#JS-engine-internal-Event-loop" class="headerlink" title="JS engine internal: Event loop"></a>JS engine internal: Event loop</h1><p><a href="https://javascript.info/event-loop#event-loop">Macrotask queue</a>: handle tasks e.g. <strong>current rgl sync script</strong>, <strong>external script</strong> load &amp; exe, <strong>UI/network event handler</strong> (e.g. <code>mousemove</code>), setTimeout <strong>callback</strong></p>
 <ul>
 <li>tasks come while engine busy — enqueued to the queue</li>
 <li>re-render only af task complete — if current task tasks long time:  <strong>Page Unresponsive</strong> alert</li>
@@ -991,7 +982,7 @@
 <p>JS exe-flow based on <em>event loop</em>: engine sleep until tasks appear, then exe from the oldest one (FIFO) <a href="https://javascript.info/event-loop">..</a></p>
 <ul>
 <li>exe process (no macrotask in-btw microtask — ensure app-env same) <a href="https://javascript.info/event-loop#summary">..</a><ol>
-<li><strong>current regular sync script</strong> (=&gt; <strong>all microtasks</strong> =&gt;  <strong>render</strong>) </li>
+<li><strong>current rgl sync script</strong> (=&gt; <strong>all microtasks</strong> =&gt;  <strong>render</strong>) </li>
 <li><strong>some macrotask</strong> (=&gt; <strong>all microtasks</strong> =&gt;  <strong>render</strong>)</li>
 <li><strong>another macrotask</strong> </li>
 <li>…</li>
@@ -999,8 +990,7 @@
 </li>
 <li><a href="https://javascript.info/event-loop#summary">cpu-heavy event &amp; web worker: another thread</a></li>
 </ul>
-<h1 id="Web-Components"><a href="#Web-Components" class="headerlink" title="Web Components"></a>Web Components</h1><p><strong>Web components</strong>: custom html elem, Shadow DOM, CSS Scoping <a href="https://javascript.info/webcomponents-intro#component-architecture">…</a></p>
-<h2 id="Custom-HTML-elem"><a href="#Custom-HTML-elem" class="headerlink" title="Custom HTML elem"></a>Custom HTML elem</h2><ul>
+<h1 id="Web-Components"><a href="#Web-Components" class="headerlink" title="Web Components"></a>Web Components</h1><h2 id="Custom-HTML-elem"><a href="#Custom-HTML-elem" class="headerlink" title="Custom HTML elem"></a>Custom HTML elem</h2><ul>
 <li><strong>all-new</strong>: extends <code>HTMLElement</code> <a href="https://javascript.info/custom-elements">..</a> (no semantics <a href="https://javascript.info/custom-elements#customized-built-in-elements">..</a>)<ul>
 <li>2-step creation: JS class + <code>customElements.define(tag, js-class)</code> <a href="https://javascript.info/custom-elements">…</a></li>
 <li><code>&lt;time-formatted&gt;</code> &amp; <code> Intl.DateTimeFormat(..)</code> demo …</li>
@@ -1032,8 +1022,8 @@
 </ul>
 </li>
 <li><strong>styling</strong>: <code>:host*</code>, <code>::slotted</code>, components custom CSS props <a href="https://javascript.info/shadow-dom-style">…</a> &amp; <code>pseudo</code> attr <a href="https://javascript.info/shadow-dom#built-in-shadow-dom">..</a></li>
-<li><strong>event handling</strong>: event happen in shadow DOM hidden to outside — retarget (bubble) to its <strong>host</strong> elem <a href="https://javascript.info/shadow-dom-events">..</a><ul>
-<li><code>e.composedPath()</code>, <code>e.composed</code> (true for e bubble across shadow DOM boundary) …</li>
+<li><strong>event handling</strong>: event happen in shadow DOM <strong>hidden to outside</strong> — retarget (bubble) to its <strong>host</strong> elem <a href="https://javascript.info/shadow-dom-events">..</a><ul>
+<li>evebt bubbling: <code>e.composedPath()</code>, <code>e.composed</code> (true for bubble across shadow DOM boundary) …</li>
 </ul>
 </li>
 </ul>
@@ -1072,12 +1062,12 @@
 </ul>
 <p><strong>Currying</strong></p>
 <ul>
-<li>transform <strong>f(a, b, c)</strong> –&gt; <strong>f(a)(b)(c)</strong> — easily for partial (see below): let fn = f(a), then fn(b)(c) <a href="https://javascript.info/currying-partials#currying-what-for">..</a></li>
+<li>transform <code>f(a, b, c)</code> → <code>f(a)(b)(c)</code> — easily for partial (see below): let fn = f(a), then fn(b)(c) <a href="https://javascript.info/currying-partials#currying-what-for">..</a></li>
 <li>implementation <a href="https://javascript.info/currying-partials#advanced-curry-implementation">..</a></li>
 </ul>
 <p><strong>Proxy &amp; Reflect</strong><br><code>Proxy</code>: a wrapper obj that intercepts ops (e.g. get/set props) on the target-obj by its handler (obj with traps) <a href="https://javascript.info/proxy">..</a></p>
 <ul>
-<li>ops on <code>proxy</code> =&gt; trigger corresponding trap =&gt; (if no) forwards ops to <code>target</code> <a href="https://javascript.info/proxy#proxy">..</a> </li>
+<li>ops on <code>proxy</code> =&gt; trigger crp trap =&gt; (if no) forwards ops to <code>target</code> <a href="https://javascript.info/proxy#proxy">..</a> </li>
 <li>proxy no own props, access from <code>target</code> <a href="https://javascript.info/proxy#proxy">..</a></li>
 <li>ops -&gt; proxy handler methods -&gt; internal methods (low level)</li>
 <li>Proxying a getter with <code>receiver</code> by <code>Reflect.get(target, prop, receiver);</code>: pass <code>receiver</code> (correct obj) as <code>this</code> in getter <a href="https://javascript.info/proxy#proxying-a-getter">…</a></li>
@@ -1108,25 +1098,25 @@
 <h1 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h1><ul>
 <li>a script file that load each other by <code>export</code> &amp; <code>import</code> <a href="https://javascript.info/modules-intro#what-is-a-module">..</a>, intro in ES6 <a href="https://javascript.info/modules-intro">..</a></li>
 </ul>
-<p><strong>module in browser</strong></p>
+<p><strong>module in browser</strong>: <code>&lt;script type=&quot;module&quot;&gt;</code> <a href="https://javascript.info/modules-intro#what-is-a-module">..</a></p>
 <ul>
-<li>in-line module: <code>&lt;script type=&quot;module&quot;&gt;</code> <a href="https://javascript.info/modules-intro#what-is-a-module">..</a> (<code>type</code> attr enable <code>import/export</code> <a href="https://javascript.info/modules-intro#build-tools">..</a> &amp; <a href="https://javascript.info/modules-intro#summary">..</a>) — old browser use “nomodule” attr instead <a href="https://javascript.info/modules-intro#compatibility-nomodule">..</a></li>
-<li>module <code>defer</code> <a href="https://javascript.info/modules-intro#module-scripts-are-deferred">..</a> by default <a href="https://javascript.info/modules-intro#summary">..</a>, can <code>async</code> <a href="https://javascript.info/modules-intro#async-works-on-inline-scripts">..</a> (work for both inline/external scripts <a href="https://javascript.info/modules-intro#module-scripts-are-deferred">..</a> &amp; <a href="https://javascript.info/modules-intro#async-works-on-inline-scripts">..</a> — regular script only external <a href="https://javascript.info/modules-intro#async-works-on-inline-scripts">..</a>) </li>
+<li><code>type</code> attr enable <code>import/export</code> <a href="https://javascript.info/modules-intro#build-tools">..</a>, <a href="https://javascript.info/modules-intro#summary">..</a> — the old “nomodule” attr <a href="https://javascript.info/modules-intro#compatibility-nomodule">..</a></li>
+<li>module <code>defer</code> <a href="https://javascript.info/modules-intro#module-scripts-are-deferred">..</a> by default <a href="https://javascript.info/modules-intro#summary">..</a>, can <code>async</code> <a href="https://javascript.info/modules-intro#async-works-on-inline-scripts">..</a> (work for both <strong>inline</strong>/external scripts <a href="https://javascript.info/modules-intro#module-scripts-are-deferred">..</a>, <a href="https://javascript.info/modules-intro#async-works-on-inline-scripts">..</a>) </li>
 </ul>
 <p><code>export/import</code> <strong>syntax</strong> <a href="https://javascript.info/import-export#summary">..</a></p>
 <ul>
 <li>default export (import without <code>&#123;&#125;</code>) vs named export <a href="https://javascript.info/import-export#export-default">..</a></li>
-<li><code>default</code> keyword ref to the default export <a href="https://javascript.info/import-export#the-default-name">..</a> (when import, any name works — name it correspond to file name for consistency <a href="https://javascript.info/import-export#a-word-against-default-exports">..</a>)</li>
+<li><code>default</code> keyword for default export <a href="https://javascript.info/import-export#the-default-name">…</a> (when import, any name works — naming consistency: crp to file name <a href="https://javascript.info/import-export#a-word-against-default-exports">..</a>)</li>
 <li><code>as</code> for export/import renaming</li>
-<li>Re-export: <code>export .. from ..</code> (import things &amp; immediately export them): gather scattered pkg fnality into single entry point &amp; expose them (by mtp re-export stmt in 1 file) <a href="https://javascript.info/import-export#re-export">..</a></li>
+<li>Re-export: <code>export .. from ..</code> (import &amp; export): single entry point of fnality (mtp re-export stmt in 1 file) <a href="https://javascript.info/import-export#re-export">..</a></li>
 <li><code>import &quot;module&quot;</code>: run module code without assign to var </li>
 </ul>
-<p><strong>dynamic imports</strong> <code>import(&lt;module-path&gt;)</code>: return a <strong>promise</strong> resolves into a module-obj with exports as keys <a href="https://javascript.info/modules-dynamic-imports">..</a></p>
+<p><strong>dynamic imports</strong> <code>import(&lt;module-path&gt;)</code>: return a <strong>promise</strong> resolves into a module-obj with exports (as keys) <a href="https://javascript.info/modules-dynamic-imports">..</a></p>
 <ul>
 <li>a special syntax, not a fn (like super(), cannot copy &amp; use <strong>call/apply</strong>)</li>
-<li>work with regular <code>&lt;script&gt;</code> tag (no need type=”module”)</li>
+<li>work with rgl <code>&lt;script&gt;</code> tag (no need type=”module”)</li>
 </ul>
-<p><strong>module vs regular script</strong> <a href="https://javascript.info/modules-intro#core-module-features">..</a></p>
+<p><strong>module vs rgl script</strong> <a href="https://javascript.info/modules-intro#core-module-features">..</a></p>
 <ul>
 <li>auto strict (<code>this == undefined</code>)</li>
 <li>own scope (interchange fnality via <code>import/export</code> <a href="https://javascript.info/modules-intro#summary">..</a>)</li>
@@ -1136,8 +1126,8 @@
 <ul>
 <li>place of <code>import/export</code> stms not matter (script top or bottom), but not work inside “{…}” — dynamic imports <a href="https://javascript.info/import-export#summary">..</a></li>
 <li><code>import.meta</code>: obj contains info about the current module <a href="https://javascript.info/modules-intro#import-meta">..</a></li>
-<li>build tool (for deployment) e.g. <strong>webpack</strong> (bundle modules toghther &amp; tree-shaking) <a href="https://javascript.info/modules-intro#build-tools">..</a><ul>
-<li>resulting “bundled” script <code>bundle.js</code> no <code>import/export</code> stmt ==&gt; no <code>type=module</code> required (regular script <code>src=&quot;bundle.js&quot;</code>) <a href="https://javascript.info/modules-intro#build-tools">..</a></li>
+<li>build tool (for deployment) e.g. <strong>webpack</strong> (bundle modules together &amp; tree-shaking) <a href="https://javascript.info/modules-intro#build-tools">..</a><ul>
+<li>resulting “bundled” script <code>bundle.js</code> no <code>import/export</code> stmt ==&gt; no <code>type=module</code> required (rgl script <code>src=&quot;bundle.js&quot;</code>) <a href="https://javascript.info/modules-intro#build-tools">..</a></li>
 </ul>
 </li>
 </ul>

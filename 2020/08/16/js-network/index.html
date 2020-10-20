@@ -30,7 +30,7 @@
 <meta property="og:description" content="Mtp win commPopup win: window.open(URL, ..) .. — open a new tab (by default) in browser (or win if sizes provided ..)  win &lt;-&gt; popup: let popupWin &#x3D; window.open(..); .., popupWin.opener .. close">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-08-16T00:30:58.000Z">
-<meta property="article:modified_time" content="2020-10-19T13:22:58.690Z">
+<meta property="article:modified_time" content="2020-10-20T13:50:06.906Z">
 <meta property="article:author" content="Stephen Chan">
 <meta property="article:tag" content="IT">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mtp-win-comm"><span class="nav-number">1.</span> <span class="nav-text">Mtp win comm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B-S-communication"><span class="nav-number">2.</span> <span class="nav-text">B&#x2F;S communication</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Receive-msg-from-server"><span class="nav-number">2.1.</span> <span class="nav-text">Receive msg from server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bi-directional-data-exchange"><span class="nav-number">2.2.</span> <span class="nav-text">Bi-directional data exchange</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#General"><span class="nav-number">2.3.</span> <span class="nav-text">General</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mtp-win-comm"><span class="nav-number">1.</span> <span class="nav-text">Mtp win comm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Binary-data-files"><span class="nav-number">2.</span> <span class="nav-text">Binary data, files</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BufferSource"><span class="nav-number">2.1.</span> <span class="nav-text">BufferSource</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Blob"><span class="nav-number">2.2.</span> <span class="nav-text">Blob</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#File-amp-FileReader"><span class="nav-number">2.3.</span> <span class="nav-text">File &amp; FileReader</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Network-requests-amp-fetch"><span class="nav-number">3.</span> <span class="nav-text">Network requests &amp; fetch()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B-S-communication"><span class="nav-number">4.</span> <span class="nav-text">B&#x2F;S communication</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Receive-msg-from-server"><span class="nav-number">4.1.</span> <span class="nav-text">Receive msg from server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bi-directional-data-exchange"><span class="nav-number">4.2.</span> <span class="nav-text">Bi-directional data exchange</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#General"><span class="nav-number">4.3.</span> <span class="nav-text">General</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -350,7 +350,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-19 21:22:58" itemprop="dateModified" datetime="2020-10-19T21:22:58+08:00">2020-10-19</time>
+        <time title="Modified: 2020-10-20 21:50:06" itemprop="dateModified" datetime="2020-10-20T21:50:06+08:00">2020-10-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -387,6 +387,8 @@
 <li>win focus/blur: <code>win.focus/blur()</code> &amp; <code>win.onfocus/onblur</code> <a target="_blank" rel="noopener" href="https://javascript.info/popup-windows#focus-blur-on-a-window">..</a></li>
 <li>win scrolling &amp; resizing <a target="_blank" rel="noopener" href="https://javascript.info/popup-windows#scrolling-and-resizing">…</a></li>
 </ul>
+<a id="more"></a>
+
 <p><a href="ttps://javascript.info/cross-window-communication#in-action-iframe" title="a sep embeded win with own sep `document` and `window` obj">Embedded win</a>: <code>&lt;iframe ..&gt;</code> — <code>iframe.contentWindow/contentDocument</code> <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#in-action-iframe">..</a></p>
 <ul>
 <li>wrong doc pitfall: <code>iframe.contentDocument</code> when <code>iframe.onload</code> (wrong for the one immediately af iframe created) <a target="_blank" rel="noopener" href="https://javascript.info/cross-window-communication#iframe-wrong-document-pitfall">..</a></li>
@@ -405,40 +407,29 @@
 </ul>
 </li>
 </ul>
-<a id="more"></a>
-
-<hr>
-<p>URL components &amp; char-encoding <a target="_blank" rel="noopener" href="https://javascript.info/url">..</a></p>
-<p>Binary data, files</p>
-<ul>
-<li>deal with files/img (create, upload, download)</li>
-<li><code>ArrayBuffer(..)</code>: store raw binary data (seq of bytes)</li>
-<li><strong>view</strong> obj (aka <strong>TypedArray</strong>): interpret data stored in ArrayBuffer (no data on it’s own)</li>
-<li><code>buffer.byteLength</code>, <code>arr.buffer</code>, <code>arr.length</code> &amp; <code>arr.byteLength</code></li>
-<li><code>DataView</code>: untyped view over ArrayBuffer (choose data format at method)</li>
-<li><code>ArrayBufferView</code> &amp; <code>BufferSource</code> ..</li>
-<li>Task: <a target="_blank" rel="noopener" href="https://javascript.info/arraybuffer-binary-arrays#concatenate-typed-arrays">Concatenate typed arrays</a></li>
-</ul>
-<p>Blob: binary data with type in File API, immutable</p>
-<ul>
-<li>in file upload/download op &amp; web network request <a target="_blank" rel="noopener" href="https://javascript.info/blob#summary">..</a></li>
-<li>Blob to URL (for <code>&lt;a&gt;/&lt;img&gt;</code> tags): <ul>
-<li><code>&lt;a download=&quot;hello.txt&quot;&gt;</code></li>
-<li><code>Blob type: &#39;text/html&#39;</code> (or <code>&#39;text/plain&#39;</code>, becomes Content-Type in network requests, see fetch()) </li>
-<li><code>link.href = URL.createObjectURL(blob)</code> &amp; <code>URL.revokeObjectURL(link.href)</code></li>
-<li><code>link.click()</code>: simulate click on <code>&lt;a&gt;</code></li>
+<h1 id="Binary-data-files"><a href="#Binary-data-files" class="headerlink" title="Binary data, files"></a>Binary data, files</h1><p>meet binary data: files/img (create, upload, download) <a target="_blank" rel="noopener" href="https://javascript.info/arraybuffer-binary-arrays">..</a></p>
+<h2 id="BufferSource"><a href="#BufferSource" class="headerlink" title="BufferSource"></a>BufferSource</h2><ul>
+<li><code>ArrayBuffer(byteLength: int)</code>: store raw bin data (byte-seq) — read data by 2 kinds <code>ArrayBufferView</code> <a target="_blank" rel="noopener" href="https://javascript.info/arraybuffer-binary-arrays#summary">..</a><ul>
+<li>mtp typed arrays <a target="_blank" rel="noopener" href="https://javascript.info/arraybuffer-binary-arrays#typedarray">…</a>: choose data format at constructor, e.g. Uint8Array <a target="_blank" rel="noopener" href="https://javascript.info/arraybuffer-binary-arrays#dataview">..</a>  — “out-of-bounds” problem <a target="_blank" rel="noopener" href="https://javascript.info/arraybuffer-binary-arrays#out-of-bounds-behavior">..</a> &amp; methods ??? <a target="_blank" rel="noopener" href="https://javascript.info/arraybuffer-binary-arrays#typedarray-methods">…</a>, task: <a target="_blank" rel="noopener" href="https://javascript.info/arraybuffer-binary-arrays#concatenate-typed-arrays">Concat typed arrays</a></li>
+<li><code>DataView</code>: choose data format at method <a target="_blank" rel="noopener" href="https://javascript.info/arraybuffer-binary-arrays#dataview">…</a></li>
 </ul>
 </li>
-<li>Blob to base64 Data URL / ArrayBuffer: <code>fileReader.readAsDataURL / .readAsArrayBuffer(blob)</code> &amp; <code>link.href / arrBuffer = fileReader.result</code></li>
-<li>img to Blob (blob type: <code>&#39;image/png&#39;</code>): <code>context.drawImage(img)</code> &amp; <code>canvas.toBlob(blob =&gt; ..)</code> ..</li>
+<li><code>BufferSource</code>: ArrayBuffer + ArrayBufferView <a target="_blank" rel="noopener" href="https://javascript.info/arraybuffer-binary-arrays#summary">..</a></li>
+<li>str &lt;=&gt; bytes: <code>textEncoder.encode(str)</code> (utf-8) &amp; <code>new TextDecoder(encoding, ..).decode(BufferSource, ..)</code> <a target="_blank" rel="noopener" href="https://javascript.info/text-decoder">..</a></li>
 </ul>
-<p>File and FileReader</p>
+<h2 id="Blob"><a href="#Blob" class="headerlink" title="Blob"></a>Blob</h2><p><code>Blob</code> bin data type <a target="_blank" rel="noopener" href="https://javascript.info/blob">…</a>: file up/download op &amp; web network request <a target="_blank" rel="noopener" href="https://javascript.info/blob#summary">..</a></p>
 <ul>
-<li><code>File</code> inherit from <code>Blob</code>, <code>input.files[0]</code> &amp; Drag’n’Drop events</li>
-<li><code>FileReader</code>: <code>fr.readAs*(blob)</code> (as ArrayBuffer, Text, base64 DataURL ..) <code>fr.result / err</code> &amp; other events</li>
+<li>Blob type <code>&#39;text/html | text/plain&#39;</code> → <code>Content-Type</code> in network requests </li>
+<li>Blob → URL (for <code>&lt;a&gt;/&lt;img&gt;</code>) <a target="_blank" rel="noopener" href="https://javascript.info/blob#blob-as-url">…</a><br>  <code>&lt;a download=&quot;hello.txt&quot;&gt;</code>, <code>a.href = URL.createObjectURL(blob)</code><br>  <code>a.click()</code>, <code>URL.revokeObjectURL(a.href)</code></li>
+<li>img → Blob (via <code>&lt;convas&gt;</code>) <a target="_blank" rel="noopener" href="https://javascript.info/blob#image-to-blob">…</a></li>
 </ul>
-<p>String &lt;=&gt; bytes by utf-8: <code>TextEncoder.encode(str)</code> (to bytes) &amp; <code>TextDecoder.decode()</code> (get str)</p>
-<p>Network requests &amp; fetch()<br><code>fetch(url, [options])</code> &amp; AJAX ..</p>
+<h2 id="File-amp-FileReader"><a href="#File-amp-FileReader" class="headerlink" title="File &amp; FileReader"></a>File &amp; FileReader</h2><ul>
+<li><code>File</code>: inherit from <code>Blob</code>, get from <code>input.files[0]</code> &amp; Drag’n’Drop events <a target="_blank" rel="noopener" href="https://javascript.info/file">..</a></li>
+<li><code>FileReader</code>: read data from <code>Blob</code> via <code>fr.readAs*(blob)</code> (async), <code>load/error</code> events &amp; <code>fr.result / error</code> <a target="_blank" rel="noopener" href="https://javascript.info/file#filereader">..</a></li>
+<li>sent file over network: <code>Fetch</code>/ <code>XHR</code> <a target="_blank" rel="noopener" href="https://javascript.info/file#summary">..</a></li>
+</ul>
+<hr>
+<h1 id="Network-requests-amp-fetch"><a href="#Network-requests-amp-fetch" class="headerlink" title="Network requests &amp; fetch()"></a>Network requests &amp; fetch()</h1><p><code>fetch(url, [options])</code> &amp; AJAX ..</p>
 <ul>
 <li><code>fetch(url)</code>: GET request (downloading content of the url) ==&gt; fetch API <a target="_blank" rel="noopener" href="https://javascript.info/fetch-api">..</a></li>
 <li><strong>options</strong>: <code>&#123; method, headers, body &#125;</code><ul>
