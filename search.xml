@@ -93,7 +93,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="Binary-data-files"><a href="#Binary-data-files" class="headerlink" title="Binary data, files"></a>Binary data, files</h1><p>meet binary data: files/img (create, upload, download) <a href="https://javascript.info/arraybuffer-binary-arrays">..</a></p>
+<h1 id="Bin-data-files"><a href="#Bin-data-files" class="headerlink" title="Bin data, files"></a>Bin data, files</h1><p>meet binary data: files/img (create, upload, download) <a href="https://javascript.info/arraybuffer-binary-arrays">..</a></p>
 <h2 id="BufferSource"><a href="#BufferSource" class="headerlink" title="BufferSource"></a>BufferSource</h2><ul>
 <li><code>ArrayBuffer(byteLength: int)</code>: store raw bin data (byte-seq) — read data by 2 kinds <code>ArrayBufferView</code> <a href="https://javascript.info/arraybuffer-binary-arrays#summary">..</a><ul>
 <li>mtp typed arrays <a href="https://javascript.info/arraybuffer-binary-arrays#typedarray">…</a>: choose data format at constructor, e.g. Uint8Array <a href="https://javascript.info/arraybuffer-binary-arrays#dataview">..</a>  — “out-of-bounds” problem <a href="https://javascript.info/arraybuffer-binary-arrays#out-of-bounds-behavior">..</a> &amp; methods ??? <a href="https://javascript.info/arraybuffer-binary-arrays#typedarray-methods">…</a>, task: <a href="https://javascript.info/arraybuffer-binary-arrays#concatenate-typed-arrays">Concat typed arrays</a></li>
